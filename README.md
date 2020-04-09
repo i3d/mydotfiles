@@ -6,4 +6,4 @@ See screenshot.
 TERM=iterm2
 Theme=batman
 
-![screenshot](Screen Shot 2020-04-08 at 21.39.38.png)
+![screenshot](https://github.com/i3d/mydotfiles/blob/master/Screen%20Shot%202020-04-08%20at%2021.39.38.png)
