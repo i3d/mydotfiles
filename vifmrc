@@ -1,11 +1,15 @@
 " vim: filetype=vifm :
-" Sample configuration file for vifm on OSX (last updated: 27 January, 2020)
+" Sample configuration file for vifm on OSX (last updated: 8 April, 2020)
 " You can edit this file by hand.
 " The " character at the beginning of a line comments out the line.
 " Blank lines are ignored.
 " The basic format for each item is shown with an example.
 
+" if bash, then $BASH_ENV='~/.bashrc'
 let $ZSH_ENV = '~/.zshrc'
+
+" when this sets, s out to shell wouldn't invoke vifm anymore. I have vifm .
+" in my zsh already."
 let $VIFM_ENABLED = 1
 
 " Selected color scheme
