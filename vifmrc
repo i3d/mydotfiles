@@ -439,7 +439,12 @@ fileviewer *.docx docx2txt.pl %f -
 " 256-color terminal
 " Noted that in Linux highligh, there is no --base16 flag, change it to -s
 " olive or some theme that's suitable.
+"highlight --list-scripts=langs to see supported syntax
 fileviewer *.go highlight -O xterm256 --base16 %c
+fileviewer *.md highlight -O xterm256 --base16 --syntax md %c
+fileviewer *.js,.hyper.js highlight -O xterm256 --base16 --syntax js %c
+fileviewer *.ts highlight -O xterm256 --base16 --syntax ts %c
+fileviewer .zshrc,.zshrc.pre-oh-my-zsh,.vim* highlight -O xterm256 --base16 --syntax sh %c
 fileviewer *.zsh,*.bash*,*.vim*,*.fish* highlight -O xterm256 --base16 --syntax sh %c
 fileviewer *.[ch],*.[ch]pp highlight -O xterm256 --base16 --syntax c %c
 fileviewer Makefile,Makefile.* highlight -O xterm256 --base16 --syntax make %c
