@@ -1,15 +1,11 @@
 " vim: filetype=vifm :
-" Sample configuration file for vifm on OSX (last updated: 8 April, 2020)
+" Sample configuration file for vifm on OSX (last updated: 27 January, 2020)
 " You can edit this file by hand.
 " The " character at the beginning of a line comments out the line.
 " Blank lines are ignored.
 " The basic format for each item is shown with an example.
 
-" if bash, then $BASH_ENV='~/.bashrc'
 let $ZSH_ENV = '~/.zshrc'
-
-" when this sets, s out to shell wouldn't invoke vifm anymore. I have vifm .
-" in my zsh already."
 let $VIFM_ENABLED = 1
 
 " Selected color scheme
@@ -434,14 +430,19 @@ fileviewer *.docx docx2txt.pl %f -
 
 "code
 "fileviewer *.js,*.zsh,*.vim*,*.go,*.c,*.cc,*.s,*.S,*.java open -a CotEditor.app
+""fileviewer *.js,*.zsh,*.vim*,*.go,*.c,*.cc,*.s,*.S,*.java highlight %c
 
 " Syntax highlighting in preview
 "
 " Explicitly set highlight type for some extensions
 "
 " 256-color terminal
-fileviewer *.[ch],*.[ch]pp highlight -O xterm256 -s dante --syntax c %c
-fileviewer Makefile,Makefile.* highlight -O xterm256 -s dante --syntax make %c
+fileviewer *.go highlight -O xterm256 --base16 %c
+fileviewer *.zsh,*.bash*,*.vim*,*.fish* highlight -O xterm256 --base16 --syntax sh %c
+fileviewer *.[ch],*.[ch]pp highlight -O xterm256 --base16 --syntax c %c
+fileviewer Makefile,Makefile.* highlight -O xterm256 --base16 --syntax make %c
+""fileviewer *.[ch],*.[ch]pp,*.cc,*.s,*.S highlight -O xterm256 -s dante --syntax c %c
+""fileviewer Makefile,Makefile.* highlight -O xterm256 -s dante --syntax make %c
 "
 " 16-color terminal
 " fileviewer *.c,*.h highlight -O ansi -s dante %c
