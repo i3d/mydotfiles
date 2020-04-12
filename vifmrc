@@ -437,6 +437,8 @@ fileviewer *.docx docx2txt.pl %f -
 " Explicitly set highlight type for some extensions
 "
 " 256-color terminal
+" Noted that in Linux highligh, there is no --base16 flag, change it to -s
+" olive or some theme that's suitable.
 fileviewer *.go highlight -O xterm256 --base16 %c
 fileviewer *.zsh,*.bash*,*.vim*,*.fish* highlight -O xterm256 --base16 --syntax sh %c
 fileviewer *.[ch],*.[ch]pp highlight -O xterm256 --base16 --syntax c %c
