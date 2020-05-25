@@ -1,0 +1,575 @@
+"reference: http://nvie.com/posts/how-i-boosted-my-vim/
+"
+"fzf
+set rtp+=~/homebrew/opt/vim
+set rtp+=/Users/jimxu/homebrew/opt/fzf
+
+set path+=**
+set wildmenu
+
+" Quickly edit/reload the vimrc file
+nmap <silent> <leader>ev :e ~/.vimrc.local<CR>
+nmap <silent> <leader>sv :so ~/.vimrc.local<CR>"
+
+"behavior"
+set copyindent   "make the autoindent copying the existing indentation"
+set shiftround   "round the shift to multiple shiftwidth"
+set smarttab     "use shiftwidth when insert tab"
+set wildignore=*.swp,*.bak,*.pyc,*.class,*.o
+set title
+set visualbell
+set noerrorbells
+set nobackup
+set noswapfile
+
+":w becomes ;w" need evaluate
+""nnoremap ; :
+
+" Use Q for formatting the current paragraph (or selection)
+vmap Q gq
+nmap Q gqap"
+
+""when you forgot to sudo before editing a file that requires root privileges
+cmap w!! w !sudo tee % >/dev/null
+
+""In some files, like HTML and XML files,
+""tabs are fine and showing them is really annoying,
+""you can disable them easily using an autocmd declaration:
+"make sure :set list is on"
+autocmd filetype html,xml set listchars-=tab:>.
+
+if &term == 'xterm' || &term == 'screen' || !&term
+    set t_Co=256            " Enable 256 colors to stop the CSApprox warning and make xterm vim shine
+endif
+
+
+
+
+
+
+""""""""""""""""
+""""""""""""""""
+""""""""""""""""
+""""""""""""""""
+""""""""""""""""
+"Features
+
+
+"tagbar"
+let g:tagbar_left = 1
+let g:tagbar_width = 35
+let g:tagbar_autoclose = 0
+let g:tagbar_autofocus = 1
+let g:tagbar_compact = 1
+let g:tagbar_show_visibility = 1
+let g:tagbar_show_linenumbers = 1
+let g:tagbar_autoshowtag = 1
+""let g:tagbar_autopreview = 1
+
+"yankring"
+let g:yankring_max_history = 1000
+"don't remember single letter deletion"
+let g:yankring_min_element_length = 2
+
+nmap <silent> <leader>yr :YRShow<CR>
+
+"c/c++ include gate"
+function! s:insert_gates()
+    let gatename = substitute(toupper(expand("%:t")), "\\.", "_", "g")
+    execute "normal! i#ifndef " . gatename
+    execute "normal! o#define " . gatename . " "
+    execute "normal! Go#endif /* " . gatename . " */"
+    normal! kk
+endfunction
+autocmd BufNewFile *.{h,hpp} call <SID>insert_gates()
+
+nnoremap <F12> "%phr_I#ifndef __<Esc>gUwyypldwidefine <Esc>yypldwiendif //<Esc>O<Esc>
+
+
+function! New_Class_C(l_class_name, u_class_name)
+   insert
+#include "l_class_name.h"
+
+u_class_name::u_class_name(
+)
+{
+   ;
+}
+
+u_class_name::~u_class_name(
+)
+{
+   ;
+}
+.
+   %s/l_class_name/\=a:l_class_name/g
+   %s/u_class_name/\=a:u_class_name/g
+endfunction
+
+function! New_Class_H(l_class_name, u_class_name)
+   insert
+#if !defined(INCLUDED_u_class_name_H)
+#define INCLUDED_u_class_name_H
+
+class u_class_name {
+public:
+   u_class_name();
+   ~u_class_name();
+};
+
+#else
+
+class u_class_name;
+
+#endif
+.
+   %s/u_class_name/\=a:u_class_name/g
+endfunction
+
+function! New_Class()
+   let class_name = expand("%:r")
+   let file_type = expand("%:e")
+   let l_class_name = tolower(class_name)
+   let u_class_name = toupper(class_name)
+
+   if file_type =~# "c"
+      call New_Class_C(l_class_name, u_class_name)
+   else
+      call New_Class_H(l_class_name, u_class_name)
+   endif
+endfunction
+
+"Go lang mapping"
+let g:go_fmt_command = "goimports"
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+au FileType go nmap <Leader>gs <Plug>(go-implements)
+au FileType go nmap <Leader>gi <Plug>(go-info)
+au FileType go nmap <Leader>gd <Plug>(go-doc)
+au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
+au FileType go nmap <leader>gr <Plug>(go-run)
+au FileType go nmap <leader>gb <Plug>(go-build)
+au FileType go nmap <leader>gt <Plug>(go-test)
+au FileType go nmap <leader>gc <Plug>(go-coverage)
+au FileType go nmap <Leader>gds <Plug>(go-def-split)
+au FileType go nmap <Leader>gdv <Plug>(go-def-vertical)
+au FileType go nmap <Leader>gdt <Plug>(go-def-tab)
+au FileType go nmap <Leader>ge <Plug>(go-rename)
+
+"disable ruby warning.
+let g:LustyJugglerSuppressRubyWarning = 1
+
+""colorscheme"
+"colorscheme mustang
+"colorscheme ir_black
+"colorscheme molokai
+"colorscheme transparent
+"colorscheme nuvola.2
+"
+"color railscasts
+"color jellybeans
+"color distinguished
+"color codeschool
+"color skittles_berry
+"color hybrid
+"color evening
+"color gotham
+"colorscheme base16-default-dark
+"color solarized
+"color lucius
+"color onedark
+"color molokai_dark
+"color bubblegum-256-dark
+"color holokai
+"color hemisu
+"color cabin
+"color hybrid_material
+"color darkburn
+"color alduin
+"color kolor
+"color badwolf
+"color Tomorrow-Night-Bright
+"color Tomorrow-Night-Eighties
+"color Tomorrow-Night
+"color PaperColor
+"color kalisi
+"
+"color farout
+"color onedark
+
+"color colorsbox-material
+"
+"color base16-twilight
+"color gruvbox
+"
+"color palenight
+"let g:airline_theme='palenight'
+"
+""color onedark
+""let g:airline_theme='onedark'
+"
+"color one
+"let g:airline_theme='one'
+
+"set t_8b=^[[48;2;%lu;%lu;%lum
+"set t_8f=^[[38;2;%lu;%lu;%lum
+"
+"color atlas
+"
+""color nord
+""let g:airline_theme='nord'
+
+"color hybrid_material
+""color hydrangea
+"color monokai-chris
+"color mustang
+"color material
+"color hybrid
+"let g:airline_theme='hybrid'
+"
+"let g:airline_theme='palenight'
+""color ayu
+""let g:airline_theme='ayu'
+
+"color spacegray
+"let g:airline_theme='spacegray'
+
+color minimalist
+let g:airline_theme='minimalist'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+
+" maybe usefule for powerline fonts. Terminal already working. but iTerm2 isn't.
+" comment this section out of encounter problem.
+set encoding=utf-8
+let g:Powerline_symbols = 'fancy'
+set guifont=Monaco\ for\ Powerline:h15
+"set t_Co=256
+set fillchars+=stl:\ ,stlnc:\
+if !has("nvim")
+    set term=xterm-256color
+endif
+"set termencoding=utf-8
+" maybe usefule for powerline fonts. Terminal already working. but iTerm2 isn't.
+
+
+"
+"
+" Airline start
+"
+" the mac is patched by the powerline-fonts git.
+let g:airline_powerline_fonts = 1
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_symbols.space = "\ua0"
+
+let g:airline_mode_map = {
+    \ '__' : '-',
+    \ 'n'  : 'N',
+    \ 'i'  : 'I',
+    \ 'R'  : 'R',
+    \ 'c'  : 'C',
+    \ 'v'  : 'V',
+    \ 'V'  : 'V',
+    \ '' : 'V',
+    \ 's'  : 'S',
+    \ 'S'  : 'S',
+    \ '' : 'S',
+    \ }
+
+if !exists('g:airline_powerline_fonts')
+  let g:airline#extensions#tabline#left_sep = ' '
+  let g:airline#extensions#tabline#left_alt_sep = '|'
+
+  "let g:airline_left_sep          = '▶'
+  "let g:airline_left_alt_sep      = '»'
+  "let g:airline_right_sep         = '◀'
+  "let g:airline_right_alt_sep     = '«'
+  "if the following doesn't show up correctly, switch back to above.
+  let g:airline_left_sep = '⮀'
+  let g:airline_left_alt_sep = '⮁'
+  let g:airline_right_sep = '⮂'
+  let g:airline_right_alt_sep = '⮃'
+else
+  let g:airline#extensions#tabline#left_sep = ''
+  let g:airline#extensions#tabline#left_alt_sep = ''
+  " powerline symbols
+  let g:airline_left_sep = ''
+  let g:airline_left_alt_sep = ''
+  let g:airline_right_sep = ''
+  let g:airline_right_alt_sep = ''
+  let g:airline_symbols.branch = ''
+  "let g:airline_symbols.branch = 'ᚠ'
+  let g:airline_symbols.readonly = ''
+  let g:airline_symbols.linenr = ''
+endif
+
+let g:airline_symbols.crypt = '🔒'
+let g:airline_symbols.spell = 'Ꞩ'
+let g:airline_symbols.maxlinenr = '㏑'
+let g:airline_symbols.notexists = '∄'
+"
+" old but working vim-powerline symbols
+"let g:airline_left_sep = '⮀'
+"let g:airline_left_alt_sep = '⮁'
+"let g:airline_right_sep = '⮂'
+"let g:airline_right_alt_sep = '⮃'
+"let g:airline_symbols.branch = '⭠'
+"let g:airline_symbols.readonly = '⭤'
+"let g:airline_symbols.linenr = '⭡'
+let g:airline#extensions#branch#prefix     = '⤴' "➔, ➥, ⎇
+"let g:airline#extensions#readonly#symbol   = '⊘'
+let g:airline#extensions#readonly#symbol   = '☯'
+let g:airline#extensions#linecolumn#prefix = '¶'
+let g:airline#extensions#paste#symbol      = 'ρ'
+"let g:airline_symbols.linenr    = '␊'
+"let g:airline_symbols.linenr    = '࿖'
+"let g:airline_symbols.branch    = '⎇'
+let g:airline_symbols.paste     = 'ρ'
+"let g:airline_symbols.paste     = 'Þ'
+"let g:airline_symbols.paste     = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
+
+" seems to be the same.
+let g:airline#extensions#default#layout = [
+    \ [ 'a', 'b', 'c' ],
+    \ [ 'x', 'y', 'z', 'error', 'warning' ]
+    \ ]
+
+let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
+let g:airline#extensions#quickfix#location_text = 'Location'
+let g:airline#extensions#bufferline#enabled = 1
+let g:airline#extensions#bufferline#overwrite_variables = 1
+let g:airline#extensions#branch#enabled = 1
+
+let g:airline#extensions#syntastic#enabled = 1
+let airline#extensions#syntastic#error_symbol = 'E:'
+let airline#extensions#syntastic#stl_format_err = '%E{[%e(#%fe)]}'
+let airline#extensions#syntastic#warning_symbol = 'W:'
+let airline#extensions#syntastic#stl_format_err = '%W{[%w(#%fw)]}'
+
+let g:airline#extensions#hunks#enabled = 1
+let g:airline#extensions#hunks#non_zero_only = 0
+let g:airline#extensions#hunks#hunk_symbols = ['+', '~', '-']
+
+let g:airline#extensions#ctrlp#color_template = 'insert'
+let g:airline#extensions#ctrlp#color_template = 'normal'
+let g:airline#extensions#ctrlp#color_template = 'visual'
+let g:airline#extensions#ctrlp#color_template = 'replace'
+let g:airline#extensions#ctrlp#show_adjacent_modes = 1
+
+let g:airline#extensions#ctrlspace#enabled = 1
+let g:CtrlSpaceStatuslineFunction = "airline#extensions#ctrlspace#statusline()"
+
+let g:airline#extensions#tabline#enabled = 1
+" no with ctrlspace tabline.
+"let g:airline#extensions#tabline#show_splits = 1
+let g:airline#extensions#tabline#switch_buffers_and_tabs = 1
+let g:airline#extensions#tabline#show_buffers = 1
+let g:airline#extensions#tabline#show_tabs = 1
+let g:airline#extensions#tabline#buffers_label = 'b'
+let g:airline#extensions#tabline#tabs_label = 't'
+
+"tmuxline
+" use tmp
+let g:airline#extensions#tmuxline#enabled = 0
+let airline#extensions#tmuxline#color_template = 'normal'
+let airline#extensions#tmuxline#color_template = 'insert'
+let airline#extensions#tmuxline#color_template = 'visual'
+let airline#extensions#tmuxline#color_template = 'replace'
+"airline#extensions#tmuxline#snapshot_file = "~/.tmux-statusline-colors.conf"
+
+let g:airline#extensions#ycm#enabled = 1
+let g:airline#extensions#ycm#error_symbol = 'E:'
+let g:airline#extensions#ycm#warning_symbol = 'W:'
+
+"vimtex
+let g:airline#extensions#vimtex#enabled = 1
+let g:airline#extensions#vimtex#left = "{"
+let g:airline#extensions#vimtex#right = "}"
+
+"let g:airline_theme='gotham'
+"let g:airline_theme='term'
+"let g:airline_theme='hybridline'
+"let g:airline_theme='kalisi'
+"let g:airline_theme='powerlineish'
+"
+" https://github.com/vim-airline/vim-airline/wiki/Screenshots
+"let g:airline_theme='jellybeans'
+"let g:airline_theme='lucius'
+"let g:airline_theme='wombat'
+"let g:airline_theme='night_owl'
+"let g:airline_theme='understated'
+"let g:airline_theme='ubaryd'
+"let g:airline_theme='papercolor'
+"let g:airline_theme='murmur'
+"let g:airline_theme='luna'
+"let g:airline_theme='kolor'
+"let g:airline_theme='badwolf'
+"let g:airline_theme='angr'
+"let g:airline_theme='distinguished'
+"let g:airline_theme='base16'
+"let g:airline_theme='tomorrow'
+"let g:airline_theme='archery'
+"let g:airline_theme='solarized'
+"
+"let g:airline_theme='solarized'
+"let g:airline_solarized_bg='dark'
+
+"let g:tmuxline_preset = 'nightly_fox'
+"
+"
+" Airline end
+"
+
+
+"supertab
+let g:SuperTabDefaultCompletionType = "context"
+autocmd FileType *
+    \ if &omnifunc != '' |
+    \   call SuperTabChain(&omnifunc, "<c-p>") |
+    \ endif
+
+" map tab key to c-w so jump window would become tab-w.
+nnoremap <tab> <C-w>
+
+set relativenumber
+
+"NERDTree auto open. ctrl-e does the same toggle. disable for now.
+"autocmd VimEnter * execute 'NERDTree' | wincmd p
+"autocmd BufWinEnter * NERDTreeMirror
+let g:NERDTreeHighlightCursorline=1
+let g:NERDTreeShowFiles=1
+let g:NERDTreeShowBookmarks=1
+let g:NERDTreeQuitOnOpen=0
+let g:NERDTreeMarkBookmarks=1
+let g:NERDTreeShowLineNumbers=1
+let g:NERDTreeShowHidden=1
+let g:NERDTreeStatusline = "%{exists('b:NERDTreeRoot')?b:NERDTreeRoot.path._strForUI():''}"
+let g:NERDTreeWinSize=27
+let g:NERDTreeChDirMode=2
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+
+"NERDTreeTab (does everything above with a few options)
+"NERDTree auto open. ctrl-e does the same toggle. disable for now.
+"let g:nerdtree_tabs_open_on_console_startup=1
+"let g:nerdtree_tabs_focus_on_files=1
+"let g:nerdtree_tabs_autofind=1
+
+"fzf
+set rtp+=/Users/jimxu/homebrew/opt/fzf
+"fish
+au BufNewFile,BufRead fish_funced set ft=fish
+
+
+if exists('veonim')
+
+" built-in plugin manager
+Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-surround'
+
+" extensions for web dev
+let g:vscode_extensions = [
+  \'vscode.typescript-language-features',
+  \'vscode.css-language-features',
+  \'vscode.html-language-features',
+\]
+
+" multiple nvim instances
+nno <silent> <c-t>c :Veonim vim-create<cr>
+nno <silent> <c-g> :Veonim vim-switch<cr>
+nno <silent> <c-t>, :Veonim vim-rename<cr>
+
+" workspace functions
+nno <silent> ,f :Veonim files<cr>
+nno <silent> ,e :Veonim explorer<cr>
+nno <silent> ,b :Veonim buffers<cr>
+nno <silent> ,d :Veonim change-dir<cr>
+"or with a starting dir: nno <silent> ,d :Veonim change-dir ~/proj<cr>
+
+" searching text
+nno <silent> <space>fw :Veonim grep-word<cr>
+vno <silent> <space>fw :Veonim grep-selection<cr>
+nno <silent> <space>fa :Veonim grep<cr>
+nno <silent> <space>ff :Veonim grep-resume<cr>
+nno <silent> <space>fb :Veonim buffer-search<cr>
+
+" language features
+nno <silent> sr :Veonim rename<cr>
+nno <silent> sd :Veonim definition<cr>
+nno <silent> si :Veonim implementation<cr>
+nno <silent> st :Veonim type-definition<cr>
+nno <silent> sz :Veonim references<cr>
+nno <silent> sh :Veonim hover<cr>
+nno <silent> sl :Veonim symbols<cr>
+nno <silent> so :Veonim workspace-symbols<cr>
+nno <silent> sq :Veonim code-action<cr>
+nno <silent> sk :Veonim highlight<cr>
+nno <silent> sK :Veonim highlight-clear<cr>
+nno <silent> ,n :Veonim next-usage<cr>
+nno <silent> ,p :Veonim prev-usage<cr>
+nno <silent> sp :Veonim show-problem<cr>
+nno <silent> <c-n> :Veonim next-problem<cr>
+nno <silent> <c-p> :Veonim prev-problem<cr>
+
+set guifont=Anonymice\ Nerd\ Font\ Mono:h24
+endif
+
+" select last paste in visual mode
+nnoremap <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]'
+nnoremap ; :
+inoremap jk <esc>
+
+"split"
+nnoremap - <C-W>-
+nnoremap = <C-W>+
+nnoremap <silent> <leader>S :split<cr>
+"vsplit"
+nnoremap < <C-W><
+nnoremap > <C-W>>
+nnoremap <silent> <leader>V :vsplit<cr>
+
+
+if executable('rg')
+  set grepprg=rg\ -S\ --column\ -H\ --color=never
+endif
+
+",ig"
+nnoremap <leader>sg :SignifyToggleHighlight<cr>
+nnoremap <leader>cc :colo<cr>
+
+"NERDTree"
+nnoremap <leader>to :NERDTreeTabsOpen<cr>
+nnoremap <leader>tf :NERDTreeTabsFind<cr>
+nnoremap <leader>tg :NERDTreeTabsToggle<cr>
+nnoremap <leader>g :NERDTreeToggle<cr>
+"nnoremap <leader>e :NERDTreeFind<cr>  // in .vimrc
+
+"vifm mapping
+nmap <leader>vt :TabVifm<cr>
+nmap <leader>vs :VsplitVifm<cr>
+nmap <leader>vd :DiffVifm<cr>
+
+" sync with cider -- myciderkeys on mac
+noremap <silent> go <c-o>
+noremap <silent> gi <c-i>
+
+"from makc => My New Terminal: Alaritty 19:05
+" allow alaritty to have a transparent background."
+hi! Normal ctermbg=None guibg=None
+hi! NonText ctermbg=None guibg=None guifg=None ctermfg=None
+
+syntax on
+set shiftround
+set ignorecase
+set smartcase
+set incsearch
+set nowrapscan
+" always has to be the end.
+filetype plugin indent on
+set nu rnu
+set nospell
