@@ -1,3 +1,4 @@
+
 #!/bin/bash
 
 # randomly use different evil/vim editors on mac.

@@ -2,6 +2,22 @@
 ;; This file is loaded by Spacemacs at startup.
 ;; It must be stored in your home directory.
 
+;; online references:
+;; https://steinbaugh.com/posts/spacemacs.html
+;; https://devhints.io/spacemacs
+;; https://devhints.io/vim
+;;
+;; layout.
+;; gt: Go to next workspace.
+;; gT: Go to previous workspace.
+;; SPC l w n: Create or switch to workspace n.
+;; SPC l w TAB: Switch to last active workspace.
+;; SPC l w c: Close current workspace.
+;; SPC l w n; SPC l w l: Switch to next workspace.
+;; SPC l w N; SPC l w p; SPC l w h: Switch to previous workspace.
+;; SPC l w r: Set a tag to the current workspace.
+;; SPC l w w: Switched to tagged workspace.
+
 (defun dotspacemacs/layers ()
   "Configuration Layers declaration.
 You should not put any user code in this function besides modifying the variable

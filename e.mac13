@@ -1,0 +1,14 @@
+#!/usr/bin/env zsh
+
+set -e
+
+SPACE=$HOME/bin/space
+DOOM=$HOME/bin/emacs
+VIM=$HOME/bin/nv
+
+rnd=$(jot -r -n 19 0 9 | rs -g 0)
+
+(($((10#$rnd%10)) > 4)) && $DOOM -nw "$@" && exit 0     # 60%
+(($((10#$rnd%10)) > 6)) && $SPACE "$@" && exit 0    # 40%
+(($((10#$rnd%10)) <= 4)) && $VIM -u ~/.vimrc -X -p "$@" && exit 0     # 40%
+(($((10#$rnd%10)) > 8)) && $VIM -u ~/.SpaceVim/vimrc "$@" && exit 0     # 20%
