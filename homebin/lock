@@ -1,0 +1,3 @@
+#!/bin/bash
+
+cmatrix -Bs -C blue -u10 && open -a ScreenSaverEngine

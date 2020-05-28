@@ -1,0 +1,4 @@
+#!/bin/bash
+
+#HOME=~/.spacemacs.d spacemacs_do_not_refresh_packages=t /Users/jimxu/bin/emacs -nw "$@"
+HOME=~/.spacemacs.d /Users/jimxu/bin/emacs -nw "$@"
