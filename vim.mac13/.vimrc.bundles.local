@@ -47,9 +47,31 @@ let g:AutoPairsUseInsertedCount = 1
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'drewtempelmeyer/palenight.vim'
 
+"
+"""""""""""""""""""""""""""""""""""""""""""""""
+"https://github.com/ChristianChiarulli/nvim
+"""""""""""""""""""""""""""""""""""""""""""""""
+" To get mach2 installed and all the goodies for neovim.
+"
+"
 " Specify a directory for plugins
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
+" auto-install vim-plug
+" For neovim
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
+
+"For vim
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
+
 call plug#begin('~/.vim/plugged')
 Plug 'rakr/vim-one'
 Plug 'edkolev/promptline.vim'
@@ -69,4 +91,11 @@ Plug 'junegunn/fzf.vim'
 Plug 'dylanaraps/wal.vim'
 Plug 'ajh17/Spacegray.vim'
 Plug 'dikiaap/minimalist'
+" Keeping up to date with master
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 call plug#end()
+" Automatically install missing plugins on startup
+autocmd VimEnter *
+  \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \|   PlugInstall --sync | q
+  \| endif
