@@ -62,7 +62,7 @@ source ~/.zshrc.pre-oh-my-zsh
 
 
 # Customize to your needs...
-export PATH=/Users/jimxu/go/bin:/Users/jimxu/bin:/Users/jimxu/go_code/bin:/usr/local/bin:/usr/local/sbin:/usr/local/symlinks:/usr/local/scripts:/usr/local/buildtools/java/jdk/bin:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/bin/g4bin:/usr/X11R6/bin:/Users/jimxu/pkgs/android-sdk-linux_x86-1.5_r3/tools:/Users/jimxu/src/depot_tools
+export PATH=/Users/jimxu/go/bin:/Users/jimxu/bin:/Users/jimxu/go_code/bin:/usr/local/bin:/usr/local/sbin:/usr/local/symlinks:/usr/local/scripts:/usr/local/buildtools/java/jdk/bin:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/bin/g4bin:/usr/X11R6/bin:/Users/jimxu/pkgs/android-sdk-linux_x86-1.5_r3/tools:/usr/local/google/bin:/Users/jimxu/src/depot_tools
 
 PATH=$HOME/.rbenv/shims:$HOME/homebrew/bin:$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 export PATH="/Users/jimxu/homebrew/sbin:$PATH"
@@ -73,14 +73,49 @@ export CSCOPE_DB=/Users/jimxu/src/linux/cscope.out
 #github qfc
 [[ -s "$HOME/.qfc/bin/qfc.sh"  ]] && source "$HOME/.qfc/bin/qfc.sh"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
+if `which rg &>/dev/null`; then
+    export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
+else
+    # if nothing else, this is the default.
+    export FZF_DEFAULT_COMMAND='find .'
+fi
 # terminal logo
 #screenfetch
 neofetch
 # don't fatch the IP.
 #archey -o
 
+# for my kir workstation.
+#. $HOME/.bagpipe/setup.sh $HOME/.bagpipe jimxu-linux.kir.corp.google.com "corp-ssh-helper --stderrthreshold=INFO %h %p"
+# for my c.googler.com instance.
+. $HOME/.bagpipe/setup.sh $HOME/.bagpipe ujimux.c.googlers.com "corp-ssh-helper -relay=sup-ssh-relay.corp.google.com --stderrthreshold=INFO %h %p"
+#. $HOME/.bagpipe/setup.sh $HOME/.bagpipe ujimux.c.googlers.com
 export PATH=$HOME/bin:$PATH
+
+function renew_gcert_ifneeded() {
+  HOURS_TILL_EOB=$((20 - $(date +%-H)))h
+  #gcertstatus -ssh_cert_comment=corp/normal -check_remaining=$HOURS_TILL_EOB || gcert
+  gcertstatus -ssh_cert_comment=corp/normal -check_remaining=$HOURS_TILL_EOB || ~/bin/pa.py
+}
+
+function renew_bagpipe_ifneeded() {
+  p4 info > /dev/null 2>&1 || p4 bagpipe-prodaccess
+}
+
+function pa() {
+  renew_gcert_ifneeded && renew_bagpipe_ifneeded
+  # open up our first connection to our remote host so that any
+  # disconnection will be reconnected. 'then sux wouldn't bother
+  # manual reconnect anymore'
+  echo "ssh to ujimux.c.googler.com ..."
+  echo
+  # idempotent if already connected.
+  # help any remote editing or opened remote sessions, e.g. sux, remote tmux, vscode, oni, etc.
+  #autossh -f -M20000 -t -A -X ujimux.c.googlers.com
+}
+
+#too slow on laptop.
+#pa
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
@@ -188,17 +223,27 @@ export NVM_DIR="$HOME/.nvm"
 export HOMEBREW_INSTALL_CLEANUP=1
 #or run this to cleanup.
 alias hbc='~/bin/hbc.sh'
+alias g4='p4'
+alias bbbb='blaze'
+# g4d citc stuff.
+source /Library/GoogleCorpSupport/srcfs/shell_completion/enable_completion.sh
 
+export PATH="/Users/jimxu/homebrew/opt/llvm/bin:$PATH"
+#export CPLUS_INCLUDE_PATH=/Users/jimxu/homebrew/Cellar/gcc/HEAD-2d3af38/include/c++/9.0.1:/usr/include:/usr/local/include:$HOME/.local/include:$CPLUS_INCLUDE_PATH
 # for oni finding neovim
 export ONI_NEOVIM_PATH=/Users/jimxu/homebrew/bin/nvim
 
 # space vim, not using neovim due to deoplete-go.
-alias vv='vi -u ~/.SpaceVim/vimrc'
+alias vv='nv -u ~/.SpaceVim/vimrc'
 # make sure any override of vim alias to homebrew's version (the version I use)
 #alias vim='~/bin/vim -u ~/.vimrc -X -p'
 alias vim='nv -u ~/.vimrc -X -p'
-alias vi='vim'
-alias v='vi'
+# v always == vim
+alias v='vim'
+#alias vi='vim'
+# vi can be emacs, or vim
+# no alias, it is a ln -sf to ~/bin/e
+#alias vi='~/bin/e'
 
 # cause trouble, must at the end of .zshrc
 #source /Users/jimxu/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -300,19 +345,51 @@ export PATH=$PATH:$HOME/src/dotfiles/utils
 #unset ZSH_ENV
 # load the vim file manager if we aren't already in vifm
 # when vifmrc loaded, it will set this env to true.
-[[ -z ${VIFM_ENABLED} ]] && vifm
+#[[ -z ${VIFM_ENABLED} ]] && vifm
 
 HOMEBREW_PREFIX=/Users/jimxu/homebrew
 eval $(${HOMEBREW_PREFIX}/bin/brew shellenv)
 
+# for doom emacs
+export PATH=$PATH:$HOME/.emacs.d/bin
+
+# bash-hook            # add hook code to bash $PROMPT_COMMAND
+# bash-ccomp           # bash command mode completion definitions
+# bash-ccomp-install   # setup command mode completion for bash
+# posix-alias          # define aliases that applies to all posix shells
+# posix-hook           # setup $PS1 hook for shells that's posix compatible
+# tcsh-alias           # define aliases for tcsh
+# tcsh-hook            # setup tcsh precmd alias
+# zsh-hook             # define _fasd_preexec and add it to zsh preexec array
+# zsh-ccomp            # zsh command mode completion definitions
+# zsh-ccomp-install    # setup command mode completion for zsh
+# zsh-wcomp            # zsh word mode completion definitions
+# zsh-wcomp-install    # setup word mode completion for zsh
+
+# Example for a minimal zsh setup (no tab completion):
+# eval "$(fasd --init posix-alias zsh-hook)"
+# Note that this method will slightly increase your shell start-up time, since calling binaries has overhead.  You can cache fasd init code if you want min-
+# imal overhead.  Example code for bash (to be put into .bashrc):
+fasd_cache="$HOME/.fasd-init-zsh"
+if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
+    fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install zsh-wcomp zsh-wcomp-install >| "$fasd_cache"
+fi
+source "$fasd_cache"
+
+#fish
+#
+unalias s 2>/dev/null
+# always unalias vi
+unalias vi 2>/dev/null
+unalias g  2>/dev/null # alias to git which never good.
+unalias rd 2>/dev/null # for mac remote desktop, not rmdir
+export PATH=$HOME/bin:$PATH
+fortune | cowsay -f $(cowsay -l| sed '1d' | shuf | tr ' ' '\n' | head -1) | lolcat
+
+# put this at the end since it could hang.
+# TODO: figure out why.
 # Import colorscheme from 'wal' asynchronously
 # &   # Run the process in the background.
 # ( ) # Hide shell job control messages.
 (cat ~/.cache/wal/sequences &)
-# To add support for TTYs this line can be optionally added.
-#source ~/.cache/wal/colors-tty.sh
-export PATH=$PATH:$HOME/.emacs.d/bin
 wal -R
-
-#fish
-unalias s
