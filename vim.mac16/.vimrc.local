@@ -1,15 +1,19 @@
 "reference: http://nvie.com/posts/how-i-boosted-my-vim/
 "
-"fzf
-set rtp+=~/homebrew/opt/vim
-set rtp+=/Users/jimxu/homebrew/opt/fzf
+" global is ,
+let g:maplocalleader = "\<Space>"
+nnoremap <silent> <leader> :<c-u>WhichKey ','<CR>
+nnoremap <silent> <localleader> :<c-u>WhichKey '<Space>'<CR>
 
+"fzf
+set rtp+=~/homebrew/opt/vim,~/homebrew/opt/fzf
 set path+=**
 set wildmenu
 
+
 " Quickly edit/reload the vimrc file
-nmap <silent> <leader>ev :e ~/.vimrc.local<CR>
-nmap <silent> <leader>sv :so ~/.vimrc.local<CR>"
+nmap <silent> <leader>ev :tabe ~/.vimrc.local<CR>
+nmap <silent> <leader>sv :so ~/.vimrc.local<CR>
 
 "behavior"
 set copyindent   "make the autoindent copying the existing indentation"
@@ -206,9 +210,15 @@ let g:LustyJugglerSuppressRubyWarning = 1
 "
 "color palenight
 "let g:airline_theme='palenight'
+
+"This color scheme also built-in with airline theme. If you wanna use:
+colorscheme minimalist
+let g:airline_theme='minimalist'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
 "
-""color onedark
-""let g:airline_theme='onedark'
+"color onedark
+"let g:airline_theme='onedark'
 "
 "color one
 "let g:airline_theme='one'
@@ -218,28 +228,21 @@ let g:LustyJugglerSuppressRubyWarning = 1
 "
 "color atlas
 "
-""color nord
-""let g:airline_theme='nord'
+"color nord
+"let g:airline_theme='nord'
 
 "color hybrid_material
-""color hydrangea
+"color hydrangea
 "color monokai-chris
 "color mustang
 "color material
-"color hybrid
+"color iceberg
 "let g:airline_theme='hybrid'
 "
 "let g:airline_theme='palenight'
-""color ayu
-""let g:airline_theme='ayu'
+"color ayu
+"let g:airline_theme='ayu'
 
-"color spacegray
-"let g:airline_theme='spacegray'
-
-color minimalist
-let g:airline_theme='minimalist'
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
 
 " maybe usefule for powerline fonts. Terminal already working. but iTerm2 isn't.
 " comment this section out of encounter problem.
@@ -251,7 +254,7 @@ set fillchars+=stl:\ ,stlnc:\
 if !has("nvim")
     set term=xterm-256color
 endif
-"set termencoding=utf-8
+set termencoding=utf-8
 " maybe usefule for powerline fonts. Terminal already working. but iTerm2 isn't.
 
 
@@ -361,8 +364,8 @@ let g:airline#extensions#ctrlp#color_template = 'visual'
 let g:airline#extensions#ctrlp#color_template = 'replace'
 let g:airline#extensions#ctrlp#show_adjacent_modes = 1
 
-let g:airline#extensions#ctrlspace#enabled = 1
-let g:CtrlSpaceStatuslineFunction = "airline#extensions#ctrlspace#statusline()"
+"let g:airline#extensions#ctrlspace#enabled = 1
+"let g:CtrlSpaceStatuslineFunction = "airline#extensions#ctrlspace#statusline()"
 
 let g:airline#extensions#tabline#enabled = 1
 " no with ctrlspace tabline.
@@ -433,6 +436,9 @@ autocmd FileType *
     \   call SuperTabChain(&omnifunc, "<c-p>") |
     \ endif
 
+" map tab key to c-w so jump window would become tab-w.
+nnoremap <tab> <C-w>
+
 set relativenumber
 
 "NERDTree auto open. ctrl-e does the same toggle. disable for now.
@@ -458,7 +464,7 @@ let NERDTreeDirArrows = 1
 "let g:nerdtree_tabs_autofind=1
 
 "fzf
-set rtp+=/Users/jimxu/homebrew/opt/fzf
+set rtp+=/Users/i3dmaster/homebrew/opt/fzf
 "fish
 au BufNewFile,BufRead fish_funced set ft=fish
 
@@ -466,6 +472,10 @@ au BufNewFile,BufRead fish_funced set ft=fish
 nnoremap <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]'
 nnoremap ; :
 inoremap jk <esc>
+nnoremap <leader>tg :NERDTreeTabsToggle<cr>
+nnoremap <leader>tf :NERDTreeTabsFind<cr>
+nnoremap <leader>to :NERDTreeTabsOpen<cr>
+nnoremap <leader>g :NERDTreeToggle<cr>
 
 "split"
 nnoremap - <C-W>-
@@ -483,23 +493,12 @@ endif
 ",ig"
 nnoremap <leader>sg :SignifyToggleHighlight<cr>
 nnoremap <leader>cc :colo<cr>
-
-"NERDTree"
-nnoremap <leader>to :NERDTreeTabsOpen<cr>
-nnoremap <leader>tf :NERDTreeTabsFind<cr>
-nnoremap <leader>tg :NERDTreeTabsToggle<cr>
-nnoremap <leader>g :NERDTreeToggle<cr>
-"nnoremap <leader>e :NERDTreeFind<cr>  // in .vimrc
-
 "vifm mapping
 nmap <leader>vt :TabVifm<cr>
 nmap <leader>vs :VsplitVifm<cr>
 nmap <leader>vd :DiffVifm<cr>
-
-" sync with cider -- myciderkeys on mac
-nnoremap <silent> go <c-o>
-nnoremap <silent> gi <c-i>
-
+noremap <silent> go <c-o>
+noremap <silent> gi <c-i>
 " ==================== space macs simulation layer ========
 nno <silent> <space>q :q!<cr>
 nno <silent> <space>qq :qa!<cr>
@@ -527,12 +526,23 @@ nno <silent> <space>gc :Grepcc<space>
 nno <silent> <space>gg :Grepgo<space>
 " ==================== space macs simulation layer ========
 source $HOME/.config/nvim/plug-config/coc.vim
-"from makc => My New Terminal: Alaritty 19:05
-" allow alaritty to have a transparent background."
-hi! Normal ctermbg=None guibg=None
-hi! NonText ctermbg=None guibg=None guifg=None ctermfg=None
 
-syntax on
+" help switchbuf
+set switchbuf=usetab
+" fzf Buffers
+let g:fzf_buffers_jump = 1
+fun! ChooseBuf()
+    redir => buffers
+        silent ls
+    redir end
+
+    echo l:buffers
+    let l:choice = input('Which one: ')
+    execute ':e +' . l:choice . 'buf'
+endfun
+command! ChooseBuf call ChooseBuf()
+"nnoremap <Leader>b :call ChooseBuf()<CR>
+
 set shiftround
 set ignorecase
 set smartcase
