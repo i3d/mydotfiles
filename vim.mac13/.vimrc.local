@@ -532,6 +532,8 @@ nno <silent> <space><space> :CocList vimcommands<cr>
 nno <silent> <space>/ :CocList outline<cr>
 nno <silent> <space>w :CocList windows<cr>
 nno <silent> <space>T :CocList colors<cr>
+nno <silent> <space>t :FloatermToggle<cr>
+nno <silent> <space>h :FloatermHide<cr>
 nno <silent> <space>q :q!<cr>
 nno <silent> <space>qq :qa!<cr>
 nno <silent> <space><tab> :bnext<cr>
@@ -554,7 +556,8 @@ set shiftround
 set ignorecase
 set smartcase
 set incsearch
-set nowrapscan
+set ws  " wrap search"
+set wb  "writebackup"
 " always has to be the end.
 filetype plugin indent on
 set nu rnu
