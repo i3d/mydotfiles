@@ -534,9 +534,6 @@ nno <silent> <space>w :CocList windows<cr>
 nno <silent> <space>T :CocList colors<cr>
 nno <silent> <space>t :FloatermToggle<cr>
 nno <silent> <space>h :FloatermHide<cr>
-nno <silent> <space>q :q!<cr>
-nno <silent> <space>qq :qa!<cr>
-nno <silent> <space><tab> :bnext<cr>
 "" <space>k to bring up help
 command! -nargs=+ Greph execute 'silent grep! <args> *.h' | cwindow
 command! -nargs=+ Grepcc execute 'silent grep! <args> *.cc' | cwindow
