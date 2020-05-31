@@ -462,6 +462,23 @@ set rtp+=/Users/jimxu/homebrew/opt/fzf
 "fish
 au BufNewFile,BufRead fish_funced set ft=fish
 
+
+if exists('veonim')
+
+" built-in plugin manager
+Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-surround'
+
+" extensions for web dev
+let g:vscode_extensions = [
+  \'vscode.typescript-language-features',
+  \'vscode.css-language-features',
+  \'vscode.html-language-features',
+\]
+
+set guifont=Anonymice\ Nerd\ Font\ Mono:h24
+endif
+
 " select last paste in visual mode
 nnoremap <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]'
 nnoremap ; :
