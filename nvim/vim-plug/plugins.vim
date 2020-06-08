@@ -93,8 +93,19 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Vim Wiki
     " Plug 'https://github.com/vimwiki/vimwiki.git'
   endif
-
-
+" === local ===
+Plug 'rainglow/vim'
+Plug 'nightsense/vimspectr'
+Plug 'nightsense/snow'
+Plug 'mswift42/vim-themes'
+Plug 'rakr/vim-two-firewatch'
+Plug 'sts10/vim-pink-moon'
+Plug 'owickstrom/vim-colors-paramount'
+Plug 'tyrannicaltoucan/vim-deep-space'
+Plug 'danilo-augusto/vim-afterglow'
+Plug 'romainl/Apprentice'
+Plug 'nightsense/carbonized'
+" === local ===
 call plug#end()
 
 " Automatically install missing plugins on startup

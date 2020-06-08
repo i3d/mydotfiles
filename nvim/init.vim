@@ -20,7 +20,8 @@ if exists('g:vscode')
 else
   " ordinary neovim
   source $HOME/.config/nvim/themes/syntax.vim
-  source $HOME/.config/nvim/themes/onedark.vim
+"  source $HOME/.config/nvim/themes/onedark.vim
+  source $HOME/.config/nvim/themes/local.vim
   source $HOME/.config/nvim/themes/airline.vim
   source $HOME/.config/nvim/plug-config/rnvimr.vim
   source $HOME/.config/nvim/plug-config/fzf.vim
