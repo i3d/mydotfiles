@@ -9,14 +9,16 @@ let $ZSH_ENV = '~/.zshrc'
 let $VIFM_ENABLED = 1
 
 " Selected color scheme
-colorscheme dracula
+"colorscheme dracula
+"colorscheme ph
+colorscheme matrix
 
 " ------------------------------------------------------------------------------
 " Command used to edit files in various contexts.  The default is vim.
 " If you would like to use another vi clone such as Elvis or Vile
 " you will need to change this setting.
 set dotfiles
-set vicmd='vim -p'
+set vicmd='vi'
 set rnu
 set scb
 set quickview
@@ -99,7 +101,14 @@ endif
 " use < and > without ctrl-w prefix key in normal mode
 nnoremap < <c-w><
 nnoremap > <c-w>>
+nnoremap x <c-w>p
 nnoremap ; :
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-l> <c-w>l
+nnoremap <c-h> <c-w>h
+nnoremap = <c-w>=
+nnoremap | <c-w>|
 nnoremap jk <esc>
 nnoremap s :shell<cr>
 " Display sorting dialog
@@ -107,11 +116,76 @@ nnoremap S :sort<cr>
 " Toggle visibility of preview window
 nnoremap w :view<cr>
 vnoremap w :view<cr>gv
+nnoremap q :q!<cr>
+
+"command! gohome :execute 'cd' system('echo $HOME')
+"For paths that have spaces this should be better:
+"command! gohome :execute "cd '".system('echo $HOME')."'"
 
 " open vim to edit .vifmrc
 nnoremap ,c :write | execute ':!%n${EDITOR:-vim} $MYVIFMRC' | restart<cr>
 " open gvim to edit .vifmrc
 nnoremap ,C :!vi --remote-tab-silent $MYVIFMRC &<cr>
+nnoremap eb :!v ~/.vimrc.bundles<cr>
+nnoremap ev :!v ~/.vimrc<cr>
+nnoremap ez :!v ~/.zshrc<cr>
+nnoremap et :!v ~/.tmux.conf<cr>
+
+command! FZFHomeLocate :set noquickview | :execute 'goto' fnameescape(term('locate $HOME | fzf-tmux --height 15 2>/dev/tty'))
+command! FZFFindFile :set noquickview | :execute 'goto' fnameescape(term('find . | fzf-tmux --height 15 2>/dev/tty'))
+command! FZFFind :set noquickview | :execute 'goto' fnameescape(term('rg -C1 -S -l --column -H --vimgrep --color=never "%a"| fzf --height 15 2>/dev/tty'))
+
+nnoremap fh :FZFHomeLocate<cr>
+nnoremap f. :FZFFindFile<cr>
+nnoremap f? :FZFFind<space>
+
+command! googlesearch :!g %a
+nnoremap g? :googlesearch<space>
+nnoremap gF :!open -g %f<cr>
+nnoremap gn :tabnew<cr>
+nnoremap ch :cd ~<cr>
+nnoremap C  :gfourd<cr>
+nnoremap c, :gfourroot<cr>
+nnoremap cf :gfourflowmon<cr>
+nnoremap cv :gfourver<cr>
+nnoremap cb :gfourborg<cr>
+nnoremap cm :gfourmon<cr>
+nnoremap ec :gfourefconfig<cr>
+nnoremap ef :gfouref<cr>
+nnoremap ci :cd ~/bin<cr>
+nnoremap cr :cd ~/src<cr>
+nnoremap cn :cd ~/.config/nvim<cr>
+nnoremap cs :csearch<space>
+nnoremap vl :!less %f<cr>
+nnoremap gc :!p4 change<cr>
+nnoremap gp :!!p4 pending<cr>
+nnoremap gs :!!p4 diff %f<cr>
+nnoremap ge :!p4 edit %f<cr>
+nnoremap gv :gvi<space>
+nnoremap gz :!!p4 revert %f
+nnoremap gl :!!p4 blame %f<cr>
+nnoremap ga :!!p4 add %f<cr>
+nnoremap gA :gAddto<space>
+nnoremap go :!!p4 opened<cr>
+nnoremap gw :!!p4 whatsout<cr>
+nnoremap bb :!!blaze build ":"%f:r<cr>
+nnoremap bt :!!blaze test ":"%f:r<cr>
+nnoremap bl :!!bcleant ":"%f:r<cr>
+nnoremap bc :bcl<space>
+nnoremap up :!!p4 sync<cr>
+nnoremap B  :!!xxd -g1 %f<cr>
+nnoremap uu :!git pull|less<cr>
+
+nnoremap df :!cdiff %f %F | less<cr>
+command! cmpinternal :!!cdiff %a %S<cr>
+command! cmp : if expand('%%c') == expand('%%f')
+              \ |     echo expand('Comparing %%"c and %%"C:t ...')
+              \ |     cmpinternal %c %C
+              \ | else
+              \ |     echo expand('Comparing files: %%"f ...')
+              \ |     cmpinternal %f
+              \ | endif
+
 
 " Open file in new MacVim tab
 ""nnoremap o :!mvim --remote-tab-silent %f<cr>
@@ -124,10 +198,6 @@ nnoremap gb :!open -g %f<cr>
 nnoremap yd :!printf %d | pbcopy<cr>
 " Yank current file path into the clipboard
 nnoremap yf :!printf %c:p | pbcopy<cr>
-" View preview in Quick Look
-"nnoremap <space> :!qlmanage -p %f > /dev/null 2>&1<cr>
-nnoremap <space> :!open -a CotEditor.app %f > /dev/null 2>&1<cr>
-" Mappings for faster renaming
 nnoremap I cw<c-a>
 nnoremap cc cw<c-u>
 nnoremap A cw
@@ -437,17 +507,36 @@ fileviewer *.docx docx2txt.pl %f -
 " Explicitly set highlight type for some extensions
 "
 " 256-color terminal
-" Noted that in Linux highligh, there is no --base16 flag, change it to -s
-" olive or some theme that's suitable.
+
 "highlight --list-scripts=langs to see supported syntax
-fileviewer *.go highlight -O xterm256 --base16 %c
+fileviewer *.go highlight -O xterm256 --base16 --syntax go %c
+fileviewer *.py highlight -O xterm256 --base16 --syntax py %c
+fileviewer *.java highlight -O xterm256 --base16 --syntax java %c
+fileviewer *.rs highlight -O xterm256 --base16 --syntax rs %c
 fileviewer *.md highlight -O xterm256 --base16 --syntax md %c
 fileviewer *.js,.hyper.js highlight -O xterm256 --base16 --syntax js %c
 fileviewer *.ts highlight -O xterm256 --base16 --syntax ts %c
-fileviewer .zshrc,.zshrc.pre-oh-my-zsh,.vim* highlight -O xterm256 --base16 --syntax sh %c
-fileviewer *.zsh,*.bash*,*.vim*,*.fish* highlight -O xterm256 --base16 --syntax sh %c
-fileviewer *.cc,*.[ch],*.[ch]pp highlight -O xterm256 --base16 --syntax c %c
+fileviewer .zshrc,.zshrc.pre-oh-my-zsh highlight -O xterm256 --base16 --syntax sh %c
+fileviewer .vim*,vifmrc highlight -O xterm256 --base16 --syntax vim %c
+fileviewer *.[ch],*.[ch]pp,*.proto,*.textproto highlight -O xterm256 --base16 --syntax c %c
 fileviewer Makefile,Makefile.* highlight -O xterm256 --base16 --syntax make %c
+
+"""" bat --list-language
+"""fileviewer *.go bat -l go %c
+"""fileviewer *.java bat -l java %c
+"""fileviewer *.rs bat -l rs %c
+"""fileviewer *.py bat -l py %c
+"""fileviewer *.md bat -l md %c
+"""fileviewer *.js,.hyper.js bat -l js %c
+"""fileviewer *.ts bat -l ts %c
+"""fileviewer *.html,*.htm bat -l html %c
+"""fileviewer .zshrc,.zshrc.pre-oh-my-zsh bat -l sh %c
+"""fileviewer .vim*,vifmrc bat -l vim %c
+"""fileviewer *.[ch],*.[ch]pp,*.proto,*.textproto bat -l c %c
+"""fileviewer Makefile,Makefile.* bat -l make %c
+
+""fileviewer *.[ch],*.[ch]pp,*.cc,*.s,*.S highlight -O xterm256 -s dante --syntax c %c
+""fileviewer Makefile,Makefile.* highlight -O xterm256 -s dante --syntax make %c
 "
 " 16-color terminal
 " fileviewer *.c,*.h highlight -O ansi -s dante %c
