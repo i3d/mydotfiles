@@ -326,9 +326,11 @@ unalias s 2>/dev/null
 unalias vi 2>/dev/null
 unalias g  2>/dev/null # alias to git which never good.
 unalias rd 2>/dev/null # for mac remote desktop, not rmdir
+alias cat=bat
+alias less=bat
 export PATH=$HOME/bin:$PATH
 
 fortune | cowsay -f $(cowsay -l| sed '1d' | shuf | tr ' ' '\n' | head -1) | lolcat
-(cat ~/.cache/wal/sequences &)
-wal -R
 [[ -z $VIFM_ENABLED ]] && vifm $HOME
+(cat ~/.cache/wal/sequences &)
+wal -R -n -t -w -e
