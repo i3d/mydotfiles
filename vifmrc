@@ -144,35 +144,11 @@ nnoremap g? :googlesearch<space>
 nnoremap gF :!open -g %f<cr>
 nnoremap gn :tabnew<cr>
 nnoremap ch :cd ~<cr>
-nnoremap C  :gfourd<cr>
-nnoremap c, :gfourroot<cr>
-nnoremap cf :gfourflowmon<cr>
-nnoremap cv :gfourver<cr>
-nnoremap cb :gfourborg<cr>
-nnoremap cm :gfourmon<cr>
-nnoremap ec :gfourefconfig<cr>
-nnoremap ef :gfouref<cr>
 nnoremap ci :cd ~/bin<cr>
 nnoremap cr :cd ~/src<cr>
 nnoremap cn :cd ~/.config/nvim<cr>
-nnoremap cs :csearch<space>
 nnoremap vl :!less %f<cr>
-nnoremap gc :!p4 change<cr>
-nnoremap gp :!!p4 pending<cr>
-nnoremap gs :!!p4 diff %f<cr>
-nnoremap ge :!p4 edit %f<cr>
 nnoremap gv :gvi<space>
-nnoremap gz :!!p4 revert %f
-nnoremap gl :!!p4 blame %f<cr>
-nnoremap ga :!!p4 add %f<cr>
-nnoremap gA :gAddto<space>
-nnoremap go :!!p4 opened<cr>
-nnoremap gw :!!p4 whatsout<cr>
-nnoremap bb :!!blaze build ":"%f:r<cr>
-nnoremap bt :!!blaze test ":"%f:r<cr>
-nnoremap bl :!!bcleant ":"%f:r<cr>
-nnoremap bc :bcl<space>
-nnoremap up :!!p4 sync<cr>
 nnoremap B  :!!xxd -g1 %f<cr>
 nnoremap uu :!git pull|less<cr>
 

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# change background using the image target.
+# for example: paper Pictures/foobar.png
+wal -n -t -e -i "$@"

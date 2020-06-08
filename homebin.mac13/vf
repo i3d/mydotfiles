@@ -1,0 +1,5 @@
+#!/bin/zsh
+
+VIFM=$(which vifm)
+
+[[ -z $1 ]] && $VIFM $PWD || $VIFM "$@"

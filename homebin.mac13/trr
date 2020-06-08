@@ -1,0 +1,3 @@
+#!/bin/bash
+
+tmx2 -2 attach-session -t $1 || tmux ls

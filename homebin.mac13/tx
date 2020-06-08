@@ -1,0 +1,18 @@
+#!/bin/bash
+
+tx() {
+  local tus="$(tmx2 ls | fzf-tmux -d 20 --multi --reverse)"
+  if [[ -z "$tus" ]]
+  then
+          return
+  fi
+  local sess="$(echo "$tus" | awk -F: '{print $1}')"
+  if [ -n "$TMUX" ]
+  then
+          tmx2 switchc -t $sess
+  else
+          trr $sess
+  fi
+}
+
+tx
