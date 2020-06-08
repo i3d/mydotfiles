@@ -62,7 +62,7 @@ source ~/.zshrc.pre-oh-my-zsh
 
 
 # Customize to your needs...
-export PATH=/Users/jimxu/go/bin:/Users/jimxu/bin:/Users/jimxu/go_code/bin:/usr/local/bin:/usr/local/sbin:/usr/local/symlinks:/usr/local/scripts:/usr/local/buildtools/java/jdk/bin:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/bin/g4bin:/usr/X11R6/bin:/Users/jimxu/pkgs/android-sdk-linux_x86-1.5_r3/tools:/usr/local/google/bin:/Users/jimxu/src/depot_tools
+export PATH=/Users/jimxu/go/bin:/Users/jimxu/bin:/Users/jimxu/go_code/bin:/usr/local/bin:/usr/local/sbin:/usr/local/symlinks:/usr/local/scripts:/usr/local/buildtools/java/jdk/bin:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/bin/g4bin:/usr/X11R6/bin:/Users/jimxu/pkgs/android-sdk-linux_x86-1.5_r3/tools:/Users/jimxu/src/depot_tools
 
 PATH=$HOME/.rbenv/shims:$HOME/homebrew/bin:$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 export PATH="/Users/jimxu/homebrew/sbin:$PATH"
@@ -84,39 +84,7 @@ fi
 neofetch
 # don't fatch the IP.
 #archey -o
-
-# for my kir workstation.
-#. $HOME/.bagpipe/setup.sh $HOME/.bagpipe jimxu-linux.kir.corp.google.com "corp-ssh-helper --stderrthreshold=INFO %h %p"
-# for my c.googler.com instance.
-. $HOME/.bagpipe/setup.sh $HOME/.bagpipe ujimux.c.googlers.com "corp-ssh-helper -relay=sup-ssh-relay.corp.google.com --stderrthreshold=INFO %h %p"
-#. $HOME/.bagpipe/setup.sh $HOME/.bagpipe ujimux.c.googlers.com
 export PATH=$HOME/bin:$PATH
-
-function renew_gcert_ifneeded() {
-  HOURS_TILL_EOB=$((20 - $(date +%-H)))h
-  #gcertstatus -ssh_cert_comment=corp/normal -check_remaining=$HOURS_TILL_EOB || gcert
-  gcertstatus -ssh_cert_comment=corp/normal -check_remaining=$HOURS_TILL_EOB || ~/bin/pa.py
-}
-
-function renew_bagpipe_ifneeded() {
-  p4 info > /dev/null 2>&1 || p4 bagpipe-prodaccess
-}
-
-function pa() {
-  renew_gcert_ifneeded && renew_bagpipe_ifneeded
-  # open up our first connection to our remote host so that any
-  # disconnection will be reconnected. 'then sux wouldn't bother
-  # manual reconnect anymore'
-  echo "ssh to ujimux.c.googler.com ..."
-  echo
-  # idempotent if already connected.
-  # help any remote editing or opened remote sessions, e.g. sux, remote tmux, vscode, oni, etc.
-  #autossh -f -M20000 -t -A -X ujimux.c.googlers.com
-}
-
-#too slow on laptop.
-#pa
-
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 #[ -f /Users/jimxu/homebrew/opt/fzf/shell/completion.zsh ] &&  source /Users/jimxu/homebrew/opt/fzf/shell/completion.zsh
@@ -221,13 +189,6 @@ export NVM_DIR="$HOME/.nvm"
 
 #homebrew cleanup previous installs.
 export HOMEBREW_INSTALL_CLEANUP=1
-#or run this to cleanup.
-alias hbc='~/bin/hbc.sh'
-alias g4='p4'
-alias bbbb='blaze'
-# g4d citc stuff.
-source /Library/GoogleCorpSupport/srcfs/shell_completion/enable_completion.sh
-
 export PATH="/Users/jimxu/homebrew/opt/llvm/bin:$PATH"
 #export CPLUS_INCLUDE_PATH=/Users/jimxu/homebrew/Cellar/gcc/HEAD-2d3af38/include/c++/9.0.1:/usr/include:/usr/local/include:$HOME/.local/include:$CPLUS_INCLUDE_PATH
 # for oni finding neovim
