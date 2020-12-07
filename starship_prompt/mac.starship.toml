@@ -1,0 +1,123 @@
+#Don't print a new line at the start of the prompt
+add_newline = true
+
+# Replace the "❯" symbol in the prompt with "➜"
+[character]      # The name of the module we are configuring is "character"
+symbol = "➜"     # The "symbol" segment is being set to "➜"
+error_symbol = "✗"
+use_symbol_for_status = true
+
+[cmd_duration]
+min_time = 10_000  # Show command duration over 10,000 milliseconds (=10 sec)
+format = " took [$duration]($style)"
+
+# Disable the package module, hiding it from the prompt completely
+[package]
+disabled = false
+
+[battery]
+full_symbol = "🔋"
+charging_symbol = "⚡️"
+discharging_symbol = "💀"
+
+[[battery.display]]  # "bold red" style when capacity is between 0% and 10%
+threshold = 10
+style = "bold red"
+
+[[battery.display]]  # "bold yellow" style when capacity is between 10% and 30%
+threshold = 30
+style = "bold yellow"
+
+[directory]
+truncation_length = 4
+
+# docker
+[docker_context]
+symbol = "🐋 "
+disabled = false
+
+# env variable
+[env_var]
+variable = "SHELL"
+default = "unknown shell"
+
+# git
+
+[git_branch]
+format = " [$symbol$branch]($style) "
+symbol = "🍣 "
+style = "bold yellow"
+
+[git_commit]
+commit_hash_length = 8
+style = "bold white"
+
+[git_state]
+progress_divider = " of "
+
+#[git_commit]
+#commit_hash_length = 4
+
+[git_status]
+conflicted = "🏳"
+ahead = "🏎💨"
+behind = "😰"
+diverged = "😵"
+untracked = "🤷‍"
+stashed = "📦"
+modified = "📝"
+staged.value = "++"
+staged.style = "green"
+staged_count.enabled = true
+staged_count.style = "green"
+renamed = "👅"
+deleted = "🗑"
+
+#[git_status]
+#conflicted = "⚔️ "
+#ahead = "🏎️ 💨 ×${count}"
+#behind = "🐢 ×${count}"
+#diverged = "🔱 🏎️ 💨 ×${ahead_count} 🐢 ×${behind_count}"
+#untracked = "🛤️  ×${count}"
+#stashed = "📦 "
+#modified = "📝 ×${count}"
+#staged = "🗃️  ×${count}"
+#renamed = "📛 ×${count}"
+#deleted = "🗑️  ×${count}"
+#style = "bright-white"
+#format = "$all_status$ahead_behind"
+
+# hostname
+[hostname]
+ssh_only = false
+prefix = "⟪"
+suffix = "⟫"
+trim_at = ".companyname.com"
+disabled = true
+
+# kubernetes
+[kubernetes]
+symbol = "⛵ "
+style = "dimmed green"
+disabled = false
+[kubernetes.context_aliases]
+"dev.local.cluster.k8s" = "dev"
+
+[memory_usage]
+disabled = false
+show_percentage = true
+show_swap = true
+threshold = -1
+symbol = " "
+separator = "/"
+style = "bold dimmed green"
+
+[time]
+time_format = "%T"
+format = "🕙 $time($style) "
+style = "bright-white"
+disabled = false
+
+[username]
+style_user = "bold dimmed blue"
+show_always = false
