@@ -1,0 +1,261 @@
+"
+"""""""""""""""""""""""""""""""""""""""""""""""
+"https://github.com/ChristianChiarulli/nvim
+"""""""""""""""""""""""""""""""""""""""""""""""
+" To get mach2 installed and all the goodies for neovim.
+"
+"
+" Specify a directory for plugins
+" - For Neovim: ~/.local/share/nvim/plugged
+" - Avoid using standard Vim directory names like 'plugin'
+" auto-install vim-plug
+" For neovim
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
+
+"For vim
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
+" ===== from old spf13
+Plug 'fatih/vim-go'
+"Plug 'ervandew/supertab'
+Plug 'edkolev/tmuxline.vim'
+Plug 'uarun/vim-protobuf'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-endwise'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'chriskempson/base16-vim'
+Plug 'fcpg/vim-farout'
+Plug 'vim-scripts/mru.vim'
+Plug 'w0rp/ale'
+Plug 'ayu-theme/ayu-vim' " or other package manager
+"set termguicolors     " enable true colors support
+let ayucolor="mirage" " for mirage version of theme
+"let ayucolor="dark"   " for dark version of theme
+"Plug 'auto-pairs-gentle'
+"let g:AutoPairsUseInsertedCount = 1
+Plug 'jiangmiao/auto-pairs'
+Plug 'drewtempelmeyer/palenight.vim'
+Plug 'preservim/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'dempfi/vim-airline-neka'
+Plug 'frazrepo/vim-rainbow'
+Plug 'bling/vim-bufferline'
+Plug 'flazz/vim-colorschemes'
+Plug 'tpope/vim-fugitive'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'tpope/vim-surround'
+" ===== from old spf13
+
+Plug 'rakr/vim-one'
+Plug 'edkolev/promptline.vim'
+Plug 'nikvdp/neomux'
+Plug 'huyvohcmc/atlas.vim'
+Plug 'arcticicestudio/nord-vim'
+Plug 'sjl/badwolf'
+Plug 'jacoborus/tender.vim'
+Plug 'kristijanhusak/vim-hybrid-material'
+Plug 'yuttie/hydrangea-vim'
+" imcompatible with zah's nim.vim plugin.
+Plug 'baabelfish/nvim-nim'
+Plug 'vifm/vifm.vim'
+" use homebrew version
+"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'dylanaraps/wal.vim'
+Plug 'ajh17/Spacegray.vim'
+Plug 'dikiaap/minimalist'
+
+" use <leader><leader>
+Plug 'easymotion/vim-easymotion'
+hi link EasyMotionTarget ErrorMsg
+hi link EasyMotionShade  Comment
+"
+hi link EasyMotionTarget2First MatchParen
+hi link EasyMotionTarget2Second MatchParen
+
+hi link EasyMotionMoveHL Search
+hi link EasyMotionIncSearch Search
+"Lower case finds upper & lower case but upper case only finds upper case
+let g:EasyMotion_smartcase = 1
+
+Plug 'norcalli/nvim-colorizer.lua'
+" by default use s.
+Plug 'justinmk/vim-sneak'
+let g:sneak#s_next = 1
+let g:sneak#label = 1
+
+Plug 'unblevable/quick-scope'
+" Trigger a highlight in the appropriate direction when pressing these keys:
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
+highlight QuickScopePrimary guifg='#00C7DF' gui=underline ctermfg=155 cterm=underline
+highlight QuickScopeSecondary guifg='#eF5F70' gui=underline ctermfg=81 cterm=underline
+let g:qs_max_chars=150
+
+Plug 'junegunn/rainbow_parentheses.vim'
+let g:rainbow#max_level = 16
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+autocmd FileType * RainbowParentheses
+
+Plug 'airblade/vim-rooter'
+let g:rooter_silent_chdir = 1
+
+Plug 'sheerun/vim-polyglot'
+Plug 'ryanoasis/vim-devicons'
+
+Plug 'alvan/vim-closetag'
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.js'
+let g:closetag_filetypes = 'html,xhtml,phtml,javascript'
+
+" use <c-w><c-w> to switch.
+Plug 'voldikss/vim-floaterm'
+set shell=/bin/zsh
+let g:floaterm_wintype="floating"
+let g:floaterm_gitcommit='floaterm'
+let g:floaterm_autoinsert=1
+let g:floaterm_width=0.7
+let g:floaterm_height=0.8
+let g:floaterm_wintitle=0
+let g:floaterm_position="bottomright"
+let g:floaterm_autoclose=1
+function s:floatermSettings()
+    setlocal number
+    " more settings
+endfunction
+autocmd FileType floaterm call s:floatermSettings()
+autocmd User Startified setlocal buflisted
+
+Plug 'mhinz/vim-startify'
+
+Plug 'liuchengxu/vista.vim'
+let g:vista_default_executive = 'coc'
+let g:vista_fzf_preview = ['right:50%']
+
+let g:vista#renderer#enable_icon = 1
+
+let g:vista#renderer#icons = {
+\   "function": "\uf794",
+\   "variable": "\uf71b",
+\  }
+
+Plug 'AlphaMycelium/pathfinder.vim'
+Plug 'rainglow/vim'
+Plug 'nightsense/vimspectr'
+Plug 'nightsense/snow'
+Plug 'mswift42/vim-themes'
+Plug 'rakr/vim-two-firewatch'
+Plug 'sts10/vim-pink-moon'
+Plug 'owickstrom/vim-colors-paramount'
+Plug 'tyrannicaltoucan/vim-deep-space'
+Plug 'danilo-augusto/vim-afterglow'
+Plug 'romainl/Apprentice'
+Plug 'nightsense/carbonized'
+Plug 'junegunn/goyo.vim'
+Plug 'liuchengxu/vim-which-key'
+Plug 'mhinz/vim-signify'
+Plug 'tpope/vim-rhubarb'
+Plug 'junegunn/gv.vim'
+Plug 'neomake/neomake'
+Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
+" Keeping up to date with master
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+call plug#end()
+" Automatically install missing plugins on startup
+autocmd VimEnter *
+  \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \|   PlugInstall --sync | q
+  \| endif
+
+" ============================== FZF ===============================
+" This is the default extra key bindings
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+" Enable per-command history.
+" CTRL-N and CTRL-P will be automatically bound to next-history and
+" previous-history instead of down and up. If you don't like the change,
+" explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
+let g:fzf_history_dir = '~/.local/share/fzf-history'
+let g:fzf_buffers_jump = 1
+
+" map <C-f> :Files<CR>
+" map <leader>b :Buffers<CR>
+" nnoremap <leader>g :Rg<CR>
+" nnoremap <leader>t :Tags<CR>
+" nnoremap <leader>m :Marks<CR>
+
+
+let g:fzf_tags_command = 'ctags -R'
+" Border color
+let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp' } }
+
+let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info'
+let $FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/**'"
+"-g '!{node_modules,.git}'
+
+" Customize fzf colors to match your color scheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+"Get Files
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--inline-info']}), <bang>0)
+
+
+" Get text in files with Rg
+" command! -bang -nargs=* Rg
+"   \ call fzf#vim#grep(
+"   \   "rg --column --line-number --no-heading --color=always --smart-case --glob '!.git/**' ".shellescape(<q-args>), 1,
+
+ " Make Ripgrep ONLY search file contents and not filenames
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --hidden --smart-case --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
+  \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4.. -e'}, 'right:50%', '?'),
+  \   <bang>0)
+
+" Ripgrep advanced
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+
+" Git grep
+command! -bang -nargs=* GGrep
+  \ call fzf#vim#grep(
+  \   'git grep --line-number '.shellescape(<q-args>), 0,
+  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
+" ============================== FZF ===============================

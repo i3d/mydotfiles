@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Disable ARD Agent and Remove Access Privileges for All Users
+sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -deactivate -configure -access -off

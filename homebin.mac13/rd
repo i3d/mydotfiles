@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# share or disallow remote desktop
+
+# Allow Access for All Users and Give All Users Full Access
+sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -configure -allowAccessFor -allUsers -privs -all

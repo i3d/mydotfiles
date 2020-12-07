@@ -62,7 +62,7 @@ source ~/.zshrc.pre-oh-my-zsh
 
 
 # Customize to your needs...
-export PATH=/Users/i3dmaster/go/bin:/Users/i3dmaster/bin:/Users/i3dmaster/go_code/bin:/usr/local/bin:/usr/local/sbin:/usr/local/symlinks:/usr/local/scripts:/usr/local/buildtools/java/jdk/bin:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/bin/g4bin:/usr/X11R6/bin:/Users/i3dmaster/pkgs/android-sdk-linux_x86-1.5_r3/tools:/usr/local/google/bin:/Users/i3dmaster/src/depot_tools
+export PATH=/Users/i3dmaster/go/bin:/Users/i3dmaster/bin:/Users/i3dmaster/go_code/bin:/usr/local/bin:/usr/local/sbin:/usr/local/symlinks:/usr/local/scripts:/usr/local/buildtools/java/jdk/bin:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/bin/g4bin:/usr/X11R6/bin:/Users/i3dmaster/pkgs/android-sdk-linux_x86-1.5_r3/tools:/Users/i3dmaster/src/depot_tools
 
 PATH=$HOME/.rbenv/shims:$HOME/homebrew/bin:$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 export PATH="/Users/i3dmaster/homebrew/sbin:$PATH"
@@ -326,9 +326,11 @@ unalias s 2>/dev/null
 unalias vi 2>/dev/null
 unalias g  2>/dev/null # alias to git which never good.
 unalias rd 2>/dev/null # for mac remote desktop, not rmdir
+alias cat=bat
+alias less=bat
 export PATH=$HOME/bin:$PATH
 
 fortune | cowsay -f $(cowsay -l| sed '1d' | shuf | tr ' ' '\n' | head -1) | lolcat
-(cat ~/.cache/wal/sequences &)
-wal -R
 [[ -z $VIFM_ENABLED ]] && vifm $HOME
+(cat ~/.cache/wal/sequences &)
+wal -R -n -t -w -e
