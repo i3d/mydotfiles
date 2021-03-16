@@ -111,22 +111,22 @@ hi WildMenu         guisp=NONE guifg=#ffffff guibg=#1c1c1c ctermfg=231 ctermbg=2
 
 " major
 
-hi Normal     guisp=NONE guifg=#b3b5a7 guibg=21282C  ctermfg=145 ctermbg=235  gui=NONE cterm=NONE
-hi Comment    guisp=NONE guifg=#384545 guibg=NONE    ctermfg=238 ctermbg=NONE gui=NONE cterm=NONE
-hi Constant   guisp=NONE guifg=#e6d15a guibg=#1c1c1c ctermfg=185 ctermbg=234  gui=NONE cterm=NONE
-hi Identifier guisp=NONE guifg=#a3a360 guibg=#1c1c1c ctermfg=143 ctermbg=234  gui=NONE cterm=NONE
-hi Statement  guisp=NONE guifg=#3b8766 guibg=#1c1c1c ctermfg=65  ctermbg=234  gui=NONE cterm=NONE
-hi PreProc    guisp=NONE guifg=#67692f guibg=#1c1c1c ctermfg=240 ctermbg=234  gui=NONE cterm=NONE
-hi Type       guisp=NONE guifg=#f2bd52 guibg=#1c1c1c ctermfg=215 ctermbg=234  gui=NONE cterm=NONE
-hi Special    guisp=NONE guifg=#de7a7a guibg=#1c1c1c ctermfg=174 ctermbg=234  gui=NONE cterm=NONE
-hi Underlined guisp=NONE guifg=#5fff87 guibg=#1c1c1c ctermfg=84  ctermbg=234  gui=NONE cterm=NONE
-hi Ignore     guisp=NONE guifg=#ffffff guibg=#1c1c1c ctermfg=231 ctermbg=234  gui=NONE cterm=NONE
-hi Error      guisp=NONE guifg=#b54f33 guibg=#1c1c1c ctermfg=131 ctermbg=234  gui=NONE cterm=NONE
-hi Todo       guisp=NONE guifg=#e34d84 guibg=#1c1c1c ctermfg=168 ctermbg=234  gui=NONE cterm=NONE
+hi Normal     guisp=NONE guifg=#b3b5a7 guibg=21282C  ctermfg=145 ctermbg=235  gui=NONE   cterm=NONE
+hi Comment    guisp=NONE guifg=#384545 guibg=NONE    ctermfg=238 ctermbg=NONE gui=italic cterm=italic
+hi Constant   guisp=NONE guifg=#e6d15a guibg=#1c1c1c ctermfg=185 ctermbg=234  gui=NONE   cterm=NONE
+hi Identifier guisp=NONE guifg=#a3a360 guibg=#1c1c1c ctermfg=143 ctermbg=234  gui=NONE   cterm=NONE
+hi Statement  guisp=NONE guifg=#3b8766 guibg=#1c1c1c ctermfg=65  ctermbg=234  gui=NONE   cterm=NONE
+hi PreProc    guisp=NONE guifg=#67692f guibg=#1c1c1c ctermfg=240 ctermbg=234  gui=NONE   cterm=NONE
+hi Type       guisp=NONE guifg=#f2bd52 guibg=#1c1c1c ctermfg=215 ctermbg=234  gui=NONE   cterm=NONE
+hi Special    guisp=NONE guifg=#de7a7a guibg=#1c1c1c ctermfg=174 ctermbg=234  gui=NONE   cterm=NONE
+hi Underlined guisp=NONE guifg=#5fff87 guibg=#1c1c1c ctermfg=84  ctermbg=234  gui=NONE   cterm=NONE
+hi Ignore     guisp=NONE guifg=#ffffff guibg=#1c1c1c ctermfg=231 ctermbg=234  gui=NONE   cterm=NONE
+hi Error      guisp=NONE guifg=#b54f33 guibg=#1c1c1c ctermfg=131 ctermbg=234  gui=NONE   cterm=NONE
+hi Todo       guisp=NONE guifg=#e34d84 guibg=#1c1c1c ctermfg=168 ctermbg=234  gui=NONE   cterm=NONE
 
 " minor
 
-hi String         guisp=NONE guifg=#dbdb76 guibg=#1c1c1c ctermfg=186 ctermbg=234 gui=NONE cterm=NONE
+hi String         guisp=NONE guifg=#997a48 guibg=#1c1c1c ctermfg=101 ctermbg=234 gui=NONE cterm=NONE
 hi Character      guisp=NONE guifg=#ffffff guibg=#1c1c1c ctermfg=231 ctermbg=234 gui=NONE cterm=NONE
 hi Number         guisp=NONE guifg=#86f7a2 guibg=#1c1c1c ctermfg=121 ctermbg=234 gui=NONE cterm=NONE
 hi Boolean        guisp=NONE guifg=#afd75f guibg=#1c1c1c ctermfg=149 ctermbg=234 gui=NONE cterm=NONE
