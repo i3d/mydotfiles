@@ -29,14 +29,14 @@ hi javaScriptNumber           guisp=NONE guifg=#00d700 guibg=#NONE ctermfg=40  c
 hi javaScriptRegexpString     guisp=NONE guifg=#384545 guibg=#NONE ctermfg=231 ctermbg=234 gui=NONE cterm=NONE
 hi javaScriptFunction         guisp=NONE guifg=#0087d7 guibg=#NONE ctermfg=32  ctermbg=234 gui=NONE cterm=NONE
 hi javaScriptFunctionFold     guisp=NONE guifg=#384545 guibg=#NONE ctermfg=231 ctermbg=234 gui=NONE cterm=NONE
-hi javaScriptBraces           guisp=NONE guifg=#ff5f00 guibg=#NONE ctermfg=202 ctermbg=234 gui=NONE cterm=NONE
-hi javaScriptParens           guisp=NONE guifg=#d75fff guibg=#NONE ctermfg=171 ctermbg=234 gui=NONE cterm=NONE
+hi javaScriptBraces           guisp=NONE guifg=#477340 guibg=#NONE ctermfg=202 ctermbg=234 gui=NONE cterm=NONE
+hi javaScriptParens           guisp=NONE guifg=#477340 guibg=#NONE ctermfg=171 ctermbg=234 gui=NONE cterm=NONE
 hi javaScriptCommentTodo      guisp=NONE guifg=#e34d84 guibg=#NONE ctermfg=168 ctermbg=234 gui=NONE cterm=NONE
 hi javaScriptCharacter        guisp=NONE guifg=#384545 guibg=#NONE ctermfg=231 ctermbg=234 gui=NONE cterm=NONE
 hi javaScriptConditional      guisp=NONE guifg=#0087d7 guibg=#NONE ctermfg=32  ctermbg=234 gui=NONE cterm=NONE
 hi javaScriptRepeat           guisp=NONE guifg=#0087d7 guibg=#NONE ctermfg=32  ctermbg=234 gui=NONE cterm=NONE
 hi javaScriptBranch           guisp=NONE guifg=#384545 guibg=#NONE ctermfg=231 ctermbg=234 gui=NONE cterm=NONE
-hi javaScriptOperator         guisp=NONE guifg=#ff5f00 guibg=#NONE ctermfg=202 ctermbg=234 gui=NONE cterm=NONE
+hi javaScriptOperator         guisp=NONE guifg=#404D73 guibg=#NONE ctermfg=202 ctermbg=234 gui=NONE cterm=NONE
 hi javaScriptType             guisp=NONE guifg=#dec11d guibg=#NONE ctermfg=178 ctermbg=234 gui=NONE cterm=NONE
 hi javaScriptStatement        guisp=NONE guifg=#0087d7 guibg=#NONE ctermfg=32  ctermbg=234 gui=NONE cterm=NONE
 hi javaScriptError            guisp=NONE guifg=#384545 guibg=#NONE ctermfg=231 ctermbg=234 gui=NONE cterm=NONE
@@ -118,7 +118,7 @@ hi Identifier guisp=NONE guifg=#a3a360 guibg=#NONE ctermfg=143 ctermbg=234  gui=
 hi Statement  guisp=NONE guifg=#3b8766 guibg=#NONE ctermfg=65  ctermbg=234  gui=NONE   cterm=NONE
 hi PreProc    guisp=NONE guifg=#67692f guibg=#NONE ctermfg=240 ctermbg=234  gui=NONE   cterm=NONE
 hi Type       guisp=NONE guifg=#f2bd52 guibg=#NONE ctermfg=215 ctermbg=234  gui=NONE   cterm=NONE
-hi Special    guisp=NONE guifg=#de7a7a guibg=#NONE ctermfg=174 ctermbg=234  gui=NONE   cterm=NONE
+hi Special    guisp=NONE guifg=#477340 guibg=#NONE ctermfg=174 ctermbg=234  gui=NONE   cterm=NONE
 hi Underlined guisp=NONE guifg=#5fff87 guibg=#NONE ctermfg=84  ctermbg=234  gui=NONE   cterm=NONE
 hi Ignore     guisp=NONE guifg=#384545 guibg=#NONE ctermfg=231 ctermbg=234  gui=NONE   cterm=NONE
 hi Error      guisp=NONE guifg=#b54f33 guibg=#NONE ctermfg=131 ctermbg=234  gui=NONE   cterm=NONE
