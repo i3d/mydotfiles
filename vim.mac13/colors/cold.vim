@@ -111,43 +111,46 @@ hi WildMenu         guisp=NONE guifg=#384545 guibg=#NONE ctermfg=231 ctermbg=234
 
 " major
 
-hi Normal     guisp=NONE guifg=#b3b5a7 guibg=232424  ctermfg=145 ctermbg=235  gui=NONE   cterm=NONE
+"hi Normal     guisp=NONE guifg=#b3b5a7 guibg=232424  ctermfg=145 ctermbg=235  gui=NONE   cterm=NONE
+"hi Normal     guisp=NONE guifg=#7C774B guibg=232424  ctermfg=145 ctermbg=235  gui=NONE   cterm=NONE
+hi Normal     guisp=NONE guifg=#697258 guibg=232424  ctermfg=145 ctermbg=235  gui=NONE   cterm=NONE
+"hi Comment    guisp=NONE guifg=#384545 guibg=NONE    ctermfg=238 ctermbg=NONE gui=italic cterm=italic
 hi Comment    guisp=NONE guifg=#384545 guibg=NONE    ctermfg=238 ctermbg=NONE gui=italic cterm=italic
 hi Constant   guisp=NONE guifg=#e6d15a guibg=#NONE ctermfg=185 ctermbg=234  gui=NONE   cterm=NONE
-hi Identifier guisp=NONE guifg=#a3a360 guibg=#NONE ctermfg=143 ctermbg=234  gui=NONE   cterm=NONE
-hi Statement  guisp=NONE guifg=#3b8766 guibg=#NONE ctermfg=65  ctermbg=234  gui=NONE   cterm=NONE
+hi Identifier guisp=NONE guifg=#80804B guibg=#NONE ctermfg=143 ctermbg=234  gui=NONE   cterm=NONE
+hi Statement  guisp=NONE guifg=#388161 guibg=#NONE ctermfg=65  ctermbg=234  gui=NONE   cterm=NONE
 hi PreProc    guisp=NONE guifg=#67692f guibg=#NONE ctermfg=240 ctermbg=234  gui=NONE   cterm=NONE
-hi Type       guisp=NONE guifg=#f2bd52 guibg=#NONE ctermfg=215 ctermbg=234  gui=NONE   cterm=NONE
+hi Type       guisp=NONE guifg=#7E622B guibg=#NONE ctermfg=215 ctermbg=234  gui=NONE   cterm=NONE
 hi Special    guisp=NONE guifg=#477340 guibg=#NONE ctermfg=174 ctermbg=234  gui=NONE   cterm=NONE
-hi Underlined guisp=NONE guifg=#5fff87 guibg=#NONE ctermfg=84  ctermbg=234  gui=NONE   cterm=NONE
+hi Underlined guisp=NONE guifg=#348B4A guibg=#NONE ctermfg=84  ctermbg=234  gui=NONE   cterm=NONE
 hi Ignore     guisp=NONE guifg=#384545 guibg=#NONE ctermfg=231 ctermbg=234  gui=NONE   cterm=NONE
-hi Error      guisp=NONE guifg=#b54f33 guibg=#NONE ctermfg=131 ctermbg=234  gui=NONE   cterm=NONE
-hi Todo       guisp=NONE guifg=#e34d84 guibg=#NONE ctermfg=168 ctermbg=234  gui=NONE   cterm=NONE
+hi Error      guisp=NONE guifg=#E34D84 guibg=#NONE ctermfg=131 ctermbg=234  gui=NONE   cterm=NONE
+hi Todo       guisp=NONE guifg=#E34D84 guibg=#NONE ctermfg=168 ctermbg=234  gui=NONE   cterm=NONE
 
 " minor
 
-hi String         guisp=NONE guifg=#997a48 guibg=#NONE ctermfg=101 ctermbg=234 gui=NONE cterm=NONE
+hi String         guisp=NONE guifg=#55804D guibg=#NONE ctermfg=101 ctermbg=234 gui=NONE cterm=NONE
 hi Character      guisp=NONE guifg=#384545 guibg=#NONE ctermfg=231 ctermbg=234 gui=NONE cterm=NONE
 hi Number         guisp=NONE guifg=#86f7a2 guibg=#NONE ctermfg=121 ctermbg=234 gui=NONE cterm=NONE
 hi Boolean        guisp=NONE guifg=#afd75f guibg=#NONE ctermfg=149 ctermbg=234 gui=NONE cterm=NONE
 hi Float          guisp=NONE guifg=#0087d7 guibg=1F2225  ctermfg=32  ctermbg=235 gui=NONE cterm=NONE
-hi Function       guisp=NONE guifg=#7d7db8 guibg=#NONE ctermfg=103 ctermbg=234 gui=NONE cterm=NONE
-hi Conditional    guisp=NONE guifg=#4490bd guibg=#NONE ctermfg=67  ctermbg=234 gui=NONE cterm=NONE
-hi Repeat         guisp=NONE guifg=#0087d7 guibg=#NONE ctermfg=32  ctermbg=234 gui=NONE cterm=NONE
-hi Label          guisp=NONE guifg=#0087d7 guibg=#NONE ctermfg=32  ctermbg=234 gui=NONE cterm=NONE
-hi Operator       guisp=NONE guifg=#87d7d7 guibg=#NONE ctermfg=116 ctermbg=234 gui=NONE cterm=NONE
-hi Keyword        guisp=NONE guifg=#3e8eb3 guibg=#NONE ctermfg=67  ctermbg=234 gui=NONE cterm=NONE
+hi Function       guisp=NONE guifg=#AAAAED guibg=#NONE ctermfg=103 ctermbg=234 gui=NONE cterm=NONE
+hi Conditional    guisp=NONE guifg=#2E817F guibg=#NONE ctermfg=67  ctermbg=234 gui=NONE cterm=NONE
+hi Repeat         guisp=NONE guifg=#006080 guibg=#NONE ctermfg=32  ctermbg=234 gui=NONE cterm=NONE
+hi Label          guisp=NONE guifg=#006080 guibg=#NONE ctermfg=32  ctermbg=234 gui=NONE cterm=NONE
+hi Operator       guisp=NONE guifg=#4F7E7E guibg=#NONE ctermfg=116 ctermbg=234 gui=NONE cterm=NONE
+hi Keyword        guisp=NONE guifg=#2C6680 guibg=#NONE ctermfg=67  ctermbg=234 gui=NONE cterm=NONE
 hi Exception      guisp=NONE guifg=#384545 guibg=#NONE ctermfg=231 ctermbg=234 gui=NONE cterm=NONE
-hi Include        guisp=NONE guifg=#698f63 guibg=#NONE ctermfg=65  ctermbg=234 gui=NONE cterm=NONE
+hi Include        guisp=NONE guifg=#678C61 guibg=#NONE ctermfg=65  ctermbg=234 gui=NONE cterm=NONE
 hi Define         guisp=NONE guifg=#384545 guibg=#NONE ctermfg=231 ctermbg=234 gui=NONE cterm=NONE
 hi Macro          guisp=NONE guifg=#618c61 guibg=#NONE ctermfg=65  ctermbg=234 gui=NONE cterm=NONE
-hi PreCondit      guisp=NONE guifg=#87d7d7 guibg=#NONE ctermfg=116 ctermbg=234 gui=NONE cterm=NONE
+hi PreCondit      guisp=NONE guifg=#4F7E7E guibg=#NONE ctermfg=116 ctermbg=234 gui=NONE cterm=NONE
 hi StorageClass   guisp=NONE guifg=#b178eb guibg=#NONE ctermfg=141 ctermbg=234 gui=NONE cterm=NONE
-hi Structure      guisp=NONE guifg=#68c4c4 guibg=#NONE ctermfg=80  ctermbg=234 gui=NONE cterm=NONE
+hi Structure      guisp=NONE guifg=#437F7F guibg=#NONE ctermfg=80  ctermbg=234 gui=NONE cterm=NONE
 hi Typedef        guisp=NONE guifg=#384545 guibg=#NONE ctermfg=231 ctermbg=234 gui=NONE cterm=NONE
 hi SpecialChar    guisp=NONE guifg=#384545 guibg=#NONE ctermfg=231 ctermbg=234 gui=NONE cterm=NONE
 hi Tag            guisp=NONE guifg=#384545 guibg=#NONE ctermfg=231 ctermbg=234 gui=NONE cterm=NONE
-hi Delimiter      guisp=NONE guifg=#ffd700 guibg=#NONE ctermfg=220 ctermbg=234 gui=NONE cterm=NONE
+hi Delimiter      guisp=NONE guifg=#816C00 guibg=#NONE ctermfg=220 ctermbg=234 gui=NONE cterm=NONE
 hi SpecialComment guisp=NONE guifg=#384545 guibg=#NONE ctermfg=231 ctermbg=234 gui=NONE cterm=NONE
 hi Debug          guisp=NONE guifg=#384545 guibg=#NONE ctermfg=231 ctermbg=234 gui=NONE cterm=NONE
 
