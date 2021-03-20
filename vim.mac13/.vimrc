@@ -115,13 +115,59 @@ com! -nargs=+ Grepgo execute 'silent grep! <args> *.go' | cwindow
 "color oncedark
 "let g:airline_theme='onedark'
 
+"set background=dark
+"set termguicolors
+"color one
+"let g:airline_theme='one'
+"set t_8b=^[[48;2;%lu;%lu;%lum
+"
+"set background=dark
+"set termguicolors
+"colorscheme rigel
+"let g:rigel_airline = 1
+"let g:airline_theme = 'rigel'
+"
+"
+"set background=dark
+"set termguicolors
+"colorscheme spacegray
+"let g:airline_theme = 'minimalist'
+"let g:spacegray_underline_search = 1
+"let g:spacegray_use_italics = 1
+"let g:spacegray_low_contrast = 1
+
+"set background=dark
+"set termguicolors
+"colorscheme pinkmare
+"let g:airline_theme = 'minimalist'
+
+"set background=dark
+"set termguicolors
+"colorscheme elly
+"let g:airline_theme = 'elly'
+"
 set background=dark
 set termguicolors
-color one
-let g:airline_theme='one'
-set t_8b=^[[48;2;%lu;%lu;%lum
-set t_8f=^[[38;2;%lu;%lu;%lum
+colorscheme cold
+let g:airline_theme = 'elly'
+
+"set background=dark
+"set termguicolors
+"colorscheme serenade
+"let g:serenade_enable_italic = 1
+"let g:serenade_transparent_background = 1
+"let g:serenade_diagnostic_text_highlight = 1
+"let g:serenade_diagnostic_line_highlight = 0
+"let g:airline_theme = 'serenade'
+
+"set background=dark
+"set termguicolors
+"colorscheme lighthaus
+"let g:airline_theme = 'lighthaus'
+
+
 " ##########################################
+let g:javascript_plugin_flow = 1
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 " ============== themes ====================
@@ -319,8 +365,13 @@ nno <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]'
 ",ig"
 nno <silent> <localleader>sf :SignifyToggleHighlight<cr>
 ino <silent> <localleader>w <esc>:w!<cr>
+ino <silent> <localleader>ww <esc>:wa!<cr>
+nno <silent> <localleader>qq :q!<cr>
+nno <silent> <localleader>qa :qa!<cr>
+nno <silent> <localleader>qs :wqa!<cr>
 nno <silent> <localleader>iv :e ~/.vimrc<CR>
 nno <silent> <localleader>iR :so ~/.vimrc<CR>"
+nno <silent> <localleader>gw :GoogleOutlineWindow<CR>
 nno <silent> <localleader>gj <plug>(signify-next-hunk)
 nno <silent> <localleader>gk <plug>(signify-prev-hunk)
 nno <silent> <localleader>oh :O h<cr>
@@ -338,6 +389,7 @@ nno <silent> <localleader>s/ :CocList grep<cr>
 nno <silent> <localleader>sa :Ag<cr>
 nno <silent> <localleader>s. :CocList files<cr>
 nno <silent> <localleader>s, :CocList words<cr>
+nno <silent> <localleader>se :call InterestingWords('n')<cr>
 nno <silent> <localleader>s? :CocList commands<cr>
 nno <silent> <localleader>sb :Buffers<cr>
 nno <silent> <localleader>sB :BLines<cr>
@@ -529,6 +581,23 @@ let g:which_key_map.g = {
       \ 'v' : [':GV'                               , 'view commits'],
       \ 'V' : [':GV!'                              , 'view buffer commits'],
       \ }
+" google
+let g:which_key_map.G = {
+      \ 'name' : '+Google',
+      \ 'r' : [ ':RelatedFilesWindow'                     , 'Related files'],
+      \ 'l' : [ ':GoogleOutlineWindow'                    , 'List Outlines'],
+      \ 'H' : [ ':SignifyToggleHighlight'                 , 'toggle highlight'],
+      \ 'v' : [ ':BlazeViewCommandLog'                    , 'Blaze View Log'],
+      \ 'e' : [ ':BlazeLoadErrors'                        , 'Blaze Errors'],
+      \ 'S' : [ ':BlazeGoToSponge'                        , 'Blaze Sponge'],
+      \ 'U' : [ ':BlazeDepsUpdate'                        , 'Blaze DepUpdate'],
+      \ 'c' : [ ':CritiqueComments'                       , 'CL comments'],
+      \ 'p' : [ ':CritiquePreviousComments'               , 'CL previous comments'],
+      \ 'n' : [ ':CritiqueNextComments'                   , 'CL next comments'],
+      \ 'u' : [ ':CritiqueUnresolvedComments'             , 'CL unresolved comments'],
+      \ 'B' : [ 'BlazeBuild'                              , 'Async Build'],
+      \ 'T' : [ 'BlazeTest'                               , 'Async Test'],
+      \ }
 " l is for language server protocol
 let g:which_key_map.l = {
       \ 'name' : '+lsp' ,
@@ -599,9 +668,10 @@ let g:which_key_map.p = {
       \ 'name' : '+projects' ,
       \ 'q' : [':qa!'                                       , 'quit all'],
       \ 's' : [':wqa!'                                      , 'save&quit all'],
+      \ 'w' : [':w!'                                        , 'save!'],
       \ 'S' : [':SSave'                                     , 'save session'],
-      \ 'e' : [':e ~/.vimrc'                          , 'open init' ],
-      \ 'b' : [':e ~/.vimrc.bundles'                  , 'open bundles' ],
+      \ 'e' : [':e ~/.vimrc'                          	    , 'open init' ],
+      \ 'b' : [':e ~/.vimrc.bundles'                        , 'open bundles' ],
       \ 'h' : ['Startify'                                   , 'home' ],
       \ }
 " s is for search
@@ -632,6 +702,7 @@ let g:which_key_map.s = {
       \ 'y' : [':Filetypes'             , 'file types'],
       \ 'z' : [':FZF'                   , 'FZF'],
       \ '?' : [':FZF'                   , 'FZF'],
+      \ 'e' : [":call InterestingWords('n')"          , 'search words'],
       \ }
       " \ 's' : [':Snippets'     , 'snippets'],
 " t is for terminal
