@@ -1,6 +1,6 @@
 
 """
-" Name: cold.vim
+" Name: cody.vim
 """
 
 set background=dark
@@ -10,7 +10,7 @@ if exists('syntax on')
     syntax reset
 endif
 
-let g:colors_name='cold'
+let g:colors_name='cody'
 set t_Co=256
 
 
@@ -62,7 +62,7 @@ hi Cursor           guisp=NONE guifg=#384545 guibg=#NONE ctermfg=231 ctermbg=234
 hi lCursor          guisp=NONE guifg=#384545 guibg=#NONE ctermfg=231 ctermbg=234 gui=NONE cterm=NONE
 hi CursorIM         guisp=NONE guifg=#384545 guibg=#NONE ctermfg=231 ctermbg=234 gui=NONE cterm=NONE
 hi CursorColumn     guisp=NONE guifg=#384545 guibg=#NONE ctermfg=231 ctermbg=234 gui=NONE cterm=NONE
-hi CursorLine       guisp=NONE guifg=NONE  guibg=#212727 ctermfg=231 ctermbg=234 gui=NONE cterm=NONE
+hi CursorLine       guisp=NONE guifg=#NONE  guibg=#212727 ctermfg=231 ctermbg=234 gui=NONE cterm=NONE
 hi Directory        guisp=NONE guifg=#384545 guibg=#NONE ctermfg=231 ctermbg=234 gui=NONE cterm=NONE
 hi DiffAdd          guisp=NONE guifg=#384545 guibg=#NONE ctermfg=231 ctermbg=234 gui=NONE cterm=NONE
 hi DiffChange       guisp=NONE guifg=#384545 guibg=#NONE ctermfg=231 ctermbg=234 gui=NONE cterm=NONE
@@ -111,15 +111,15 @@ hi WildMenu         guisp=NONE guifg=#384545 guibg=#NONE ctermfg=231 ctermbg=234
 
 " major
 
-"hi Normal     guisp=NONE guifg=#b3b5a7 guibg=232424  ctermfg=145 ctermbg=235  gui=NONE   cterm=NONE
-"hi Normal     guisp=NONE guifg=#7C774B guibg=232424  ctermfg=145 ctermbg=235  gui=NONE   cterm=NONE
-"hi Normal     guisp=NONE guifg=#697258 guibg=232424  ctermfg=145 ctermbg=235  gui=NONE   cterm=NONE
-"""hi Normal     guisp=NONE guifg=#6A6641 guibg=232424  ctermfg=145 ctermbg=235  gui=NONE   cterm=NONE
-"""hi Normal     guisp=NONE guifg=#3E4347 guibg=232424  ctermfg=145 ctermbg=235  gui=NONE   cterm=NONE
-hi Normal     guisp=NONE guifg=#6E797F guibg=232424 ctermfg=145 ctermbg=235  gui=NONE   cterm=NONE
-"hi Comment    guisp=NONE guifg=#384545 guibg=NONE    ctermfg=238 ctermbg=NONE gui=italic cterm=italic
-"hi Comment    guisp=NONE guifg=#384545 guibg=NONE    ctermfg=238 ctermbg=NONE gui=italic cterm=italic
-hi Comment    guisp=NONE guifg=#4D5559 guibg=NONE    ctermfg=238 ctermbg=NONE gui=italic cterm=italic
+"hi Normal     guisp=NONE guifg=#b3b5a7 guibg=#232424  ctermfg=145 ctermbg=235  gui=NONE   cterm=NONE
+"hi Normal     guisp=NONE guifg=#7C774B guibg=#232424  ctermfg=145 ctermbg=235  gui=NONE   cterm=NONE
+"hi Normal     guisp=NONE guifg=#697258 guibg=#232424  ctermfg=145 ctermbg=235  gui=NONE   cterm=NONE
+"""hi Normal     guisp=NONE guifg=#6A6641 guibg=#232424  ctermfg=145 ctermbg=235  gui=NONE   cterm=NONE
+"""hi Normal     guisp=NONE guifg=#3E4347 guibg=#232424  ctermfg=145 ctermbg=235  gui=NONE   cterm=NONE
+hi Normal     guisp=NONE guifg=#6E797F guibg=#272B2F ctermfg=145 ctermbg=235  gui=NONE   cterm=NONE
+"hi Comment    guisp=NONE guifg=#384545 guibg=#NONE    ctermfg=238 ctermbg=NONE gui=italic cterm=italic
+"hi Comment    guisp=NONE guifg=#384545 guibg=#NONE    ctermfg=238 ctermbg=NONE gui=italic cterm=italic
+hi Comment    guisp=NONE guifg=#4D5559 guibg=#NONE    ctermfg=238 ctermbg=NONE gui=italic cterm=italic
 hi Constant   guisp=NONE guifg=#e6d15a guibg=#NONE ctermfg=185 ctermbg=234  gui=NONE   cterm=NONE
 "hi Identifier guisp=NONE guifg=#80804B guibg=#NONE ctermfg=143 ctermbg=234  gui=NONE   cterm=NONE
 hi Identifier guisp=NONE guifg=#485164 guibg=#NONE ctermfg=143 ctermbg=234  gui=NONE   cterm=NONE
