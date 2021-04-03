@@ -104,7 +104,7 @@ hi TabLineFill      guisp=NONE guifg=#384545 guibg=#NONE ctermfg=231 ctermbg=234
 hi TabLineSel       guisp=NONE guifg=#384545 guibg=#NONE ctermfg=231 ctermbg=234 gui=NONE cterm=NONE
 hi Terminal         guisp=NONE guifg=#384545 guibg=#NONE ctermfg=231 ctermbg=234 gui=NONE cterm=NONE
 hi Title            guisp=NONE guifg=#ffd700 guibg=#NONE ctermfg=220 ctermbg=234 gui=NONE cterm=NONE
-hi Visual           guisp=NONE guifg=#384545 guibg=#NONE ctermfg=231 ctermbg=234 gui=NONE cterm=NONE
+hi Visual           guisp=NONE guifg=#NONE guibg=#3b4252 ctermfg=231 ctermbg=234 gui=NONE cterm=NONE
 hi VisualNOS        guisp=NONE guifg=#384545 guibg=#NONE ctermfg=231 ctermbg=234 gui=NONE cterm=NONE
 hi WarningMsg       guisp=NONE guifg=#384545 guibg=#NONE ctermfg=231 ctermbg=234 gui=NONE cterm=NONE
 hi WildMenu         guisp=NONE guifg=#384545 guibg=#NONE ctermfg=231 ctermbg=234 gui=NONE cterm=NONE
@@ -114,7 +114,7 @@ hi WildMenu         guisp=NONE guifg=#384545 guibg=#NONE ctermfg=231 ctermbg=234
 "hi Normal     guisp=NONE guifg=#478A91 guibg=#0F1818 ctermfg=145 ctermbg=235  gui=NONE   cterm=NONE
 "hi Normal     guisp=NONE guifg=#478A91 guibg=#09080A ctermfg=145 ctermbg=235  gui=NONE   cterm=NONE
 hi Normal     guisp=NONE guifg=#478A91 guibg=#0F1313 ctermfg=145 ctermbg=235  gui=NONE   cterm=NONE
-hi Comment    guisp=NONE guifg=#2B515F guibg=#NONE   ctermfg=238 ctermbg=NONE gui=italic cterm=italic
+hi Comment    guisp=NONE guifg=#2B515F guibg=#NONE   ctermfg=238 ctermbg=NONE gui=NONE cterm=NONE
 hi Constant   guisp=NONE guifg=#81ADAE guibg=#NONE ctermfg=185 ctermbg=234  gui=NONE   cterm=NONE
 hi Identifier guisp=NONE guifg=#523C27 guibg=#NONE ctermfg=143 ctermbg=234  gui=NONE   cterm=NONE
 hi Statement  guisp=NONE guifg=#9F9A6E guibg=#NONE ctermfg=65  ctermbg=234  gui=NONE   cterm=NONE
