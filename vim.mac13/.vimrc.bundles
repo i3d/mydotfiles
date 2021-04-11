@@ -115,6 +115,7 @@ let g:rooter_silent_chdir = 1
 
 Plug 'sheerun/vim-polyglot'
 Plug 'ryanoasis/vim-devicons'
+set encoding=UTF-8
 
 Plug 'alvan/vim-closetag'
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
@@ -220,6 +221,24 @@ Plug 'ulwlu/elly.vim'
 Plug 'sainnhe/gruvbox-material'
 Plug 'b4skyx/serenade'
 
+" 3/22/2021
+Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
+
+" 4/3/2021
+Plug 'i3d/vim-jimbothemes'
+
+" 4/6/2021
+Plug 'neovim/nvim-lspconfig'
+Plug 'simrat39/rust-tools.nvim'
+
+" Optional dependencies
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+
+Plug 'nacro90/numb.nvim'
+
+"
 call plug#end()
 " Automatically install missing plugins on startup
 autocmd VimEnter *
@@ -307,3 +326,5 @@ command! -bang -nargs=* GGrep
   \   'git grep --line-number '.shellescape(<q-args>), 0,
   \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
 " ============================== FZF ===============================
+
+luafile ~/.vim/init.lua

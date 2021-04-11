@@ -1,13 +1,46 @@
 source ~/.vimrc.bundles
 
+let g:asyncrun_open = 10
+let g:asyncrun_rootmarks = ['.git', '.svn', '.root', '.project', '.hg', '.projectile']
+
 set rtp+=~/homebrew/opt/vim
 set rtp+=/Users/jimxu/homebrew/opt/fzf
+set rtp+=/Users/jimxu/.vim/lua
 let g:mapleader = "\<Space>"
 let g:maplocalleader = ','
 nno <silent> <leader> :silent <c-u> :silent WhichKey '<Space>'<CR>
 vno <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
 nno <silent> <localleader> :silent <c-u> :silent WhichKey ','<CR>
 " ================ functions and commands ======================
+function! s:AsyncRustBuild() abort
+	"open cwindow manually.
+  let l:aro = g:asyncrun_open
+  let g:asyncrun_open = 0
+  let l:target = expand('%')
+  call setqflist([]) | copen 15
+  " don't use !, so we scrolling the output.
+  call asyncrun#run("", {"rows": 15}, 'rustc '.l:target)
+  let g:asyncrun_open = l:aro
+endfunction
+
+function! s:AsyncRustRun() abort
+	"open cwindow manually.
+  let l:aro = g:asyncrun_open
+  let g:asyncrun_open = 0
+  let l:target = expand('%')
+  let l:runtarget = expand('%:r')
+  call setqflist([]) | copen 15
+  " don't use !, so we scrolling the output.
+  call asyncrun#run("", {"rows": 15}, 'rustc '.l:target.' && ./'.l:runtarget)
+  let g:asyncrun_open = l:aro
+endfunction
+
+" NERDTrees File highlighting
+function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+ exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+ exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+endfunction
+
 """ <space>k to bring up help
 com! -nargs=+ Moma execute 'silent !moma <args>'
 com! -nargs=+ Who execute 'silent !who <args>'
@@ -20,6 +53,8 @@ com! -nargs=* Google execute 'silent !google <args>'
 com! -nargs=+ Greph execute 'silent grep! <args> *.h' | cwindow
 com! -nargs=+ Grepcc execute 'silent grep! <args> *.cc' | cwindow
 com! -nargs=+ Grepgo execute 'silent grep! <args> *.go' | cwindow
+com! -nargs=* AsyncRustBuild :call <SID>AsyncRustBuild()
+com! -nargs=* AsyncRustRun :call <SID>AsyncRustRun()
 " ================ functions and commands ======================
 " ================ themes ======================
 "colorscheme mustang
@@ -146,10 +181,64 @@ com! -nargs=+ Grepgo execute 'silent grep! <args> *.go' | cwindow
 "colorscheme elly
 "let g:airline_theme = 'elly'
 "
+"set background=dark
+"set termguicolors
+"colorscheme cold
+"let g:airline_theme = 'minimalist'
+"
+"set background=dark
+"set termguicolors
+"colorscheme cody
+"let g:airline_theme = 'minimalist'
+
+"set background=dark
+"if exists('+termguicolors')
+"      let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+"      let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+"      set termguicolors
+"endif
+"colorscheme spaceduck
+"let g:airline_theme = 'spaceduck'
+
+"set background=dark
+"set termguicolors
+"colorscheme topology
+"let g:airline_theme = 'minimalist'
+
+"set background=dark
+"set termguicolors
+"colorscheme breakingbad
+"let g:airline_theme = 'minimalist'
+
+"set background=dark
+"set termguicolors
+"colorscheme batman
+"let g:airline_theme = 'minimalist'
+
+"set background=dark
+"set termguicolors
+"colorscheme ironman_dark
+"let g:airline_theme = 'minimalist'
+
+"set background=dark
+"set termguicolors
+"colorscheme neonhive
+"let g:airline_theme = 'minimalist'
+
 set background=dark
 set termguicolors
-colorscheme cold
-let g:airline_theme = 'elly'
+colorscheme matrix
+let g:airline_theme = 'onedark'
+"
+"set background=dark
+"set termguicolors
+"colorscheme superman
+"let g:airline_theme = 'minimalist'
+
+"set background=dark
+"set termguicolors
+"colorscheme nordic-aurora
+"let g:airline_theme = 'nord'
 
 "set background=dark
 "set termguicolors
@@ -475,9 +564,10 @@ nno <localleader>tg :NERDTreeTabsToggle<cr>
 nno <localleader>vt :TabVifm<cr>
 nno <localleader>vs :VsplitVifm<cr>
 nno <localleader>vd :DiffVifm<cr>
+
 " ==================== space macs simulation layer ========
 " ==================== space macs simulation layer ========
-source $HOME/.config/nvim/plug-config/coc.vim
+source $HOME/.config/nvim_back/plug-config/coc.vim
 " ==================== space macs simulation layer ========
 " Create map to add keys to
 let g:which_key_map =  {}
@@ -597,6 +687,12 @@ let g:which_key_map.G = {
       \ 'u' : [ ':CritiqueUnresolvedComments'             , 'CL unresolved comments'],
       \ 'B' : [ 'BlazeBuild'                              , 'Async Build'],
       \ 'T' : [ 'BlazeTest'                               , 'Async Test'],
+      \ }
+" Rust 
+let g:which_key_map.R = {
+      \ 'name' : '+Rust',
+      \ 'r' : [ ':AsyncRustRun'                  , 'Run current file'],
+      \ 'b' : [ ':AsyncRustBuild'                , 'Compile current file'],
       \ }
 " l is for language server protocol
 let g:which_key_map.l = {
@@ -791,12 +887,47 @@ let g:NERDTreeWinSize=27
 let g:NERDTreeChDirMode=2
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
+autocmd VimEnter * call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('h', 'Red', 'none', '#ffa500', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('cc', 'cyan', 'none', 'cyan', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('c', 'cyan', 'none', 'cyan', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('go', 'Magenta', 'none', '#ff00ff', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('ds_store', 'Gray', 'none', '#686868', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('rs', 'Gray', 'none', '#686868', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('gitconfig', 'Gray', 'none', '#686868', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('gitignore', 'Gray', 'none', '#686868', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('bashrc', 'Gray', 'none', '#686868', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('bashprofile', 'Gray', 'none', '#686868', '#151515')
+" NERDTrees File highlighting only the glyph/icon
+" test highlight just the glyph (icons) in nerdtree:
+autocmd filetype nerdtree highlight haskell_icon ctermbg=none ctermfg=Red guifg=#ffa500
+autocmd filetype nerdtree highlight html_icon ctermbg=none ctermfg=Red guifg=#ffa500
+autocmd filetype nerdtree highlight go_icon ctermbg=none ctermfg=Red guifg=#ffa500
+
+autocmd filetype nerdtree syn match haskell_icon ## containedin=NERDTreeFlags
+" if you are using another syn highlight for a given line (e.g.
+" NERDTreeHighlightFile) need to give that name in the 'containedin' for this
+" other highlight to work with it
+autocmd filetype nerdtree syn match html_icon ## containedin=NERDTreeFlags,html
+autocmd filetype nerdtree syn match go_icon ## containedin=NERDTreeFlags
 "fish
 au BufNewFile,BufRead fish_funced set ft=fish
 "from makc => My New Terminal: Alaritty 19:05
 " allow alaritty to have a transparent background."
-hi! Normal ctermbg=None guibg=None
-hi! NonText ctermbg=None guibg=None guifg=None ctermfg=None
+hi! Normal ctermbg=NONE guibg=NONE
+hi! NonText ctermbg=NONE guibg=NONE guifg=NONE ctermfg=NONE
 syntax on
 set shiftround
 set ignorecase

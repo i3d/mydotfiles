@@ -1,325 +1,374 @@
 total 0
-drwxr-xr-x  3 jimxu  primarygroup   96 Feb  3  2019 adns
-drwxr-xr-x  3 jimxu  primarygroup   96 Dec  9  2018 antigen
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 13 08:31 aom
-drwxrwxrwx  3 jimxu  primarygroup   96 Jun 17  2015 apple-gcc42
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr  6  2019 apr
-drwxrwxrwx  3 jimxu  primarygroup   96 Sep 14  2019 apr-util
-drwxr-xr-x  3 jimxu  primarygroup   96 Dec 30  2018 archey
-drwxr-xr-x  3 jimxu  primarygroup   96 Oct 18  2019 aria2
-drwxr-xr-x  3 jimxu  primarygroup   96 Mar 25 23:58 asdf
-drwxr-xr-x  3 jimxu  primarygroup   96 May 28  2017 autoconf
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 20  2019 autojump
-drwxr-xr-x  3 jimxu  primarygroup   96 Mar 25 23:56 automake
-drwxr-xr-x  3 jimxu  primarygroup   96 Jul 14  2019 autossh
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 12 22:02 axel
-drwxrwxrwx  3 jimxu  primarygroup   96 Jun 17  2015 base64
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 27 23:13 bash
-drwxr-xr-x  3 jimxu  primarygroup   96 Mar 23  2019 bash-completion
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 20  2019 bdw-gc
-drwxr-xr-x  3 jimxu  primarygroup   96 May 25 12:40 bison
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 23 12:09 boost
-drwxr-xr-x  3 jimxu  primarygroup   96 Jan 26  2019 bower
-drwxrwxrwx  3 jimxu  primarygroup   96 Mar 29  2019 brew-gem
-drwxrwxrwx  3 jimxu  primarygroup   96 Jun 17  2015 brew-pip
-drwxrwxrwx  3 jimxu  primarygroup   96 Jun 17  2015 bsdiff
-drwxrwxrwx  3 jimxu  primarygroup   96 Jun 17  2015 bsdmake
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 11 22:17 cabal-install
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 11 22:15 cairo
-drwxrwxrwx  3 jimxu  primarygroup   96 Sep  6  2019 cgdb
-drwxr-xr-x  3 jimxu  primarygroup   96 May  3 21:17 cmake
-drwxr-xr-x  3 jimxu  primarygroup   96 May 25 22:45 cmatrix
-drwxr-xr-x  3 jimxu  primarygroup   96 May 28 07:43 colordiff
-drwxrwxrwx  3 jimxu  primarygroup   96 Jun 17  2015 colormake
-drwxrwxrwx  3 jimxu  primarygroup   96 Jun 17  2015 colortail
-drwxr-xr-x  3 jimxu  primarygroup   96 May 13 09:12 composer
-drwxrwxrwx  3 jimxu  primarygroup   96 Mar  6 12:18 coreutils
-drwxr-xr-x  3 jimxu  primarygroup   96 May 25 22:45 cowsay
-drwxr-xr-x  3 jimxu  primarygroup   96 May 13 09:11 cppcheck
-drwxr-xr-x  3 jimxu  primarygroup   96 Mar  2  2019 cscope
-drwxrwxrwx  3 jimxu  primarygroup   96 Jun 17  2015 ctags
-drwxrwxrwx  3 jimxu  primarygroup   96 Jun 17  2015 ctail
-drwxr-xr-x  3 jimxu  primarygroup   96 May 25 13:07 dav1d
-drwxr-xr-x  3 jimxu  primarygroup   96 Jan  5  2019 diffutils
-drwxr-xr-x  3 jimxu  primarygroup   96 May 21 14:09 direnv
-drwxrwxrwx  3 jimxu  primarygroup   96 Jun 17  2015 djvu2pdf
-drwxrwxrwx  3 jimxu  primarygroup   96 Dec 30  2018 djvulibre
-drwxrwxrwx  3 jimxu  primarygroup   96 Jun 17  2015 dnstracer
-drwxr-xr-x  3 jimxu  primarygroup   96 Mar 25 23:55 docbook
-drwxr-xr-x  3 jimxu  primarygroup   96 Mar 25 23:53 docbook-xsl
-drwxrwxrwx  3 jimxu  primarygroup   96 Mar 29  2017 docker-clean
-drwxrwxrwx  3 jimxu  primarygroup   96 Apr 11 22:16 docker-compose-completion
-drwxr-xr-x  3 jimxu  primarygroup   96 Sep  6  2019 docker-machine
-drwxrwxrwx  3 jimxu  primarygroup   96 Sep 16  2019 docker-machine-completion
-drwxr-xr-x  3 jimxu  primarygroup   96 May  3 21:17 docutils
-drwxr-xr-x  3 jimxu  primarygroup   96 May 21 14:09 editorconfig
-drwxr-xr-x  3 jimxu  primarygroup   96 May 25 12:39 fasd
-drwxr-xr-x  3 jimxu  primarygroup   96 May 21 14:06 fd
-drwxr-xr-x  3 jimxu  primarygroup   96 Mar  6 12:18 fdupes
-drwxr-xr-x  3 jimxu  primarygroup   96 May 25 13:11 ffmpeg
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 13 08:31 ffmpeg-iina
-drwxr-xr-x  3 jimxu  primarygroup   96 May  3 21:20 fish
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 13 08:31 flac
-drwxr-xr-x  3 jimxu  primarygroup   96 Dec 30  2018 fontconfig
-drwxr-xr-x  3 jimxu  primarygroup   96 May 25 13:01 fontforge
-drwxr-xr-x  3 jimxu  primarygroup   96 May 25 22:46 fortune
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr  6  2019 fping
-drwxr-xr-x  3 jimxu  primarygroup   96 Jul 12  2019 freetype
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 13 08:31 frei0r
-drwxr-xr-x  3 jimxu  primarygroup   96 Mar  6 12:30 fribidi
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 19 09:21 fzf
-drwxr-xr-x  3 jimxu  primarygroup   96 Dec  8  2018 fzy
-drwxr-xr-x  4 jimxu  primarygroup  128 May  9 23:38 gcc
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 12 22:02 gd
-drwxr-xr-x  3 jimxu  primarygroup   96 May 25 12:54 gdb
-drwxr-xr-x  3 jimxu  primarygroup   96 Dec 30  2018 gdbm
-drwxr-xr-x  3 jimxu  primarygroup   96 May 17 20:45 gdk-pixbuf
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 23 12:19 gettext
-drwxr-xr-x  3 jimxu  primarygroup   96 May 13 10:11 ghc
-drwxrwxrwx  3 jimxu  primarygroup   96 Mar 25 23:01 ghostscript
-drwxr-xr-x  3 jimxu  primarygroup   96 Nov 27  2019 giflib
-drwxr-xr-x  3 jimxu  primarygroup   96 May 25 13:03 git
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr  4 21:33 glances
-drwxrwxrwx  3 jimxu  primarygroup   96 May 25 13:12 glib
-drwxr-xr-x  3 jimxu  primarygroup   96 Jul 12  2019 glide
-drwxr-xr-x  3 jimxu  primarygroup   96 Jan 19 22:22 global
-drwxr-xr-x  3 jimxu  primarygroup   96 May 23 12:56 gmime
-drwxr-xr-x  3 jimxu  primarygroup   96 Feb 22 21:46 gmp
-drwxr-xr-x  3 jimxu  primarygroup   96 May 17 21:07 gnu-getopt
-drwxr-xr-x  3 jimxu  primarygroup   96 May 17 21:10 gnu-sed
-drwxr-xr-x  3 jimxu  primarygroup   96 May 23 12:52 gnupg
-drwxr-xr-x  3 jimxu  primarygroup   96 May 13 10:19 gnutls
-drwxr-xr-x  3 jimxu  primarygroup   96 May 25 12:56 go
-drwxrwxrwx  3 jimxu  primarygroup   96 Apr 20 00:54 gobject-introspection
-drwxr-xr-x  3 jimxu  primarygroup   96 Sep 15  2019 gotop
-drwxr-xr-x  3 jimxu  primarygroup   96 May 23 12:56 gpgme
-drwxr-xr-x  3 jimxu  primarygroup   96 Mar  6 12:18 gptfdisk
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 11 22:17 graphite2
-drwxr-xr-x  3 jimxu  primarygroup   96 May  3 21:23 graphviz
-drwxr-xr-x  3 jimxu  primarygroup   96 May 13 09:12 grc
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 11 22:08 gtk-doc
-drwxr-xr-x  3 jimxu  primarygroup   96 Jan 19 21:47 gts
-drwxr-xr-x  3 jimxu  primarygroup   96 May 25 12:45 guile
-drwxr-xr-x  3 jimxu  primarygroup   96 May 13 09:15 harfbuzz
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 27 23:08 help2man
-drwxr-xr-x  3 jimxu  primarygroup   96 May 13 09:12 heroku
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 20 00:57 heroku-node
-drwxrwxrwx  3 jimxu  primarygroup   96 Dec 30  2018 hexedit
-drwxrwxrwx  3 jimxu  primarygroup   96 Jun 17  2015 hfsutils
-drwxrwxrwx  3 jimxu  primarygroup   96 May 25 12:56 highlight
-drwxr-xr-x  3 jimxu  primarygroup   96 May 28  2017 hping
-drwxr-xr-x  3 jimxu  primarygroup   96 Feb 10  2019 htop
-lrwxrwxrwx  1 jimxu  primarygroup    4 Oct 15  2017 htop-osx -> htop
-drwxr-xr-x  3 jimxu  primarygroup   96 Sep 15  2019 httperf
-drwxr-xr-x  3 jimxu  primarygroup   96 Mar  6 12:15 hub
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 23 12:08 icu4c
-drwxrwxrwx  3 jimxu  primarygroup   96 Jun 17  2015 ifstat
-drwxrwxrwx  3 jimxu  primarygroup   96 Jun 17  2015 iftop
-drwxr-xr-x  3 jimxu  primarygroup   96 May 17 21:12 ilmbase
-drwxr-xr-x  3 jimxu  primarygroup   96 May 25 13:03 imagemagick
-drwxr-xr-x  3 jimxu  primarygroup   96 May 25 12:43 imagemagick@6
-drwxr-xr-x  3 jimxu  primarygroup   96 May 16 20:55 imlib2
-drwxr-xr-x  3 jimxu  primarygroup   96 Sep  6  2019 iperf
-drwxr-xr-x  3 jimxu  primarygroup   96 May  3 21:17 ipython
-drwxr-xr-x  3 jimxu  primarygroup   96 Sep 16  2019 irssi
-drwxr-xr-x  3 jimxu  primarygroup   96 Mar 25 23:55 isl
-drwxr-xr-x  3 jimxu  primarygroup   96 May 13 09:11 jansson
-drwxr-xr-x  3 jimxu  primarygroup   96 Dec  5 07:04 jasper
-drwxr-xr-x  3 jimxu  primarygroup   96 Mar 25 23:55 jbig2dec
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr  4 21:30 jemalloc
-drwxr-xr-x  3 jimxu  primarygroup   96 Jan 19 22:17 jpeg
-drwxr-xr-x  3 jimxu  primarygroup   96 Dec  8  2018 jq
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 20 00:54 kotlin
-drwxr-xr-x  3 jimxu  primarygroup   96 May 25 12:44 krb5
-drwxr-xr-x  3 jimxu  primarygroup   96 May 21 14:09 ktlint
-drwxr-xr-x  3 jimxu  primarygroup   96 May  3 20:59 lame
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 13 08:31 leptonica
-drwxr-xr-x  3 jimxu  primarygroup   96 May 25 12:39 libarchive
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 13 08:31 libass
-drwxr-xr-x  3 jimxu  primarygroup   96 Feb 15  2019 libassuan
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 20  2019 libatomic_ops
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 13 08:36 libb2
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 13 08:31 libbluray
-drwxr-xr-x  3 jimxu  primarygroup   96 Jan 19 22:11 libde265
-drwxr-xr-x  3 jimxu  primarygroup   96 Sep 16  2019 libevent
-drwxr-xr-x  3 jimxu  primarygroup   96 Mar 25 23:53 libewf
-drwxr-xr-x  3 jimxu  primarygroup   96 May 25 12:57 libexif
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 20 00:40 libffi
-drwxr-xr-x  3 jimxu  primarygroup   96 Sep  6  2019 libgcrypt
-drwxrwxrwx  3 jimxu  primarygroup   96 Feb 13 20:55 libgpg-error
-drwxr-xr-x  3 jimxu  primarygroup   96 Feb 22 21:46 libheif
-drwxr-xr-x  3 jimxu  primarygroup   96 Nov 27  2019 libidn2
-drwxr-xr-x  3 jimxu  primarygroup   96 May 25 13:12 libksba
-drwxrwxrwx  3 jimxu  primarygroup   96 Dec 21 20:53 libmagic
-drwxr-xr-x  3 jimxu  primarygroup   96 Jan 27  2019 libmpc
-drwxr-xr-x  3 jimxu  primarygroup   96 Mar 25 23:47 libnet
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 13 08:31 libogg
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr  4 21:31 libomp
-drwxr-xr-x  3 jimxu  primarygroup   96 Nov 27  2019 libpcap
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 20  2019 libpng
-drwxr-xr-x  3 jimxu  primarygroup   96 May 17 20:46 librsvg
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 13 08:31 libsamplerate
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr  4 21:30 libsigc++
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 13 08:31 libsndfile
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 13 08:31 libsoxr
-drwxr-xr-x  3 jimxu  primarygroup   96 May 25 13:00 libspiro
-drwxr-xr-x  3 jimxu  primarygroup   96 Sep 15  2019 libssh2
-drwxr-xr-x  3 jimxu  primarygroup   96 Feb  6 22:36 libtasn1
-drwxr-xr-x  3 jimxu  primarygroup   96 Mar 23  2019 libtermkey
-drwxr-xr-x  3 jimxu  primarygroup   96 Nov  9  2019 libtiff
-drwxr-xr-x  3 jimxu  primarygroup   96 May 28  2017 libtool
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 20 00:57 libuninameslist
-drwxr-xr-x  3 jimxu  primarygroup   96 Dec 30  2018 libunistring
-drwxr-xr-x  3 jimxu  primarygroup   96 Sep 16  2019 libusb
-drwxr-xr-x  3 jimxu  primarygroup   96 May 25 12:56 libuv
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 13 08:31 libvidstab
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 13 08:31 libvorbis
-drwxr-xr-x  3 jimxu  primarygroup   96 May  3 20:59 libvpx
-drwxr-xr-x  3 jimxu  primarygroup   96 Jan 19 22:23 libvterm
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 11 22:05 libxml2
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 23 12:09 libyaml
-drwxr-xr-x  3 jimxu  primarygroup   96 Dec 30  2018 little-cms2
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 20 00:40 llvm
-drwxr-xr-x  3 jimxu  primarygroup   96 May 25 22:54 lolcat
-drwxr-xr-x  3 jimxu  primarygroup   96 Sep  5  2019 lsof
-drwxr-xr-x  3 jimxu  primarygroup   96 Dec 30  2018 lua
-lrwxrwxrwx  1 jimxu  primarygroup    7 Mar 29  2017 lua51 -> lua@5.1
-drwxr-xr-x  3 jimxu  primarygroup   96 Dec 30  2018 lua@5.1
-drwxr-xr-x  3 jimxu  primarygroup   96 Mar  6 18:47 luajit
-drwxr-xr-x  3 jimxu  primarygroup   96 Mar 25 23:08 luarocks
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 13 08:36 lz4
-drwxr-xr-x  3 jimxu  primarygroup   96 Jun 21  2019 lzo
-drwxr-xr-x  3 jimxu  primarygroup   96 Mar 23  2019 m-cli
-drwxr-xr-x  3 jimxu  primarygroup   96 Jan 19 22:19 makedepend
-drwxr-xr-x  3 jimxu  primarygroup   96 May 25 12:44 mas
-drwxr-xr-x  3 jimxu  primarygroup   96 Dec  9  2018 mdp
-drwxr-xr-x  3 jimxu  primarygroup   96 May 17 21:12 meson
-lrwxrwxrwx  1 jimxu  primarygroup    4 Oct 15  2017 mobile-shell -> mosh
-drwxr-xr-x  3 jimxu  primarygroup   96 May 25 13:03 mosh
-drwxr-xr-x  3 jimxu  primarygroup   96 Mar 23  2019 mpfr
-drwxr-xr-x  3 jimxu  primarygroup   96 Dec 21 20:52 msgpack
-drwxr-xr-x  3 jimxu  primarygroup   96 Sep  5  2019 mtr
-drwxr-xr-x  3 jimxu  primarygroup   96 May 23 12:57 mu
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 20 00:53 mujs
-drwxr-xr-x  3 jimxu  primarygroup   96 Jan 19 21:14 multitail
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 13 08:31 nasm
-drwxr-xr-x  3 jimxu  primarygroup   96 Feb 22 21:26 ncurses
-drwxr-xr-x  3 jimxu  primarygroup   96 Mar 25 23:08 neofetch
-drwxr-xr-x  3 jimxu  primarygroup   96 Mar  6 18:47 neovim
-drwxr-xr-x  3 jimxu  primarygroup   96 May 13 09:15 netpbm
-drwxr-xr-x  3 jimxu  primarygroup   96 May 13 09:12 nettle
-drwxr-xr-x  3 jimxu  primarygroup   96 Feb  6 21:39 ninja
-drwxr-xr-x  3 jimxu  primarygroup   96 Sep  6  2019 nmap
-drwxr-xr-x  3 jimxu  primarygroup   96 May 25 13:00 node
-drwxr-xr-x  3 jimxu  primarygroup   96 Feb  3  2019 npth
-drwxr-xr-x  3 jimxu  primarygroup   96 Mar  6 12:30 nvm
-drwxr-xr-x  3 jimxu  primarygroup   96 May  3 21:20 oniguruma
-drwxr-xr-x  3 jimxu  primarygroup   96 May  3 20:59 opencore-amr
-drwxr-xr-x  3 jimxu  primarygroup   96 May 17 21:12 openexr
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr  6  2019 openjpeg
-drwxrwxrwx  3 jimxu  primarygroup   96 Oct 10  2019 openssl
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 23 12:08 openssl@1.1
-drwxr-xr-x  3 jimxu  primarygroup   96 May  3 20:59 opus
-drwxrwxrwx  3 jimxu  primarygroup   96 Apr 20 01:00 p11-kit
-drwxr-xr-x  3 jimxu  primarygroup   96 Sep  5  2019 p7zip
-drwxr-xr-x  3 jimxu  primarygroup   96 Mar 25 22:57 pandoc
-drwxr-xr-x  3 jimxu  primarygroup   96 Oct 27  2019 pango
-drwxr-xr-x  3 jimxu  primarygroup   96 Mar  6 12:29 parity
-drwxr-xr-x  3 jimxu  primarygroup   96 Feb 13 21:01 pcre
-drwxr-xr-x  3 jimxu  primarygroup   96 May 13 10:11 pcre2
-drwxr-xr-x  3 jimxu  primarygroup   96 Jan 19 22:22 peco
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 20 00:51 perl
-drwxr-xr-x  3 jimxu  primarygroup   96 May 16 17:49 pidof
-drwxr-xr-x  3 jimxu  primarygroup   96 Feb  3  2019 pinentry
-drwxr-xr-x  3 jimxu  primarygroup   96 May 21 14:09 pipenv
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 23 12:08 pixman
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 11 22:14 pkg-config
-drwxr-xr-x  3 jimxu  primarygroup   96 Mar 16  2019 popt
-drwxr-xr-x  3 jimxu  primarygroup   96 May 25 13:07 postgresql
-drwxr-xr-x  3 jimxu  primarygroup   96 Mar 23  2019 powerlevel9k
-drwxr-xr-x  3 jimxu  primarygroup   96 May 28  2017 proctools
-drwxr-xr-x  3 jimxu  primarygroup   96 May 25 13:03 protobuf
-drwxr-xr-x  3 jimxu  primarygroup   96 May 28  2017 pstree
-drwxr-xr-x  3 jimxu  primarygroup   96 Mar 23  2019 pv
-drwxr-xr-x  3 jimxu  primarygroup   96 Mar 25 23:01 python
-lrwxr-xr-x  1 jimxu  primarygroup    6 Sep  6  2018 python3 -> python
-drwxr-xr-x  3 jimxu  primarygroup   96 Jan 19 21:44 python@2
-drwxr-xr-x  3 jimxu  primarygroup   96 Mar 25 22:57 python@3.8
-drwxrwxrwx  3 jimxu  primarygroup   96 Apr 20 00:57 radare2
-drwxr-xr-x  3 jimxu  primarygroup   96 Sep 19  2019 rbenv
-drwxr-xr-x  3 jimxu  primarygroup   96 Oct 19  2019 rcm
-drwxr-xr-x  3 jimxu  primarygroup   96 Feb 22 21:26 readline
-drwxr-xr-x  3 jimxu  primarygroup   96 Jun 29  2019 reattach-to-user-namespace
-drwxr-xr-x  3 jimxu  primarygroup   96 May 13 10:11 ripgrep
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 13 08:31 rtmpdump
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 13 08:31 rubberband
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 19 23:17 ruby
-drwxr-xr-x  3 jimxu  primarygroup   96 May 25 12:59 ruby-build
-drwxr-xr-x  3 jimxu  primarygroup   96 May 17 20:44 rust
-drwxr-xr-x  3 jimxu  primarygroup   96 Nov 27  2019 screenfetch
-drwxr-xr-x  3 jimxu  primarygroup   96 Aug 27  2017 screenresolution
-drwxr-xr-x  3 jimxu  primarygroup   96 May  3 20:59 sdl2
-drwxr-xr-x  3 jimxu  primarygroup   96 May 17 21:12 shared-mime-info
-drwxr-xr-x  3 jimxu  primarygroup   96 May 21 14:09 shellcheck
-drwxr-xr-x  3 jimxu  primarygroup   96 May  5 18:39 shfmt
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 13 08:31 snappy
-drwxr-xr-x  3 jimxu  primarygroup   96 May 28  2017 sntop
-drwxr-xr-x  3 jimxu  primarygroup   96 Jan 19 22:17 socat
-drwxr-xr-x  3 jimxu  primarygroup   96 Jan 19 22:15 source-highlight
-drwxr-xr-x  3 jimxu  primarygroup   96 May  3 21:10 speedtest-cli
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 13 08:31 speex
-drwxr-xr-x  3 jimxu  primarygroup   96 May  3 21:16 sphinx-doc
-drwxr-xr-x  3 jimxu  primarygroup   96 Feb  6 21:35 sqlite
-drwxr-xr-x  3 jimxu  primarygroup   96 May  3 20:59 srt
-drwxrwxrwx  3 jimxu  primarygroup   96 Feb 22 21:42 ssh-copy-id
-drwxr-xr-x  3 jimxu  primarygroup   96 Nov 27  2019 ssldump
-drwxr-xr-x  3 jimxu  primarygroup   96 May 28  2017 stress
-drwxr-xr-x  3 jimxu  primarygroup   96 Sep  5  2019 swig
-drwxr-xr-x  3 jimxu  primarygroup   96 Jan 12  2019 tcc
-drwxr-xr-x  3 jimxu  primarygroup   96 May 28  2017 tcping
-drwxr-xr-x  3 jimxu  primarygroup   96 May 28  2017 tcptrace
-drwxr-xr-x  3 jimxu  primarygroup   96 Mar 25 23:54 tcptraceroute
-drwxr-xr-x  3 jimxu  primarygroup   96 Dec  8  2018 terminal-notifier
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 13 08:31 tesseract
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 13 08:31 texi2html
-drwxr-xr-x  3 jimxu  primarygroup   96 Dec 30  2018 the_silver_searcher
-drwxr-xr-x  3 jimxu  primarygroup   96 May  3 20:59 theora
-drwxr-xr-x  3 jimxu  primarygroup   96 May  5 18:39 tmux
-drwxr-xr-x  3 jimxu  primarygroup   96 May 28  2017 tokyo-cabinet
-drwxr-xr-x  3 jimxu  primarygroup   96 Dec 30  2018 tree
-drwxr-xr-x  3 jimxu  primarygroup   96 May 25 12:59 typescript
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 27 23:09 uchardet
-drwxr-xr-x  3 jimxu  primarygroup   96 May 25 13:12 unbound
-drwxr-xr-x  3 jimxu  primarygroup   96 Dec 30  2018 unibilium
-drwxr-xr-x  3 jimxu  primarygroup   96 Oct 19  2019 universal-ctags
-drwxr-xr-x  3 jimxu  primarygroup   96 Oct 19  2019 unixodbc
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr  4 21:31 unrar
-drwxr-xr-x  3 jimxu  primarygroup   96 Sep  5  2019 unzip
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 11 22:14 utf8proc
-drwxrwxrwx  3 jimxu  primarygroup   96 May 25 13:00 vala
-drwxr-xr-x  3 jimxu  primarygroup   96 Mar  6 12:27 valabind
-drwxr-xr-x  3 jimxu  primarygroup   96 Nov 27  2019 vifm
-drwxr-xr-x  3 jimxu  primarygroup   96 May 25 13:04 vim
-drwxr-xr-x  3 jimxu  primarygroup   96 Apr 13 23:35 w3m
-drwxr-xr-x  3 jimxu  primarygroup   96 Jan 19 22:16 watch
-drwxr-xr-x  3 jimxu  primarygroup   96 May  3 21:20 watchman
-drwxr-xr-x  3 jimxu  primarygroup   96 Jan 19 22:11 webp
-drwxr-xr-x  3 jimxu  primarygroup   96 Nov 27  2019 wget
-drwxr-xr-x  3 jimxu  primarygroup   96 May  3 21:14 wifi-password
-drwxr-xr-x  3 jimxu  primarygroup   96 Feb  6 22:46 wmctrl
-drwxr-xr-x  3 jimxu  primarygroup   96 May 25 13:00 x264
-drwxr-xr-x  3 jimxu  primarygroup   96 Feb 22 21:42 x265
-drwxr-xr-x  3 jimxu  primarygroup   96 May 23 12:57 xapian
-drwxrwxrwx  3 jimxu  primarygroup   96 Dec 30  2018 xmlrpc-c
-drwxr-xr-x  3 jimxu  primarygroup   96 May 17 21:07 xmlto
-drwxr-xr-x  3 jimxu  primarygroup   96 May  3 20:59 xvid
-drwxr-xr-x  3 jimxu  primarygroup   96 Mar 25 23:51 xz
-drwxr-xr-x  3 jimxu  primarygroup   96 Oct 18  2019 yara
-drwxr-xr-x  3 jimxu  primarygroup   96 Mar 25 23:51 yarn
-drwxr-xr-x  3 jimxu  primarygroup   96 May 13 10:11 youtube-dl
-drwxr-xr-x  3 jimxu  primarygroup   96 May  3 21:17 z
-drwxr-xr-x  3 jimxu  primarygroup   96 Jul 12  2019 zeromq
-drwxr-xr-x  3 jimxu  primarygroup   96 Feb 22 21:44 zsh
-drwxr-xr-x  3 jimxu  primarygroup   96 Mar  6 13:18 zsh-syntax-highlighting
-drwxr-xr-x  3 jimxu  primarygroup   96 May 25 13:00 zstd
-drwxrwxrwx  3 jimxu  primarygroup   96 Jun 18  2015 zsync
+  2312511 -rw-r--r--  1 jimxu  primarygroup    0 Sep 19  2019 .keepme
+  2311702 drwxr-xr-x  3 jimxu  primarygroup   96 Jun 13  2020 adns/
+  2311709 drwxr-xr-x  3 jimxu  primarygroup   96 Dec  9  2018 antigen/
+ 24940708 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 28 23:03 aom/
+  2311715 drwxrwxrwx  3 jimxu  primarygroup   96 Jun 17  2015 apple-gcc42/
+  2311744 drwxrwxrwx  3 jimxu  primarygroup   96 Sep 14  2019 apr-util/
+  2311760 drwxr-xr-x  3 jimxu  primarygroup   96 Jan 17 20:43 apr/
+  2311773 drwxr-xr-x  3 jimxu  primarygroup   96 Dec 30  2018 archey/
+  2311777 drwxr-xr-x  3 jimxu  primarygroup   96 Oct 18  2019 aria2/
+135352859 drwxr-xr-x  3 jimxu  primarygroup   96 Nov 15 21:34 asciidoctor/
+  2311795 drwxr-xr-x  3 jimxu  primarygroup   96 Mar  3 15:46 asdf/
+  2311817 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 30 23:11 autoconf/
+  2312001 drwxr-xr-x  3 jimxu  primarygroup   96 Oct 17 21:07 autojump/
+  2312019 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 30 23:14 automake/
+  2312534 drwxr-xr-x  3 jimxu  primarygroup   96 Jul 14  2019 autossh/
+  3763970 drwxr-xr-x  3 jimxu  primarygroup   96 Dec 24 18:57 axel/
+  2312546 drwxrwxrwx  3 jimxu  primarygroup   96 Jun 17  2015 base64/
+  2312553 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 23  2019 bash-completion/
+  2312762 drwxr-xr-x  3 jimxu  primarygroup   96 Dec 24 18:52 bash/
+ 87855960 drwxr-xr-x  3 jimxu  primarygroup   96 Mar  3 15:53 bat/
+  2313027 drwxr-xr-x  3 jimxu  primarygroup   96 Feb  3 18:53 bdw-gc/
+288931100 drwxr-xr-x  3 jimxu  primarygroup   96 Mar  3 15:24 berkeley-db/
+ 21124676 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 13 23:33 bison/
+  2313309 drwxr-xr-x  3 jimxu  primarygroup   96 Mar  3 15:15 boost/
+  2328978 drwxr-xr-x  3 jimxu  primarygroup   96 Jan 15 15:00 bower/
+  2336863 drwxrwxrwx  3 jimxu  primarygroup   96 Feb  3 19:05 brew-gem/
+  2336870 drwxrwxrwx  3 jimxu  primarygroup   96 Jun 17  2015 brew-pip/
+321515813 drwxr-xr-x  3 jimxu  primarygroup   96 Apr  9 13:36 brotli/
+  2336873 drwxrwxrwx  3 jimxu  primarygroup   96 Jun 17  2015 bsdiff/
+  2336879 drwxrwxrwx  3 jimxu  primarygroup   96 Jun 17  2015 bsdmake/
+250049830 drwxr-xr-x  3 jimxu  primarygroup   96 Dec 24 19:00 c-ares/
+  2336887 drwxr-xr-x  3 jimxu  primarygroup   96 Mar  3 15:53 cabal-install/
+  2336893 drwxr-xr-x  3 jimxu  primarygroup   96 Mar  3 15:41 cairo/
+  2337086 drwxrwxrwx  3 jimxu  primarygroup   96 Sep  6  2019 cgdb/
+  2337094 drwxr-xr-x  3 jimxu  primarygroup   96 Apr  9 13:34 cmake/
+ 85812870 drwxr-xr-x  3 jimxu  primarygroup   96 May 25  2020 cmatrix/
+ 86188658 drwxr-xr-x  3 jimxu  primarygroup   96 May 28  2020 colordiff/
+  2342997 drwxrwxrwx  3 jimxu  primarygroup   96 Jun 17  2015 colormake/
+  2343009 drwxrwxrwx  3 jimxu  primarygroup   96 Jun 17  2015 colortail/
+  2343012 drwxr-xr-x  3 jimxu  primarygroup   96 Apr  6 21:21 composer/
+  2343016 drwxrwxrwx  3 jimxu  primarygroup   96 Mar  6  2020 coreutils/
+ 85812995 drwxr-xr-x  3 jimxu  primarygroup   96 Sep 28  2020 cowsay/
+  2343658 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 28 22:38 cppcheck/
+218560297 drwxr-xr-x  3 jimxu  primarygroup   96 Jan 13 13:40 cppman/
+  2343670 drwxr-xr-x  3 jimxu  primarygroup   96 Mar  2  2019 cscope/
+  2343678 drwxr-xr-x  3 jimxu  primarygroup   96 Jan 25 10:12 ctags/
+  2343686 drwxrwxrwx  3 jimxu  primarygroup   96 Jun 17  2015 ctail/
+ 85708283 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 10 23:14 dav1d/
+  2343689 drwxr-xr-x  3 jimxu  primarygroup   96 Jan  5  2019 diffutils/
+ 77177943 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 13 23:36 direnv/
+  2343698 drwxrwxrwx  3 jimxu  primarygroup   96 Jun 17  2015 djvu2pdf/
+  2343704 drwxrwxrwx  3 jimxu  primarygroup   96 Dec 24 18:59 djvulibre/
+  2343918 drwxrwxrwx  3 jimxu  primarygroup   96 Jun 17  2015 dnstracer/
+  2343925 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 25  2020 docbook-xsl/
+  2347919 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 25  2020 docbook/
+  2348127 drwxrwxrwx  3 jimxu  primarygroup   96 Mar 29  2017 docker-clean/
+  2348131 drwxrwxrwx  3 jimxu  primarygroup   96 Apr  6 21:21 docker-compose-completion/
+  2348142 drwxrwxrwx  3 jimxu  primarygroup   96 Sep 16  2019 docker-machine-completion/
+  2348150 drwxr-xr-x  3 jimxu  primarygroup   96 Sep  6  2019 docker-machine/
+ 24938800 drwxr-xr-x  3 jimxu  primarygroup   96 Apr  6 21:20 docutils/
+ 77178010 drwxr-xr-x  3 jimxu  primarygroup   96 Aug 30  2020 editorconfig/
+ 85316205 drwxr-xr-x  3 jimxu  primarygroup   96 May 25  2020 fasd/
+ 77177197 drwxr-xr-x  3 jimxu  primarygroup   96 Dec 24 18:39 fd/
+  2348159 drwxr-xr-x  3 jimxu  primarygroup   96 Aug 21  2020 fdupes/
+ 24957578 drwxr-xr-x  3 jimxu  primarygroup   96 Jan  7 10:54 ffmpeg-iina/
+ 51665389 drwxr-xr-x  3 jimxu  primarygroup   96 Apr  6 21:32 ffmpeg/
+  2348166 drwxr-xr-x  3 jimxu  primarygroup   96 Apr  9 13:42 fish/
+ 24941826 drwxr-xr-x  3 jimxu  primarygroup   96 Apr 13  2020 flac/
+  2349109 drwxr-xr-x  3 jimxu  primarygroup   96 Dec 30  2018 fontconfig/
+  2349695 drwxr-xr-x  3 jimxu  primarygroup   96 Dec 24 19:06 fontforge/
+ 85813329 drwxr-xr-x  3 jimxu  primarygroup   96 May 25  2020 fortune/
+  2351061 drwxr-xr-x  3 jimxu  primarygroup   96 Aug 21  2020 fping/
+  2351069 drwxr-xr-x  3 jimxu  primarygroup   96 Oct 28 00:18 freetype/
+ 24940894 drwxr-xr-x  3 jimxu  primarygroup   96 Apr 13  2020 frei0r/
+  2351085 drwxr-xr-x  3 jimxu  primarygroup   96 Jul 19  2020 fribidi/
+ 26866972 drwxr-xr-x  3 jimxu  primarygroup   96 Apr  6 21:30 fzf/
+  2351288 drwxr-xr-x  3 jimxu  primarygroup   96 Dec  8  2018 fzy/
+  2351296 drwxr-xr-x  4 jimxu  primarygroup  128 Feb 21 19:46 gcc/
+  2352872 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 10 23:14 gd/
+  2352880 drwxr-xr-x  3 jimxu  primarygroup   96 Feb  3 19:16 gdb/
+  2352901 drwxr-xr-x  4 jimxu  primarygroup  128 Mar 10 08:26 gdbm/
+ 75708488 drwxr-xr-x  3 jimxu  primarygroup   96 Apr  9 13:35 gdk-pixbuf/
+  2352915 drwxr-xr-x  3 jimxu  primarygroup   96 Apr  7 12:11 gettext/
+218562135 drwxr-xr-x  3 jimxu  primarygroup   96 Apr  6 21:20 gh/
+  2355200 drwxr-xr-x  3 jimxu  primarygroup   96 Feb 21 20:47 ghc/
+  2363057 drwxrwxrwx  3 jimxu  primarygroup   96 Jan  5 10:36 ghostscript/
+  2363861 drwxr-xr-x  3 jimxu  primarygroup   96 Nov 27  2019 giflib/
+323351109 drwxr-xr-x  3 jimxu  primarygroup   96 Apr 10 14:53 git-delta/
+  2363870 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 28 23:08 git/
+323047528 drwxr-xr-x  3 jimxu  primarygroup   96 Apr 10 11:01 gitui/
+  3759024 drwxr-xr-x  3 jimxu  primarygroup   96 Feb 14 11:38 glances/
+  2365599 drwxrwxrwx  3 jimxu  primarygroup   96 Mar 28 23:03 glib/
+  2366209 drwxr-xr-x  3 jimxu  primarygroup   96 Jul 12  2019 glide/
+  2366213 drwxr-xr-x  3 jimxu  primarygroup   96 Jan 19  2020 global/
+ 77560567 drwxr-xr-x  3 jimxu  primarygroup   96 May 23  2020 gmime/
+  2366794 drwxr-xr-x  3 jimxu  primarygroup   96 Dec 24 19:23 gmp/
+ 75776530 drwxr-xr-x  3 jimxu  primarygroup   96 Feb 14 11:29 gnu-getopt/
+ 75797163 drwxr-xr-x  3 jimxu  primarygroup   96 May 17  2020 gnu-sed/
+ 77526063 drwxr-xr-x  3 jimxu  primarygroup   96 Jan 13 13:36 gnupg/
+  2367016 drwxr-xr-x  3 jimxu  primarygroup   96 Sep  5  2020 gnutls/
+  2368333 drwxr-xr-x  3 jimxu  primarygroup   96 Apr  6 21:20 go/
+  2379177 drwxrwxrwx  3 jimxu  primarygroup   96 Mar 28 23:04 gobject-introspection/
+  2379379 drwxr-xr-x  3 jimxu  primarygroup   96 Sep 15  2019 gotop/
+ 77559271 drwxr-xr-x  3 jimxu  primarygroup   96 Jan 13 13:40 gpgme/
+  2379591 drwxr-xr-x  3 jimxu  primarygroup   96 Jan 15 14:59 gptfdisk/
+  2379599 drwxr-xr-x  3 jimxu  primarygroup   96 Apr 11  2020 graphite2/
+  2379613 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 28 23:04 graphviz/
+  2380031 drwxr-xr-x  3 jimxu  primarygroup   96 Mar  3 15:24 grc/
+  2380217 drwxr-xr-x  3 jimxu  primarygroup   96 Oct 28 00:22 gtk-doc/
+  3788072 drwxr-xr-x  3 jimxu  primarygroup   96 Jan 19  2020 gts/
+ 85354392 drwxr-xr-x  3 jimxu  primarygroup   96 Jan 13 13:30 guile/
+  2380633 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 28 23:03 harfbuzz/
+  2380832 drwxr-xr-x  3 jimxu  primarygroup   96 Apr  6 21:32 help2man/
+  2380840 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 28 22:33 heroku-node/
+  2380845 drwxr-xr-x  3 jimxu  primarygroup   96 Apr  9 13:43 heroku/
+  2399002 drwxr-xr-x  3 jimxu  primarygroup   96 Aug 29  2020 hexedit/
+  2399010 drwxrwxrwx  3 jimxu  primarygroup   96 Jun 17  2015 hfsutils/
+  2399017 drwxrwxrwx  3 jimxu  primarygroup   96 Apr  6 21:21 highlight/
+  2399570 drwxr-xr-x  3 jimxu  primarygroup   96 May 28  2017 hping/
+  2311698 lrwxrwxrwx  1 jimxu  primarygroup    4 Oct 15  2017 htop-osx@ -> htop
+  2399579 drwxr-xr-x  3 jimxu  primarygroup   96 Jan 13 13:17 htop/
+  2399760 drwxr-xr-x  3 jimxu  primarygroup   96 Sep 15  2019 httperf/
+  2399785 drwxr-xr-x  3 jimxu  primarygroup   96 Mar  6  2020 hub/
+  2399806 drwxr-xr-x  3 jimxu  primarygroup   96 Mar  3 15:07 icu4c/
+  2400018 drwxrwxrwx  3 jimxu  primarygroup   96 Jun 17  2015 ifstat/
+  2400025 drwxrwxrwx  3 jimxu  primarygroup   96 Jun 17  2015 iftop/
+  2400213 drwxr-xr-x  3 jimxu  primarygroup   96 Feb 14 11:38 ilmbase/
+  2400441 drwxr-xr-x  3 jimxu  primarygroup   96 Apr  6 21:30 imagemagick/
+ 75739680 drwxr-xr-x  3 jimxu  primarygroup   96 Apr  6 19:47 imagemagick@6/
+ 75206446 drwxr-xr-x  3 jimxu  primarygroup   96 Dec 24 19:21 imlib2/
+  2401964 drwxr-xr-x  3 jimxu  primarygroup   96 Sep  6  2019 iperf/
+  2401972 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 28 22:57 ipython/
+  2405328 drwxr-xr-x  3 jimxu  primarygroup   96 Apr  6 21:22 irssi/
+  2405739 drwxr-xr-x  3 jimxu  primarygroup   96 Jan  5 12:37 isl/
+  2405751 drwxr-xr-x  3 jimxu  primarygroup   96 May 13  2020 jansson/
+  3784492 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 30 23:14 jasper/
+  2405759 drwxr-xr-x  3 jimxu  primarygroup   96 Sep 20  2020 jbig2dec/
+  2405770 drwxr-xr-x  3 jimxu  primarygroup   96 Apr  4  2020 jemalloc/
+  2405785 drwxr-xr-x  3 jimxu  primarygroup   96 Jan 19  2020 jpeg/
+  2405796 drwxr-xr-x  3 jimxu  primarygroup   96 Dec  8  2018 jq/
+135356376 drwxr-xr-x  3 jimxu  primarygroup   96 Aug  3  2020 json-c/
+  2405810 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 30 23:11 kotlin/
+ 15221687 drwxr-xr-x  3 jimxu  primarygroup   96 Feb 21 17:18 krb5/
+ 77178084 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 28 22:57 ktlint/
+ 51649184 drwxr-xr-x  3 jimxu  primarygroup   96 May  3  2020 lame/
+ 24942876 drwxr-xr-x  3 jimxu  primarygroup   96 Aug  3  2020 leptonica/
+ 24964215 drwxr-xr-x  3 jimxu  primarygroup   96 Jan  5 10:24 libarchive/
+ 24941078 drwxr-xr-x  3 jimxu  primarygroup   96 Oct 31 19:44 libass/
+  2405998 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 28 23:04 libassuan/
+  2406010 drwxr-xr-x  3 jimxu  primarygroup   96 Apr 20  2019 libatomic_ops/
+ 24963830 drwxr-xr-x  3 jimxu  primarygroup   96 Apr 13  2020 libb2/
+ 24941152 drwxr-xr-x  3 jimxu  primarygroup   96 Apr  6 21:21 libbluray/
+  2406206 drwxr-xr-x  3 jimxu  primarygroup   96 Nov  7 22:30 libde265/
+250050042 drwxr-xr-x  3 jimxu  primarygroup   96 Dec 24 19:00 libev/
+  2406218 drwxr-xr-x  3 jimxu  primarygroup   96 Jul 19  2020 libevent/
+  2407141 drwxr-xr-x  3 jimxu  primarygroup   96 Dec 24 18:55 libewf/
+ 75207864 drwxr-xr-x  3 jimxu  primarygroup   96 May 25  2020 libexif/
+  2407340 drwxr-xr-x  4 jimxu  primarygroup  128 Mar 10 08:33 libffi/
+  2407354 drwxr-xr-x  3 jimxu  primarygroup   96 Feb 21 19:47 libgcrypt/
+  2407369 drwxrwxrwx  3 jimxu  primarygroup   96 Mar 28 23:04 libgpg-error/
+  2407388 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 28 23:10 libheif/
+224335965 drwxr-xr-x  3 jimxu  primarygroup   96 Nov 15 21:34 libice/
+  2407406 drwxr-xr-x  3 jimxu  primarygroup   96 Nov 27  2019 libidn2/
+  2407653 drwxr-xr-x  3 jimxu  primarygroup   96 Apr  6 21:33 libksba/
+ 90857310 drwxr-xr-x  3 jimxu  primarygroup   96 Jun  6  2020 liblqr/
+  2407664 drwxrwxrwx  3 jimxu  primarygroup   96 Apr  6 21:33 libmagic/
+  2407860 drwxr-xr-x  3 jimxu  primarygroup   96 Oct 28 00:31 libmpc/
+  2408052 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 25  2020 libnet/
+ 24941619 drwxr-xr-x  3 jimxu  primarygroup   96 Apr 13  2020 libogg/
+  2408063 drwxr-xr-x  3 jimxu  primarygroup   96 Mar  3 15:53 libomp/
+  2408069 drwxr-xr-x  3 jimxu  primarygroup   96 Jan  5 10:36 libpcap/
+  2408104 drwxr-xr-x  3 jimxu  primarygroup   96 Apr 20  2019 libpng/
+221195488 drwxr-xr-x  3 jimxu  primarygroup   96 Nov  7 22:38 libpthread-stubs/
+ 75726426 drwxr-xr-x  3 jimxu  primarygroup   96 Feb  3 19:00 librsvg/
+ 24942513 drwxr-xr-x  3 jimxu  primarygroup   96 Apr 13  2020 libsamplerate/
+  2408124 drwxr-xr-x  3 jimxu  primarygroup   96 Dec 24 18:35 libsigc++/
+224336031 drwxr-xr-x  3 jimxu  primarygroup   96 Nov 15 21:34 libsm/
+ 24942366 drwxr-xr-x  3 jimxu  primarygroup   96 Jan 25 11:08 libsndfile/
+249870469 drwxr-xr-x  3 jimxu  primarygroup   96 Dec 24 18:47 libsodium/
+ 24941254 drwxr-xr-x  3 jimxu  primarygroup   96 Apr 13  2020 libsoxr/
+  2408483 drwxr-xr-x  3 jimxu  primarygroup   96 May 25  2020 libspiro/
+  2408491 drwxr-xr-x  3 jimxu  primarygroup   96 Sep 15  2019 libssh2/
+135356500 drwxr-xr-x  3 jimxu  primarygroup   96 Jan  5 11:36 libstfl/
+  2408685 drwxr-xr-x  3 jimxu  primarygroup   96 Feb 12 17:43 libtasn1/
+  2408699 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 23  2019 libtermkey/
+  2408710 drwxr-xr-x  3 jimxu  primarygroup   96 Dec 24 19:23 libtiff/
+  2409080 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 28 23:10 libtool/
+  2409097 drwxr-xr-x  3 jimxu  primarygroup   96 Apr 20  2020 libuninameslist/
+  2409108 drwxr-xr-x  3 jimxu  primarygroup   96 Dec 30  2018 libunistring/
+  2409297 drwxr-xr-x  3 jimxu  primarygroup   96 Dec 24 19:06 libusb/
+  2409310 drwxr-xr-x  3 jimxu  primarygroup   96 Feb 14 11:38 libuv/
+ 24941356 drwxr-xr-x  3 jimxu  primarygroup   96 Apr 13  2020 libvidstab/
+ 24942101 drwxr-xr-x  3 jimxu  primarygroup   96 Jul  7  2020 libvorbis/
+ 51649772 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 28 23:04 libvpx/
+  2409330 drwxr-xr-x  3 jimxu  primarygroup   96 Aug 29  2020 libvterm/
+221207354 drwxr-xr-x  3 jimxu  primarygroup   96 Dec 24 19:19 libx11/
+221196257 drwxr-xr-x  3 jimxu  primarygroup   96 Nov  7 22:38 libxau/
+221198833 drwxr-xr-x  3 jimxu  primarygroup   96 Jan 27 09:52 libxcb/
+221196340 drwxr-xr-x  3 jimxu  primarygroup   96 Nov  7 22:38 libxdmcp/
+221214843 drwxr-xr-x  3 jimxu  primarygroup   96 Nov  7 22:40 libxext/
+  2409339 drwxr-xr-x  3 jimxu  primarygroup   96 Oct 28 00:09 libxml2/
+224337083 drwxr-xr-x  3 jimxu  primarygroup   96 Nov 15 21:34 libxmu/
+289117299 drwxr-xr-x  3 jimxu  primarygroup   96 Mar  3 15:38 libxrender/
+224336395 drwxr-xr-x  3 jimxu  primarygroup   96 Jan 25 11:04 libxt/
+  2409729 drwxr-xr-x  3 jimxu  primarygroup   96 Jun  6  2020 libyaml/
+  2409736 drwxr-xr-x  3 jimxu  primarygroup   96 Feb 12 17:52 little-cms2/
+  2409748 drwxr-xr-x  3 jimxu  primarygroup   96 Apr  6 21:18 llvm/
+ 85815062 drwxr-xr-x  3 jimxu  primarygroup   96 May 25  2020 lolcat/
+  2418183 drwxr-xr-x  3 jimxu  primarygroup   96 Nov 15 21:31 lsof/
+  2418190 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 30 23:11 lua/
+  2311699 lrwxrwxrwx  1 jimxu  primarygroup    7 Mar 29  2017 lua51@ -> lua@5.1
+  2418219 drwxr-xr-x  3 jimxu  primarygroup   96 Dec 30  2018 lua@5.1/
+295838912 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 12 20:22 luajit-openresty/
+ 17077993 drwxr-xr-x  3 jimxu  primarygroup   96 Mar  6  2020 luajit/
+  2418261 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 30 23:11 luarocks/
+ 24963902 drwxr-xr-x  3 jimxu  primarygroup   96 Nov 16 08:51 lz4/
+  2418477 drwxr-xr-x  3 jimxu  primarygroup   96 Jun 21  2019 lzo/
+  2418488 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 23  2019 m-cli/
+310412935 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 28 22:33 m4/
+  2418501 drwxr-xr-x  3 jimxu  primarygroup   96 Jan 19  2020 makedepend/
+  2418507 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 28 22:56 mas/
+  2418748 drwxr-xr-x  3 jimxu  primarygroup   96 Dec  9  2018 mdp/
+  2418756 drwxr-xr-x  3 jimxu  primarygroup   96 Feb 21 19:49 meson/
+  2311700 lrwxrwxrwx  1 jimxu  primarygroup    4 Oct 15  2017 mobile-shell@ -> mosh
+  2418964 drwxr-xr-x  3 jimxu  primarygroup   96 Mar  3 15:58 mosh/
+288726694 drwxr-xr-x  3 jimxu  primarygroup   96 Mar  3 15:03 mpdecimal/
+  2418974 drwxr-xr-x  3 jimxu  primarygroup   96 Aug  3  2020 mpfr/
+295844232 drwxr-xr-x  3 jimxu  primarygroup   96 Apr  9 13:41 mpv/
+  2418986 drwxr-xr-x  3 jimxu  primarygroup   96 Jun 13  2020 msgpack/
+  2419776 drwxr-xr-x  3 jimxu  primarygroup   96 Oct  9  2020 mtr/
+ 77563391 drwxr-xr-x  3 jimxu  primarygroup   96 Jan 25 10:13 mu/
+ 24964328 drwxr-xr-x  3 jimxu  primarygroup   96 Feb 14 11:35 mujs/
+  2419786 drwxr-xr-x  3 jimxu  primarygroup   96 Jan 19  2020 multitail/
+ 24939789 drwxr-xr-x  3 jimxu  primarygroup   96 Aug 29  2020 nasm/
+  2420051 drwxr-xr-x  3 jimxu  primarygroup   96 Feb 22  2020 ncurses/
+  2424040 drwxr-xr-x  3 jimxu  primarygroup   96 Aug  3  2020 neofetch/
+ 17086356 drwxr-xr-x  3 jimxu  primarygroup   96 Aug 21  2020 neovim/
+  3786546 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 28 23:03 netpbm/
+  2425373 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 28 22:57 nettle/
+135357607 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 28 23:12 newsboat/
+250052737 drwxr-xr-x  3 jimxu  primarygroup   96 Feb  3 18:50 nghttp2/
+  2425565 drwxr-xr-x  3 jimxu  primarygroup   96 Dec 24 18:52 ninja/
+  2425575 drwxr-xr-x  3 jimxu  primarygroup   96 Oct 17 21:02 nmap/
+101071232 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 28 23:04 nnn/
+  2426347 drwxr-xr-x  3 jimxu  primarygroup   96 Apr  9 13:41 node/
+  2432613 drwxr-xr-x  3 jimxu  primarygroup   96 Feb  3  2019 npth/
+  2432623 drwxr-xr-x  3 jimxu  primarygroup   96 Apr  6 21:21 nvm/
+  2432796 drwxr-xr-x  3 jimxu  primarygroup   96 Nov  8 16:59 oniguruma/
+ 51650046 drwxr-xr-x  3 jimxu  primarygroup   96 May  3  2020 opencore-amr/
+  2432805 drwxr-xr-x  3 jimxu  primarygroup   96 Feb 21 19:47 openexr/
+249733659 drwxr-xr-x  4 jimxu  primarygroup  128 Mar 10 08:26 openjdk/
+  2432822 drwxr-xr-x  3 jimxu  primarygroup   96 Jan 17 20:43 openjpeg/
+  2435552 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 28 22:26 openssl@1.1/
+ 51650266 drwxr-xr-x  3 jimxu  primarygroup   96 May  3  2020 opus/
+  2444295 drwxrwxrwx  3 jimxu  primarygroup   96 Dec 24 19:17 p11-kit/
+  2444315 drwxr-xr-x  3 jimxu  primarygroup   96 Apr  6 21:20 p7zip/
+  2444414 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 28 22:56 pandoc/
+  2444538 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 28 22:57 pango/
+  2444554 drwxr-xr-x  3 jimxu  primarygroup   96 Mar  6  2020 parity/
+  2444560 drwxr-xr-x  3 jimxu  primarygroup   96 Feb 13  2020 pcre/
+  2444678 drwxr-xr-x  3 jimxu  primarygroup   96 Dec 24 18:58 pcre2/
+  2444982 drwxr-xr-x  3 jimxu  primarygroup   96 Jul 19  2020 peco/
+  2444986 drwxr-xr-x  3 jimxu  primarygroup   96 Mar  3 15:31 perl/
+ 75018837 drwxr-xr-x  3 jimxu  primarygroup   96 May 16  2020 pidof/
+  2447618 drwxr-xr-x  3 jimxu  primarygroup   96 Jan 25 11:10 pinentry/
+ 77179996 drwxr-xr-x  3 jimxu  primarygroup   96 Nov 15 21:48 pipenv/
+  2447626 drwxr-xr-x  3 jimxu  primarygroup   96 Apr 23  2020 pixman/
+  2447634 drwxr-xr-x  3 jimxu  primarygroup   96 Apr 11  2020 pkg-config/
+  2447644 drwxr-xr-x  3 jimxu  primarygroup   96 Jul  7  2020 popt/
+  2447654 drwxr-xr-x  3 jimxu  primarygroup   96 Mar  3 15:49 postgresql/
+  2450899 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 23  2019 powerlevel9k/
+  2450935 drwxr-xr-x  3 jimxu  primarygroup   96 May 28  2017 proctools/
+ 90821863 drwxr-xr-x  3 jimxu  primarygroup   96 Mar  3 15:51 protobuf-c/
+  2450942 drwxr-xr-x  3 jimxu  primarygroup   96 Apr  9 13:43 protobuf/
+  2452233 drwxr-xr-x  3 jimxu  primarygroup   96 May 28  2017 pstree/
+  2452239 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 23  2019 pv/
+  2452246 drwxr-xr-x  2 jimxu  primarygroup   64 Jul 19  2020 python/
+  2311701 lrwxr-xr-x  1 jimxu  primarygroup    6 Sep  6  2018 python3@ -> python
+  2461420 drwxr-xr-x  3 jimxu  primarygroup   96 Jan 19  2020 python@2/
+ 10267894 drwxr-xr-x  3 jimxu  primarygroup   96 Apr  6 19:44 python@3.8/
+210725710 drwxr-xr-x  3 jimxu  primarygroup   96 Apr  6 21:31 python@3.9/
+  2468552 drwxrwxrwx  3 jimxu  primarygroup   96 Mar 30 23:06 radare2/
+318446635 drwxr-xr-x  3 jimxu  primarygroup   96 Apr  7 12:00 ragel/
+ 86697941 drwxr-xr-x  3 jimxu  primarygroup   96 May 29  2020 ranger/
+136675969 drwxr-xr-x  3 jimxu  primarygroup   96 Apr  6 21:27 rav1e/
+  2469352 drwxr-xr-x  3 jimxu  primarygroup   96 Sep 19  2019 rbenv/
+  2469363 drwxr-xr-x  3 jimxu  primarygroup   96 Oct 19  2019 rcm/
+  2469374 drwxr-xr-x  3 jimxu  primarygroup   96 Dec 24 18:23 readline/
+  2469394 drwxr-xr-x  3 jimxu  primarygroup   96 Oct 17 20:59 reattach-to-user-namespace/
+ 24896705 drwxr-xr-x  3 jimxu  primarygroup   96 May 29  2020 ripgrep/
+ 24941447 drwxr-xr-x  3 jimxu  primarygroup   96 Apr 13  2020 rtmpdump/
+ 24942597 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 28 23:08 rubberband/
+  2469399 drwxr-xr-x  3 jimxu  primarygroup   96 Apr  6 21:21 ruby-build/
+  2469938 drwxr-xr-x  3 jimxu  primarygroup   96 Apr  6 19:41 ruby/
+ 75683475 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 30 23:10 rust/
+293764130 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 10 08:26 scons/
+  2491940 drwxr-xr-x  3 jimxu  primarygroup   96 Nov 27  2019 screenfetch/
+  2491948 drwxr-xr-x  3 jimxu  primarygroup   96 Aug 27  2017 screenresolution/
+ 51650417 drwxr-xr-x  3 jimxu  primarygroup   96 Jan  5 12:46 sdl2/
+  2491951 drwxr-xr-x  3 jimxu  primarygroup   96 Jan  5 10:40 shared-mime-info/
+ 77182003 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 28 23:04 shellcheck/
+  2492128 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 10 23:14 shfmt/
+ 24942667 drwxr-xr-x  3 jimxu  primarygroup   96 Apr 13  2020 snappy/
+  2492132 drwxr-xr-x  3 jimxu  primarygroup   96 May 28  2017 sntop/
+  2492302 drwxr-xr-x  3 jimxu  primarygroup   96 Jan 13 13:19 socat/
+  2492309 drwxr-xr-x  3 jimxu  primarygroup   96 Dec 24 18:57 source-highlight/
+ 51701657 drwxr-xr-x  3 jimxu  primarygroup   96 Apr  9 13:38 speedtest-cli/
+ 24942758 drwxr-xr-x  3 jimxu  primarygroup   96 Apr 13  2020 speex/
+  2492691 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 28 22:33 sphinx-doc/
+  2497342 drwxr-xr-x  3 jimxu  primarygroup   96 Apr  9 13:34 sqlite/
+ 51650576 drwxr-xr-x  3 jimxu  primarygroup   96 Oct  9  2020 srt/
+  2497354 drwxrwxrwx  3 jimxu  primarygroup   96 Mar  3 15:03 ssh-copy-id/
+  2497361 drwxr-xr-x  3 jimxu  primarygroup   96 Nov 27  2019 ssldump/
+  2497369 drwxr-xr-x  3 jimxu  primarygroup   96 May 28  2017 stress/
+293771403 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 10 08:27 subversion/
+  2497377 drwxr-xr-x  3 jimxu  primarygroup   96 Jun 13  2020 swig/
+  2498017 drwxr-xr-x  3 jimxu  primarygroup   96 Jan 12  2019 tcc/
+263771711 drwxr-xr-x  3 jimxu  primarygroup   96 Feb 12 17:30 tcl-tk/
+  2498030 drwxr-xr-x  3 jimxu  primarygroup   96 Jul  7  2020 tcping/
+  2498033 drwxr-xr-x  3 jimxu  primarygroup   96 May 28  2017 tcptrace/
+  2498041 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 25  2020 tcptraceroute/
+  2498233 drwxr-xr-x  3 jimxu  primarygroup   96 Dec  8  2018 terminal-notifier/
+ 24943058 drwxr-xr-x  3 jimxu  primarygroup   96 Apr 13  2020 tesseract/
+ 24940231 drwxr-xr-x  3 jimxu  primarygroup   96 Apr 13  2020 texi2html/
+  2498243 drwxr-xr-x  3 jimxu  primarygroup   96 Dec 30  2018 the_silver_searcher/
+ 51650743 drwxr-xr-x  3 jimxu  primarygroup   96 May  3  2020 theora/
+316869749 drwxr-xr-x  3 jimxu  primarygroup   96 Apr  6 20:45 ticker/
+  2498258 drwxr-xr-x  3 jimxu  primarygroup   96 Nov  7 22:32 tmux/
+  2498269 drwxr-xr-x  3 jimxu  primarygroup   96 May 28  2017 tokyo-cabinet/
+307935854 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 26 00:21 tree-sitter/
+  2498287 drwxr-xr-x  3 jimxu  primarygroup   96 Dec 30  2018 tree/
+  2498295 drwxr-xr-x  3 jimxu  primarygroup   96 Apr  9 13:38 typescript/
+ 24964396 drwxr-xr-x  3 jimxu  primarygroup   96 Apr 27  2020 uchardet/
+  2498573 drwxr-xr-x  3 jimxu  primarygroup   96 Feb 12 17:44 unbound/
+  2498767 drwxr-xr-x  3 jimxu  primarygroup   96 Apr  6 21:20 unibilium/
+  2498778 drwxr-xr-x  3 jimxu  primarygroup   96 Oct 19  2019 universal-ctags/
+  2499165 drwxr-xr-x  3 jimxu  primarygroup   96 Sep 13  2020 unixodbc/
+  2499182 drwxr-xr-x  3 jimxu  primarygroup   96 Nov 15 21:39 unrar/
+  2499187 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 10 23:09 unzip/
+  2499195 drwxr-xr-x  3 jimxu  primarygroup   96 Dec 24 18:49 utf8proc/
+221195323 drwxr-xr-x  3 jimxu  primarygroup   96 Jan 25 11:04 util-macros/
+  2499202 drwxrwxrwx  3 jimxu  primarygroup   96 Apr  9 13:40 vala/
+  2499582 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 28 23:03 valabind/
+295839033 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 12 20:22 vapoursynth/
+  2499590 drwxr-xr-x  3 jimxu  primarygroup   96 Nov  7 22:34 vifm/
+ 22866652 drwxr-xr-x  3 jimxu  primarygroup   96 Apr  6 21:32 vim/
+  2501809 drwxr-xr-x  3 jimxu  primarygroup   96 Dec 24 18:27 w3m/
+  2501824 drwxr-xr-x  3 jimxu  primarygroup   96 Feb 14 11:35 watch/
+  2501831 drwxr-xr-x  3 jimxu  primarygroup   96 Oct  9  2020 watchman/
+  2501847 drwxr-xr-x  3 jimxu  primarygroup   96 Feb  3 18:55 webp/
+  2501862 drwxr-xr-x  3 jimxu  primarygroup   96 Jan 27 09:58 wget/
+ 51737577 drwxr-xr-x  3 jimxu  primarygroup   96 May  3  2020 wifi-password/
+  2502136 drwxr-xr-x  3 jimxu  primarygroup   96 Nov 15 21:34 wmctrl/
+ 51650906 drwxr-xr-x  3 jimxu  primarygroup   96 Feb 14 11:35 x264/
+  2502143 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 28 23:04 x265/
+ 77562634 drwxr-xr-x  3 jimxu  primarygroup   96 Jan 15 15:00 xapian/
+  2502151 drwxr-xr-x  3 jimxu  primarygroup   96 Mar  3 15:58 xmlrpc-c/
+ 75776622 drwxr-xr-x  3 jimxu  primarygroup   96 May 17  2020 xmlto/
+221195814 drwxr-xr-x  3 jimxu  primarygroup   96 Mar  3 15:41 xorgproto/
+221195417 drwxr-xr-x  3 jimxu  primarygroup   96 Nov  7 22:38 xtrans/
+ 51650964 drwxr-xr-x  3 jimxu  primarygroup   96 May  3  2020 xvid/
+  2502203 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 25  2020 xz/
+  2502431 drwxr-xr-x  3 jimxu  primarygroup   96 Feb 12 17:43 yara/
+  2502444 drwxr-xr-x  3 jimxu  primarygroup   96 Oct  9  2020 yarn/
+272735458 drwxr-xr-x  3 jimxu  primarygroup   96 Feb  3 18:54 yasm/
+ 24966345 drwxr-xr-x  4 jimxu  primarygroup  128 Apr  7 12:11 youtube-dl/
+  2502451 drwxr-xr-x  3 jimxu  primarygroup   96 May  3  2020 z/
+  2502459 drwxr-xr-x  3 jimxu  primarygroup   96 Jan 17 20:43 zeromq/
+261694421 drwxr-xr-x  3 jimxu  primarygroup   96 Jan  5 12:53 zimg/
+  2502473 drwxr-xr-x  3 jimxu  primarygroup   96 Mar  6  2020 zsh-syntax-highlighting/
+  2502669 drwxr-xr-x  3 jimxu  primarygroup   96 Dec 24 19:06 zsh/
+ 24964027 drwxr-xr-x  3 jimxu  primarygroup   96 Mar 10 23:14 zstd/
+  2504116 drwxrwxrwx  3 jimxu  primarygroup   96 Jun 18  2015 zsync/

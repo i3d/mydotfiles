@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+#if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+#fi
+
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/jimxu/.oh-my-zsh
 
@@ -5,7 +12,7 @@ source $ZSH/oh-my-zsh.sh
 
 # for awesome-terminal-fonts
 source $HOME/src/awesome-terminal-fonts/fonts/*.sh
-POWERLEVEL9K_MODE='nerdfont-complete'
+#POWERLEVEL9K_MODE='nerdfont-complete'
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -62,19 +69,21 @@ source ~/.zshrc.pre-oh-my-zsh
 
 
 # Customize to your needs...
-export PATH=/Users/jimxu/go/bin:/Users/jimxu/bin:/Users/jimxu/go_code/bin:/usr/local/bin:/usr/local/sbin:/usr/local/symlinks:/usr/local/scripts:/usr/local/buildtools/java/jdk/bin:/sw/bin:/sw/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/bin/g4bin:/usr/X11R6/bin:/Users/jimxu/pkgs/android-sdk-linux_x86-1.5_r3/tools:/Users/jimxu/src/depot_tools
-
-PATH=$HOME/.rbenv/shims:$HOME/homebrew/bin:$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-export PATH="/Users/jimxu/homebrew/sbin:$PATH"
-
-
+export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/symlinks:/usr/local/scripts:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/bin/g4bin:/usr/X11R6/bin:/Users/jimxu/pkgs/android-sdk-linux_x86-1.5_r3/tools:/usr/local/google/bin:/Users/jimxu/src/depot_tools
 export CSCOPE_DB=/Users/jimxu/src/linux/cscope.out
+
+# Initialize HOMEBREW PATHs and ENVs before we add our own.
+HOMEBREW_PREFIX=/Users/jimxu/homebrew
+eval $(${HOMEBREW_PREFIX}/bin/brew shellenv)
+
+export PATH=/Users/jimxu/homebrew/opt/llvm/bin:$PATH:$HOME/.rvm/bin:/$HOME/.rbenv/shims # Add RVM to PATH for scripting
 
 #github qfc
 [[ -s "$HOME/.qfc/bin/qfc.sh"  ]] && source "$HOME/.qfc/bin/qfc.sh"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 if `which rg &>/dev/null`; then
-    export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
+    #export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
+    export FZF_DEFAULT_COMMAND='rg -S --trim --column -H --hidden ""'
 else
     # if nothing else, this is the default.
     export FZF_DEFAULT_COMMAND='find .'
@@ -84,7 +93,40 @@ fi
 neofetch
 # don't fatch the IP.
 #archey -o
-export PATH=$HOME/bin:$PATH
+
+# for my kir workstation.
+#. $HOME/.bagpipe/setup.sh $HOME/.bagpipe jimxu-linux.kir.corp.google.com "corp-ssh-helper --stderrthreshold=INFO %h %p"
+# for my c.googler.com instance.
+. $HOME/.bagpipe/setup.sh $HOME/.bagpipe ujimux.c.googlers.com "corp-ssh-helper -relay=sup-ssh-relay.corp.google.com --stderrthreshold=INFO %h %p"
+#. $HOME/.bagpipe/setup.sh $HOME/.bagpipe ujimux.c.googlers.com
+#
+
+
+function renew_gcert_ifneeded() {
+  HOURS_TILL_EOB=$((20 - $(date +%-H)))h
+  #gcertstatus -ssh_cert_comment=corp/normal -check_remaining=$HOURS_TILL_EOB || gcert
+  gcertstatus -ssh_cert_comment=corp/normal -check_remaining=$HOURS_TILL_EOB || ~/bin/pa.py
+}
+
+function renew_bagpipe_ifneeded() {
+  p4 info > /dev/null 2>&1 || (gcert --nounruffled="not ready" && p4 bagpipe-prodaccess)
+}
+
+function pa() {
+  renew_gcert_ifneeded && renew_bagpipe_ifneeded
+  # open up our first connection to our remote host so that any
+  # disconnection will be reconnected. 'then sux wouldn't bother
+  # manual reconnect anymore'
+  echo "ssh to ujimux.c.googler.com ..."
+  echo
+  # idempotent if already connected.
+  # help any remote editing or opened remote sessions, e.g. sux, remote tmux, vscode, oni, etc.
+  #autossh -f -M20000 -t -A -X ujimux.c.googlers.com
+}
+
+#too slow on laptop.
+#pa
+
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 #[ -f /Users/jimxu/homebrew/opt/fzf/shell/completion.zsh ] &&  source /Users/jimxu/homebrew/opt/fzf/shell/completion.zsh
@@ -189,7 +231,13 @@ export NVM_DIR="$HOME/.nvm"
 
 #homebrew cleanup previous installs.
 export HOMEBREW_INSTALL_CLEANUP=1
-export PATH="/Users/jimxu/homebrew/opt/llvm/bin:$PATH"
+#or run this to cleanup.
+alias hbc='~/bin/hbc.sh'
+alias g4='p4'
+alias bbbb='blaze'
+# g4d citc stuff.
+source /Library/GoogleCorpSupport/srcfs/shell_completion/enable_completion.sh
+
 #export CPLUS_INCLUDE_PATH=/Users/jimxu/homebrew/Cellar/gcc/HEAD-2d3af38/include/c++/9.0.1:/usr/include:/usr/local/include:$HOME/.local/include:$CPLUS_INCLUDE_PATH
 # for oni finding neovim
 export ONI_NEOVIM_PATH=/Users/jimxu/homebrew/bin/nvim
@@ -247,14 +295,18 @@ zplugin cdclear -q # <- forget completions provided up to this moment
 #
 #zplugin light tannhuber/oh-my-zsh-budspencer
 #
-zplugin light denysdovhan/spaceship-prompt
-SPACESHIP_BATTERY_SHOW=false
+# ============ was enabled before =======================
+#zplugin light denysdovhan/spaceship-prompt
+#SPACESHIP_BATTERY_SHOW=false
 #
 #zplugin light halfo/lambda-mod-zsh-theme
 #
 # nice but ugly in vim term.
 #zplugin light bhilburn/powerlevel9k
-#zplugin light romkatv/powerlevel10k
+#
+# ========== Current prompt ===================
+# Disable for starship
+# zplugin light romkatv/powerlevel10k
 #
 # prompt_git:15: unknown group
 #zplugin light caiogondim/bullet-train.zsh
@@ -278,7 +330,7 @@ eval "$("$BASE16_SHELL/profile_helper.sh")"
 . /Users/jimxu/homebrew/opt/asdf/etc/bash_completion.d/asdf.bash
 #
 # always make sure my own bin path is the first
-export PATH=/Users/jimxu/bin:/Users/jimxu/.cargo/bin:/Users/jimxu/src/Nim/bin:$PATH
+export PATH=/Users/jimxu/.cargo/bin:/Users/jimxu/src/Nim/bin:$PATH
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 
 # parth/dotfiles
@@ -300,19 +352,21 @@ if [[ "${terminfo[kcud1]}" != "" ]]; then
 	bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
 fi
 
-source $HOME/src/dotfiles/zsh/prompt.sh
-export PATH=$PATH:$HOME/src/dotfiles/utils
-
-#unset ZSH_ENV
-# load the vim file manager if we aren't already in vifm
-# when vifmrc loaded, it will set this env to true.
-#[[ -z ${VIFM_ENABLED} ]] && vifm
-
-HOMEBREW_PREFIX=/Users/jimxu/homebrew
-eval $(${HOMEBREW_PREFIX}/bin/brew shellenv)
+# ===================== Was used before powerlevel10k ==================
+#source $HOME/src/dotfiles/zsh/prompt.sh
+#export PATH=$PATH:$HOME/src/dotfiles/utils
 
 # for doom emacs
 export PATH=$PATH:$HOME/.emacs.d/bin
+
+#######################################################################
+#                                                                     #
+#     Everything installed into .local/bin can only be referenced     #
+#     after this PATH spec !!!                                        #
+#                                                                     #
+#######################################################################
+# for everything that installed into .local/bin/
+export PATH=$HOME/.local/bin:$PATH
 
 # bash-hook            # add hook code to bash $PROMPT_COMMAND
 # bash-ccomp           # bash command mode completion definitions
@@ -339,18 +393,51 @@ source "$fasd_cache"
 
 #fish
 #
+# bat has ln and syntax highlight.
+alias cat=bat
+alias less=bat
 unalias s 2>/dev/null
 # always unalias vi
 unalias vi 2>/dev/null
+unalias v 2>/dev/null
 unalias g  2>/dev/null # alias to git which never good.
 unalias rd 2>/dev/null # for mac remote desktop, not rmdir
-export PATH=$HOME/bin:$PATH
+#export PATH=$HOME/.config/nvim/utils/bin:$HOME/bin:$PATH
 fortune | cowsay -f $(cowsay -l| sed '1d' | shuf | tr ' ' '\n' | head -1) | lolcat
+# see https://unix.stackexchange.com/questions/140750/generate-random-numbers-in-specific-range
+# or jot -r 1 1 10000
+# head -200 /dev/urandom | cksum
+#
+cbonsai -s $(shuf -i 1-10000 -n 1) -p
 
+#unset ZSH_ENV
+# load the vim file manager if we aren't already in vifm
+# when vifmrc loaded, it will set this env to true.
+#[[ -z ${VIFM_ENABLED} ]] && vf .
+
+killwal() {
+    sleep 3
+    if ps -ef|grep $1 &>/dev/null; then
+      kill -9 $1 &>/dev/null
+    fi
+}
 # put this at the end since it could hang.
 # TODO: figure out why.
 # Import colorscheme from 'wal' asynchronously
 # &   # Run the process in the background.
 # ( ) # Hide shell job control messages.
-(cat ~/.cache/wal/sequences &)
-wal -R -n -t -w -e
+#(cat ~/.cache/wal/sequences &)
+####wal -R -n -t -w -e 
+#killwal $! &
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+#[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# Disable powerlevel9k for now and use starship prompt.
+POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
+# Starship prompt starts here.
+eval "$(starship init zsh)"
+export PATH=$PATH:$HOME/.config/nvcode/utils/bin
+
+# This stay the last since we need our own path to be at the top.
+export PATH=/Users/jimxu/bin:/Users/jimxu/go/bin:/Users/jimxu/go_code/bin:$PATH
