@@ -439,5 +439,6 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 eval "$(starship init zsh)"
 export PATH=$PATH:$HOME/.config/nvcode/utils/bin
 
-# This stay the last since we need our own path to be at the top.
-export PATH=/Users/jimxu/bin:/Users/jimxu/go/bin:/Users/jimxu/go_code/bin:$PATH
+# These two stay the last since we need our own path to be at the top.
+export PATH=/Users/jimxu/bin:/Users/jimxu/go_code/bin:$PATH:/Users/jimxu/go/bin
+eval "$(ssh-agent -s)"
