@@ -390,13 +390,26 @@ if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
     fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install zsh-wcomp zsh-wcomp-install >| "$fasd_cache"
 fi
 source "$fasd_cache"
+## better zz from fasd
+unalias zz 2>/dev/null
+function zz() {
+  local dir
+  dir="$(z | fzf-tmux -1 -0 --no-sort +m | awk '{print $2}')" && cd "${dir}" || return 1
+}
+
+function vcp() {
+  local p=$1
+  # -m supports multi select using tab/shift-tab.
+  find ${p%%/} | fzf-tmux -m --preview 'head -50 {}' | while read file; do
+    cp $file $2
+  done
+}
 
 #fish
 #
 # bat has ln and syntax highlight.
 alias cat=bat
 alias less=bat
-unalias s 2>/dev/null
 # always unalias vi
 unalias vi 2>/dev/null
 unalias v 2>/dev/null
