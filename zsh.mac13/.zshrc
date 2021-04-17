@@ -438,7 +438,16 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 # Starship prompt starts here.
 eval "$(starship init zsh)"
 export PATH=$PATH:$HOME/.config/nvcode/utils/bin
+# Setup python environment. It should be on >= v3
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+alias python=$HOME/homebrew/bin/python3
 
+# neovim as man pager.
+export MANPAGER="/bin/sh -c \"col -b | v -c 'set ft=man ts=8 nomod nolist noma nu' -\""
+
+#eval $( gdircolors -b $HOME/.LS_COLORS )
 # These two stay the last since we need our own path to be at the top.
 export PATH=/Users/jimxu/bin:/Users/jimxu/go_code/bin:$PATH:/Users/jimxu/go/bin
-eval "$(ssh-agent -s)"
+#eval "$(ssh-agent -s)"
