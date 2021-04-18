@@ -1,0 +1,9 @@
+#!/bin/zsh
+
+SPATH=$1
+[[ -z $1 ]] && SPATH=$(pwd)
+line=$(fzf-tmux -d 20% --select-1 --exit-0)
+[[ -z $line ]] && exit 0
+file=${line%%:*}
+bat $file
+exit 0
