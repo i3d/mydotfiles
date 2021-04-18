@@ -2,5 +2,5 @@
 
 # edit file from z history
 files=$(fasd -f | awk '{print $2}' | fzf-tmux -1 -0 -s -m -print0 --preview 'head -100 {}' | tr '\n' ' ')
-[[ -z $file ]] && exit 0
-less $(echo $file)
+[[ -z $files ]] && exit 0
+less $(echo $files)
