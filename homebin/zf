@@ -2,8 +2,12 @@
 
 SPATH=$1
 [[ -z $1 ]] && SPATH=$(pwd)
-line=$(/bin/ls -a $SPATH | fzf-tmux -d 20% --select-1 --exit-0)
+line=$(fd $SPATH | fzf-tmux -d 20% -1 -0 -s -m -print0 --preview 'head -100 {}' | tr '\n' ' ')
 [[ -z $line ]] && exit 0
-[[ -f $line ]] && v $line && exit 0
-v $SPATH/$line
+[[ -f $line ]] && v $(echo $line) && exit 0
+all=
+for file in $(echo "$line"); do
+	all=$all" "$SPATH/$file
+done
+v $(echo "$all")
 exit 0
