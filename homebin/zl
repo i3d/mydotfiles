@@ -1,6 +1,6 @@
 #!/bin/zsh
 
 # edit file from z history
-file=$(fasd -f | fzf-tmux -1 -0 --no-sort +m | awk '{print $2}')
+files=$(fasd -f | awk '{print $2}' | fzf-tmux -1 -0 -s -m -print0 --preview 'head -100 {}' | tr '\n' ' ')
 [[ -z $file ]] && exit 0
-less $file
+less $(echo $file)
