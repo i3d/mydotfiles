@@ -1,8 +1,8 @@
 #!/bin/zsh
 
 # edit file from z history
-out=$(rg --color=never --column --line-number -s -e "$1" $2 | fzf-tmux -1 -0 -s -m -print0 -d 50% )
+out=$(rg --color=never --column --line-number -s -e "$1" $2 | fzf-tmux -1 -0 -s +m -d 50%)
 [[ -z $out ]] && exit 0
-file=$(echo $out|awk -F: '{print $1}')
-line=$(echo $out|awk -F: '{print $2}')
+file=$(echo $out|head -1 | awk -F: '{print $1}')
+line=$(echo $out|head -1 | awk -F: '{print $2}')
 v +$line $file
