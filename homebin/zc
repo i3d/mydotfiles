@@ -2,9 +2,15 @@
 
 SPATH=$1
 [[ -z $1 ]] && SPATH=$(pwd)
-line=$(/bin/ls -a $SPATH | fzf-tmux -d 20% -1 -0 -s -m -print0 --preview 'head -100 {}' | tr '\n' ' ')
+if [[ $SPATH =~ '/' && ! -f $SPATH ]]; then
+	# it is a dir, not a file, so we just give everything from that dir.
+	line=$(fd . $SPATH | fzf-tmux -d 20% -1 -0 -s -m -print0 --preview 'head -100 {}' | tr '\n' ' ')
+else 
+	line=$(find $SPATH | fzf-tmux -d 20% -1 -0 -s -m -print0 --preview 'head -100 {}' | tr '\n' ' ')
+fi
+
 [[ -z $line ]] && exit 0
-[[ -f $line ]] && less $(echo $line) && exit 0
+[[ -f ${line%% } ]] && less $(echo $line) && exit 0
 all=
 for file in $(echo "$line"); do
 	all=$all" "$SPATH/$file
