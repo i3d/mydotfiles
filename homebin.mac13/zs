@@ -1,0 +1,4 @@
+#!/bin/zsh
+
+# edit file from z history
+rg --color=never --column --line-number -s -e "$1" $2 | fzf-tmux -1 -0 -s -m -print0 -d 50% |awk -F: '{print $1}'
