@@ -1,5 +1,9 @@
 source ~/.vimrc.bundles
 
+" for italic
+set t_ZH=[3m
+set t_ZR=[23m
+
 let g:asyncrun_open = 10
 let g:asyncrun_rootmarks = ['.git', '.svn', '.root', '.project', '.hg', '.projectile']
 
@@ -17,9 +21,9 @@ function! s:AsyncRustBuild() abort
   let l:aro = g:asyncrun_open
   let g:asyncrun_open = 0
   let l:target = expand('%')
-  call setqflist([]) | copen 15
+  call setqflist([]) | copen 30
   " don't use !, so we scrolling the output.
-  call asyncrun#run("", {"rows": 15}, 'rustc '.l:target)
+  call asyncrun#run("", {"rows": 30}, 'rustc '.l:target)
   let g:asyncrun_open = l:aro
 endfunction
 
@@ -29,9 +33,9 @@ function! s:AsyncRustRun() abort
   let g:asyncrun_open = 0
   let l:target = expand('%')
   let l:runtarget = expand('%:r')
-  call setqflist([]) | copen 15
+  call setqflist([]) | copen 30
   " don't use !, so we scrolling the output.
-  call asyncrun#run("", {"rows": 15}, 'rustc '.l:target.' && ./'.l:runtarget)
+  call asyncrun#run("", {"rows": 30}, 'rustc '.l:target.' && ./'.l:runtarget)
   let g:asyncrun_open = l:aro
 endfunction
 
@@ -204,6 +208,15 @@ com! -nargs=* AsyncRustRun :call <SID>AsyncRustRun()
 "set termguicolors
 "colorscheme topology
 "let g:airline_theme = 'minimalist'
+"
+"let g:tokyonight_style = "storm"
+"let g:tokyonight_style = "night"
+"let g:tokyonight_italic_comments = 1
+"let g:tokyonight_hide_inactive_statusline = 1
+"set background=dark
+"set termguicolors
+"colorscheme tokyonight
+"let g:airline_theme = 'elly'
 
 "set background=dark
 "set termguicolors
@@ -225,10 +238,15 @@ com! -nargs=* AsyncRustRun :call <SID>AsyncRustRun()
 "colorscheme neonhive
 "let g:airline_theme = 'minimalist'
 
-set background=dark
-set termguicolors
-colorscheme matrix
-let g:airline_theme = 'onedark'
+"set background=dark
+"set termguicolors
+"colorscheme matrix
+"let g:airline_theme = 'onedark'
+
+"set background=dark
+"set termguicolors
+"colorscheme duotone-darkforest
+"let g:airline_theme = 'forest-night'
 "
 "set background=dark
 "set termguicolors
@@ -240,14 +258,15 @@ let g:airline_theme = 'onedark'
 "colorscheme nordic-aurora
 "let g:airline_theme = 'nord'
 
-"set background=dark
-"set termguicolors
-"colorscheme serenade
-"let g:serenade_enable_italic = 1
-"let g:serenade_transparent_background = 1
-"let g:serenade_diagnostic_text_highlight = 1
-"let g:serenade_diagnostic_line_highlight = 0
-"let g:airline_theme = 'serenade'
+set background=dark
+set termguicolors
+colorscheme serenade
+let g:serenade_enable_italic = 1
+let g:serenade_disable_italic_comment = 0
+let g:serenade_transparent_background = 0
+let g:serenade_diagnostic_text_highlight = 1
+let g:serenade_diagnostic_line_highlight = 0
+let g:airline_theme = 'serenade'
 
 "set background=dark
 "set termguicolors
@@ -421,6 +440,23 @@ let g:ranger_map_keys = 0
 if executable('rg')
   set grepprg=rg\ -C1\ -S\ --column\ -H\ --vimgrep\ --color=never
 endif
+
+" Prettier configuration
+" https://github.com/prettier/vim-prettier
+let g:prettier#autoformat = 1
+let g:prettier#autoformat_require_pragma = 0
+" may try this if slow?
+let g:prettier#exec_cmd_async = 0
+" don't use <leader>p
+nno zcp <Plug>(Prettier)
+" now maps to it's real usage.
+nno <silent> <leader>cp :Prettier<cr>
+
+" ================== prettier on every keystroke =========
+" ============ Not doing it now. =========================
+" when running at every change you may want to disable quickfix
+" let g:prettier#quickfix_enabled = 0
+" autocmd TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 " ================ themes ======================
 "
 " ================ key maps ======================
@@ -506,6 +542,7 @@ nno <silent> <localleader>pR :so $MYVIMRC<cr>
 nno <silent> <localleader>pS :SSave<cr>
 nno <silent> <localleader>pE :e ~/.vimrc<cr>
 nno <silent> <localleader>pB :e ~/.vimrc.bundles<cr>
+nno <silent> <localleader>pf :Prettier<cr>
 nno <silent> <localleader>Gb :!blaze build<cr>
 nno <silent> <localleader>GB :BlazeBuild<cr>
 nno <silent> <localleader>Gt :!blaze test<cr>
@@ -564,6 +601,9 @@ nno <localleader>tg :NERDTreeTabsToggle<cr>
 nno <localleader>vt :TabVifm<cr>
 nno <localleader>vs :VsplitVifm<cr>
 nno <localleader>vd :DiffVifm<cr>
+
+" au BufWrite *.rs :RustFmt
+let g:rustfmt_autosave = 1
 
 " ==================== space macs simulation layer ========
 " ==================== space macs simulation layer ========
@@ -769,6 +809,7 @@ let g:which_key_map.p = {
       \ 'e' : [':e ~/.vimrc'                          	    , 'open init' ],
       \ 'b' : [':e ~/.vimrc.bundles'                        , 'open bundles' ],
       \ 'h' : ['Startify'                                   , 'home' ],
+      \ 'f' : [':Prettier'                                  , 'Pretties' ],
       \ }
 " s is for search
 let g:which_key_map.s = {
@@ -939,4 +980,17 @@ set wb  "writebackup"
 filetype plugin indent on
 set nu rnu
 set nospell
+set guifont=FiraCode\ Nerd\ Font\ Mono:h24
+
+"" neovide configs"
+set mouse=nicr
+set mouse=a
+let g:neovide_transparency=0.95
+let g:neovide_cursor_antialiasing=v:true
+" also sonicboom, wireframe 
+let g:neovide_cursor_vfx_mode="torpedo"
+set guioptions-=m "remove menu bar"
+set guioptions-=T "remove toolbar"
+set guioptions-=r "remove right-hand scroll bar"
+set guioptions-=L "remove left-hand scroll bar"
 " ================ settings ======================
