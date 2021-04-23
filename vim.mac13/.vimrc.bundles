@@ -154,7 +154,10 @@ let g:vista#renderer#icons = {
 
 Plug 'Rigellute/rigel'
 Plug 'pangloss/vim-javascript'
+
 Plug 'AlphaMycelium/pathfinder.vim'
+let g:python3_host_prog = '/Users/jimxu/homebrew/bin/python3'
+
 Plug 'rainglow/vim'
 Plug 'nightsense/vimspectr'
 Plug 'nightsense/snow'
