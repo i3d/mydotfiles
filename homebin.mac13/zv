@@ -6,15 +6,16 @@ if [[ $SPATH =~ '/' && ! -f $SPATH ]]; then
 	# it is a dir, not a file, so we just give everything from that dir.
 	line=$(fd -H -s -t f . $SPATH | fzf-tmux -d 30% -1 -0 -s -m --preview 'head -100 {}' | tr '\n' ' ')
 else 
-	line=$(fd -H -s -t f $SPATH . | fzf-tmux -d 30% -1 -0 -s -m --preview 'head -100 {}' | tr '\n' ' ')
+	line=$(fd -H -s -t f $SPATH . | fzf-tmux -d 30% -1 -0 -s -m  --preview 'head -100 {}' | tr '\n' ' ')
 fi
 
-[[ -z $line ]] && $HOME/bin/zs "$@" && exit 0
-[[ -f ${line%% } ]] && less $(echo $line) && exit 0
+# don't find targets on local, then try search history.
+[[ -z $line ]] && $HOME/bin/ze "$@" && exit 0
+[[ -f ${line%% } ]] && v $(echo $line) && exit 0
 
 all=
 for file in $(echo "$line"); do
 	all=$all" "$SPATH/$file
 done
-less $(echo "$all")
+v $(echo "$all")
 exit 0
