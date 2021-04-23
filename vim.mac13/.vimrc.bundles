@@ -248,6 +248,9 @@ Plug 'hoob3rt/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'ryanoasis/vim-devicons'
 
+" 4/23/2021 (AirTag day)
+Plug 'numtostr/FTerm.nvim'
+
 "
 call plug#end()
 " Automatically install missing plugins on startup
@@ -261,7 +264,8 @@ autocmd VimEnter *
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
+  \ 'ctrl-v': 'vsplit',
+  \ 'return': 'vsplit',}
 
 " Enable per-command history.
 " CTRL-N and CTRL-P will be automatically bound to next-history and
@@ -364,5 +368,4 @@ let g:lualine = {
     \}
 
 lua require("lualine").setup()
-
 luafile ~/.vim/init.lua

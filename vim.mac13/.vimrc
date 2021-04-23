@@ -589,6 +589,7 @@ nno <silent> <localleader>te :NERDTreeFind<cr>
 nno <silent> <localleader>tt :NERDTreeToggle<cr>
 nno <silent> <localleader>tv :FloatermToggle<cr>
 nno <silent> <localleader>th :FloatermHide<cr>
+nno <silent> <localleader>t. :lua require('FTerm').toggle()<cr>
 "au VimEnter * nno <silent> gd :LspDefinition<CR>
 "au VimEnter * nno <silent> gD :LspReferences<CR>
 "au VimEnter * nno <silent> gp :LspPeekDefinition<CR>
