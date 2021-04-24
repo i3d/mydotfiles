@@ -1,8 +1,7 @@
 #!/bin/zsh
 
 # edit file from z history
-files=$(fasd -f | awk '{print $2}' | fzf-tmux -1 -0 -s -m --preview 'head -100 {}' | tr '\n' ' ')
+files=$(fasd -f -r -l | fzf-tmux -1 -0 +s --tac -m --preview 'bat --color=always --paging=never -p {}' --keep-right --ansi --info=inline --preview-window=up,30%,nofollow | tr '\n' ' ')
 
-# if we can't find it, try the search version.
-[[ -z $files ]] && $HOME/bin/zse "$@" && exit 0
+[[ -z $files ]] && $HOME/bin/zse "$@" exit 0
 v $(echo $files)

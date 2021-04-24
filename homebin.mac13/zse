@@ -1,7 +1,9 @@
 #!/bin/zsh
 
 # edit file from z history
-out=$(rg --color=never --column --line-number -s -e "$1" $2 | fzf-tmux -1 -0 -s +m -d 50%)
+#out=$(rg --color=never --column --line-number -s -e "$1" $2 | fzf-tmux -1 -0 -s +m --preview 'bat --color=always --paging=never -p {}' --keep-right --ansi --info=inline --preview-window=up,80%,nofollow)
+out=$(rg --files-with-matches --no-messages --line-number --column -s -e "$1" $2| fzf -1 -0 +s -m --keep-right --ansi --info=inline --preview-window=up,50%,nofollow --preview "bat --color=always --paging=never -p {} | rg --colors 'match:bg:red' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}")
+
 [[ -z $out ]] && exit 0
 file=$(echo $out|head -1 | awk -F: '{print $1}')
 line=$(echo $out|head -1 | awk -F: '{print $2}')

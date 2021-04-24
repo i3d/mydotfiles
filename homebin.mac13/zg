@@ -1,9 +1,19 @@
-#!/bin/zsh
+#!/bin/bash
 
-SPATH=$2
-[[ -z $2  ]] && SPATH=$(pwd)
-line=$(rg -S -H --hidden "$1" $SPATH | fzf-tmux -d 20% -- --query="$1" --select-1 --exit-0)
-[[ -z $line  ]] && exit 0
-file=${line%%:*}
-nv $file
-exit 0
+real=$(realpath "$PWD")
+[[ ! $real =~ /google3 ]] && echo "must under google3"
+
+out=$(p4 whatsout | fzf-tmux -1 -0 -s +m --cycle --preview 'p4 diff {} | bat --color=always --paging=never -p' --keep-right --ansi --info=inline --preview-window=up,80%,nofollow)
+[[ -z $out ]] && exit 0
+
+echo "Revert will do the following:"
+g4 revert -n "$out"
+
+while true; do
+    read -p "Are you sure?[Yy|Nn] " yn
+    case $yn in
+        [Yy]* ) g4 revert "$out"; break;;
+        [Nn]* ) exit;;
+        * ) exit;;
+    esac
+done

@@ -1,0 +1,4 @@
+#!/bin/zsh
+
+#afplay "$(fd -i -t f --regex ".*\.(mp3|flac|m4a)" /Volumes/MacBackUp/Musics | fzf +m -1 -0 --cycle)"
+mpv "$(fd -i -t f --regex ".*\.(mp3|flac|m4a)" /Volumes/MacBackUp/Musics | fzf +m -1 -0 --cycle)"

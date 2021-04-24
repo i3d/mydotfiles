@@ -1,4 +1,4 @@
 #!/bin/zsh
 
 # edit file from z history
-rg --color=never --column --line-number -s -e "$1" $2 | fzf-tmux -1 -0 -s -m -d 50% |awk -F: '{print $1":"$2}'
+rg --files-with-matches --no-messages --line-number --column -s -e "$1" $2| fzf -1 -0 +s -m --keep-right --ansi --info=inline --preview-window=up,50%,nofollow --preview "bat --color=always --paging=never -p {} | rg --colors 'match:bg:red' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}"|awk -F: '{print $1":"$2}'

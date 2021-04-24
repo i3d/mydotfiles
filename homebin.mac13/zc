@@ -3,18 +3,17 @@
 SPATH=$1
 [[ -z $1 ]] && SPATH=$(pwd)
 if [[ $SPATH =~ '/' && ! -f $SPATH ]]; then
-	# it is a dir, not a file, so we just give everything from that dir.
-	line=$(fd -H -s -t f . $SPATH | fzf-tmux -d 30% -1 -0 -s -m --preview 'head -100 {}' | tr '\n' ' ')
-else 
-	line=$(fd -H -s -t f $SPATH . | fzf-tmux -d 30% -1 -0 -s -m --preview 'head -100 {}' | tr '\n' ' ')
+    # it is a dir, not a file, so we just give everything from that dir.
+    line=$(fd -H -s -t f . $SPATH | fzf-tmux -1 -0 -s -m --preview 'bat --color=always --paging=never -p {}' --keep-right --ansi --info=inline --preview-window=up,30%,nofollow | tr '\n' ' ')
+else
+    line=$(fd -H -s -t f $SPATH . | fzf-tmux -1 -0 -s -m --preview 'bat --color=always --paging=never -p {}' --keep-right --ansi --info=inline --preview-window=up,30%,nofollow | tr '\n' ' ')
 fi
 
 [[ -z $line ]] && $HOME/bin/zs "$@" && exit 0
 [[ -f ${line%% } ]] && less $(echo $line) && exit 0
-
 all=
 for file in $(echo "$line"); do
-	all=$all" "$SPATH/$file
+    all=$all" "$SPATH/$file
 done
 less $(echo "$all")
 exit 0
