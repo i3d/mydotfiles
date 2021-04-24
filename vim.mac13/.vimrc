@@ -45,6 +45,22 @@ function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
  exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
 endfunction
 
+function! NextHunk(size) abort
+  if a:size > 1
+    execute "normal " . a:size . "\<plug>(signify-next-hunk)"
+  else
+    execute "normal \<plug>(signify-next-hunk)"
+  endif
+endfunction
+
+function! PrevHunk(size) abort
+  if a:size > 1
+    execute "normal " . a:size . "\<plug>(signify-prev-hunk)"
+  else
+    execute "normal \<plug>(signify-prev-hunk)"
+  endif
+endfunction
+
 """ <space>k to bring up help
 com! -nargs=+ Moma execute 'silent !moma <args>'
 com! -nargs=+ Who execute 'silent !who <args>'
@@ -480,15 +496,21 @@ nno <silent> ga :G4Add<cr>
 nno <silent> gl :Blame<cr>
 nno <silent> gf :GFiles<cr>
 nno <silent> cp :copen<cr>
+
+" !!! important !!! don't map to gj/gk, unfortunately they aren't reliable.
+nno <silent> gj :call NextHunk(1)<cr>
+nno <silent> gk :call PrevHunk(1)<cr>
+nno <silent> gl :call NextHunk(9999)<cr>
+nno <silent> gh :call PrevHunk(9999)<cr>
+" !!! important !!! don't map to gj/gk, unfortunately they aren't reliable.
+"
+"nno <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]'
 nno ; :
 "ino jk <esc>
 ino vv <esc>
 nno <silent> <tab> <c-w>w
 cno w!! w !sudo tee % >/dev/null
 nno <F12> "%phr_I#ifndef __<Esc>gUwyypldwidefine <Esc>yypldwiendif //<Esc>O<Esc>
-nno <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]'
-nno <silent> <localleader>mp :let job = jobstart("afplay " . expand("<cWORD>"))<cr>
-nno <silent> <localleader>ms :call jobstop(job)<cr>
 ",ig"
 nno <silent> <localleader>sf :SignifyToggleHighlight<cr>
 ino <silent> <localleader>w <esc>:w!<cr>
