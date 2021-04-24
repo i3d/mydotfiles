@@ -36,10 +36,10 @@ source $HOME/src/awesome-terminal-fonts/fonts/*.sh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-# alias zshconfig="mate ~/.zshrc"
+# alias zshrc="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 # Example aliases
-alias zshconfig="v -O ~/.zshrc ~/.zshrc.pre-oh-my-zsh"
+alias zshrc="v -O ~/.zshrc ~/.zshrc.pre-oh-my-zsh"
 alias ohmyzsh="v ~/.oh-my-zsh"
 
 # Set to this to use case-sensitive completion
@@ -244,7 +244,7 @@ export ONI_NEOVIM_PATH=/Users/jimxu/homebrew/bin/nvim
 
 # edit the vimrc.
 alias vv='v -O ~/.vimrc ~/.vimrc.bundles'
-alias vz='zshconfig'
+alias vz='zshrc'
 alias vcheat='v $HOME/bin/cheat'
 # make sure any override of vim alias to homebrew's version (the version I use)
 #alias vim='~/bin/vim -u ~/.vimrc -X -p'
@@ -396,8 +396,8 @@ function vcp() {
 #fish
 #
 # bat has ln and syntax highlight.
-alias cat=bat
-alias less=bat
+alias cat='bat -pp'
+alias less='bat -p'
 # always unalias vi
 unalias vi 2>/dev/null
 unalias v 2>/dev/null
@@ -463,6 +463,26 @@ alias python=$HOME/homebrew/bin/python3
 # neovim as man pager.
 export MANPAGER="/bin/sh -c \"col -b | v -c 'set ft=man ts=8 nomod nolist noma nu' -\""
 
+#### FZF thems ######
+# serenade
+export FZF_DEFAULT_OPTS="--color=bg+:#3B4346,bg:#2A2F33,gutter:#2A2F33,spinner:#c1bf89,hl:#C76767,fg:#bfddb2,header:#CC9361,info:#87c095,pointer:#82abbc,marker:#c1bf89,fg+:#D49864,prompt:#e5a46b,hl+:#87c095 --header-lines=0 --ansi --keep-right --info=inline"
+
+# molokai
+#export FZF_DEFAULT_OPTS='--color=bg+:#293739,bg:#1B1D1E,border:#808080,spinner:#E6DB74,hl:#7E8E91,fg:#F8F8F2,header:#7E8E91,info:#A6E22E,pointer:#A6E22E,marker:#F92672,fg+:#F8F8F2,prompt:#F92672,hl+:#F92672'
+#
+# gruvbox
+#export FZF_DEFAULT_OPTS="--color=bg+:#1B1D1E,bg:#1B1D1E,spinner:#fb4934,hl:#928374,fg:#ebdbb2,header:#928374,info:#8ec07c,pointer:#fb4934,marker:#fb4934,fg+:#ebdbb2,prompt:#fb4934,hl+:#fb4934"
+
+#### FZF thems ######
+#### FZF customized key bindings ####
+bindkey -v
+bindkey -M viins '^x' fzf-history-widget # r for reverse history search
+bindkey -M viins '^f' fzf-file-widget # f for file
+bindkey -M viins '^j' fzf-cd-widget # j for jump
+bindkey -M viins '^t' transpose-chars # t for transpose
+bindkey -M viins '\ec' capitalize-word # c for capitalizae
+#### FZF customized key bindings ####
+#
 #eval $( gdircolors -b $HOME/.LS_COLORS )
 # These two stay the last since we need our own path to be at the top.
 export PATH=/Users/jimxu/bin:/Users/jimxu/go_code/bin:$PATH:/Users/jimxu/go/bin
