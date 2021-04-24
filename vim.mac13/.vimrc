@@ -487,6 +487,8 @@ nno <silent> <tab> <c-w>w
 cno w!! w !sudo tee % >/dev/null
 nno <F12> "%phr_I#ifndef __<Esc>gUwyypldwidefine <Esc>yypldwiendif //<Esc>O<Esc>
 nno <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]'
+nno <silent> <localleader>mp :let job = jobstart("afplay " . expand("<cWORD>"))<cr>
+nno <silent> <localleader>ms :call jobstop(job)<cr>
 ",ig"
 nno <silent> <localleader>sf :SignifyToggleHighlight<cr>
 ino <silent> <localleader>w <esc>:w!<cr>
@@ -497,8 +499,6 @@ nno <silent> <localleader>qs :wqa!<cr>
 nno <silent> <localleader>iv :e ~/.vimrc<CR>
 nno <silent> <localleader>iR :so ~/.vimrc<CR>"
 nno <silent> <localleader>gw :GoogleOutlineWindow<CR>
-nno <silent> <localleader>gj <plug>(signify-next-hunk)
-nno <silent> <localleader>gk <plug>(signify-prev-hunk)
 nno <silent> <localleader>oh :O h<cr>
 nno <silent> <localleader>ot :O t<cr>
 nno <silent> <localleader>ob :O b<cr>
@@ -857,6 +857,8 @@ let g:which_key_map.t = {
       \ 't' : [':FloatermToggle'                                , 'toggle'],
       \ 'y' : [':FloatermNew ytop'                              , 'ytop'],
       \ 's' : [':FloatermNew ncdu'                              , 'ncdu'],
+      \ 'm' : [':FloatermNew --wintype=popup playm'             , 'play music'],
+      \ 'v' : [':FloatermNew playv'                             , 'play video'],
       \ }
 " windows
 let g:which_key_map.w = {

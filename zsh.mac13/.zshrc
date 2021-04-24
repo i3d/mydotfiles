@@ -39,9 +39,8 @@ source $HOME/src/awesome-terminal-fonts/fonts/*.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 # Example aliases
-alias zshconfig="vi ~/.zshrc"
-alias ohmyzsh="vi ~/.oh-my-zsh"
-alias pomz="vi ~/.zshrc.pre-oh-my-zsh"
+alias zshconfig="v -O ~/.zshrc ~/.zshrc.pre-oh-my-zsh"
+alias ohmyzsh="v ~/.oh-my-zsh"
 
 # Set to this to use case-sensitive completion
 CASE_SENSITIVE="true"
@@ -113,12 +112,13 @@ function renew_bagpipe_ifneeded() {
 }
 
 function pa() {
-  renew_gcert_ifneeded && renew_bagpipe_ifneeded
+  renew_gcert_ifneeded
   # open up our first connection to our remote host so that any
   # disconnection will be reconnected. 'then sux wouldn't bother
   # manual reconnect anymore'
   echo "ssh to ujimux.c.googler.com ..."
   echo
+  renew_bagpipe_ifneeded
   # idempotent if already connected.
   # help any remote editing or opened remote sessions, e.g. sux, remote tmux, vscode, oni, etc.
   #autossh -f -M20000 -t -A -X ujimux.c.googlers.com
@@ -140,57 +140,57 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 #source /Users/jimxu/homebrew/share/antigen/antigen.zsh
 source /Users/jimxu/.zprezto/init.zsh
 
-### Added by Zplugin's installer
-source '/Users/jimxu/.zplugin/bin/zplugin.zsh'
-autoload -Uz _zplugin
-(( ${+_comps} )) && _comps[zplugin]=_zplugin
-### End of Zplugin's installer chunk
+### Added by zinit's installer
+source ~/.zinit/bin/zinit.zsh
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+### End of zinit's installer chunk
 
 ###
-zplugin load zdharma/history-search-multi-word
+zinit load zdharma/history-search-multi-word
 
-zplugin ice compile"*.lzui" from"notabug"
-zplugin load zdharma/zui
+zinit ice compile"*.lzui" from"notabug"
+zinit load zdharma/zui
 
 # One other binary release, it needs renaming from `docker-compose-Linux-x86_64`.
 # This is done by ice-mod `mv'{from} -> {to}'. There are multiple packages per
 # single version, for OS X, Linux and Windows – so ice-mod `bpick' is used to
-# select Linux package – in this case this is not needed, Zplugin will grep
+# select Linux package – in this case this is not needed, zinit will grep
 # operating system name and architecture automatically when there's no `bpick'
 
-zplugin ice from"gh-r" as"program" mv"docker* -> docker-compose" bpick"*linux*"; zplugin load docker/compose
+zinit ice from"gh-r" as"program" mv"docker* -> docker-compose" bpick"*linux*"; zinit load docker/compose
 
 # Scripts that are built at install (there's single default make target, "install",
 # and it constructs scripts by `cat'ing a few files). The make"" ice could also be:
 # `make"install PREFIX=$ZPFX"`, if "install" wouldn't be the only, default target
 
-zplugin ice as"program" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
-zplugin light tj/git-extras
+zinit ice as"program" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
+zinit light tj/git-extras
 
-# Two regular plugins loaded in default way (no `zplugin ice ...` modifiers)
+# Two regular plugins loaded in default way (no `zinit ice ...` modifiers)
 
-zplugin light zsh-users/zsh-autosuggestions
-zplugin light zdharma/fast-syntax-highlighting
-zplugin light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-autosuggestions
+zinit light zdharma/fast-syntax-highlighting
+zinit light zsh-users/zsh-syntax-highlighting
 
-zplugin ice atclone"gdircolors -b LS_COLORS > c.zsh" atpull'%atclone' pick"c.zsh" nocompile'!'
-zplugin light trapd00r/LS_COLORS
+zinit ice atclone"gdircolors -b LS_COLORS > c.zsh" atpull'%atclone' pick"c.zsh" nocompile'!'
+zinit light trapd00r/LS_COLORS
 
 # This one to be ran just once, in interactive session
 
-#zplugin ice as"program" make'!' atclone'./direnv hook zsh > zhook.zsh' atpull'%atclone' src"zhook.zsh"
-#zplugin light direnv/direnv
+#zinit ice as"program" make'!' atclone'./direnv hook zsh > zhook.zsh' atpull'%atclone' src"zhook.zsh"
+#zinit light direnv/direnv
 #
 
 setopt promptsubst
 
 
-zplugin creinstall %HOME/my_completions  # Handle completions without loading any plugin, see "clist" command
+zinit creinstall %HOME/my_completions  # Handle completions without loading any plugin, see "clist" command
 # function issue. some highlight permission denied issue.
-#zplugin light trapd00r/zsh-syntax-highlighting-filetypes
+#zinit light trapd00r/zsh-syntax-highlighting-filetypes
 zplg light unixorn/tumult.plugin.zsh
 
-# After zplugin, override the prompt
+# After zinit, override the prompt
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -242,8 +242,10 @@ source /Library/GoogleCorpSupport/srcfs/shell_completion/enable_completion.sh
 # for oni finding neovim
 export ONI_NEOVIM_PATH=/Users/jimxu/homebrew/bin/nvim
 
-# space vim, not using neovim due to deoplete-go.
-alias vv='nv -u ~/.SpaceVim/vimrc'
+# edit the vimrc.
+alias vv='v -O ~/.vimrc ~/.vimrc.bundles'
+alias vz='zshconfig'
+alias vcheat='v $HOME/bin/cheat'
 # make sure any override of vim alias to homebrew's version (the version I use)
 #alias vim='~/bin/vim -u ~/.vimrc -X -p'
 alias vim='nv -u ~/.vimrc -X -p'
@@ -259,57 +261,43 @@ alias v='vim'
 #export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/Users/jimxu/homebrew/share/zsh-syntax-highlighting/highlighters
 #
 # currently using the following zsh prompt themes. either generate one from using vim promptline plguin,
-# or use zplugin powerlevel9k, both works, or fallback to a fixed liquidprompt.
+# or use zinit powerlevel9k, both works, or fallback to a fixed liquidprompt.
 # having git_prompt_status issue
 #source ~/.liquidprompt/liquidprompt
 #source ~/.promptline.sh
 # ==== load OMZ theme ====
 # Load OMZ Git library
-zplugin snippet OMZ::lib/git.zsh
+zinit snippet OMZ::lib/git.zsh
 
 # Load Git plugin from OMZ
-zplugin snippet OMZ::plugins/git/git.plugin.zsh
-zplugin cdclear -q # <- forget completions provided up to this moment
+zinit snippet OMZ::plugins/git/git.plugin.zsh
+zinit cdclear -q # <- forget completions provided up to this moment
 #
-#zplugin snippet OMZ::themes/cloud.zsh-theme
-#zplugin snippet OMZ::themes/cypher.zsh-theme
-#zplugin snippet OMZ::themes/kolo.zsh-theme
-#zplugin snippet OMZ::themes/lambda.zsh-theme
-#zplugin snippet OMZ::themes/lukerandall.zsh-theme
-#zplugin snippet OMZ::themes/mikeh.zsh-theme
-#zplugin snippet OMZ::themes/miloshadzic.zsh-theme
-#zplugin snippet OMZ::themes/muse.zsh-theme
-#zplugin snippet OMZ::themes/nicoulaj.zsh-theme
-#zplugin snippet OMZ::themes/norm.zsh-theme
-#zplugin snippet OMZ::themes/obraun.zsh-theme
-#zplugin snippet OMZ::themes/afowler.zsh-theme
 # having issues.
-#zplugin light NicoSantangelo/Alpharized
+#zinit light NicoSantangelo/Alpharized
 #
 # ==== load 3rd_party theme ====
 #
 # Load theme from github directly.
 # Load the pure theme, with zsh-async library that's bundled with it
 # use our own theme
-#zplugin ice pick"async.zsh" src"pure.zsh"; zplugin light sindresorhus/pure
 #
-#zplugin light tannhuber/oh-my-zsh-budspencer
+#zinit light tannhuber/oh-my-zsh-budspencer
 #
 # ============ was enabled before =======================
-#zplugin light denysdovhan/spaceship-prompt
+#zinit light denysdovhan/spaceship-prompt
 #SPACESHIP_BATTERY_SHOW=false
 #
-#zplugin light halfo/lambda-mod-zsh-theme
 #
 # nice but ugly in vim term.
-#zplugin light bhilburn/powerlevel9k
+#zinit light bhilburn/powerlevel9k
 #
 # ========== Current prompt ===================
 # Disable for starship
-# zplugin light romkatv/powerlevel10k
+# zinit light romkatv/powerlevel10k
 #
 # prompt_git:15: unknown group
-#zplugin light caiogondim/bullet-train.zsh
+#zinit light caiogondim/bullet-train.zsh
 #BULLETTRAIN_STATUS_EXIT_SHOW=true
 
 fpath+=~/.zfunc
@@ -449,7 +437,22 @@ killwal() {
 POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 # Starship prompt starts here.
-eval "$(starship init zsh)"
+# eval "$(starship init zsh)"
+# zinit light halfo/lambda-mod-zsh-theme
+#zinit snippet OMZ::themes/cloud.zsh-theme
+#zinit snippet OMZ::themes/cypher.zsh-theme
+#zinit snippet OMZ::themes/kolo.zsh-theme
+#zinit snippet OMZ::themes/lambda.zsh-theme
+#zinit snippet OMZ::themes/lukerandall.zsh-theme
+#zinit snippet OMZ::themes/mikeh.zsh-theme
+#zinit snippet OMZ::themes/miloshadzic.zsh-theme
+#zinit snippet OMZ::themes/muse.zsh-theme
+#zinit snippet OMZ::themes/nicoulaj.zsh-theme
+#zinit snippet OMZ::themes/norm.zsh-theme
+#zinit snippet OMZ::themes/obraun.zsh-theme
+#zinit snippet OMZ::themes/afowler.zsh-theme
+zinit ice pick"async.zsh" src"pure.zsh"; zinit light sindresorhus/pure
+
 export PATH=$PATH:$HOME/.config/nvcode/utils/bin
 # Setup python environment. It should be on >= v3
 if command -v pyenv 1>/dev/null 2>&1; then
