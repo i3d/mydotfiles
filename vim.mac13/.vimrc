@@ -1,4 +1,4 @@
-source ~/.vimrc.bundles
+source ~/.vimrc.plug
 
 " for italic
 set t_ZH=[3m
@@ -879,8 +879,9 @@ let g:which_key_map.t = {
       \ 't' : [':FloatermToggle'                                , 'toggle'],
       \ 'y' : [':FloatermNew ytop'                              , 'ytop'],
       \ 's' : [':FloatermNew ncdu'                              , 'ncdu'],
-      \ 'm' : [':FloatermNew --wintype=popup playm'             , 'play music'],
+      \ 'm' : [':FloatermNew playm'                             , 'play music'],
       \ 'v' : [':FloatermNew playv'                             , 'play video'],
+      \ 'c' : [':FloatermNew termv'                             , 'play tv'],
       \ }
 " windows
 let g:which_key_map.w = {
