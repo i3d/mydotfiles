@@ -190,6 +190,10 @@ zinit creinstall %HOME/my_completions  # Handle completions without loading any 
 #zinit light trapd00r/zsh-syntax-highlighting-filetypes
 zplg light unixorn/tumult.plugin.zsh
 
+# 4/24/2021 fzf utilities
+zinit load wfxr/forgit
+zinit light kazhala/dotbare
+
 # After zinit, override the prompt
 
 # Set name of the theme to load.
@@ -482,6 +486,106 @@ bindkey -M viins '^j' fzf-cd-widget # j for jump
 bindkey -M viins '^t' transpose-chars # t for transpose
 bindkey -M viins '\ec' capitalize-word # c for capitalizae
 #### FZF customized key bindings ####
+#
+# FZF functions #########################
+# https://github.com/junegunn/fzf/wiki/examples#changing-directory
+zx() {
+  # fasd history jump first, if not, fd.
+  [ $# -gt 0 ] && j "$*" && return
+  local dir
+  dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m --keep-right)"
+  [[ ! -z ${dir} ]] && cd "${dir}" && return
+
+  dir=$(fd -uu -L -i -t d | \
+    fzf -1 -0 +m --cycle --keep-right) && cd "$dir" || return 1
+}
+# command history
+zh() {
+  print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed -E 's/ *[0-9]*\*? *//' | sed -E 's/\\/\\\\/g')
+}
+# zkill - kill processes - list only the ones you can kill. Modified the earlier script.
+zkill() {
+    local pid 
+    if [ "$UID" != "0" ]; then
+        pid=$(ps -f -u $UID | sed 1d | fzf -m --keep-right --cycle -0 -1| awk '{print $2}')
+    else
+        pid=$(ps -ef | sed 1d | fzf -m --keep-right --cycle -0 -1| awk '{print $2}')
+    fi  
+
+    if [ "x$pid" != "x" ]
+    then
+        echo $pid | xargs kill -${1:-9}
+    fi  
+}
+alias glNoGraph='git log --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr% C(auto)%an" "$@"'
+_gitLogLineToHash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1"
+_viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always % | delta -n -s'"
+
+# zgitco - checkout git commit with previews
+zgitco() {
+  local commit
+  commit=$( glNoGraph |
+    fzf --preview-window=up,60%,nofollow --info=inline \
+        --no-sort --reverse --tiebreak=index --no-multi \
+        --ansi --preview="$_viewGitLogLine" ) &&
+  git checkout $(echo "$commit" | sed "s/ .*//")
+}
+# zgitcb - git commit browser with previews
+zgitcb() {
+    glNoGraph |
+        fzf --preview-window=up,60%,nofollow --info=inline \
+            --no-sort --reverse --tiebreak=index --no-multi \
+            --ansi --preview="$_viewGitLogLine" \
+                --header "enter to view, alt-y to copy hash" \
+                --bind "enter:execute:$_viewGitLogLine   | less -R" \
+                --bind "alt-y:execute:$_gitLogLineToHash | xclip"
+}
+# zgitcl - git commit browser
+zgitlog() {
+  git log --graph --color=always \
+      --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
+  fzf --preview-window=up,60%,nofollow --info=inline \
+      --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
+      --bind "ctrl-m:execute:
+                (grep -o '[a-f0-9]\{7\}' | head -1 |
+                xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
+                {}
+FZF-EOF"
+}
+# zgitstash - easier way to deal with stashes
+# type zgitstash to get a list of your stashes
+# enter shows you the contents of the stash
+# ctrl-d shows a diff of the stash against your current HEAD
+# ctrl-b checks the stash out as a branch, for easier merging
+zgitstash() {
+  local out q k sha
+  while out=$(
+    git stash list --pretty="%C(yellow)%h %>(14)%Cgreen%cr %C(blue)%gs" |
+    fzf --ansi --no-sort --query="$q" --print-query \
+        --expect=ctrl-d,ctrl-b);
+  do
+    mapfile -t out <<< "$out"
+    q="${out[0]}"
+    k="${out[1]}"
+    sha="${out[-1]}"
+    sha="${sha%% *}"
+    [[ -z "$sha" ]] && continue
+    if [[ "$k" == 'ctrl-d' ]]; then
+      git diff $sha
+    elif [[ "$k" == 'ctrl-b' ]]; then
+      git stash branch "stash-$sha" $sha
+      break;
+    else
+      git stash show -p $sha
+    fi
+  done
+}
+zman() {
+    man -k . | fzf -q "$1" --prompt='man> '  \
+      | awk -F\( '{print $1}' | xargs -r man
+}
+source $HOME/src/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
+# FZF functions #########################
 #
 #eval $( gdircolors -b $HOME/.LS_COLORS )
 # These two stay the last since we need our own path to be at the top.
