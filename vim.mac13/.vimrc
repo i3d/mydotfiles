@@ -274,15 +274,31 @@ com! -nargs=* AsyncRustRun :call <SID>AsyncRustRun()
 "colorscheme nordic-aurora
 "let g:airline_theme = 'nord'
 
+"set background=dark
+"set termguicolors
+"colorscheme serenade
+"let g:serenade_enable_italic = 1
+"let g:serenade_disable_italic_comment = 0
+"let g:serenade_transparent_background = 0
+"let g:serenade_diagnostic_text_highlight = 1
+"let g:serenade_diagnostic_line_highlight = 0
+"let g:airline_theme = 'serenade'
+
 set background=dark
 set termguicolors
-colorscheme serenade
-let g:serenade_enable_italic = 1
-let g:serenade_disable_italic_comment = 0
-let g:serenade_transparent_background = 0
-let g:serenade_diagnostic_text_highlight = 1
-let g:serenade_diagnostic_line_highlight = 0
-let g:airline_theme = 'serenade'
+"let g:material_style = 'palenight'
+"let g:material_style = 'darker'
+"let g:material_style = 'oceanic'
+let g:material_style = 'deep ocean'
+let g:material_italic_comments = 1
+let g:material_italic_keywords = 1
+let g:material_italic_functions = 1
+let g:material_italic_variables = 1
+let g:material_contrast = 1
+let g:material_borders = 0
+let g:material_disable_background = 0
+colorscheme material
+let g:airline_theme = 'hybrid'
 
 "set background=dark
 "set termguicolors
@@ -871,20 +887,18 @@ let g:which_key_map.s = {
 " t is for terminal
 let g:which_key_map.t = {
       \ 'name' : '+terminal' ,
-      \ ';' : [':FloatermNew --wintype=popup --height=6'        , 'terminal'],
+      \ ';' : [':FloatermNew --wintype=popup --height=30'       , 'terminal'],
       \ 'f' : [':FloatermNew fzf'                               , 'fzf'],
       \ 'g' : [':FloatermNew lazygit'                           , 'git'],
-      \ 'd' : [':FloatermNew lazydocker'                        , 'docker'],
-      \ 'n' : [':FloatermNew node'                              , 'node'],
-      \ 'N' : [':FloatermNew nnn'                               , 'nnn'],
       \ 'p' : [':FloatermNew python'                            , 'python'],
       \ 'r' : [':FloatermNew ranger'                            , 'ranger'],
       \ 't' : [':FloatermToggle'                                , 'toggle'],
-      \ 'y' : [':FloatermNew ytop'                              , 'ytop'],
-      \ 's' : [':FloatermNew ncdu'                              , 'ncdu'],
-      \ 'm' : [':FloatermNew playm'                             , 'play music'],
-      \ 'v' : [':FloatermNew playv'                             , 'play video'],
-      \ 'c' : [':FloatermNew termv'                             , 'play tv'],
+      \ 'y' : [':FloatermNew gotop -sbpa'                       , 'gotop'],
+      \ 'm' : [':FloatermNew --width=50 --height=8 playm'      , 'play music'],
+      \ 'v' : [':FloatermNew --width=50 --height=8 playv'      , 'play video'],
+      \ 'c' : [':FloatermNew --width=50 --height=8 termv'      , 'play tv'],
+      \ 'T' : [':FloatermNew --width=70 --height=15 ttyper'     , 'Rust typer'],
+      \ 'Z' : [':FloatermNew --width=70 --height=15 typer'      , 'Go typer'],
       \ }
 " windows
 let g:which_key_map.w = {
