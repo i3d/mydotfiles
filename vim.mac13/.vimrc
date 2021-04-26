@@ -505,7 +505,7 @@ nno <silent> gh :call PrevHunk(9999)<cr>
 " !!! important !!! don't map to gj/gk, unfortunately they aren't reliable.
 "
 "nno <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]'
-nno ; :
+"nno ; :   == ; is used in line search.
 "ino jk <esc>
 ino vv <esc>
 nno <silent> <tab> <c-w>w
@@ -563,7 +563,7 @@ nno <silent> <localleader>pw :wqa!<cr>
 nno <silent> <localleader>pR :so $MYVIMRC<cr>
 nno <silent> <localleader>pS :SSave<cr>
 nno <silent> <localleader>pE :e ~/.vimrc<cr>
-nno <silent> <localleader>pB :e ~/.vimrc.bundles<cr>
+nno <silent> <localleader>pB :e ~/.vimrc.plug<cr>
 nno <silent> <localleader>pf :Prettier<cr>
 nno <silent> <localleader>Gb :!blaze build<cr>
 nno <silent> <localleader>GB :BlazeBuild<cr>
@@ -635,7 +635,8 @@ source $HOME/.config/nvim_back/plug-config/coc.vim
 " Create map to add keys to
 let g:which_key_map =  {}
 " Define a separator
-let g:which_key_sep = '➥'
+" let g:which_key_sep = '➥'
+let g:which_key_sep = '✑'
 set timeoutlen=100
 " Not a fan of floating windows for this
 let g:which_key_use_floating_win = 0
@@ -699,7 +700,8 @@ let g:which_key_map.b = {
       \ 'n' : ['bnext'                                      , 'next-buffer']     ,
       \ 'p' : ['bprevious'                                  , 'previous-buffer'] ,
       \ '?' : ['Buffers'                                    , 'fzf-buffer']      ,
-      \ 'b' : [ 'CocList marks'                             , 'all marks'],
+      \ 'b' : [ 'CocList buffers'                           , 'all buffers'],
+      \ 'm' : [ 'CocList marks'                             , 'all marks'],
       \ }
 " code
 let g:which_key_map.c = {
@@ -798,8 +800,9 @@ let g:which_key_map.l = {
 " open
 let g:which_key_map.o = {
       \ 'name' : '+open',
-      \ '1' : [':e ~/.vimrc'                                     , 'vimrc'],
-      \ '2' : [':e ~/.vimrc.bundles'                             , 'vimrc bundle'],
+      \ '1' : [':e ~/.vimrc'                                           , 'vimrc'],
+      \ '2' : [':e ~/.vimrc.plug'                                      , 'vimrc plug'],
+      \ '3' : [':e ~/.zshrc'                                           , 'zshrc'],
       \ 'i' : [':e ~/.config/nvim/init.vim'                            , 'open init'],
       \ 'k' : [':e ~/.config/nvim/keys/which-key.vim'                  , 'which keys'],
       \ 'p' : [':e ~/.config/nvim/vim-plug/plugins.vim'                , 'vim-plug'],
@@ -830,7 +833,7 @@ let g:which_key_map.p = {
       \ 'w' : [':w!'                                        , 'save!'],
       \ 'S' : [':SSave'                                     , 'save session'],
       \ 'e' : [':e ~/.vimrc'                          	    , 'open init' ],
-      \ 'b' : [':e ~/.vimrc.bundles'                        , 'open bundles' ],
+      \ 'b' : [':e ~/.vimrc.plug'                        , 'open plug' ],
       \ 'h' : ['Startify'                                   , 'home' ],
       \ 'f' : [':Prettier'                                  , 'Pretties' ],
       \ }
