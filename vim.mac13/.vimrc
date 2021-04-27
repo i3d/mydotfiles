@@ -666,6 +666,7 @@ autocmd! FileType which_key
 autocmd  FileType which_key set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
 " Single mappings
+let g:which_key_map['0'] = [ ':Restart'                   , 'Restart Nvim' ]
 let g:which_key_map['1'] = [ '<C-W>s'                     , '2 stacks' ]
 let g:which_key_map['2'] = [ '<C-W>v'                     , '2 columns' ]
 let g:which_key_map['/'] = [ ':CocList grep'              , 'coc grep' ]
