@@ -1,0 +1,6 @@
+#!/bin/zsh
+
+# this is different from the 
+# https://github.com/ChristianChiarulli/nvcode
+# setup. It uses the src build nvim.
+exec $HOME/bin/neovide -u $HOME/.vimrc -X -p "$@" 2>/dev/null 1>/dev/null &

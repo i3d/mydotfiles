@@ -1,0 +1,4 @@
+#!/bin/zsh
+
+# borderless vlc
+$HOME/homebrew/bin/vlc --no-video-deco --no-embedded-video "$@"
