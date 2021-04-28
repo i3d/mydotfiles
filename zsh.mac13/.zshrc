@@ -39,9 +39,6 @@ source $HOME/src/awesome-terminal-fonts/fonts/*.sh
 # alias zshrc="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 # Example aliases
-alias zshrc="v -O ~/.zshrc ~/.zshrc.pre-oh-my-zsh"
-alias ohmyzsh="v ~/.oh-my-zsh"
-
 # Set to this to use case-sensitive completion
 CASE_SENSITIVE="true"
 
@@ -247,14 +244,20 @@ source /Library/GoogleCorpSupport/srcfs/shell_completion/enable_completion.sh
 export ONI_NEOVIM_PATH=/Users/jimxu/homebrew/bin/nvim
 
 # edit the vimrc.
-alias vv='v -O ~/.vimrc ~/.vimrc.bundles'
+alias vim='nv -u ~/.vimrc -X -p'
+alias v='vim'
+alias zshrc="v -O ~/.zshrc ~/.zshrc.pre-oh-my-zsh"
+alias ohmyzsh="v ~/.oh-my-zsh"
+alias vv='v -O ~/.vimrc ~/.vimrc.plug'
+alias v1='v -O ~/.vimrc'
+alias v2='v -O ~/.vimrc.plug'
 alias vz='zshrc'
+alias z1='v -O ~/.zshrc'
+alias z2='v -O ~/.zshrc.pre-oh-my-zsh'
 alias vcheat='v $HOME/bin/cheat'
 # make sure any override of vim alias to homebrew's version (the version I use)
 #alias vim='~/bin/vim -u ~/.vimrc -X -p'
-alias vim='nv -u ~/.vimrc -X -p'
 # v always == vim
-alias v='vim'
 #alias vi='vim'
 # vi can be emacs, or vim
 # no alias, it is a ln -sf to ~/bin/e
@@ -517,9 +520,9 @@ zkill() {
         echo $pid | xargs kill -${1:-9}
     fi  
 }
-alias glNoGraph='git log --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr% C(auto)%an" "$@"'
+alias glNoGraph='git --no-pager log --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr% C(auto)%an" "$@"'
 _gitLogLineToHash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1"
-_viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always % | delta -n -s'"
+_viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git --no-pager show --color=always % | delta -n -s'"
 
 # zgitco - checkout git commit with previews
 zgitco() {
@@ -537,18 +540,18 @@ zgitcb() {
             --no-sort --reverse --tiebreak=index --no-multi \
             --ansi --preview="$_viewGitLogLine" \
                 --header "enter to view, alt-y to copy hash" \
-                --bind "enter:execute:$_viewGitLogLine   | less -R" \
+                --bind "enter:execute:$_viewGitLogLine   | delta -n -s" \
                 --bind "alt-y:execute:$_gitLogLineToHash | xclip"
 }
 # zgitcl - git commit browser
 zgitlog() {
-  git log --graph --color=always \
+  git --no-pager log --graph --color=always \
       --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
-  fzf --preview-window=up,60%,nofollow --info=inline \
+  fzf --info=inline \
       --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
       --bind "ctrl-m:execute:
                 (grep -o '[a-f0-9]\{7\}' | head -1 |
-                xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
+                xargs -I % sh -c 'git show --color=always % | delta -n -s') << 'FZF-EOF'
                 {}
 FZF-EOF"
 }
