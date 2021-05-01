@@ -84,11 +84,6 @@ else
     # if nothing else, this is the default.
     export FZF_DEFAULT_COMMAND='find .'
 fi
-# terminal logo
-#screenfetch
-neofetch
-# don't fatch the IP.
-#archey -o
 
 # for my kir workstation.
 #. $HOME/.bagpipe/setup.sh $HOME/.bagpipe jimxu-linux.kir.corp.google.com "corp-ssh-helper --stderrthreshold=INFO %h %p"
@@ -248,7 +243,7 @@ alias vim='nv -u ~/.vimrc -X -p'
 alias v='vim'
 alias zshrc="v -O ~/.zshrc ~/.zshrc.pre-oh-my-zsh"
 alias ohmyzsh="v ~/.oh-my-zsh"
-alias vv='v -O ~/.vimrc ~/.vimrc.plug'
+alias va='v -O ~/.vimrc ~/.vimrc.plug'
 alias v1='v -O ~/.vimrc'
 alias v2='v -O ~/.vimrc.plug'
 alias vz='zshrc'
@@ -417,6 +412,12 @@ fortune | cowsay -f $(cowsay -l| sed '1d' | shuf | tr ' ' '\n' | head -1) | lolc
 # head -200 /dev/urandom | cksum
 #
 cbonsai -s $(shuf -i 1-10000 -n 1) -p
+# terminal logo
+#screenfetch
+#neofetch
+afetch
+# don't fatch the IP.
+#archey -o
 
 #unset ZSH_ENV
 # load the vim file manager if we aren't already in vifm
@@ -429,14 +430,6 @@ killwal() {
       kill -9 $1 &>/dev/null
     fi
 }
-# put this at the end since it could hang.
-# TODO: figure out why.
-# Import colorscheme from 'wal' asynchronously
-# &   # Run the process in the background.
-# ( ) # Hide shell job control messages.
-#(cat ~/.cache/wal/sequences &)
-####wal -R -n -t -w -e 
-#killwal $! &
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 #[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -593,4 +586,13 @@ source $HOME/src/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
 #eval $( gdircolors -b $HOME/.LS_COLORS )
 # These two stay the last since we need our own path to be at the top.
 export PATH=/Users/jimxu/bin:/Users/jimxu/go_code/bin:$PATH:/Users/jimxu/go/bin
-#eval "$(ssh-agent -s)"
+# this is a bit slow.
+#fm6000 -c random -w -de="Amethyst" -pa $(ls -l $HOMEBREW_CELLAR|wc -l) -g 3
+# put this at the end since it could hang.
+# TODO: figure out why.
+# Import colorscheme from 'wal' asynchronously
+# &   # Run the process in the background.
+# ( ) # Hide shell job control messages.
+(cat ~/.cache/wal/sequences &)
+wal -R -n -t -w -e &
+#killwal $! &
