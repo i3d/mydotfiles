@@ -254,6 +254,10 @@ Plug 'norcalli/nvim-colorizer.lua'
 Plug 'tversteeg/registers.nvim'
 Plug 'npxbr/glow.nvim', {'do': ':GlowInstall'}
 
+" 5/3/2021
+Plug 'folke/lsp-colors.nvim'
+Plug 'folke/lsp-trouble.nvim'
+
 "
 call plug#end()
 " Automatically install missing plugins on startup
@@ -370,6 +374,7 @@ let g:lualine = {
     \'extensions' : [ 'fzf' ],
     \}
 
+lua require'lspconfig'.rust_analyzer.setup({})
 lua require("lualine").setup()
 lua require('symbols-outline').setup()
 lua require'colorizer'.setup()

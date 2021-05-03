@@ -39,6 +39,36 @@ function! s:AsyncRustRun() abort
   let g:asyncrun_open = l:aro
 endfunction
 
+function! s:AsyncCargoBuild() abort
+	"open cwindow manually.
+  let l:aro = g:asyncrun_open
+  let g:asyncrun_open = 0
+  call setqflist([]) | copen 30
+  " don't use !, so we scrolling the output.
+  call asyncrun#run("", {"rows": 30}, 'cargo build')
+  let g:asyncrun_open = l:aro
+endfunction
+
+function! s:AsyncCargoTest() abort
+	"open cwindow manually.
+  let l:aro = g:asyncrun_open
+  let g:asyncrun_open = 0
+  call setqflist([]) | copen 30
+  " don't use !, so we scrolling the output.
+  call asyncrun#run("", {"rows": 30}, 'cargo test')
+  let g:asyncrun_open = l:aro
+endfunction
+
+function! s:AsyncCargoRun() abort
+	"open cwindow manually.
+  let l:aro = g:asyncrun_open
+  let g:asyncrun_open = 0
+  call setqflist([]) | copen 30
+  " don't use !, so we scrolling the output.
+  call asyncrun#run("", {"rows": 30}, 'cargo run')
+  let g:asyncrun_open = l:aro
+endfunction
+
 " NERDTrees File highlighting
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
  exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
@@ -75,6 +105,9 @@ com! -nargs=+ Grepcc execute 'silent grep! <args> *.cc' | cwindow
 com! -nargs=+ Grepgo execute 'silent grep! <args> *.go' | cwindow
 com! -nargs=* AsyncRustBuild :call <SID>AsyncRustBuild()
 com! -nargs=* AsyncRustRun :call <SID>AsyncRustRun()
+com! -nargs=* AsyncCargoBuild :call <SID>AsyncCargoBuild()
+com! -nargs=* AsyncCargoRun :call <SID>AsyncCargoRun()
+com! -nargs=* AsyncCargoTest :call <SID>AsyncCargoTest()
 " ================ functions and commands ======================
 " ================ themes ======================
 "colorscheme mustang
@@ -692,7 +725,6 @@ let g:which_key_map['v'] = [ '<C-W>v'                     , 'split right']
 let g:which_key_map['z'] = [ 'Goyo'                       , 'zen' ]
 let g:which_key_map['?'] = [ ':CocList maps'              , 'maps' ]
 let g:which_key_map['B'] = [ ':!xxd -g1 %'                , 'show hex' ]
-let g:which_key_map['x'] = [ 'copen'                      , 'show quickfix' ]
 let g:which_key_map["'"] = [ 'FloatermNew --width=50 --height=60' , 'shell' ]
 let g:which_key_map['h'] = [ 'FloatermKill'               , 'kill shell' ]
 let g:which_key_map['q'] = [ ':q!'                        , 'quit']
@@ -777,8 +809,11 @@ let g:which_key_map.G = {
 " Rust 
 let g:which_key_map.R = {
       \ 'name' : '+Rust',
-      \ 'r' : [ ':AsyncRustRun'                  , 'Run current file'],
-      \ 'b' : [ ':AsyncRustBuild'                , 'Compile current file'],
+      \ 'r' : [ ':AsyncRustRun'                  , 'Run file'],
+      \ 'b' : [ ':AsyncRustBuild'                , 'Compile file'],
+      \ 'c' : [ ':AsyncCargoBuild'               , 'Compile cargo'],
+      \ 'x' : [ ':AsyncCargoRun'                 , 'Run cargo bin'],
+      \ 't' : [ ':AsyncCargoTest'                , 'Test cargo'],
       \ }
 " l is for language server protocol
 let g:which_key_map.l = {
@@ -893,11 +928,13 @@ let g:which_key_map.s = {
 let g:which_key_map.t = {
       \ 'name' : '+terminal' ,
       \ 't' : [':FloatermNew --wintype=popup --width=50 --height=60'   , 'terminal'],
+      \ '.' : [':FloatermNew --wintype=popup --width=60 --height=25'   , 'small terminal'],
       \ '1' : [':FloatermFirst'                                        , 'first terminal'],
       \ '0' : [':FloatermLast'                                         , 'last terminal'],
       \ 'n' : [':FloatermNext'                                         , 'next terminal'],
-      \ 'p' : [':FloatermPrev'                                         , 'next terminal'],
+      \ 'p' : [':FloatermPrev'                                         , 'prev terminal'],
       \ 'k' : [':FloatermKill'                                         , 'kill terminal'],
+      \ 'h' : [':FloatermHide'                                         , 'hide terminal'],
       \ 'f' : [':FloatermNew fzf'                               , 'fzf'],
       \ 'g' : [':FloatermNew lazygit'                           , 'git'],
       \ 'i' : [':FloatermNew ipython'                           , 'ipython'],
@@ -910,6 +947,17 @@ let g:which_key_map.t = {
       \ 'T' : [':FloatermNew --width=70 --height=15 ttyper'     , 'Rust typer'],
       \ 'Z' : [':FloatermNew --width=70 --height=15 typer'      , 'Go typer'],
       \ }
+" Diagnose
+let g:which_key_map.x = {
+      \ 'name' : '+Diagnose' ,
+      \ 'q' : [ 'copen'                                         , 'show quickfix' ],
+      \ 'x' : [ ':LspTroubleToggle'                             , 'toggle lsp trouble' ],
+      \ 'w' : [ ':LspTroubleToggle lsp_workspace_diagnostics'   , 'lsp workspace' ],
+      \ 'd' : [ ':LspTroubleToggle lsp_document_diagnostics'    , 'lsp document' ],
+      \ 'c' : [ ':LspTroubleToggle quickfix'                    , 'lsp quickfix' ],
+      \ 'l' : [ ':LspTroubleToggle loclist'                     , 'lsp loclist' ],
+      \ 'r' : [ ':LspTroubleToggle lsp_references'              , 'lsp refs' ],
+      \}
 " windows
 let g:which_key_map.w = {
       \ 'name' : '+windows' ,
