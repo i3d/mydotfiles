@@ -7,8 +7,9 @@ set t_ZR=[23m
 let g:asyncrun_open = 10
 let g:asyncrun_rootmarks = ['.git', '.svn', '.root', '.project', '.hg', '.projectile']
 
-set rtp+=/home/linuxbrew/.linuxbrew/opt/vim
-set rtp+=/home/linuxbrew/.linuxbrew/opt/fzf
+set rtp+=/home/linuxbrew/.linuxbrew/opt/nvim
+" install fzf from github head.
+set rtp+=/home/jimxu/.fzf
 set rtp+=/home/jimxu/.vim/lua
 
 let g:mapleader = "\<Space>"
