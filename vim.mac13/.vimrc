@@ -683,7 +683,8 @@ let g:rustfmt_autosave = 1
 
 " ==================== space macs simulation layer ========
 " ==================== space macs simulation layer ========
-source $HOME/.config/nvim_back/plug-config/coc.vim
+" source $HOME/.config/nvim_back/plug-config/coc.vim
+source $HOME/.vim/plugged/coc.nvim/plugin/coc.vim
 " ==================== space macs simulation layer ========
 " Create map to add keys to
 let g:which_key_map =  {}
@@ -984,7 +985,11 @@ call which_key#register('<Space>', "g:which_key_map")
 "
 " ================ settings ======================
 set path+=**
+set wildmode=longest,list,full
 set wildmenu
+" tab completion
+ino <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+ino <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
 set copyindent   "make the autoindent copying the existing indentation"
 set shiftround   "round the shift to multiple shiftwidth"
 set smarttab     "use shiftwidth when insert tab"

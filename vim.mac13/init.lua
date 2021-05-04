@@ -8,7 +8,8 @@ if fn.empty(fn.glob(install_path)) > 0 then
   execute 'packadd packer.nvim'
 end
 
-require('plugins')
+-- require('plugins') " no include this would make both lunar and native works.
+--
 require('numb').setup{
    show_numbers = true, -- Enable 'number' for the window while peeking
    show_cursorline = true -- Enable 'cursorline' for the window while peeking
@@ -238,3 +239,18 @@ require('FTerm').setup({
     },
     border = 'single' -- or 'double'
 })
+
+-- trouble
+require('trouble').setup( {
+    height = 20,
+} )
+local trouble = require("trouble.providers.telescope")
+local telescope_t = require("telescope")
+telescope_t.setup {
+  defaults = {
+    mappings = {
+      i = { ["<c-t>"] = trouble.open_with_trouble },
+      n = { ["<c-t>"] = trouble.open_with_trouble },
+    },
+  },
+}
