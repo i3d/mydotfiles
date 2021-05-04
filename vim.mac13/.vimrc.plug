@@ -220,6 +220,7 @@ Plug 'i3d/vim-jimbothemes'
 
 " 4/6/2021
 Plug 'neovim/nvim-lspconfig'
+Plug 'kabouzeid/nvim-lspinstall'
 Plug 'simrat39/rust-tools.nvim'
 
 " Optional dependencies
@@ -374,7 +375,6 @@ let g:lualine = {
     \'extensions' : [ 'fzf' ],
     \}
 
-lua require'lspconfig'.rust_analyzer.setup({})
 lua require("lualine").setup()
 lua require('symbols-outline').setup()
 lua require'colorizer'.setup()

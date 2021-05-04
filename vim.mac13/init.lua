@@ -254,3 +254,12 @@ telescope_t.setup {
     },
   },
 }
+
+-- lspinstall
+require'lspinstall'.setup() -- important
+local servers = require'lspinstall'.installed_servers()
+for _, server in pairs(servers) do
+  require'lspconfig'[server].setup{}
+end
+-- this should no longer needed.
+-- require'lspconfig'.rust_analyzer.setup({})
