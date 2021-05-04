@@ -685,7 +685,7 @@ let g:rustfmt_autosave = 1
 " ==================== space macs simulation layer ========
 " ==================== space macs simulation layer ========
 " source $HOME/.config/nvim_back/plug-config/coc.vim
-source $HOME/.vim/plugged/coc.nvim/plugin/coc.vim
+" source $HOME/.vim/plugged/coc.nvim/plugin/coc.vim
 " ==================== space macs simulation layer ========
 " Create map to add keys to
 let g:which_key_map =  {}
