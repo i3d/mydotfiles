@@ -2,6 +2,8 @@
   // suggestions
   // "suggest.echodocSupport": true,
   // TODO add more labels and give them cool glyphs
+
+  "suggest.autoTrigger": "none",
   "suggest.completionItemKindLabels": {
     "text": "t",
     "method": "m",
@@ -13,7 +15,7 @@
   "diagnostic.warningSign": " ",
   "diagnostic.infoSign": "",
   "diagnostic.hintSign": " ",
-  "diagnostic.virtualText": true, // this won't work with codelens when error on same line
+  // "diagnostic.virtualText": true, // this won't work with codelens when error on same line
 
   // "diagnostic.displayByAle": true,
 
@@ -25,40 +27,43 @@
   "list.selectedSignText": " ",
 
   // autoformat
-  "coc.preferences.formatOnSaveFiletypes": [
-    "css",
-    "markdown",
-    "javascript",
-    "graphql",
-    "html",
-    "yaml",
-    "json",
-    "python"
-  ],
+  //"coc.preferences.formatOnSaveFiletypes": [
+  //  "css",
+  //  "markdown",
+  //  "javascript",
+  //  "graphql",
+  //  "html",
+  //  "yaml",
+  //  "json",
+  //  "python"
+  //],
   "coc.preferences.hoverTarget": "float",
 
   // python config
-  "python.linting.enabled": true,
-  "python.linting.pylintEnabled": true,
-  "python.formatting.provider": "black",
-  "python.formatting.blackPath": "~/.miniconda/envs/neovim/bin/black",
+  // "python.linting.enabled": true,
+  // "python.linting.pylintEnabled": true,
+  // "python.formatting.provider": "black",
+  // "python.formatting.blackPath": "~/.miniconda/envs/neovim/bin/black",
   // "python.linting.pylintPath": "~/.miniconda/envs/neovim/bin/pylint",
-  "python.condaPath": "~/.miniconda/bin/conda",
-  "python.sortImports.path": "~/.miniconda/envs/neovim/bin/isort",
-  "python.jediPath": "~/.miniconda/envs/neovim/lib/python3.8/site-packages",
+  // "python.condaPath": "~/.miniconda/bin/conda",
+  // "python.sortImports.path": "~/.miniconda/envs/neovim/bin/isort",
+  // "python.jediPath": "~/.miniconda/envs/neovim/lib/python3.8/site-packages",
 
   // snippets
   "snippets.ultisnips.directories": ["UltiSnips", "~/.config/nvim/snips"],
   //"snippets.userSnippetsDirectory": "~/.config/nvim/snips",
 
   // emmet
-  "emmet.includeLanguages": {
-    "vue-html": "html",
-    "javascript": "javascriptreact"
-  },
+  // "emmet.includeLanguages": {
+  //  "vue-html": "html",
+  //  "javascript": "javascriptreact"
+  //},
 
   // explorer
-  "explorer.width": 40,
+  "explorer.width": 50,
+  "explorer.floating.position": "left-center",
+  "explorer.floating.width": -20,
+  "explorer.floating.contentWidth": 40,
   "explorer.icon.enableNerdfont": true,
   "explorer.previewAction.onHover": false,
   "explorer.icon.enableVimDevicons": false,
@@ -77,6 +82,27 @@
       "filetypes": ["sh"],
       "ignoredRootPaths": ["~"]
     }
+
+    // For google3.
+    //"ciderlsp": {
+    //  "command": "/google/bin/releases/editor-devtools/ciderlsp",
+    //  "args": [
+    //    "--tooltag=coc-nvim",
+    //    "--noforward_sync_responses"
+    //  ],
+    //  "filetypes": [
+    //    "borg",
+    //    "h",
+    //    "c",
+    //    "cc",
+    //    "cpp",
+    //    "go",
+    //    "java",
+    //    "proto",
+    //    "python",
+    //    "textproto"
+    //  ]
+    //}
   }
 
   // TODO b:coc_suggest_disable=1 GOYO
