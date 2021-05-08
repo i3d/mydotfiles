@@ -12,7 +12,7 @@ sudo echo "archcraft" >> /etc/hostname
 
 # update system
 sudo pacman -S archlinux-keyring || sudo pacman-key --populate
-sudo pacman -Syy && sudo pacman -Syua
+sudo pacman -Syy && sudo pacman -Syu
 [[ -f $HOME/.config/polybar/fix_modules.sh ]] && $HOME/.config/polybar/fix_modules.sh
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 sudo pacman -S --noconfirm linux-headers reflector base-devel inetutils dnsutils openssh rsync
@@ -21,7 +21,7 @@ sudo pacman -S --noconfirm linux-headers reflector base-devel inetutils dnsutils
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 HOMEBREW_PREFIX=/home/linuxbrew/.linuxbrew
 eval $(${HOMEBREW_PREFIX}/bin/brew shellenv)
-brew install fortune asdf node yarn hub go gotop neofetch
+brew install fortune asdf node yarn hub go gotop neofetch autojump fasd
 
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 source $HOME/.cargo/env

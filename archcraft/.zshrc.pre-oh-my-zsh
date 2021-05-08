@@ -249,7 +249,7 @@ alias gtagsjs='/home/build/nonconf/google3/tools/tags/gtags.sh --lang=javascript
 alias gtagspb='/home/build/nonconf/google3/tools/tags/gtags.sh --lang=proto'
 alias gtagspy='/home/build/nonconf/google3/tools/tags/gtags.sh --lang=python'
 alias vless='vi -u /usr/share/vim/vim80/macros/less.vim'
-alias ls='ls -trABipF --color=always'
+alias ls='/bin/ls -trABipF --color=always --group-directories-first'
 alias l='ls -trABlipF'
 #alias s='cd ..'
 alias md='mkdir -p'

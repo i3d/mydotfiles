@@ -12,6 +12,36 @@ fi
 #  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 #fi
 
+# Set name of the theme to load. these need to be set __BEFORE__ sourcing OMZ.
+# Look in ~/.oh-my-zsh/themes/ or custom
+# Optionally, if you set this to "random", it'll load a random theme each
+# time that oh-my-zsh is loaded.
+#ZSH_THEME="robbyrussell"
+#
+#ZSH_THEME="terencehill"
+#SPACESHIP_BATTERY_SHOW=false
+#ZSH_THEME="budspencer"
+#ZSH_THEME="agnoster"
+#ZSH_THEME="spaceship"
+#ZSH_THEME="powerlevel9k/powerlevel9k"
+#ZSH_THEME="gitster"
+#ZSH_THEME="lambda-gitster"
+#ZSH_THEME="lambda-mod"
+#ZSH_THEME="psyrendust"
+#ZSH_THEME="starlight"
+#ZSH_THEME="kinda-fishy"
+#ZSH_THEME="bunnyruni"
+#
+# the current theme
+ZSH_THEME="archcraft"
+
+#bad
+#ZSH_THEME="lambda-pure"
+#ZSH_THEME="agnosterzak"
+#ZSH_THEME="zeta"
+#ZSH_THEME="haribo"
+#ZSH_THEME="bullet-train"
+
 # Path to your oh-my-zsh installation.
 export ZSH=/home/jimxu/.oh-my-zsh
 
@@ -156,33 +186,6 @@ zinit light kazhala/dotbare
 
 # After zinit, override the prompt
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-#ZSH_THEME="robbyrussell"
-#
-#ZSH_THEME="terencehill"
-#SPACESHIP_BATTERY_SHOW=false
-#ZSH_THEME="budspencer"
-#ZSH_THEME="agnoster"
-#ZSH_THEME="spaceship"
-#ZSH_THEME="powerlevel9k/powerlevel9k"
-#ZSH_THEME="gitster"
-#ZSH_THEME="lambda-gitster"
-#ZSH_THEME="lambda-mod"
-#ZSH_THEME="psyrendust"
-#ZSH_THEME="starlight"
-#ZSH_THEME="kinda-fishy"
-#ZSH_THEME="bunnyruni"
-#
-
-#bad
-#ZSH_THEME="lambda-pure"
-#ZSH_THEME="agnosterzak"
-#ZSH_THEME="zeta"
-#ZSH_THEME="haribo"
-#ZSH_THEME="bullet-train"
 
 [ -f /home/linuxbrew/.linuxbrew/etc/profile.d/autojump.sh ] && . /home/linuxbrew/.linuxbrew/etc/profile.d/autojump.sh
 
@@ -244,8 +247,6 @@ zinit cdclear -q # <- forget completions provided up to this moment
 #zinit light bhilburn/powerlevel9k
 #
 # ========== Current prompt ===================
-# Disable for starship
-zinit light romkatv/powerlevel10k
 #
 # prompt_git:15: unknown group
 #zinit light caiogondim/bullet-train.zsh
@@ -380,11 +381,13 @@ killwal() {
     fi
 }
 
+# Disable for starship
+#zinit light romkatv/powerlevel10k
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+#[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 # Disable powerlevel9k for now and use starship prompt.
 #POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
-typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
+#typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 #
 # Starship prompt starts here.
 # eval "$(starship init zsh)"
