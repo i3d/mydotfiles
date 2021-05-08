@@ -1,0 +1,5 @@
+/* Text Font */
+
+* {
+    font:				 	"Sans Regular 14";
+}
