@@ -105,6 +105,8 @@ ifconfig enp0s3
 sudo systemctl enable --now sshd
 sudo systemctl restart sshd
 
+sh -c ./cleanup
+
 printf "Shall be able to reboot and ssh remote, sleep 20s and ctrl-c now if needed 5..4..3..2..1.."
 sleep 20
 sudo reboot -h now

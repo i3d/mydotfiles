@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# cleanup
+systemctl --failed
+sudo pacman -Syu
+yay -Syu
+sudo pacman -Scc
+yay -Yc
+sudo pacman -Qtdq
+sudo pacman -Rns $(pacman -Qtdq)
+rm -rf $HOME/.cache/*
+sudo journalctl --vacuum-time=2weeks
