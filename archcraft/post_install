@@ -1,0 +1,110 @@
+#!/bin/bash
+
+# time setup
+sudo ln -sf /usr/share/zoneinfo/PST8PDT /etc/localtime
+sudo timedatectl set-ntp true
+sudo hwclock --systohc
+sudo sed -i '177s/.//' /etc/locale.gen
+sudo sed -i '178s/.//' /etc/locale.gen
+sudo locale-gen
+sudo echo "LANG=en_US.UTF-8" >> /etc/locale.conf
+sudo echo "archcraft" >> /etc/hostname
+
+# update system
+sudo pacman -S archlinux-keyring || sudo pacman-key --populate
+sudo pacman -Syy && sudo pacman -Syua
+[[ -f $HOME/.config/polybar/fix_modules.sh ]] && $HOME/.config/polybar/fix_modules.sh
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+sudo pacman -S --noconfirm linux-headers reflector base-devel inetutils dnsutils openssh rsync
+
+# setup tools
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+HOMEBREW_PREFIX=/home/linuxbrew/.linuxbrew
+eval $(${HOMEBREW_PREFIX}/bin/brew shellenv)
+brew install fortune asdf node yarn hub go gotop neofetch
+
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source $HOME/.cargo/env
+rustup update && rustup default nightly
+cargo install bat
+cargo install ripgrep
+cargo install git-delta
+
+yay -S neovim-nightly-bin
+
+# setup zsh libraries.
+cd $HOME && sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
+cd $HOME && sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# setup src and packages
+mkdir -p $HOME/my_completions
+mkdir -p $HOME/src
+cd $HOME/src
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+python get-pip.py
+export PATH=$HOME/.local/bin:$PATH
+pip install pynvim
+pip install ipython
+
+git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
+git clone https://github.com/i3d/mydotfiles.git
+git clone https://github.com/i3d/afetch.git
+git clone https://github.com/gabrielelana/awesome-terminal-fonts.git
+git clone https://github.com/chriskempson/base16-shell.git
+git clone https://github.com/Parth/dotfiles.git
+git clone https://github.com/vifm/vifm.git
+git clone https://github.com/changyuheng/zsh-interactive-cd.git
+git clone https://github.com/nim-lang/Nim.git
+git clone https://github.com/rust-lang/rust.git
+git clone https://github.com/golang/go.git $HOME/go
+
+# setup fzf
+$HOME/.fzf/install
+
+# setup zsh and nvim
+ln -sf $HOME/src/mydotfiles/archcraft/.vimrc $HOME/.vimrc
+ln -sf $HOME/src/mydotfiles/archcraft/.vimrc.plug $HOME/.vimrc.plug
+mkdir -p $HOME/.vim
+ln -sf $HOME/src/mydotfiles/archcraft/init.lua $HOME/.vim/init.lua
+ln -sf $HOME/src/mydotfiles/archcraft/.zshrc $HOME/.zshrc
+ln -sf $HOME/src/mydotfiles/archcraft/.zshrc.pre-oh-my-zsh $HOME/.zshrc.pre-oh-my-zsh
+ln -sf $HOME/src/mydotfiles/.tmux.conf $HOME/
+
+# setup afetch
+cd $HOME/src/afetch
+git pull && make && make install
+
+
+# finally setup static network
+rm -rf /etc/systemd/network/*
+cat <<EOF > /etc/systemd/network/enp0s3.network
+[Match]
+Name=enp0s3
+
+[Network]
+Address=192.168.1.97/24
+Gateway=192.168.1.1
+DNS=192.168.1.1
+DNS=8.8.8.8
+EOF
+
+sudo systemctl list-unit-files | grep netctl | while read entry; do
+  sudo systemctl stop $entry
+  sudo systemctl disable $entry
+done
+sudo pacman -Rns netctl 
+
+sudo systemctl stop dhcpcd
+sudo systemctl disable dhcpcd@.service
+sudo pacman -Rns dhcpcd
+
+sudo systemctl enable --now systemd-networkd
+sudo systemctl restart systemd-networkd
+sudo systemctl status systemd-networkd
+ifconfig enp0s3
+sudo systemctl enable --now sshd
+sudo systemctl restart sshd
+
+printf "Shall be able to reboot and ssh remote, sleep 20s and ctrl-c now if needed 5..4..3..2..1.."
+sleep 20
+sudo reboot -h now
