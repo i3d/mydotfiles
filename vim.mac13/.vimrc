@@ -307,15 +307,15 @@ com! -nargs=* AsyncCargoTest :call <SID>AsyncCargoTest()
 "colorscheme nordic-aurora
 "let g:airline_theme = 'nord'
 
-set background=dark
-set termguicolors
-colorscheme serenade
-let g:serenade_enable_italic = 1
-let g:serenade_disable_italic_comment = 0
-let g:serenade_transparent_background = 0
-let g:serenade_diagnostic_text_highlight = 1
-let g:serenade_diagnostic_line_highlight = 0
-let g:airline_theme = 'serenade'
+"set background=dark
+"set termguicolors
+"colorscheme serenade
+"let g:serenade_enable_italic = 1
+"let g:serenade_disable_italic_comment = 0
+"let g:serenade_transparent_background = 0
+"let g:serenade_diagnostic_text_highlight = 1
+"let g:serenade_diagnostic_line_highlight = 0
+"let g:airline_theme = 'serenade'
 
 "set background=dark
 "set termguicolors
@@ -338,6 +338,15 @@ let g:airline_theme = 'serenade'
 "colorscheme lighthaus
 "let g:airline_theme = 'lighthaus'
 
+set background=dark
+set termguicolors
+colorscheme base16-darktooth
+let g:airline_theme = 'base16_darktooth'
+"
+"set background=dark
+"set termguicolors
+"colorscheme base16-horizon-terminal-dark
+"let g:airline_theme = 'base16_darktooth'
 
 " ##########################################
 let g:javascript_plugin_flow = 1
@@ -349,7 +358,6 @@ set fillchars+=stl:\ ,stlnc:\
 if !has("nvim")
     set term=xterm-256color
 endif
-let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
@@ -721,7 +729,6 @@ let g:which_key_map['e'] = [ ':CocCommand explorer'       , 'explorer' ]
 let g:which_key_map['f'] = [ ':Files'                     , 'search files' ]
 let g:which_key_map['r'] = [ ':RnvimrToggle'              , 'ranger' ]
 let g:which_key_map['S'] = [ ':SSave'                     , 'save session' ]
-let g:which_key_map['T'] = [ ':Rg'                        , 'search text' ]
 let g:which_key_map['v'] = [ '<C-W>v'                     , 'split right']
 let g:which_key_map['z'] = [ 'Goyo'                       , 'zen' ]
 let g:which_key_map['?'] = [ ':CocList maps'              , 'maps' ]
@@ -959,6 +966,29 @@ let g:which_key_map.x = {
       \ 'l' : [ ':LspTroubleToggle loclist'                     , 'lsp loclist' ],
       \ 'r' : [ ':LspTroubleToggle lsp_references'              , 'lsp refs' ],
       \}
+" Telescope                                                                            
+let g:which_key_map.T = {                                                         
+        \ 'name' : '+Telescope' ,                                                   
+        \ 'A' : [':Telescope autocommands'                         , 'Telescope autocommands'],
+        \ 'B' : [':Telescope builtin'                              , 'Telescope builtin'],
+        \ 'C' : [':Telescope commands'                             , 'Telescope vim commands'],
+        \ 'K' : [':Telescope keymaps'                              , 'Telescope keymaps'],
+        \ 'O' : [':Telescope vim_options'                          , 'Telescope vim options'],
+        \ 'R' : [':Telescope registers'                            , 'Telescope registers'],
+        \ 'H' : [':Telescope search_history'                       , 'Telescope search history'],
+        \ 'M' : [':Telescope man_pages'                            , 'Telescope man page'],
+        \ 'L' : [':Telescope loclist'                              , 'Telescope loclist'],
+        \ 'Q' : [':Telescope quickfix'                             , 'Telescope quickfix'],
+        \ '/' : [':Telescope current_buffer_fuzzy_find'            , 'Telescope curbuf search'],
+        \ '.' : [':Telescope file_browser theme=get_dropdown'      , 'Telescope browser'],
+        \ 'b' : [':Telescope buffers'                              , 'Telescope buffers'],
+        \ 'f' : [':Telescope find_files theme=get_dropdown find_command=rg,--hidden,-i,--files,-l'       , 'Telescope find files'],
+        \ 'g' : [':Telescope live_grep'                            , 'Telescope grep'],
+        \ 'h' : [':Telescope help_tags'                            , 'Telescope vim help'],
+        \ 'm' : [':Telescope marks'                                , 'Telescope marks'],
+        \ 'c' : [':Telescope command_history'                      , 'Telescope q:'],
+        \ 's' : [':Telescope oldfiles'                             , 'Telescope switch files'],
+        \ }
 " windows
 let g:which_key_map.w = {
       \ 'name' : '+windows' ,
