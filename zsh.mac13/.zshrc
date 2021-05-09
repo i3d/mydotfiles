@@ -5,11 +5,40 @@
 #  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 #fi
 
+# ================ Before sourcing OMZ ====================
+# Set name of the theme to load.
+# Look in ~/.oh-my-zsh/themes/
+# Optionally, if you set this to "random", it'll load a random theme each
+# time that oh-my-zsh is loaded.
+#ZSH_THEME="robbyrussell"
+#
+#ZSH_THEME="terencehill"
+#SPACESHIP_BATTERY_SHOW=false
+#ZSH_THEME="budspencer"
+#ZSH_THEME="agnoster"
+#ZSH_THEME="spaceship"
+#ZSH_THEME="powerlevel9k/powerlevel9k"
+#ZSH_THEME="gitster"
+#ZSH_THEME="lambda-gitster"
+#ZSH_THEME="lambda-mod"
+#ZSH_THEME="psyrendust"
+#ZSH_THEME="starlight"
+#ZSH_THEME="kinda-fishy"
+#ZSH_THEME="bunnyruni"
+#
+
+#bad
+#ZSH_THEME="lambda-pure"
+#ZSH_THEME="agnosterzak"
+#ZSH_THEME="zeta"
+#ZSH_THEME="haribo"
+#ZSH_THEME="bullet-train"
+ZSH_THEME="archcraft"
+# ================ Before sourcing OMZ ====================
+#
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/jimxu/.oh-my-zsh
-
 source $ZSH/oh-my-zsh.sh
-
 # for awesome-terminal-fonts
 source $HOME/src/awesome-terminal-fonts/fonts/*.sh
 #POWERLEVEL9K_MODE='nerdfont-complete'
@@ -188,33 +217,6 @@ zinit light kazhala/dotbare
 
 # After zinit, override the prompt
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-#ZSH_THEME="robbyrussell"
-#
-#ZSH_THEME="terencehill"
-#SPACESHIP_BATTERY_SHOW=false
-#ZSH_THEME="budspencer"
-#ZSH_THEME="agnoster"
-#ZSH_THEME="spaceship"
-#ZSH_THEME="powerlevel9k/powerlevel9k"
-#ZSH_THEME="gitster"
-#ZSH_THEME="lambda-gitster"
-#ZSH_THEME="lambda-mod"
-#ZSH_THEME="psyrendust"
-#ZSH_THEME="starlight"
-#ZSH_THEME="kinda-fishy"
-#ZSH_THEME="bunnyruni"
-#
-
-#bad
-#ZSH_THEME="lambda-pure"
-#ZSH_THEME="agnosterzak"
-#ZSH_THEME="zeta"
-#ZSH_THEME="haribo"
-#ZSH_THEME="bullet-train"
 
 [ -f /Users/jimxu/homebrew/etc/profile.d/autojump.sh ] && . /Users/jimxu/homebrew/etc/profile.d/autojump.sh
 
@@ -431,6 +433,7 @@ killwal() {
     fi
 }
 
+# archcraft for now. 5/9/2021
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 #[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 # Disable powerlevel9k for now and use starship prompt.
@@ -451,7 +454,7 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 #zinit snippet OMZ::themes/norm.zsh-theme
 #zinit snippet OMZ::themes/obraun.zsh-theme
 #zinit snippet OMZ::themes/afowler.zsh-theme
-zinit ice pick"async.zsh" src"pure.zsh"; zinit light sindresorhus/pure
+#zinit ice pick"async.zsh" src"pure.zsh"; zinit light sindresorhus/pure
 
 export PATH=$PATH:$HOME/.config/nvcode/utils/bin
 # Setup python environment. It should be on >= v3

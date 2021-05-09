@@ -21,7 +21,7 @@ sudo pacman -S --noconfirm linux-headers reflector base-devel inetutils dnsutils
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 HOMEBREW_PREFIX=/home/linuxbrew/.linuxbrew
 eval $(${HOMEBREW_PREFIX}/bin/brew shellenv)
-brew install fortune asdf node yarn hub go gotop neofetch autojump fasd
+brew install fortune asdf node yarn hub go gotop neofetch autojump fasd 
 
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 source $HOME/.cargo/env
@@ -29,6 +29,9 @@ rustup update && rustup default nightly
 cargo install bat
 cargo install ripgrep
 cargo install git-delta
+cargo install exa
+cargo install tokei
+cargo install procs
 
 yay -S neovim-nightly-bin
 
