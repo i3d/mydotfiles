@@ -21,7 +21,7 @@ sudo pacman -S --noconfirm linux-headers reflector base-devel inetutils dnsutils
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 HOMEBREW_PREFIX=/home/linuxbrew/.linuxbrew
 eval $(${HOMEBREW_PREFIX}/bin/brew shellenv)
-brew install fortune asdf node yarn hub go gotop neofetch autojump fasd glow
+brew install fortune asdf node yarn hub go gotop neofetch autojump fasd glow lolcat cowsay
 
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 source $HOME/.cargo/env
@@ -42,6 +42,7 @@ yay -S neovim-nightly-bin
 # make distclean && make CMAKE_EXTRA_FLAGS=-DCMAKE_INSTALL_PREFIX=$HOME/.local CMAKE_BUILD_TYPE=Release
 # make install
 
+# or install from yarn
 npm update -g --force
 npm install -g tldr
 npm install -g neovim
