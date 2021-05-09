@@ -16,6 +16,23 @@ nno <silent> <leader> :silent <c-u> :silent WhichKey '<Space>'<CR>
 vno <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
 nno <silent> <localleader> :silent <c-u> :silent WhichKey ','<CR>
 " ================ functions and commands ======================
+" window management                                                               
+function! MaximizeToggle() abort                                                  
+  if exists("s:maximize_session")                                                 
+    exec "source " . s:maximize_session                                           
+    call delete(s:maximize_session)                                               
+    unlet s:maximize_session                                                      
+    let &hidden=s:maximize_hidden_save                                            
+    unlet s:maximize_hidden_save                                                  
+  else                                                                            
+    let s:maximize_hidden_save = &hidden                                          
+    let s:maximize_session = tempname()                                           
+    set hidden                                                                    
+    exec "mksession! " . s:maximize_session                                       
+    only                                                                          
+  endif                                                                           
+endfunction
+
 function! s:AsyncRustBuild() abort
 	"open cwindow manually.
   let l:aro = g:asyncrun_open
@@ -323,6 +340,7 @@ com! -nargs=* AsyncCargoTest :call <SID>AsyncCargoTest()
 "let g:material_style = 'darker'
 "let g:material_style = 'oceanic'
 "let g:material_style = 'deep ocean'
+"let g:material_style = 'moonlight'
 "let g:material_italic_comments = 1
 "let g:material_italic_keywords = 1
 "let g:material_italic_functions = 1
@@ -338,10 +356,15 @@ com! -nargs=* AsyncCargoTest :call <SID>AsyncCargoTest()
 "colorscheme lighthaus
 "let g:airline_theme = 'lighthaus'
 
+"set background=dark
+"set termguicolors
+"colorscheme base16-darktooth
+"let g:airline_theme = 'base16_darktooth'
+"
 set background=dark
 set termguicolors
-colorscheme base16-darktooth
-let g:airline_theme = 'base16_darktooth'
+colorscheme base16-gruvbox-dark-pale
+let g:airline_theme = 'base16_gruvbox_dark_pale'
 "
 "set background=dark
 "set termguicolors
