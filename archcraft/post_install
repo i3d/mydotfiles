@@ -26,14 +26,21 @@ brew install fortune asdf node yarn hub go gotop neofetch autojump fasd glow
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 source $HOME/.cargo/env
 rustup update && rustup default nightly
-cargo install bat
-cargo install ripgrep
-cargo install git-delta
-cargo install exa
-cargo install tokei
-cargo install procs
+cargo install bat ripgrep git-delta exa tokei procs
+# from cargo having problem, try brew them.
 
 yay -S neovim-nightly-bin
+
+# or build from source
+# ubuntu:
+# sudo apt-get install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip
+# arch:
+# sudo pacman -S base-devel cmake unzip ninja tree-sitter
+#
+# git clone https://github.com/neovim/neovim.git
+# cd neovim
+# make distclean && make CMAKE_EXTRA_FLAGS=-DCMAKE_INSTALL_PREFIX=$HOME/.local CMAKE_BUILD_TYPE=Release
+# make install
 
 npm update -g --force
 npm install -g tldr
