@@ -21,7 +21,7 @@ sudo pacman -S --noconfirm linux-headers reflector base-devel inetutils dnsutils
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 HOMEBREW_PREFIX=/home/linuxbrew/.linuxbrew
 eval $(${HOMEBREW_PREFIX}/bin/brew shellenv)
-brew install fortune asdf node yarn hub go gotop neofetch autojump fasd 
+brew install fortune asdf node yarn hub go gotop neofetch autojump fasd glow
 
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 source $HOME/.cargo/env
@@ -109,6 +109,9 @@ sudo systemctl enable --now sshd
 sudo systemctl restart sshd
 
 sh -c ./cleanup
+
+printf "Need to manual scp .vifm over to $HOME."
+printf "Need to manual scp coc over to $HOME/.config/."
 
 printf "Shall be able to reboot and ssh remote, sleep 20s and ctrl-c now if needed 5..4..3..2..1.."
 sleep 20
