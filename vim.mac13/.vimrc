@@ -16,25 +16,25 @@ nno <silent> <leader> :silent <c-u> :silent WhichKey '<Space>'<CR>
 vno <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
 nno <silent> <localleader> :silent <c-u> :silent WhichKey ','<CR>
 " ================ functions and commands ======================
-" window management                                                               
-function! MaximizeToggle() abort                                                  
-  if exists("s:maximize_session")                                                 
-    exec "source " . s:maximize_session                                           
-    call delete(s:maximize_session)                                               
-    unlet s:maximize_session                                                      
-    let &hidden=s:maximize_hidden_save                                            
-    unlet s:maximize_hidden_save                                                  
-  else                                                                            
-    let s:maximize_hidden_save = &hidden                                          
-    let s:maximize_session = tempname()                                           
-    set hidden                                                                    
-    exec "mksession! " . s:maximize_session                                       
-    only                                                                          
-  endif                                                                           
+" window management
+function! MaximizeToggle() abort
+  if exists("s:maximize_session")
+    exec "source " . s:maximize_session
+    call delete(s:maximize_session)
+    unlet s:maximize_session
+    let &hidden=s:maximize_hidden_save
+    unlet s:maximize_hidden_save
+  else
+    let s:maximize_hidden_save = &hidden
+    let s:maximize_session = tempname()
+    set hidden
+    exec "mksession! " . s:maximize_session
+    only
+  endif
 endfunction
 
 function! s:AsyncRustBuild() abort
-	"open cwindow manually.
+  "open cwindow manually.
   let l:aro = g:asyncrun_open
   let g:asyncrun_open = 0
   let l:target = expand('%')
@@ -889,9 +889,10 @@ let g:which_key_map.o = {
       \ 'name' : '+open',
       \ '1' : [':50vs | e ~/.vimrc'                                    , 'vimrc'],
       \ '2' : [':50vs | e ~/.vimrc.plug'                               , 'vimrc plug'],
-      \ '3' : [':50vs | e ~/.zshrc'                                    , 'zshrc'],
-      \ '4' : [':50vs | e ~/.zshrc.pre-oh-my-zsh'                      , 'zshrc pre-omz'],
-      \ '5' : [':50vs | e ~/bin/cheat'                                 , 'cheatsheet'],
+      \ '3' : [':50vs | e ~/.vim/init.lua'                             , 'vimrc init.lua'],
+      \ '4' : [':50vs | e ~/.zshrc'                                    , 'zshrc'],
+      \ '5' : [':50vs | e ~/.zshrc.pre-oh-my-zsh'                      , 'zshrc pre-omz'],
+      \ '6' : [':50vs | e ~/bin/cheat'                                 , 'cheatsheet'],
       \ 'i' : [':50vs | e ~/.config/nvim/init.vim'                     , 'open init'],
       \ 'k' : [':50vs | e ~/.config/nvim/keys/which-key.vim'           , 'which keys'],
       \ 'p' : [':50vs | e ~/.config/nvim/vim-plug/plugins.vim'         , 'vim-plug'],
@@ -965,9 +966,9 @@ let g:which_key_map.t = {
       \ '.' : [':FloatermNew --wintype=popup --width=60 --height=25'   , 'small terminal'],
       \ '1' : [':FloatermFirst'                                        , 'first terminal'],
       \ '0' : [':FloatermLast'                                         , 'last terminal'],
-      \ 'n' : [':FloatermNext'                                         , 'next terminal'],
-      \ 'p' : [':FloatermPrev'                                         , 'prev terminal'],
-      \ 'k' : [':FloatermKill'                                         , 'kill terminal'],
+      \ 'j' : [':FloatermNext'                                         , 'next terminal'],
+      \ 'k' : [':FloatermPrev'                                         , 'prev terminal'],
+      \ 'q' : [':FloatermKill'                                         , 'kill terminal'],
       \ 'h' : [':FloatermHide'                                         , 'hide terminal'],
       \ 'f' : [':FloatermNew fzf'                               , 'fzf'],
       \ 'g' : [':FloatermNew lazygit'                           , 'git'],
