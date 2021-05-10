@@ -887,12 +887,14 @@ let g:which_key_map.l = {
 " open
 let g:which_key_map.o = {
       \ 'name' : '+open',
-      \ '1' : [':e ~/.vimrc'                                           , 'vimrc'],
-      \ '2' : [':e ~/.vimrc.plug'                                      , 'vimrc plug'],
-      \ '3' : [':e ~/.zshrc'                                           , 'zshrc'],
-      \ 'i' : [':e ~/.config/nvim/init.vim'                            , 'open init'],
-      \ 'k' : [':e ~/.config/nvim/keys/which-key.vim'                  , 'which keys'],
-      \ 'p' : [':e ~/.config/nvim/vim-plug/plugins.vim'                , 'vim-plug'],
+      \ '1' : [':50vs | e ~/.vimrc'                                    , 'vimrc'],
+      \ '2' : [':50vs | e ~/.vimrc.plug'                               , 'vimrc plug'],
+      \ '3' : [':50vs | e ~/.zshrc'                                    , 'zshrc'],
+      \ '4' : [':50vs | e ~/.zshrc.pre-oh-my-zsh'                      , 'zshrc pre-omz'],
+      \ '5' : [':50vs | e ~/bin/cheat'                                 , 'cheatsheet'],
+      \ 'i' : [':50vs | e ~/.config/nvim/init.vim'                     , 'open init'],
+      \ 'k' : [':50vs | e ~/.config/nvim/keys/which-key.vim'           , 'which keys'],
+      \ 'p' : [':50vs | e ~/.config/nvim/vim-plug/plugins.vim'         , 'vim-plug'],
       \ 'h' : [':O h'                                                  , 'open .h'],
       \ 'c' : [':O cc'                                                 , 'open .cc'],
       \ 'b' : [':O b'                                                  , 'open BUILD'],
@@ -959,6 +961,7 @@ let g:which_key_map.s = {
 let g:which_key_map.t = {
       \ 'name' : '+terminal' ,
       \ 't' : [':FloatermNew --wintype=popup --width=50 --height=60'   , 'terminal'],
+      \ '?' : [':FloatermNew --wintype=popup --width=90 --height=50 w3m https://quickref.me/vim'   , 'vim quickref'],
       \ '.' : [':FloatermNew --wintype=popup --width=60 --height=25'   , 'small terminal'],
       \ '1' : [':FloatermFirst'                                        , 'first terminal'],
       \ '0' : [':FloatermLast'                                         , 'last terminal'],
