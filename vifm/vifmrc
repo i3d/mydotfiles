@@ -11,7 +11,8 @@ let $VIFM_ENABLED = 1
 " Selected color scheme
 "colorscheme dracula
 "colorscheme ph
-colorscheme matrix
+"colorscheme matrix
+colorscheme palenight
 
 " ------------------------------------------------------------------------------
 " Command used to edit files in various contexts.  The default is vim.
@@ -132,23 +133,65 @@ nnoremap ez :!v ~/.zshrc<cr>
 nnoremap et :!v ~/.tmux.conf<cr>
 
 command! FZFHomeLocate :set noquickview | :execute 'goto' fnameescape(term('locate $HOME | fzf-tmux --height 15 2>/dev/tty'))
+command! FZFGLocate :set noquickview | :execute 'goto' fnameescape(term('find $G3PATH | fzf-tmux --height 15 2>/dev/tty'))
 command! FZFFindFile :set noquickview | :execute 'goto' fnameescape(term('find . | fzf-tmux --height 15 2>/dev/tty'))
 command! FZFFind :set noquickview | :execute 'goto' fnameescape(term('rg -C1 -S -l --column -H --vimgrep --color=never "%a"| fzf --height 15 2>/dev/tty'))
 
 nnoremap fh :FZFHomeLocate<cr>
+nnoremap fg :FZFGLocate<cr>
 nnoremap f. :FZFFindFile<cr>
 nnoremap f? :FZFFind<space>
 
 command! googlesearch :!g %a
+command! csearch   :!cs %a
+" cs on mac opens chrome
+"command! vcsearch  :!vi $(cs "%a")
+"nnoremap vs :vcsearch<space>
+command! gvi  :!p4 vi -c %a
+command! gAddto  :!p4 addto -c %a %f
+command! bcl  :!bcleanc -c %a
+command! gfourd :execute "cd '".system('p4 g4d $(citcc)')."'"
+command! gfourroot :execute "cd '".system('citcr "%f:p"')."'"
+command! gfouref :execute "cd '".system('citcr "%f:p"')."/ads/statscollection'"
+command! gfourefconfig :execute "cd '".system('citcr "%f:p"')."/configs/analysis/conduit/users'"
+command! gfourflowmon :execute "cd '".system('citcr "%f:p"')."/configs/ads/statscollection/flowmon'"
+command! gfourver :execute "cd '".system('citcr "%f:p"')."/logjoining/instant/verification/configs'"
+command! gfourefborg :execute "cd '".system('citcr "%f:p"')."/production/borg/evenflow-operator'"
+command! gfourefmon :execute "cd '".system('citcr "%f:p"')."/configs/monitoring/evenflow-operator'"
+
 nnoremap g? :googlesearch<space>
 nnoremap gF :!open -g %f<cr>
 nnoremap gn :tabnew<cr>
 nnoremap ch :cd ~<cr>
+nnoremap C  :gfourd<cr>
+nnoremap c, :gfourroot<cr>
+nnoremap cf :gfourflowmon<cr>
+nnoremap cv :gfourver<cr>
+nnoremap cb :gfourborg<cr>
+nnoremap cm :gfourmon<cr>
+nnoremap ec :gfourefconfig<cr>
+nnoremap ef :gfouref<cr>
 nnoremap ci :cd ~/bin<cr>
 nnoremap cr :cd ~/src<cr>
 nnoremap cn :cd ~/.config/nvim<cr>
+nnoremap cs :csearch<space>
 nnoremap vl :!less %f<cr>
+nnoremap gc :!p4 change<cr>
+nnoremap gp :!!p4 pending<cr>
+nnoremap gs :!!p4 diff %f<cr>
+nnoremap ge :!p4 edit %f<cr>
 nnoremap gv :gvi<space>
+nnoremap gz :!!p4 revert %f
+nnoremap gl :!!p4 blame %f<cr>
+nnoremap ga :!!p4 add %f<cr>
+nnoremap gA :gAddto<space>
+nnoremap go :!!p4 opened<cr>
+nnoremap gw :!!p4 whatsout<cr>
+nnoremap bb :!!blaze build ":"%f:r<cr>
+nnoremap bt :!!blaze test ":"%f:r<cr>
+nnoremap bl :!!bcleant ":"%f:r<cr>
+nnoremap bc :bcl<space>
+nnoremap up :!!p4 sync<cr>
 nnoremap B  :!!xxd -g1 %f<cr>
 nnoremap uu :!git pull|less<cr>
 

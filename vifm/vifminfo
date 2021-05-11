@@ -1,0 +1,1098 @@
+# You can edit this file by hand, but it's recommended not to do that.
+
+# Marks:
+'V
+	/Users/jimxu/.vim/bundle/
+	..
+1574900374
+'b
+	/Users/jimxu/bin/
+	..
+1574900374
+'c
+	/Users/jimxu/.vifm/
+	..
+1574900374
+'h
+	/Users/jimxu/
+	..
+1592769929
+'s
+	/Users/jimxu
+	.vimbackup
+1591981563
+'t
+	/Users/jimxu/tmp/
+	..
+1574900374
+
+# Bookmarks:
+
+# TUI:
+al
+q1
+v2
+ov
+m-1
+l2
+r2
+
+# Left window history (oldest to newest):
+d/Users/jimxu/go/src
+	hash
+7
+d/Users/jimxu
+	.zprezto
+18
+d/Users/jimxu/go/src/hash
+	hash.go
+6
+d/Users/jimxu/c++_code
+	str.cc
+42
+d/Users/jimxu/src/agnosterzak-ohmyzsh-theme
+	.git
+0
+d/Users/jimxu/src/abseil-cpp
+	absl
+2
+d/Users/jimxu/src/abseil-cpp/absl
+	strings
+13
+d/Users/jimxu/src/abseil-cpp/absl/strings
+	str_cat.h
+26
+d/Users/jimxu/src/abseil-cpp/absl
+	strings
+13
+d/Users/jimxu/src/abseil-cpp
+	absl
+2
+d/Users/jimxu/src/tinycc/lib
+	bcheck.c
+7
+d/Users/jimxu/src/tinycc
+	lib
+3
+d/Users/jimxu/src/tinycc/lib
+	bcheck.c
+7
+d/Users/jimxu/src/tinycc
+	i386-tok.h
+6
+d/google/src/cloud/jimxu/dotfiles/google3/experimental/users/jimxu/dotfiles/vifm.mac
+	vifmrc
+0
+d/Volumes/google/src/cloud/jimxu/dotfiles/google3
+	apps
+9
+d/google/src/cloud/jimxu/b143943959/google3/ads/statscollection/common
+	scoped_semaphore_acquirer.h
+16
+d/Users/jimxu/src/Nim
+	.travis.yml
+27
+d/Users/jimxu/src/Nim/lib/pure
+	strutils.nim
+36
+d/Users/jimxu/src/Nim/lib
+	pure
+11
+d/Users/jimxu/src/scriptorium
+	.git
+0
+d/Users/jimxu/src/rust
+	build_helper
+0
+d/Users/jimxu/src/scriptorium
+	.git
+0
+d/Users/jimxu/src/scriptorium/.git
+	hooks
+0
+d/Users/jimxu/src/scriptorium/.git/hooks
+	applypatch-msg.sample
+0
+d/Users/jimxu/src/scriptorium/.git
+	hooks
+0
+d/Users/jimxu/src/scriptorium
+	c
+2
+d/Users/jimxu/src/scriptorium/c
+	c4
+0
+d/Users/jimxu/src/scriptorium/c/c4
+	LICENSE
+0
+d/Users/jimxu/src/scriptorium/c
+	c4
+0
+d/Users/jimxu/src/scriptorium/c/c4
+	LICENSE
+0
+d/Users/jimxu/src/scriptorium/c
+	c4jit
+1
+d/Users/jimxu/src/scriptorium/c/c4jit
+	c4.c
+4
+d/Users/jimxu/src/gcc
+	.git
+0
+d/Users/jimxu/src/glibc
+	.git
+0
+d/Users/jimxu/src/linux
+	sound
+20
+d/Users/jimxu/src/lucius
+	.git
+0
+d/Users/jimxu/src/llvm
+	libcxx
+0
+d/Users/jimxu/src/llvm/libcxx
+	.git
+0
+d/Users/jimxu/src/llvm
+	libcxx
+0
+d/Users/jimxu/src/Nim
+	csources
+10
+d/Users/jimxu/.config
+	nvim
+16
+d/Users/jimxu/.config/nvim
+	.git
+0
+d/Users/jimxu/.config
+	nvim
+16
+d/Users/jimxu/.config/nvim
+	keys
+3
+d/Users/jimxu/.config/nvim/keys
+	which-key.vim
+1
+d/Users/jimxu/.config/nvim
+	keys
+3
+d/Users/jimxu/.config
+	liquidpromptrc
+28
+d/Users/jimxu
+	Desktop
+9
+d/Users/jimxu/go/src/time
+	format.go
+6
+d/Users/jimxu/go/src/strings
+	replace.go
+8
+d/Users/jimxu/go/src/time
+	format.go
+6
+d/Users/jimxu/go/src/net
+	main_posix_test.go
+37
+d/Users/jimxu/src/mydotfiles
+	.git
+0
+d/Users/jimxu/go/src/io
+	ioutil
+0
+d/Users/jimxu/go/src/go
+	ast
+0
+d/
+	Users
+5
+d/Users/jimxu/go/src/go
+	printer
+8
+d/Users/jimxu
+	.SpaceVim
+0
+d/Users/jimxu/.SpaceVim
+	.SpaceVim.d
+0
+d/Users/jimxu/.SpaceVim/.SpaceVim.d
+	autoload
+0
+d/Users/jimxu/.SpaceVim/.SpaceVim.d/autoload
+	SpaceVim
+0
+d/Users/jimxu/.SpaceVim/.SpaceVim.d/autoload/SpaceVim
+	api
+0
+d/Users/jimxu/.SpaceVim/.SpaceVim.d/autoload/SpaceVim/api
+	dev
+0
+d/Users/jimxu/.SpaceVim/.SpaceVim.d/autoload/SpaceVim
+	api
+0
+d/Users/jimxu/.SpaceVim/.SpaceVim.d/autoload
+	SpaceVim
+0
+d/Users/jimxu/.SpaceVim/.SpaceVim.d
+	autoload
+0
+d/Users/jimxu/.SpaceVim
+	.SpaceVim.d
+0
+d/Users/jimxu/.SpaceVim/.SpaceVim.d
+	init.vim
+2
+d/Users/jimxu/.SpaceVim
+	config
+9
+d/Users/jimxu/.SpaceVim/config
+	plugins
+0
+d/Users/jimxu/.SpaceVim/config/plugins
+	ctrlsf.vim
+9
+d/Users/jimxu/.SpaceVim/config
+	plugins
+0
+d/Users/jimxu/.SpaceVim
+	config
+9
+d/Users/jimxu/.SpaceVim/config
+	init.vim
+5
+d/Users/jimxu/.SpaceVim
+	config
+9
+d/Users/jimxu
+	.vifm
+8
+d/Users/jimxu/.vifm
+	vifmrc
+5
+d/Users/jimxu
+	vifmrc
+44
+d/tmp
+	vifmrc
+45
+d/Users/jimxu
+	.zprofile
+17
+d/Users
+	jimxu
+2
+d/Users/jimxu
+	go
+18
+d/Users/jimxu/go
+	lib
+8
+d/Users/jimxu
+	go
+18
+d/Users/jimxu/go
+	lib
+8
+d/Users/jimxu
+	.vifm
+4
+d/Users/jimxu/.vifm
+	vifmrc
+5
+d/Users/jimxu
+	.vifm
+4
+d/Users/jimxu/.vifm
+	vifmrc
+5
+d/Users/jimxu
+	go_code
+47
+d/Users/jimxu/go_code
+	src
+2
+d/Users/jimxu
+	go
+45
+d/Users/jimxu/go
+	test
+13
+d/Users/jimxu/go/test
+	alias3.dir
+0
+d/Users/jimxu/go
+	src
+12
+d/Users/jimxu/go/src
+	sync
+41
+d/Users/jimxu/go/src/sync
+	runtime.go
+17
+d/Users/jimxu/go/src
+	sync
+41
+d/Users/jimxu/go
+	src
+12
+d/Users/jimxu
+	go14-bootstrap
+43
+d/Users/jimxu/go14-bootstrap
+	go1.4-bootstrap-20161024.tar.gz
+0
+d/Users/jimxu
+	go
+42
+d/Users/jimxu/go
+	src
+12
+d/Users/jimxu/go/src
+	runtime
+37
+d/Users/jimxu/go/src/runtime
+	chan.go
+8
+d/Users/jimxu
+	src
+32
+d/Users/jimxu/src
+	neovim
+32
+d/Users/jimxu/src/neovim
+	neovim-src
+0
+d/Users/jimxu/src/neovim/neovim-src
+	.luacheckrc
+22
+d/Users/jimxu
+	.yjp
+30
+d/Users/jimxu/.yjp
+	log
+0
+d/Users/jimxu
+	go
+48
+d/Users/jimxu/go
+	src
+12
+d/Users/jimxu/go/src
+	go
+15
+d/Users/jimxu/src/neovim/neovim-src
+	snap
+12
+d/Users/jimxu/src/gotop
+	src
+8
+d/Users/jimxu/src/gotop/src
+	termui
+1
+d/Users/jimxu/src/gotop/src/termui
+	table.go
+3
+d/Users/jimxu/src/gotop/src
+	widgets
+3
+d/Users/jimxu/src/gotop/src/widgets
+	proc_linux.go
+11
+d/Users/jimxu/src/gotop/src
+	widgets
+3
+d/Users/jimxu/src/gotop/src/widgets
+	proc.go
+9
+d/Users/jimxu/src/gotop/src
+	termui
+1
+d/Users/jimxu/src/gotop/src/termui
+	table.go
+3
+d/Users/jimxu/src/gotop/src
+	widgets
+3
+d/Users/jimxu/src/gotop/src/widgets
+	proc.go
+9
+d/Users/jimxu/src/gotop/src
+	termui
+1
+d/Users/jimxu/src/gotop/src/termui
+	drawille-go
+0
+d/Users/jimxu/src/gotop/src/termui/drawille-go
+	drawille.go
+2
+d/Users/jimxu/src/gotop/src/termui
+	table.go
+3
+d/Users/jimxu/src/gotop/src
+	widgets
+3
+d/Users/jimxu/src/gotop
+	colorschemes
+5
+d/Users/jimxu/src/gotop/colorschemes
+	monokai.png
+4
+d/Users/jimxu/src/gotop
+	scripts
+6
+d/Users/jimxu/src/gotop/scripts
+	download.sh
+0
+d/Users/jimxu/src/gotop
+	scripts
+6
+d/Users/jimxu/src
+	gotop
+13
+d/Users/jimxu/src/gotop
+	README.md
+15
+d/Users/jimxu/src
+	gotop
+13
+d/Users/jimxu/src/gotop
+	README.md
+15
+d/Users/jimxu/src
+	radare2
+23
+d/Users/jimxu/src/radare2
+	.git
+0
+d/Users/jimxu/src/radare2/.git
+	hooks
+0
+d/Users/jimxu/src/radare2/.git/hooks
+	applypatch-msg.sample
+0
+d/Users/jimxu
+	src
+55
+d/Users/jimxu/src
+	mockito
+5
+d/Users/jimxu/src/mockito
+	.git
+0
+d/Users/jimxu/src
+	mockito
+5
+d/Users/jimxu
+	go
+16
+d/Users/jimxu/go
+	src
+8
+d/Users/jimxu/go/src
+	hash
+7
+d/Users/jimxu
+	.vimundo
+4
+d/Users/jimxu/.vimundo
+	%Users%jimxu%.SpaceVim%init.vim
+0
+d/Users/jimxu
+	.vifm
+9
+d/Users/jimxu/.vifm
+	vifmrc
+6
+d/Users/jimxu
+	.ssh
+7
+d/Users/jimxu/.ssh
+	id_ed25519.pub
+6
+d/Users/jimxu
+	.spf13-vim-3
+6
+d/Users/jimxu/.spf13-vim-3
+	.vim
+1
+d/Users/jimxu/.spf13-vim-3/.vim
+	bundle
+1
+d/Users/jimxu/.spf13-vim-3/.vim/bundle
+	auto-pairs-gentle
+8
+d/Users/jimxu/.spf13-vim-3/.vim/bundle/auto-pairs-gentle
+	.git
+0
+d/Users/jimxu/.spf13-vim-3/.vim/bundle
+	ale
+7
+d/Users/jimxu/.spf13-vim-3/.vim/bundle/ale
+	.git
+0
+d/Users/jimxu/.spf13-vim-3/.vim/bundle
+	vim-haml
+20
+d/Users/jimxu/.spf13-vim-3/.vim/bundle/vim-haml
+	.git
+0
+d/Users/jimxu/.spf13-vim-3/.vim/bundle
+	vim-haml
+20
+d/Users/jimxu/.spf13-vim-3/.vim/bundle/vim-haml
+	.git
+0
+d/Users/jimxu/.spf13-vim-3/.vim/bundle
+	vim-go
+19
+d/Users/jimxu/.spf13-vim-3/.vim/bundle/vim-go
+	.git
+0
+d/Users/jimxu/.spf13-vim-3/.vim/bundle
+	vim-gitgutter
+18
+d/Users/jimxu/.spf13-vim-3/.vim/bundle/vim-gitgutter
+	.git
+0
+d/Users/jimxu/.spf13-vim-3/.vim/bundle
+	vim-fugitive
+17
+d/Users/jimxu/.spf13-vim-3/.vim/bundle/vim-fugitive
+	.git
+0
+d/Users/jimxu/.spf13-vim-3/.vim/bundle
+	vim-fish
+16
+d/Users/jimxu/.spf13-vim-3/.vim/bundle/vim-fish
+	.git
+0
+d/Users/jimxu/.spf13-vim-3/.vim/bundle
+	vim-farout
+15
+d/Users/jimxu/.spf13-vim-3/.vim/bundle/vim-farout
+	.git
+0
+d/Users/jimxu/.spf13-vim-3/.vim/bundle
+	vim-expand-region
+14
+d/Users/jimxu/.spf13-vim-3/.vim/bundle/vim-expand-region
+	.git
+0
+d/Users/jimxu/.spf13-vim-3/.vim/bundle
+	vim-css3-syntax
+9
+d/Users/jimxu/.spf13-vim-3/.vim/bundle/vim-css3-syntax
+	.git
+0
+d/Users/jimxu/.spf13-vim-3/.vim/bundle
+	vim-commentary
+8
+d/Users/jimxu/.spf13-vim-3/.vim/bundle/vim-commentary
+	.git
+0
+d/Users/jimxu/.spf13-vim-3/.vim/bundle
+	vim-multiple-cursors
+29
+d/Users/jimxu/.spf13-vim-3/.vim/bundle/vim-multiple-cursors
+	.git
+0
+d/Users/jimxu/.spf13-vim-3/.vim/bundle
+	vim-nerdtree-tabs
+30
+d/Users/jimxu/.spf13-vim-3/.vim/bundle/vim-nerdtree-tabs
+	.git
+0
+d/Users/jimxu/.spf13-vim-3/.vim/bundle
+	vim-over
+31
+d/Users/jimxu/.spf13-vim-3/.vim/bundle/vim-over
+	.git
+0
+d/Users/jimxu/.spf13-vim-3/.vim/bundle
+	vim-snippets
+39
+d/Users/jimxu/.spf13-vim-3/.vim/bundle/vim-snippets
+	.git
+0
+d/Users/jimxu/.spf13-vim-3/.vim/bundle
+	vim-surround
+40
+d/Users/jimxu/.spf13-vim-3/.vim/bundle/vim-surround
+	.git
+0
+d/Users/jimxu/.spf13-vim-3/.vim/bundle
+	vim-toml
+41
+d/Users/jimxu/.spf13-vim-3/.vim/bundle/vim-toml
+	.git
+0
+d/Users/jimxu/.spf13-vim-3/.vim/bundle
+	vundle
+44
+d/Users/jimxu/.spf13-vim-3/.vim/bundle/vundle
+	.git
+0
+d/Users/jimxu/.spf13-vim-3/.vim/bundle
+	nerdtree
+26
+d/Users/jimxu
+	.fasd-init-zsh
+7
+d/Users/jimxu/Downloads
+	.bagpipe
+0
+d/Users/jimxu
+	.vimrc.local
+10
+d/Users
+	jimxu
+1
+d/Users/jimxu
+	.spf13-vim-3
+4
+d/Users/jimxu/.spf13-vim-3
+	.vim
+1
+d/Users/jimxu/.spf13-vim-3/.vim
+	bundle
+1
+d/Users/jimxu/.spf13-vim-3/.vim/bundle
+	
+1
+d/Users/jimxu/.spf13-vim-3/.vim
+	last-session.vim
+6
+d/Users/jimxu
+	.zprezto
+30
+d/google/src/cloud/jimxu/b143943959/google3/ads/statscollection/common
+	workgraph_any_protos.py
+29
+d/Users/jimxu
+	go14-bootstrap
+30
+d/Users/jimxu/go14-bootstrap
+	go1.4-bootstrap-20161024.tar.gz
+0
+d/Users/jimxu
+	go
+29
+d/Users/jimxu/go
+	src
+8
+d/Users/jimxu/go/src
+	hash
+7
+d/Users/jimxu
+	go
+18
+d
+
+# Right window history (oldest to newest):
+D/google/src
+	
+0
+D/google/src/cloud/jimxu/dotfiles/google3/experimental/users/jimxu/dotfiles/vim
+	.vimrc.local
+2
+D/google/src/cloud/jimxu/dotfiles/google3/experimental/users/jimxu/dotfiles/nvim/utils/images
+	nvim.png
+0
+D/google/src/cloud/jimxu/dotfiles/google3/experimental/users/jimxu/dotfiles/nvim/utils
+	images
+0
+D/google/src/cloud/jimxu/dotfiles/google3/experimental/users/jimxu/dotfiles/nvim
+	README.md
+11
+D/google/src/cloud/jimxu/dotfiles/google3/experimental/users/jimxu/dotfiles/vim.mac
+	
+0
+D/Users/jimxu/go/src/sort
+	genzfunc.go
+7
+D/Users/jimxu
+	.vimrc
+23
+D/google/src/cloud/jimxu/dotfiles/google3/experimental/users/jimxu/dotfiles/vim.mac
+	.vimrc.local
+2
+D/Users/jimxu
+	go
+25
+D/Users
+	jimxu
+2
+D/Users/jimxu
+	go
+25
+D/Users/jimxu/go
+	test
+13
+D/Users/jimxu/go/test
+	defererrcheck.go
+39
+D/Users/jimxu/go
+	test
+13
+D/Users/jimxu
+	go
+25
+D/Users/jimxu/go
+	test
+13
+D/Users/jimxu/go/test
+	const5.go
+21
+D/Users/jimxu/go
+	src
+12
+D/Users/jimxu/go/src
+	io
+25
+D/Users/jimxu/go/src/io
+	io.go
+2
+D/Users/jimxu/go/src
+	io
+25
+D/Users/jimxu/go/src/io
+	multi.go
+4
+D/Users/jimxu/go/src
+	go
+19
+D/Users/jimxu/go/src/go
+	types
+11
+D/Users/jimxu/go/src/go/types
+	eval.go
+12
+D/Users/jimxu/go/src/go
+	format
+4
+D/Users/jimxu/go/src
+	awesome-macos-command-line
+3
+D/Users/jimxu/go
+	build
+6
+D/Users/jimxu
+	.subversion
+4
+D/Users
+	jimxu
+1
+D/Users/jimxu
+	.subversion
+4
+D/Users/jimxu/.subversion
+	auth
+0
+D/Users/jimxu/.subversion/auth
+	svn.username
+3
+D/Users/jimxu/.subversion/auth/svn.username
+	..
+0
+D/Users/jimxu/.subversion/auth
+	svn.username
+3
+D/Users/jimxu/.subversion/auth/svn.username
+	..
+0
+D/Users/jimxu/.subversion/auth
+	svn.username
+3
+D/Users/jimxu/.subversion/auth/svn.username
+	..
+0
+D/Users/jimxu/.subversion/auth
+	svn.simple
+0
+D/Users/jimxu/.subversion/auth/svn.simple
+	..
+0
+D/Users/jimxu/.subversion/auth
+	svn.simple
+0
+D/Users/jimxu/.subversion/auth/svn.simple
+	..
+0
+D/Users/jimxu/.subversion/auth
+	svn.simple
+0
+D/Users/jimxu/.subversion/auth/svn.simple
+	..
+0
+D/Users/jimxu/.subversion/auth
+	svn.ssl.client-passphrase
+1
+D/Users/jimxu/.subversion
+	auth
+0
+D/Users/jimxu
+	.SpaceVim
+0
+D/Users/jimxu/.SpaceVim
+	test
+18
+D/Users/jimxu
+	.editorconfig
+8
+D/Users
+	jimxu
+1
+D/Users/jimxu
+	.subversion
+9
+D/google/src/cloud/jimxu/dotfiles/google3/experimental/users/jimxu/dotfiles/vifm.mac
+	vifmrc
+0
+D/google/src/cloud/jimxu/dotfiles/google3/experimental/users/jimxu/dotfiles
+	vim.mac
+6
+D/google/src/cloud/jimxu/dotfiles/google3/experimental/users/jimxu/dotfiles/vim.mac
+	.vimrc.local
+2
+D/google/src/cloud/jimxu/dotfiles/google3/experimental/users/jimxu/dotfiles
+	vifm.mac
+5
+D/google/src/cloud/jimxu/dotfiles/google3/experimental/users/jimxu/dotfiles/vifm.mac
+	vifmrc
+0
+D/google/src/cloud/jimxu/dotfiles/google3/experimental/users/jimxu/dotfiles
+	vscode
+8
+D/google/src/cloud/jimxu/dotfiles/google3/experimental/users/jimxu/dotfiles/vscode
+	keybindings.json
+0
+D/google/src/cloud/jimxu/dotfiles/google3/experimental/users/jimxu/dotfiles
+	vim.mac
+9
+D/google/src/cloud/jimxu/dotfiles/google3/experimental/users/jimxu/dotfiles/vim.mac
+	.vimrc.local
+2
+D/google/src
+	status
+0
+D/google
+	src
+1
+D/Users/jimxu
+	.vifm
+13
+D/Users/jimxu/.vifm
+	vifmrc
+6
+D/Users/jimxu
+	go
+47
+D/Users/jimxu/go
+	src
+8
+D/Users/jimxu/go/src
+	sort
+33
+D/Users/jimxu/go/src/sort
+	search.go
+8
+D/Users/jimxu/go/src
+	sort
+33
+D/Users/jimxu/go
+	src
+8
+D/google/src/cloud/jimxu/dotfiles/google3/experimental/users/jimxu/dotfiles/nvim.mac
+	lua
+4
+D/google/src/cloud/jimxu/dotfiles/google3/experimental/users/jimxu/dotfiles
+	vim.mac
+16
+D/google/src/cloud/jimxu/dotfiles/google3/experimental/users/jimxu/dotfiles/vim.mac
+	.vimrc.before.local
+0
+D/google/src/cloud/jimxu/dotfiles/google3/experimental/users/jimxu/dotfiles
+	vim.mac
+17
+D/google/src/cloud/jimxu/dotfiles/google3/experimental/users/jimxu/dotfiles/vim.mac
+	.vimrc.local
+2
+D/google/src
+	
+0
+D
+
+# Command line history (oldest to newest):
+:!v %f
+:e .config/nvim/keys/which-key.vim
+:!git clone https://github.com/r-lyeh-archived/scriptorium.git
+:grep html
+:!makeinfo --html --no-split -o tcc.html tcc-doc.texi
+:grep texi
+:nmap
+:map eb
+:e ~/.vimrc.local
+:!ssh-keygen -t ed25519 -C "gitlib"
+:!git clone https://gitlab.com/protesilaos/tempus-themes.git
+:e .
+:!p4 pending
+:s
+:help
+:colorscheme dracula
+:.,.+1
+:colorscheme gruvbox
+:colorscheme lucius
+:colorscheme matrix
+:grep *.nim
+:!bat %f
+:nmap 
+:cd src
+:!git reset --HARD
+:!git reset --
+:q:q
+:!lscider
+:!myciderkeys
+:!w3m google.com
+:!./all.bash
+:ping google.com
+:!ping google.com
+:df -ha
+:!cl 305804639
+:!cl "metric.go"
+:!cl "a:jimxu metrics.go"
+:q!:q
+:!gmail
+:!cl
+:set
+:view
+:cd /tmp/
+:cd -
+:ls
+:tabnew
+:tabprevious
+:dirs
+:vs g
+:vs go
+:vs .
+:vs
+:ls -x
+:compare
+:w
+:wq
+:!pa
+:!sux
+:!gotop -
+:Q
+:q:
+:>>>>>>>>>>>>
+:!git pull
+:!ls -la ~/bin/nvim
+:!ls -la ~/bin/nvim | lesss
+:!ls -la ~/bin/nvim | less
+:!ma
+:nnoremap
+:!g4 submit -c 314685460
+:!p4 submit -c 314685460
+:p4 revert -c 314686420
+:!p4 revert -c 314686420
+:cmp
+:!cdiff ~/.vimrc.local /google/src/cloud/jimxu/dotfiles/google3/experimental/users/jimxu/dotfiles/vim.mac/.vimrc.local
+:!!cdiff ~/.vimrc.local /google/src/cloud/jimxu/dotfiles/google3/experimental/users/jimxu/dotfiles/vim.mac/.vimrc.local
+:!p4 submit -c 314687119
+:colo dracula
+:colo iceberg
+:colo gruvbox
+:colo molokai
+:colo onedark
+:colo palenight
+:colo ph
+:colo semidarkdesert
+:colo matrix
+:!g4 submit -c 315116974
+:!p4 submit -c 315116974
+:!v .vimrc.local
+:q
+:e
+:q!
+:pwd
+:colorscheme palenight
+
+# Search history (oldest to newest):
+/str.cc
+/str
+/view
+/c4
+/html
+/texi
+/ev
+/.ssh
+/scrip
+/gu
+/git pu
+/absl
+/linux
+/.Space
+/.config
+/nvim
+/ru
+/go/src
+/time/
+/for
+/strings
+/replace
+/time
+/form
+/net
+/run
+/vim_k
+/tmux
+/vimrc.l
+/vimrc
+/sync
+/map
+/runtime
+/chan.go
+/src/
+/neo
+/go/
+/src
+/nerd
+/space
+/vifm
+/.vifm
+/.vimrc.loc
+/zshrc
+/.zshrc
+/go
+/.vimrc.local
+/vimrc.local
+/.vimrc.l
+/.spf
+/bundles
+/bun
+/vim
+
+# Prompt history (oldest to newest):
+
+# Local filter history (oldest to newest):
+
+# Registers:
+""/Users/jimxu/.vimrc.local
+
+# Directory stack (oldest to newest):
+
+# Trash content:
+
+# State:
+f/^.*\.(lo|o|d|class|py[co]|meta)$|.*~$|^\$RECYCLE\.BIN\/$/
+i1
+[.0
+[F
+F/^.*\.(lo|o|d|class|py[co]|meta)$|.*~$|^\$RECYCLE\.BIN\/$/
+I1
+].0
+]F
+s0
