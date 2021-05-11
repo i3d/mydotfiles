@@ -1,0 +1,10 @@
+#!/bin/zsh
+#
+
+imdb=$($HOME/bin/ptgo --show search "$@" | fzf | \
+			awk -F'|' '{print $NF}' | awk -F: '{print $NF}')
+[[ -z $imdb ]] && exit 0
+entry=$($HOME/bin/ptgo --show torrent $imdb | fzf)
+[[ -z $entry ]] && exit 0
+
+$HOME/bin/ptgo --show play $$(echo $entry | awk -F'|' '{print $NF}')

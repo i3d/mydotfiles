@@ -1,0 +1,8 @@
+#!/bin/bash
+
+ps -ef|grep VBoxHeadless >/dev/null || \
+    ( VBoxManage startvm "manjaro" --type headless && \
+    echo "Sleep 20s for manjaro/arch to startup ..." && sleep 20 )
+
+echo "SSH to Manjaro/Arch ..."
+ssh -t -A -x jimxu@192.168.1.114

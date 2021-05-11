@@ -1,0 +1,15 @@
+#!/bin/bash
+
+pid=
+
+if [ "$UID" != "0" ]
+then
+	pid=$(ps -f -u $UID | sed 1d | fzf -m --keep-right --cycle -0 -1| awk '{print $2}')
+else
+	pid=$(ps -ef | sed 1d | fzf -m --keep-right --cycle -0 -1| awk '{print $2}')
+fi
+
+if [ "x$pid" != "x" ]
+then
+	echo $pid | xargs kill -${1:-9}
+fi

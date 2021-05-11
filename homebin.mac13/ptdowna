@@ -1,0 +1,11 @@
+#!/bin/zsh
+#
+
+imdb=$($HOME/bin/ptgo --anime search "$@" | fzf | \
+			awk -F'|' '{print $NF}' | awk -F: '{print $NF}')
+[[ -z $imdb ]] && exit 0
+entry=$($HOME/bin/ptgo --anime torrent $imdb | fzf)
+[[ -z $entry ]] && exit 0
+
+$HOME/bin/ptgo --anime download $(echo ${entry} | awk -F'|' '{print $NF}')
+

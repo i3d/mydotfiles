@@ -1,0 +1,4 @@
+#!/bin/bash
+
+/Applications/goneovim.app/Contents/MacOS/goneovim --nvim=$HOME/bin/v 2>/dev/null &
+

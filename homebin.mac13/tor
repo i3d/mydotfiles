@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# The old Reader.
+nb -C $HOME/.newsboat/config.tor 

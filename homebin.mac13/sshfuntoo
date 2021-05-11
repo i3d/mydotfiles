@@ -1,0 +1,10 @@
+#!/bin/zsh
+#
+VM="funtoo"
+while ! VboxManage list runningvms |grep $VM >/dev/null; do
+    echo "starting $VM vm ..."
+    $HOME/bin/vboxfuntoo
+    sleep 3
+done
+sleep 3
+ssh -t -A -X jimxu@funtoo

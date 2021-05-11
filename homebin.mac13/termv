@@ -1,0 +1,5 @@
+#!/bin/zsh
+#
+# make sure we are at home first, as termv needs write access to .config
+cd $HOME && $HOME/.local/bin/termv
+

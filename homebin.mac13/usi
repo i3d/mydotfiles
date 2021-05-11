@@ -1,0 +1,4 @@
+#!/bin/bash
+
+ssh -t -A -x jimxu@u-server "$@"
+#mosh -- jimxu@u-server "$@"

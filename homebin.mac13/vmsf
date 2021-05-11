@@ -1,0 +1,4 @@
+#!/bin/bash
+[[ $# = 0 ]] && \
+/Applications/VMware\ Fusion.app/Contents/Library/vmrun -T fusion start /Users/jimxu/Documents/Virtual\ Machines.localized/Ubuntu-64.vmwarevm/Ubuntu-64.vmx || \
+/Applications/VMware\ Fusion.app/Contents/Library/vmrun -T fusion start /Users/jimxu/Documents/Virtual\ Machines.localized/Ubuntu-64.vmwarevm/Ubuntu-64.vmx "$@"

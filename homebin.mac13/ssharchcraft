@@ -1,0 +1,10 @@
+#!/bin/zsh
+#
+VM="archcraft"
+while ! VboxManage list runningvms |grep $VM >/dev/null; do
+    echo "starting $VM vm ..."
+    $HOME/bin/vboxarchcraft
+    sleep 3
+done
+ssh -t -A -X jimxu@archcraft
+#/usr/bin/ssh -F /dev/null -o PubkeyAuthentication=no jimxu@192.168.1.98

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+#jimxuels
+VM="elementary"
+while ! vboxmanage list runningvms |grep $VM >/dev/null; do
+    echo "starting vm ..."
+    $HOME/bin/vboxels
+    sleep 3
+done
+/usr/bin/ssh -F /dev/null -o PubkeyAuthentication=no jimxu@192.168.1.118

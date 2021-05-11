@@ -1,0 +1,3 @@
+#!/bin/zsh
+#
+go doc -u --all -src "$@" | bat -l go -p --pager=never

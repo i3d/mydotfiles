@@ -35,3 +35,8 @@ echo "-- <space>s or ,s to open all different kinds of search functions, especia
 echo "-- :call jobstart("command") can run arbitrary linux command async."
 echo "-- motion: [vycd][ia][thing], eg. ciw,diw,dt{, vf{% - v select to { and then % select to the end of }. % matches the pairs"
 echo "-- ctrl-a incrmenta the number, ctrl-x decrease it."
+echo "-- :[range]g/{patt}/{cmd}, :g/^\s*$/d -- del blank lines."
+echo "-- :[range]g/{patt}/{cmd}, :g[!]/foo/d -- del lines with [or not with] foo."
+echo "-- :[range]g/{patt}/{cmd}, :g/foo/m$ -- move lines with foo to the end of the file. :g/^/m0 -- reserve entire file."
+echo "-- :[range]g/{patt}/{cmd}, :g/^/t. -- dup lines."
+echo "-- w3m https://quickref.me/vim to see vim cheatsheet."

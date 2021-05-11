@@ -1,0 +1,4 @@
+#!/bin/zsh
+
+# doom CLI frontend
+~/bin/emacs -nw "$@"
