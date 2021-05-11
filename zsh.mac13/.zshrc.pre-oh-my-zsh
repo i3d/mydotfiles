@@ -249,7 +249,7 @@ alias gtagsjs='/home/build/nonconf/google3/tools/tags/gtags.sh --lang=javascript
 alias gtagspb='/home/build/nonconf/google3/tools/tags/gtags.sh --lang=proto'
 alias gtagspy='/home/build/nonconf/google3/tools/tags/gtags.sh --lang=python'
 alias vless='vi -u /usr/share/vim/vim80/macros/less.vim'
-#alias ls='/bin/ls -trABipFG'
+alias bls='/bin/ls -trABipFG'
 alias ls='exa -aBFG --sort=type --icons --time=modified --git --color=always'
 alias l='ls -Hlghi --sort=modified --group-directories-first'
 alias lsd='l -D'
