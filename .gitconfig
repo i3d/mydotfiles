@@ -1,0 +1,109 @@
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+[core]
+  abbrev = 12
+  attributesfile = ~/.config/secure/git/attributes
+  excludesfile = ~/.config/secure/git/ignore
+  autocrlf = input
+  editor = vim
+  compression = -1
+  packedGitLimit = 128m
+  packedGitWindowSize = 128m
+  fileMode = false
+  editor = $EDITOR
+  pager = delta
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+[commit]
+  template = ~/.config/secure/git/message
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+[credential]
+  helper = store --file ~/.config/secure/git/credentials
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+[init]
+  defaultBranch = main
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+[gpg]
+  program = gpg
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+[color "branch"]
+  current = green bold
+  local = green
+  remote = yellow
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+[status]
+  submoduleSummary = 1
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+[color "diff"]
+  frag = magenta
+  meta = yellow
+  new = green
+  old = red
+  newMoved = cyan
+  oldMoved = blue
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+[color "status"]
+  added = green reverse
+  changed = yellow reverse
+  untracked = red reverse
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+   #features = side-by-side line-numbers decorations
+  features = side-by-side  decorations
+  #features = decorations
+  line-numbers = false
+  hunk-header-style = omit
+  whiltespace-error-style = 22 reverse
+  plus-style = "syntax #0C4000"
+  minus-style = "syntax #500002"
+  syntax-theme = Monokai Extended
+  navigate = true
+[delta "decorations"]
+  commit-decoration-style = bold yellow box ul
+  file-style = bold yellow ul
+  file-decoration-style = none
+[diff]
+  colorMoved = zebra
+  submodule = log
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+[diff "bin"]
+  textconv = hexdump -v -C
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+[pack]
+  deltaCacheSize = 128m
+  packSizeLimit = 128m
+  windowMemory = 128m
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+[pretty]
+  custom = "%C(magenta)%h%C(red)%d %C(yellow)%ar %C(green)%s %C(yellow)(%an)"
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+[push]
+  followTags = true
+  recurseSubmodules = on-demand
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+[pull]
+  rebase = false
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+[user]
+  useConfigOnly = true
+	email = i3dmaster@gmail.com
+	name = i3d
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+[http]
+  sslVerify = false
+  postBuffer = 5m
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+[receive]
+  denyNonFastforwards = false
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+[advice]
+	detachedHead = false
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+[include]
+  path = ~/.config/git/alias
+  path = ~/.config/git/functions
+  path = ~/.config/local/gitconfig.local
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#end
+

@@ -8,6 +8,9 @@ set guitabbar=onupdate
 set permissioncamera=ask
 set permissiondisplaycapture=ask
 set permissiongeolocation=ask
+set permissionmediadevices=allowfull
+set permissionnotifications=allow
+set redirecttohttp
 set splitright
 set suggestcommands=200
 set suggestexplore=50
@@ -18,12 +21,13 @@ set tabclosefocusright
 set windowtitle=url
 
 " Mappings
-nmap O <action.openNewTab><Space>|<Space><action.toExploreMode>
+nmap <Tab> <action.toNextSplitWindow>
+nmap O <action.openNewTab><action.toExploreMode>
 nmap a <action.toInsertMode>
 nmap ? :map!<CR>
 nmap ] <action.nextTab>
 nmap [ <action.previousTab>
-nmap <M-o> <action.openNewTab><Space>|<Space><action.toExploreMode>
+nmap <M-o> <action.openNewTab><action.toExploreMode>
 nmap o <action.toExploreMode>
 nmap <M-f> <action.toggleFullscreen>
 nmap <M-r> :restart<CR>
@@ -32,6 +36,7 @@ nmap gz :only<CR>
 nmap gp :pin<CR>
 nmap <Space>2 :vs<CR>
 nmap <Space>1 :split<CR>
+nmap <Space>b :b<space>
 nmap <M-=> <action.zoomIn>
 nmap <M--> <action.zoomOut>
 nmap <M-[> <action.toLastUsedTab>
@@ -42,6 +47,7 @@ nmap <M-0> <action.toLastSplitWindow>
 nmap <M-l> <action.rotateSplitWindow>
 nmap , <action.decreaseWidthSplitWindow>
 nmap . <action.increaseWidthSplitWindow>
+nmap ; <action.decreaseHeightSplitWindow>
 
 " Commands
 colorscheme gruvbox
