@@ -37,6 +37,7 @@ nmap gp :pin<CR>
 nmap <Space>2 :vs<CR>
 nmap <Space>1 :split<CR>
 nmap <Space>b :b<space>
+nmap <Space>q :quitall<cr>
 nmap <M-=> <action.zoomIn>
 nmap <M--> <action.zoomOut>
 nmap <M-[> <action.toLastUsedTab>
