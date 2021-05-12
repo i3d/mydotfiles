@@ -166,7 +166,7 @@ body:not(#app) ::placeholder {
   color: var(--placeholder-text);
 }
 ::-webkit-scrollbar {
-  width: 0;
+  width: 1em;
   background: var(--scrollbar-bg);
 }
 ::-webkit-scrollbar-thumb {
