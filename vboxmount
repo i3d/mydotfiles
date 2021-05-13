@@ -1,0 +1,3 @@
+# for virtualbox share
+# dev                                          mount point 			fs              opts
+jimxu                                           /mnt/home       vboxsf          defaults,rw,uid=1000,gid=1000 0 0
