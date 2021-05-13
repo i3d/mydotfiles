@@ -1,99 +1,225 @@
 #!/bin/bash
 
+setup_src() {
+  mkdir -p $HOME/my_completions
+  mkdir -p $HOME/src
+}
+
 # time setup
-sudo ln -sf /usr/share/zoneinfo/PST8PDT /etc/localtime
-sudo timedatectl set-ntp true
-sudo hwclock --systohc
-sudo sed -i '177s/.//' /etc/locale.gen
-sudo sed -i '178s/.//' /etc/locale.gen
-sudo locale-gen
-sudo echo "LANG=en_US.UTF-8" >> /etc/locale.conf
-sudo echo "archcraft" >> /etc/hostname
+setup_time() {
+  while read -ep "Do you want to setup time/lang/host [yY|Yes|yes|any other key to cancel]? " a; do
+    case $a in
+      y|Y|Yes|yes)
+        sudo ln -sf /usr/share/zoneinfo/PST8PDT /etc/localtime
+        sudo timedatectl set-ntp true
+        sudo hwclock --systohc
+        sudo sed -i '177s/.//' /etc/locale.gen
+        sudo sed -i '178s/.//' /etc/locale.gen
+        sudo locale-gen
+        sudo echo "LANG=en_US.UTF-8" >> /etc/locale.conf
+        sudo echo "archcraft" >> /etc/hostname
+        break;;
+      *) return;;
+    esac
+  done
+}
 
 # update system
-sudo pacman -S archlinux-keyring || sudo pacman-key --populate
-sudo pacman -Syy && sudo pacman -Syu
-[[ -f $HOME/.config/polybar/fix_modules.sh ]] && $HOME/.config/polybar/fix_modules.sh
-sudo grub-mkconfig -o /boot/grub/grub.cfg
-sudo pacman -S --noconfirm linux-headers reflector base-devel inetutils dnsutils openssh rsync
+update_system() {
+  sudo pacman -S archlinux-keyring || sudo pacman-key --populate
+  sudo pacman -Syy && sudo pacman -Syu
+  [[ -f $HOME/.config/polybar/fix_modules.sh ]] && $HOME/.config/polybar/fix_modules.sh
+  sudo grub-mkconfig -o /boot/grub/grub.cfg
+  sudo pacman -S --noconfirm linux-headers reflector base-devel inetutils dnsutils openssh rsync
+}
 
 # setup tools
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-HOMEBREW_PREFIX=/home/linuxbrew/.linuxbrew
-eval $(${HOMEBREW_PREFIX}/bin/brew shellenv)
-brew install fortune asdf node yarn hub go gotop neofetch autojump fasd glow lolcat cowsay
+setup_brew() {
+  while read -ep "Do you want to setup homebreww [yY|Yes|yes|any other key to cancel]? " a; do
+    case $a in
+      y|Y|Yes|yes)
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        HOMEBREW_PREFIX=/home/linuxbrew/.linuxbrew
+        eval $(${HOMEBREW_PREFIX}/bin/brew shellenv)
+        brew install fortune asdf node yarn hub go gotop neofetch autojump fasd glow lolcat cowsay
+        break;;
+      *) return;;
+    esac
+  done
+}
 
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-source $HOME/.cargo/env
-rustup update && rustup default nightly
-cargo install bat ripgrep git-delta exa tokei procs
-# from cargo having problem, try brew them.
+setup_rust() {
+  while read -ep "Do you want to setup rust [yY|Yes|yes|any other key to cancel]? " a; do
+    case $a in
+      y|Y|Yes|yes)
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+        source $HOME/.cargo/env
+        rustup update && rustup default nightly
+        cargo install bat ripgrep git-delta exa tokei procs
+        break;;
+        *) return;;
+    esac
+  done
+}
 
-yay -S neovim-nightly-bin
+install_from_brew() {
+  # from cargo having problem, try brew them.
+  while read -ep "Do you want to install rust tools from brew [yY|Yes|yes|any other key to cancel]? " a; do
+    case $a in
+      y|Y|Yes|yes)
+        HOMEBREW_PREFIX=/home/linuxbrew/.linuxbrew
+        eval $(${HOMEBREW_PREFIX}/bin/brew shellenv)
+        brew install bat ripgrep git-delta exa tokei procs
+        break;;
+      *) return;;
+    esac
+  done
+}
+
+# setup src and packages
+setup_pip() {
+  while read -ep "Do you want to setup pip [yY|Yes|yes|any other key to cancel]? " a; do
+    case $a in
+      y|Y|Yes|yes)
+        cd $HOME/src
+        curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+        python get-pip.py
+        export PATH=$HOME/.local/bin:$PATH
+        pip install ipython
+        break;;
+      *) return;;
+    esac
+  done
+}
+
+install_neovim() {
+  while read -ep "How do you want to install neovim [yay|git|brew]? " a; do
+    case $a in
+      yay) 
+        yay -S neovim-nightly-bin
+        break;;
+      git)
+        echo "Install build dependencies ..."
+        sudo pacman -S base-devel cmake unzip ninja tree-sitter
+        mkdir -p $HOME/src
+        cd $HOME/src
+        git clone https://github.com/neovim/neovim.git
+        cd neovim
+        make distclean && make CMAKE_EXTRA_FLAGS=-DCMAKE_INSTALL_PREFIX=$HOME/.local CMAKE_BUILD_TYPE=Release
+        make install
+        break;;
+      brew)
+        HOMEBREW_PREFIX=/home/linuxbrew/.linuxbrew
+        eval $(${HOMEBREW_PREFIX}/bin/brew shellenv)
+        brew install neovim --HEAD
+        break;;
+      *) return;;
+    esac
+  done
+  pip install pynvim
+}
 
 # or build from source
 # ubuntu:
 # sudo apt-get install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip
-# arch:
-# sudo pacman -S base-devel cmake unzip ninja tree-sitter
-#
-# git clone https://github.com/neovim/neovim.git
-# cd neovim
-# make distclean && make CMAKE_EXTRA_FLAGS=-DCMAKE_INSTALL_PREFIX=$HOME/.local CMAKE_BUILD_TYPE=Release
-# make install
 
 # or install from yarn
-npm update -g --force
-npm install -g tldr
-npm install -g neovim
-npm install -g flake8
+setup_node() {
+  while read -ep "How do you want to install node tools [npm|yarn]? " a; do
+    case $a in
+      npm)
+        npm update -g --force
+        npm install -g tldr
+        npm install -g neovim
+        npm install -g flake8
+        break;;
+      yarn)
+        yarn update
+        yarn install -g tldr
+        yarn install -g neovim
+        yarn install -g flake8
+        break;;
+      *) return;;
+    esac
+  done
+}
 
-# setup zsh libraries.
-cd $HOME && sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
-cd $HOME && sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-# setup src and packages
-mkdir -p $HOME/my_completions
-mkdir -p $HOME/src
-cd $HOME/src
-curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-python get-pip.py
-export PATH=$HOME/.local/bin:$PATH
-pip install pynvim
-pip install ipython
-
-git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
-git clone https://github.com/i3d/mydotfiles.git
-git clone https://github.com/i3d/afetch.git
-git clone https://github.com/gabrielelana/awesome-terminal-fonts.git
-git clone https://github.com/chriskempson/base16-shell.git
-git clone https://github.com/Parth/dotfiles.git
-git clone https://github.com/vifm/vifm.git
-git clone https://github.com/changyuheng/zsh-interactive-cd.git
-git clone https://github.com/nim-lang/Nim.git
-git clone https://github.com/rust-lang/rust.git
-git clone https://github.com/golang/go.git $HOME/go
+setup_src_pkgs() {
+  while read -ep "Do you want to setup src pkgs from git [yY|Yes|yes|any other key to cancel]? " a; do
+    case $a in
+      y|Y|Yes|yes)
+        cd $HOME/src
+        git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
+        git clone https://github.com/i3d/mydotfiles.git
+        git clone https://github.com/i3d/afetch.git
+        git clone https://github.com/gabrielelana/awesome-terminal-fonts.git
+        git clone https://github.com/chriskempson/base16-shell.git
+        git clone https://github.com/Parth/dotfiles.git
+        git clone https://github.com/vifm/vifm.git
+        git clone https://github.com/changyuheng/zsh-interactive-cd.git
+        git clone https://github.com/nim-lang/Nim.git
+        git clone https://github.com/rust-lang/rust.git
+        git clone https://github.com/golang/go.git $HOME/go
+        break;;
+      *) return;;
+    esac
+  done
+}
 
 # setup fzf
-$HOME/.fzf/install
+setup_fzf() {
+  while read -ep "Do you want to setup fzf [yY|Yes|yes|any other key to cancel]? " a; do
+    case $a in
+      y|Y|Yes|yes)
+        $HOME/.fzf/install
+        break;;
+      *) return;;
+    esac
+  done
+}
 
 # setup zsh and nvim
-ln -sf $HOME/src/mydotfiles/archcraft/.vimrc $HOME/.vimrc
-ln -sf $HOME/src/mydotfiles/archcraft/.vimrc.plug $HOME/.vimrc.plug
-mkdir -p $HOME/.vim
-ln -sf $HOME/src/mydotfiles/archcraft/init.lua $HOME/.vim/init.lua
-ln -sf $HOME/src/mydotfiles/archcraft/.zshrc $HOME/.zshrc
-ln -sf $HOME/src/mydotfiles/archcraft/.zshrc.pre-oh-my-zsh $HOME/.zshrc.pre-oh-my-zsh
-ln -sf $HOME/src/mydotfiles/.tmux.conf $HOME/
+setup_zsh() {
+  while read -ep "Do you want to setup zsh and vim [yY|Yes|yes|any other key to cancel]? " a; do
+    case $a in
+      y|Y|Yes|yes)
+        cd $HOME && sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
+        cd $HOME && sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+        ln -sf $HOME/src/mydotfiles/archcraft/.vimrc $HOME/.vimrc
+        ln -sf $HOME/src/mydotfiles/archcraft/.vimrc.plug $HOME/.vimrc.plug
+        mkdir -p $HOME/.vim
+        ln -sf $HOME/src/mydotfiles/archcraft/init.lua $HOME/.vim/init.lua
+        ln -sf $HOME/src/mydotfiles/archcraft/.zshrc $HOME/.zshrc
+        ln -sf $HOME/src/mydotfiles/archcraft/.zshrc.pre-oh-my-zsh $HOME/.zshrc.pre-oh-my-zsh
+        ln -sf $HOME/src/mydotfiles/.tmux.conf $HOME/
+        break;;
+      *) return;;
+    esac
+  done
+}
+
 
 # setup afetch
-cd $HOME/src/afetch
-git pull && make && make install
+setup_afetch() {
+  while read -ep "Do you want to install afetch [yY|Yes|yes|any other key to cancel]? " a; do
+    case $a in
+      y|Y|Yes|yes)
+        cd $HOME/src/afetch
+        git pull && make && make install
+        break;;
+      *) return;;
+    esac
+  done
+}
 
 
 # finally setup static network
-rm -rf /etc/systemd/network/*
-cat <<EOF > /etc/systemd/network/enp0s3.network
+setup_static_network() {
+  while read -ep "Do you want to setup static network [yY|Yes|yes|any other key to cancel]? " a; do
+    case $a in
+      y|Y|Yes|yes)
+        rm -rf /etc/systemd/network/*
+        cat <<EOF > /etc/systemd/network/enp0s3.network
 [Match]
 Name=enp0s3
 
@@ -102,30 +228,76 @@ Address=192.168.1.97/24
 Gateway=192.168.1.1
 DNS=192.168.1.1
 DNS=8.8.8.8
+DNS=8.8.4.4
+DNS=1.1.1.1
+DNS=1.0.0.1
 EOF
 
-sudo systemctl list-unit-files | grep netctl | while read entry; do
-  sudo systemctl stop $entry
-  sudo systemctl disable $entry
-done
-sudo pacman -Rns netctl 
+        sudo systemctl list-unit-files | grep netctl | while read entry; do
+          sudo systemctl stop $entry
+          sudo systemctl disable $entry
+        done
+        sudo pacman -Rns netctl 
 
-sudo systemctl stop dhcpcd
-sudo systemctl disable dhcpcd@.service
-sudo pacman -Rns dhcpcd
+        sudo systemctl stop dhcpcd
+        sudo systemctl disable dhcpcd@.service
+        sudo pacman -Rns dhcpcd
 
-sudo systemctl enable --now systemd-networkd
-sudo systemctl restart systemd-networkd
-sudo systemctl status systemd-networkd
-ifconfig enp0s3
-sudo systemctl enable --now sshd
-sudo systemctl restart sshd
+        sudo systemctl enable --now systemd-networkd
+        sudo systemctl restart systemd-networkd
+        sudo systemctl status systemd-networkd
+        ifconfig enp0s3
+        sudo systemctl enable --now sshd
+        sudo systemctl restart sshd
+        break;;
+      *) return;;
+    esac
+  done
+  echo "network config file @ /etc/systemd/network/enp0s3.network"
+}
 
-sh -c ./cleanup
+run_cleanup() {
+  while read -ep "Do you want to setup static network [yY|Yes|yes|any other key to cancel]? " a; do
+    case $a in
+      y|Y|Yes|yes)
+        sh -c $HOME/src/mydotfiles/archcraft/cleanup
+        break;;
+      *) return;;
+    esac
+  done
+}
+
+reboot() {
+  while read -ep "Do you want to reboot now [yY|Yes|yes|any other key to cancel]? " a; do
+    case $a in
+      y|Y|Yes|yes)
+        echo "Shall be able to reboot and ssh remote, sleep 20s and ctrl-c now if needed 5..4..3..2..1.."
+        sleep 20
+        sudo reboot -h now
+        break;;
+      *) return;;
+    esac
+  done
+}
+
+echo "Start post_install setup ..."
+setup_src && \
+setup_time && \
+update_system && \
+setup_brew && \
+setup_rust && \
+install_from_brew && \
+setup_pip && \
+install_neovim && \
+setup_node && \
+setup_src_pkgs && \
+setup_fzf && \
+setup_zsh && \
+setup_afetch && \
+setup_static_network && \
+run_cleanup
 
 printf "Need to manual scp .vifm over to $HOME."
 printf "Need to manual scp coc over to $HOME/.config/."
 
-printf "Shall be able to reboot and ssh remote, sleep 20s and ctrl-c now if needed 5..4..3..2..1.."
-sleep 20
-sudo reboot -h now
+reboot
