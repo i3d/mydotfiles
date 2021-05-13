@@ -398,6 +398,8 @@ let g:airline_mode_map = {
     \ 'S'  : 'S',
     \ '' : 'S',
     \ }
+"let g:airline_left_sep = '»'
+"let g:airline_right_sep = '«'
 if !exists('g:airline_powerline_fonts')
   let g:airline#extensions#tabline#left_sep = ' '
   let g:airline#extensions#tabline#left_alt_sep = '|'
@@ -407,7 +409,9 @@ if !exists('g:airline_powerline_fonts')
   let g:airline_right_alt_sep = '⮃'
 else
   let g:airline#extensions#tabline#left_sep = ''
+  "let g:airline#extensions#tabline#left_sep = "\ue0b4"
   let g:airline#extensions#tabline#left_alt_sep = ''
+
   " powerline symbols
   let g:airline_left_sep = ''
   let g:airline_left_alt_sep = ''
@@ -424,14 +428,15 @@ endif
 "let g:airline_left_alt_sep = "\ue0c6"
 "let g:airline_right_sep = "\uE0c5"
 "let g:airline_right_alt_sep = "\uE0c7"
+
 " triangle
-let g:airline_left_sep = "\ue0b8"
-let g:airline_left_alt_sep = '\ue0b9'
-let g:airline_right_sep = "\ue0ba"
-let g:airline_righ_alt_sep = "\ue0bb"
+"let g:airline_left_sep = "\ue0b8"
+"let g:airline_left_alt_sep = "\ue0b9"
+"let g:airline_right_sep = "\ue0ba"
+"let g:airline_righ_alt_sep = "\ue0bb"
 " round
 "let g:airline_left_sep = "\ue0b4"
-"let g:airline_left_alt_sep = '\ue0b5'
+"let g:airline_left_alt_sep = "\ue0b5"
 "let g:airline_right_sep = "\ue0b6"
 "let g:airline_righ_alt_sep = "\ue0b7"
 " sticks
@@ -443,6 +448,7 @@ let g:airline_righ_alt_sep = "\ue0bb"
 " blocks
 "let g:airline_left_sep = "\ue0d2"
 "let g:airline_right_sep = "\ue0d4"
+
 let g:airline_symbols.crypt = '🔒'
 let g:airline_symbols.spell = 'Ꞩ'
 let g:airline_symbols.maxlinenr = '㏑'
@@ -902,6 +908,8 @@ let g:which_key_map.o = {
       \ 't' : [':O t'                                                  , 'open test'],
       \ 'g' : [':O go'                                                 , 'open .go'],
       \ 'l' : [':OpenCL'                                               , 'open CL'],
+      \ 'w' : [':!vieb "<cWORD>"'                                      , 'open link'],
+      \ 's' : [':!vieb "google.com/search?q=<cword>"'                  , 'search web'],
       \ }
 " Piper
 let g:which_key_map.P = {
@@ -981,6 +989,8 @@ let g:which_key_map.t = {
       \ 'c' : [':FloatermNew --width=50 --height=8 termv'       , 'play tv'],
       \ 'T' : [':FloatermNew --width=70 --height=15 ttyper'     , 'Rust typer'],
       \ 'Z' : [':FloatermNew --width=70 --height=15 typer'      , 'Go typer'],
+      \ 'n' : [':FloatermNew --width=90 --height=30 nb'         , 'newsboat'],
+      \ 'o' : [':FloatermNew --width=90 --height=30 tor'        , 'the old reader'],
       \ }
 " Diagnose
 let g:which_key_map.x = {
