@@ -41,7 +41,7 @@ setup_brew() {
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         HOMEBREW_PREFIX=/home/linuxbrew/.linuxbrew
         eval $(${HOMEBREW_PREFIX}/bin/brew shellenv)
-        brew install fortune asdf node yarn hub go gotop neofetch autojump fasd glow lolcat cowsay
+        brew install ncdu fortune asdf node yarn hub go gotop neofetch autojump fasd glow lolcat cowsay
         break;;
       *) return;;
     esac
