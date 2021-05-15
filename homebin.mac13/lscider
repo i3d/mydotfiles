@@ -1,3 +1,0 @@
-#!/bin/bash
-
-open -a "Google Chrome Canary" https://source.corp.google.com/piper///depot/google3/devtools/cider/webclient/command_name.ts

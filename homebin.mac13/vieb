@@ -1,0 +1,3 @@
+#!/bin/bash
+
+/Applications/Vieb.app/Contents/MacOS/Vieb "$@" 1>/dev/null 2>/dev/null

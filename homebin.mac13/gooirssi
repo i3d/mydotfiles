@@ -1,3 +1,0 @@
-#!/bin/bash
-
-irssi -c irc.corp.google.com -n jimxu --home=~/.irssi-google/
