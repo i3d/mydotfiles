@@ -1,0 +1,9 @@
+#!/bin/zsh
+
+SPATH=$2
+[[ -z $2  ]] && SPATH=$(pwd)
+line=$(rg -S -H --hidden "$1" $SPATH | fzf-tmux -d 20% -- --query="$1" --select-1 --exit-0)
+[[ -z $line  ]] && exit 0
+file=${line%%:*}
+nv $file
+exit 0

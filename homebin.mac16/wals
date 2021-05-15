@@ -1,0 +1,47 @@
+#!/bin/bash
+
+usage() {
+    echo -e "usage: wals [-a] <base16|dkeg|sexy|tempus|single|all> | -s theme"
+    echo -e "\t-a\talso apply each theme, without, just list the themes"
+    echo -e "\t-s\tset the specific theme"
+    echo
+    wal
+}
+
+lswal() {
+  local _cmd="wal --theme | sed -n '/Dark/,/Light/p' | sed -n '1!p' | sed -n '\$!p' | sed -e 's/ - //'"
+
+  if [[ "$2" == "all" ]]; then
+    if [[ "$1" == "-a" ]]; then
+      eval $_cmd | while read line; do
+        wal --theme $line && sleep 3
+      done
+    else 
+      eval $_cmd
+    fi
+    return
+  fi
+
+  if [[ "$2" == "single" ]]; then
+    if [[ "$1" == "-a" ]]; then
+      eval $_cmd | grep -Ev '(base16|dkeg|sexy|tempus)' | while read line; do
+        wal --theme $line && sleep 3
+      done
+    else
+      eval $_cmd | grep -Ev '(base16|dkeg|sexy|tempus)'
+    fi
+    return
+  fi
+
+  if [[ "$1" == "-a" ]]; then
+    eval $_cmd | grep "$1" | while read line; do
+      wal --theme $line && sleep 3
+    done
+  else
+    eval $_cmd | grep "$2" 
+  fi
+}
+
+[[ -z $1 ]] && usage && exit 0
+[[ $1 == "-s" ]] && wal --theme $2 && exit 0
+[[ $1 == "-a" ]] && lswal "$@" || lswal "list" $1

@@ -1,0 +1,18 @@
+#!/bin/zsh
+
+SPATH=$1
+[[ -z $1 ]] && SPATH=$(pwd)
+if [[ $SPATH =~ '/' && ! -f $SPATH ]]; then
+	# it is a dir, not a file, so we just give everything from that dir.
+	line=$(fd . $SPATH | fzf-tmux -d 20% -1 -0 -s -m -print0 --preview 'head -100 {}' | tr '\n' ' ')
+else 
+	line=$(find $SPATH | fzf-tmux -d 20% -1 -0 -s -m -print0 --preview 'head -100 {}' | tr '\n' ' ')
+fi
+[[ -z $line ]] && exit 0
+[[ -f ${line%% } ]] && v $(echo $line) && exit 0
+all=
+for file in $(echo "$line"); do
+	all=$all" "$SPATH/$file
+done
+v $(echo "$all")
+exit 0

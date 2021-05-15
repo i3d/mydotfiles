@@ -1,0 +1,4 @@
+#!/bin/bash
+
+q=$(echo "$@" | perl -MURI::Escape -ne 'chomp;print uri_escape($_),"\n"')
+w3m http://www.google.com/search?q=$q

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# the top 10 processes that opened most files.
+lsof | awk '{ print $2; }' | uniq -c | sort -rn | head | awk '{ print $1 ; system("ls -l /proc/" $2 "/exe") }'

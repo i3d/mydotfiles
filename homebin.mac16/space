@@ -1,0 +1,4 @@
+#!/bin/bash
+
+USERHOME=$HOME
+HOME=$USERHOME/.spacemacs $USERHOME/bin/emacs -nw "$@"

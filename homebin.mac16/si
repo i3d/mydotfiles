@@ -1,0 +1,3 @@
+#!/bin/bash
+
+ssh -t -A -x i3dmaster@i3dmaster-linux "$@"

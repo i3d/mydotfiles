@@ -1,0 +1,4 @@
+#!/bin/bash
+
+
+ssh jimxu@192.168.0.192 -t ssh jimux

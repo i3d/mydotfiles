@@ -1,0 +1,7 @@
+#!/bin/bash
+
+VBoxManage startvm "elementory" --type headless 2>&1 >/dev/null && \
+    echo "Sleep 20s for elementory to startup ..." && sleep 20 
+
+echo "SSH to Elementory ..."
+ssh -t -A -x jimxu@192.168.1.201

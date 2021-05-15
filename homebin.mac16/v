@@ -1,0 +1,3 @@
+#!/bin/zsh
+
+exec nv -u $HOME/.vimrc -X -p "$@"

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+ssh -t -A -x i3dmaster@u-server "$@"
+#mosh -- i3dmaster@u-server "$@"
