@@ -26,6 +26,15 @@ setup_time() {
 
 # update system
 update_system() {
+  # rm -rf /etc/pacman.d/gnupg
+  # rm -rf /root/.gnupg
+  # gpg --refresh-keys
+  # pacman-key --init && pacman-key --populate archlinux
+  # grub-install --target=i386-pc --boot-directory=/boot --bootloader-id=GRUB /dev/sda
+  # Then; look at "/etc/default/grub.silent" sample file
+  # and make necessary changes to "/etc/default/grub".
+  # Lastly, regenerate the GRUB config file:
+  #sudo grub-mkconfig -o /boot/grub/grub.cfg
   sudo pacman -S archlinux-keyring || sudo pacman-key --populate
   sudo pacman -Syy && sudo pacman -Syu
   [[ -f $HOME/.config/polybar/fix_modules.sh ]] && $HOME/.config/polybar/fix_modules.sh
