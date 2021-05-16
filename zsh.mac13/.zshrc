@@ -40,7 +40,7 @@ ZSH_THEME="archcraft"
 export ZSH=/Users/jimxu/.oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 # for awesome-terminal-fonts
-source $HOME/src/awesome-terminal-fonts/fonts/*.sh
+### source $HOME/.local/src/awesome-terminal-fonts/fonts/*.sh
 #POWERLEVEL9K_MODE='nerdfont-complete'
 
 # You may need to manually set your language environment
@@ -328,7 +328,7 @@ export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 # parth/dotfiles
 export VISUAL=vim
 stty -ixon
-source $HOME/src/dotfiles/zsh/keybindings.sh
+source $HOME/.local/src/dotfiles/zsh/keybindings.sh
 
 # Fix for arrow-key searching
 # start typing + [Up-Arrow] - fuzzy find history forward
@@ -345,8 +345,8 @@ if [[ "${terminfo[kcud1]}" != "" ]]; then
 fi
 
 # ===================== Was used before powerlevel10k ==================
-#source $HOME/src/dotfiles/zsh/prompt.sh
-#export PATH=$PATH:$HOME/src/dotfiles/utils
+#source $HOME/.local/src/dotfiles/zsh/prompt.sh
+#export PATH=$PATH:$HOME/.local/src/dotfiles/utils
 
 # for doom emacs
 export PATH=$PATH:$HOME/.emacs.d/bin
@@ -429,7 +429,14 @@ afetch
 killwal() {
     sleep 3
     if ps -ef|grep $1 &>/dev/null; then
-      kill -9 $1 &>/dev/null
+      printf "Killing pywal ..."
+      disown $1; kill -9 $1 &>/dev/null
+    fi
+    sleep 1
+    if [[  $(pgrep -f "wal -R" &>/dev/null)  ]]; then
+      pid=$(pgrep -f "wal -R")
+      printf "Killing pywal ..."
+      disown $pid; kill -9 $pid &>/dev/null
     fi
 }
 
@@ -583,19 +590,64 @@ zman() {
     man -k . | fzf -q "$1" --prompt='man> '  \
       | awk -F\( '{print $1}' | xargs -r man
 }
-source $HOME/src/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
+source $HOME/.local/src/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
 # FZF functions #########################
 #
 #eval $( gdircolors -b $HOME/.LS_COLORS )
-# These two stay the last since we need our own path to be at the top.
-export PATH=/Users/jimxu/bin:/Users/jimxu/go_code/bin:$PATH:/Users/jimxu/go/bin
 # this is a bit slow.
 #fm6000 -c random -w -de="Amethyst" -pa $(ls -l $HOMEBREW_CELLAR|wc -l) -g 3
+#
+# ytfzf config
+export YTFZF_PLAYER="mpv --vd-queue-enable=yes --vd-lavc-threads=4"
+#
 # put this at the end since it could hang.
 # TODO: figure out why.
 # Import colorscheme from 'wal' asynchronously
 # &   # Run the process in the background.
 # ( ) # Hide shell job control messages.
+unset VISUAL
+unset EDITOR
+export VISUAL=v
+export EDITOR=v
+# https://github.com/jarun/nnn/wiki/
+export NNN_OPTS="deHUeEDrRx"
+export NNN_PLUG='f:finder;o:fzopen;m:mocplay;d:diffs;v:imgview;j:autojump;k:bookmarks;z:fzz;u:getplugs;x:hexview;t:imagethumb;i:ipinfo;l:launch;b:nbak;p:pdfview'
+alias n3=nnn
+## OneDark
+#BLK="04" CHR="04" DIR="04" EXE="00" REG="00" HARDLINK="00" SYMLINK="06" MISSING="00" ORPHAN="01" FIFO="0F" SOCK="0F" OTHER="02"
+#export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
+## Nord
+#BLK="0B" CHR="0B" DIR="04" EXE="06" REG="00" HARDLINK="06" SYMLINK="06" MISSING="00" ORPHAN="09" FIFO="06" SOCK="0B" OTHER="06"
+#export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
+#
 (cat ~/.cache/wal/sequences &)
-wal -R -n -t -w -e &
-#killwal $! &
+# themes:
+# wal --theme supernova -nte
+# wal --theme neonhive -nte
+# wal --theme vadar -nte
+# wal --theme matrix -nte
+# wal --theme dna -nte
+# wal --theme topology -nte
+# wal --theme neon -nte
+# wal --theme stars -nte
+# wal --theme breakingbad -nte
+# wal --theme robotgirl -nte
+# wal --theme skullove -nte
+# wal --theme car3 -nte
+# wal --theme car2 -nte
+# wal --theme car1 -nte
+# wal --theme sunset -nte
+# wal --theme austin -nte
+# wal --theme casey -nte
+# wal --theme vancea -nte
+# wal --theme gellidon -nte
+# wal --theme karsten -nte
+# wal --theme serenade -nte
+# wal --theme nightkey -nte
+# wal --theme hope -nte
+wal --theme creature -nte
+#wal -R -n -t -w -e &
+# pid=$!; disown %1; sleep 1; ( [[ $(ps -p $pid) ]] && kill -9 $pid 1>/dev/null 2>/dev/null) &>/dev/null
+
+# These two stay the last since we need our own path to be at the top.
+export PATH=/Users/jimxu/bin:/Users/jimxu/go_code/bin:$PATH:/Users/jimxu/go/bin:/Users/jimxu/homebrew/opt/util-linux/bin:/Users/jimxu/homebrew/opt/util-linux/sbin

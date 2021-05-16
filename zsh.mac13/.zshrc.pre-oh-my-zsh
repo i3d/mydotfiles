@@ -422,3 +422,25 @@ gdoc () {
     go doc --all "$@" | highlight --syntax=go --out-format=ansi
 }
 
+# from https://github.com/tobylane/Bin
+alias lk='CGSession -suspend'
+anybar() { printf $1 | nc -4u -w0 localhost ${2:-1738}; }
+cdf() { cd "$(osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)')"; }
+#alias xcr="xcodebuild -configuration Release"
+#alias xtr="xctool -configuration Release -scheme"
+alias common='sort ~/.bash_history | uniq -c | sort -n -r | head -n10'
+alias shck='shellcheck -s sh'
+i() { osascript -e 'tell application "iTunes"' -e "$1" -e "end tell"; }
+serve() { nc -v -l 8080 <<< "HTTP/1.1 200 OK\n\n $(date) $(cat $@)"; }
+#vod() { stream=$(livestreamer --stream-url $1 best); ffmpeg -ss $2 -i $stream -bsf:a aac_adtstoasc -c copy out.mp4; }
+#alias ctd="/Applications/CorsixTH.app/Contents/MacOS/CorsixTH --config-file=$HOME/.config/CorsixTH/configdemo.txt --interpreter=$HOME/Downloads/CorsixTH/CorsixTH/CorsixTH.lua"
+#alias cth="/Applications/CorsixTH.app/Contents/MacOS/CorsixTH --interpreter=$HOME/Downloads/CorsixTH/CorsixTH/CorsixTH.lua"
+rt() { for i in $@; do youtube_dl -f "best[height=720]" $i; done }
+pman() { man -t $@ | open -fa Preview.app; }
+#alias ql="qlmanage -p 2>/dev/null"
+#alias jv="$HOME/Library/Application\ Support/minecraft/runtime/jre-x64/jre.bundle/Contents/Home/bin/java -jar"
+alias yl="yamllint -d \"rules: {line-length: disable}\""
+pdfshrink () { gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=${3:-/ebook} -dNOPAUSE -dQUIET -dBATCH -sOutputFile="$2" "$1"; }
+bo() { for i in $@; do open $(brew info $i | sed -n '3p'); done }
+alias ls2="find . -type d -mindepth 1 -maxdepth 1 ! -path '*app' -exec basename {} \;"
+alias wgetimg="wget -nd -H -r -l 2 -A jpg"
