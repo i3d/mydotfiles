@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/Users/jimxu/Pictures/kace-rodriguez-p3OzJuT_Dks-unsplash.jpg",
+    "alpha": "100",
+    "special": {
+        "background": "#12151a",
+        "foreground": "#dccec2",
+        "cursor": "#dccec2"
+    },
+    "colors": {
+        "color0": "#12151a",
+        "color1": "#897869",
+        "color2": "#AA9078",
+        "color3": "#737C82",
+        "color4": "#79868A",
+        "color5": "#90918E",
+        "color6": "#ACA194",
+        "color7": "#dccec2",
+        "color8": "#9a9087",
+        "color9": "#897869",
+        "color10": "#AA9078",
+        "color11": "#737C82",
+        "color12": "#79868A",
+        "color13": "#90918E",
+        "color14": "#ACA194",
+        "color15": "#dccec2"
+    }
+}

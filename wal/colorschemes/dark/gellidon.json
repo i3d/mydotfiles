@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/Users/jimxu/Pictures/jc-gellidon-9_VGtOBjmPI-unsplash.jpg",
+    "alpha": "100",
+    "special": {
+        "background": "#01181E",
+        "foreground": "#aac1c1",
+        "cursor": "#aac1c1"
+    },
+    "colors": {
+        "color0": "#01181E",
+        "color1": "#2C6968",
+        "color2": "#526A68",
+        "color3": "#AB6713",
+        "color4": "#53807F",
+        "color5": "#D59531",
+        "color6": "#3FA4A7",
+        "color7": "#aac1c1",
+        "color8": "#768787",
+        "color9": "#2C6968",
+        "color10": "#526A68",
+        "color11": "#AB6713",
+        "color12": "#53807F",
+        "color13": "#D59531",
+        "color14": "#3FA4A7",
+        "color15": "#aac1c1"
+    }
+}

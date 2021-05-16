@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/Users/jimxu/Pictures/wallpaperbetter-3.jpg",
+    "alpha": "100",
+    "special": {
+        "background": "#0D0C0B",
+        "foreground": "#c8c4c2",
+        "cursor": "#c8c4c2"
+    },
+    "colors": {
+        "color0": "#0D0C0B",
+        "color1": "#4E4D4D",
+        "color2": "#6A6362",
+        "color3": "#A54E3B",
+        "color4": "#9D6457",
+        "color5": "#BA8D72",
+        "color6": "#7D7F89",
+        "color7": "#c8c4c2",
+        "color8": "#8c8987",
+        "color9": "#4E4D4D",
+        "color10": "#6A6362",
+        "color11": "#A54E3B",
+        "color12": "#9D6457",
+        "color13": "#BA8D72",
+        "color14": "#7D7F89",
+        "color15": "#c8c4c2"
+    }
+}

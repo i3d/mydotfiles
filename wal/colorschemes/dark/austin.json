@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/Users/jimxu/Pictures/austin-schmid-65F-502joDA-unsplash.jpg",
+    "alpha": "100",
+    "special": {
+        "background": "#07080A",
+        "foreground": "#94bdc4",
+        "cursor": "#94bdc4"
+    },
+    "colors": {
+        "color0": "#07080A",
+        "color1": "#516A72",
+        "color2": "#667176",
+        "color3": "#A36943",
+        "color4": "#7E807F",
+        "color5": "#DB955F",
+        "color6": "#3E7986",
+        "color7": "#94bdc4",
+        "color8": "#678489",
+        "color9": "#516A72",
+        "color10": "#667176",
+        "color11": "#A36943",
+        "color12": "#7E807F",
+        "color13": "#DB955F",
+        "color14": "#3E7986",
+        "color15": "#94bdc4"
+    }
+}

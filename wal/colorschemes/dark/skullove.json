@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/Users/jimxu/Downloads/1pyo746ooty41.jpg",
+    "alpha": "100",
+    "special": {
+        "background": "#13100e",
+        "foreground": "#e8e7e6",
+        "cursor": "#e8e7e6"
+    },
+    "colors": {
+        "color0": "#13100e",
+        "color1": "#736F6D",
+        "color2": "#827C79",
+        "color3": "#84817E",
+        "color4": "#A29F9D",
+        "color5": "#C2C0BD",
+        "color6": "#D9D7D5",
+        "color7": "#e8e7e6",
+        "color8": "#a2a1a1",
+        "color9": "#736F6D",
+        "color10": "#827C79",
+        "color11": "#84817E",
+        "color12": "#A29F9D",
+        "color13": "#C2C0BD",
+        "color14": "#D9D7D5",
+        "color15": "#e8e7e6"
+    }
+}

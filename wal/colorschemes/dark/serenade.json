@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/Users/jimxu/Pictures/wallpaperbetter-ast.jpg",
+    "alpha": "100",
+    "special": {
+        "background": "#0F161E",
+        "foreground": "#89e2c2",
+        "cursor": "#89e2c2"
+    },
+    "colors": {
+        "color0": "#0F161E",
+        "color1": "#33514E",
+        "color2": "#595A59",
+        "color3": "#B95053",
+        "color4": "#2EAA5A",
+        "color5": "#B6A741",
+        "color6": "#93419C",
+        "color7": "#89e2c2",
+        "color8": "#5f9e87",
+        "color9": "#33514E",
+        "color10": "#595A59",
+        "color11": "#B95053",
+        "color12": "#2EAA5A",
+        "color13": "#B6A741",
+        "color14": "#93419C",
+        "color15": "#89e2c2"
+    }
+}

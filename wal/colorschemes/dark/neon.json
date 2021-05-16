@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/Users/jimxu/Downloads/wallpaperbetter.com_3840x2160-16.jpg",
+    "alpha": "100",
+    "special": {
+        "background": "#050605",
+        "foreground": "#cccfc7",
+        "cursor": "#cccfc7"
+    },
+    "colors": {
+        "color0": "#050605",
+        "color1": "#B6570F",
+        "color2": "#40C91F",
+        "color3": "#E1C742",
+        "color4": "#0E699A",
+        "color5": "#807F80",
+        "color6": "#31B7E5",
+        "color7": "#cccfc7",
+        "color8": "#8e908b",
+        "color9": "#B6570F",
+        "color10": "#40C91F",
+        "color11": "#E1C742",
+        "color12": "#0E699A",
+        "color13": "#807F80",
+        "color14": "#31B7E5",
+        "color15": "#cccfc7"
+    }
+}

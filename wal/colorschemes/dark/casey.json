@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/Users/jimxu/Pictures/casey-horner-fJCl1-00uBU-unsplash.jpg",
+    "alpha": "100",
+    "special": {
+        "background": "#11181a",
+        "foreground": "#d1dae1",
+        "cursor": "#d1dae1"
+    },
+    "colors": {
+        "color0": "#11181a",
+        "color1": "#637987",
+        "color2": "#758B97",
+        "color3": "#4EA2AE",
+        "color4": "#91A0AA",
+        "color5": "#C6B9B1",
+        "color6": "#A5B8C7",
+        "color7": "#d1dae1",
+        "color8": "#92989d",
+        "color9": "#637987",
+        "color10": "#758B97",
+        "color11": "#4EA2AE",
+        "color12": "#91A0AA",
+        "color13": "#C6B9B1",
+        "color14": "#A5B8C7",
+        "color15": "#d1dae1"
+    }
+}

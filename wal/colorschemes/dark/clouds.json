@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/Users/jimxu/Pictures/lobostudio-hamburg-NgHG0szvwQk-unsplash.jpg",
+    "alpha": "100",
+    "special": {
+        "background": "#0d0d0e",
+        "foreground": "#cdcbca",
+        "cursor": "#cdcbca"
+    },
+    "colors": {
+        "color0": "#0d0d0e",
+        "color1": "#686A58",
+        "color2": "#72706B",
+        "color3": "#827D77",
+        "color4": "#7C8174",
+        "color5": "#888877",
+        "color6": "#918E8E",
+        "color7": "#cdcbca",
+        "color8": "#8f8e8d",
+        "color9": "#686A58",
+        "color10": "#72706B",
+        "color11": "#827D77",
+        "color12": "#7C8174",
+        "color13": "#888877",
+        "color14": "#918E8E",
+        "color15": "#cdcbca"
+    }
+}

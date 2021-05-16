@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/Users/jimxu/Pictures/9imw7u52t9h61.png",
+    "alpha": "100",
+    "special": {
+        "background": "#0c0b09",
+        "foreground": "#ebdad0",
+        "cursor": "#ebdad0"
+    },
+    "colors": {
+        "color0": "#0c0b09",
+        "color1": "#748A88",
+        "color2": "#A3A19A",
+        "color3": "#D4B39B",
+        "color4": "#D1BAAB",
+        "color5": "#F5C39B",
+        "color6": "#D9C3B4",
+        "color7": "#ebdad0",
+        "color8": "#a49891",
+        "color9": "#748A88",
+        "color10": "#A3A19A",
+        "color11": "#D4B39B",
+        "color12": "#D1BAAB",
+        "color13": "#F5C39B",
+        "color14": "#D9C3B4",
+        "color15": "#ebdad0"
+    }
+}

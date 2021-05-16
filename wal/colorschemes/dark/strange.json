@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/Users/jimxu/Pictures/IMG_0202.jpeg",
+    "alpha": "100",
+    "special": {
+        "background": "#0B1018",
+        "foreground": "#c9c7c0",
+        "cursor": "#c9c7c0"
+    },
+    "colors": {
+        "color0": "#0B1018",
+        "color1": "#3B4347",
+        "color2": "#4D4F4E",
+        "color3": "#6A6A64",
+        "color4": "#8C7361",
+        "color5": "#7C817B",
+        "color6": "#938877",
+        "color7": "#c9c7c0",
+        "color8": "#8c8b86",
+        "color9": "#3B4347",
+        "color10": "#4D4F4E",
+        "color11": "#6A6A64",
+        "color12": "#8C7361",
+        "color13": "#7C817B",
+        "color14": "#938877",
+        "color15": "#c9c7c0"
+    }
+}

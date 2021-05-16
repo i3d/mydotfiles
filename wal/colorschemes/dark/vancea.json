@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/Users/jimxu/Pictures/dorin-vancea-kKDPBa5GmT4-unsplash.jpg",
+    "alpha": "100",
+    "special": {
+        "background": "#0a0a06",
+        "foreground": "#d7d6da",
+        "cursor": "#d7d6da"
+    },
+    "colors": {
+        "color0": "#0a0a06",
+        "color1": "#89836D",
+        "color2": "#3D5A86",
+        "color3": "#6E7788",
+        "color4": "#7B8597",
+        "color5": "#9D9FAC",
+        "color6": "#B6B7C4",
+        "color7": "#d7d6da",
+        "color8": "#969598",
+        "color9": "#89836D",
+        "color10": "#3D5A86",
+        "color11": "#6E7788",
+        "color12": "#7B8597",
+        "color13": "#9D9FAC",
+        "color14": "#B6B7C4",
+        "color15": "#d7d6da"
+    }
+}
