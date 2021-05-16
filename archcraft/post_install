@@ -64,7 +64,7 @@ setup_rust() {
         curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
         source $HOME/.cargo/env
         rustup update && rustup default nightly
-        cargo install bat ripgrep git-delta exa tokei procs
+        cargo install bat ripgrep git-delta exa tokei procs dutree
         break;;
         *) return;;
     esac
