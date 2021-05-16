@@ -3,6 +3,7 @@
 setup_src() {
   mkdir -p $HOME/my_completions
   mkdir -p $HOME/src
+  mkdir -p $HOME/.local/src
 }
 
 # time setup
@@ -90,7 +91,7 @@ setup_pip() {
   while read -ep "Do you want to setup pip [yY|Yes|yes|any other key to cancel]? " a; do
     case $a in
       y|Y|Yes|yes)
-        cd $HOME/src
+        cd $HOME/.local/src
         curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
         python get-pip.py
         export PATH=$HOME/.local/bin:$PATH
@@ -157,18 +158,19 @@ setup_src_pkgs() {
   while read -ep "Do you want to setup src pkgs from git [yY|Yes|yes|any other key to cancel]? " a; do
     case $a in
       y|Y|Yes|yes)
-        cd $HOME/src
         git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
+        cd $HOME/.local/src  # startup dependencies
         git clone https://github.com/i3d/mydotfiles.git
-        git clone https://github.com/i3d/afetch.git
         git clone https://github.com/gabrielelana/awesome-terminal-fonts.git
         git clone https://github.com/chriskempson/base16-shell.git
         git clone https://github.com/Parth/dotfiles.git
-        git clone https://github.com/vifm/vifm.git
         git clone https://github.com/changyuheng/zsh-interactive-cd.git
+        git clone https://github.com/i3d/afetch.git
+        cd $HOME/src # non startup dependencies.
+        git clone https://github.com/vifm/vifm.git
         git clone https://github.com/nim-lang/Nim.git
         git clone https://github.com/rust-lang/rust.git
-        git clone https://github.com/golang/go.git $HOME/go
+        git clone https://github.com/golang/go.git 
         break;;
       *) return;;
     esac
@@ -194,13 +196,13 @@ setup_zsh() {
       y|Y|Yes|yes)
         cd $HOME && sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
         cd $HOME && sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-        ln -sf $HOME/src/mydotfiles/archcraft/.vimrc $HOME/.vimrc
-        ln -sf $HOME/src/mydotfiles/archcraft/.vimrc.plug $HOME/.vimrc.plug
+        ln -sf $HOME/.local/src/mydotfiles/archcraft/.vimrc $HOME/.vimrc
+        ln -sf $HOME/.local/src/mydotfiles/archcraft/.vimrc.plug $HOME/.vimrc.plug
         mkdir -p $HOME/.vim
-        ln -sf $HOME/src/mydotfiles/archcraft/init.lua $HOME/.vim/init.lua
-        ln -sf $HOME/src/mydotfiles/archcraft/.zshrc $HOME/.zshrc
-        ln -sf $HOME/src/mydotfiles/archcraft/.zshrc.pre-oh-my-zsh $HOME/.zshrc.pre-oh-my-zsh
-        ln -sf $HOME/src/mydotfiles/.tmux.conf $HOME/
+        ln -sf $HOME/.local/src/mydotfiles/archcraft/init.lua $HOME/.vim/init.lua
+        ln -sf $HOME/.localsrc/mydotfiles/archcraft/.zshrc $HOME/.zshrc
+        ln -sf $HOME/.local/src/mydotfiles/archcraft/.zshrc.pre-oh-my-zsh $HOME/.zshrc.pre-oh-my-zsh
+        ln -sf $HOME/.local/src/mydotfiles/.tmux.conf $HOME/
         break;;
       *) return;;
     esac
@@ -213,7 +215,7 @@ setup_afetch() {
   while read -ep "Do you want to install afetch [yY|Yes|yes|any other key to cancel]? " a; do
     case $a in
       y|Y|Yes|yes)
-        cd $HOME/src/afetch
+        cd $HOME/.local/src/afetch
         git pull && make && make install
         break;;
       *) return;;
@@ -269,7 +271,7 @@ run_cleanup() {
   while read -ep "Do you want to setup static network [yY|Yes|yes|any other key to cancel]? " a; do
     case $a in
       y|Y|Yes|yes)
-        sh -c $HOME/src/mydotfiles/archcraft/cleanup
+        sh -c $HOME/.local/src/mydotfiles/archcraft/cleanup
         break;;
       *) return;;
     esac
