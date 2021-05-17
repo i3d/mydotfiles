@@ -3,7 +3,7 @@ source ~/.vimrc.plug
 " for italic
 set t_ZH=[3m
 set t_ZR=[23m
-
+    
 let g:asyncrun_open = 10
 let g:asyncrun_rootmarks = ['.git', '.svn', '.root', '.project', '.hg', '.projectile']
 
@@ -364,7 +364,7 @@ com! -nargs=* AsyncCargoTest :call <SID>AsyncCargoTest()
 set background=dark
 set termguicolors
 colorscheme base16-gruvbox-dark-pale
-let g:airline_theme = 'base16_gruvbox_dark_pale'
+let g:airline_theme = 'base16_gruvbox_dark_hard'
 "
 "set background=dark
 "set termguicolors
@@ -983,7 +983,7 @@ let g:which_key_map.t = {
       \ 'i' : [':FloatermNew ipython'                           , 'ipython'],
       \ 'r' : [':FloatermNew ranger'                            , 'ranger'],
       \ ';' : [':FloatermToggle'                                , 'toggle'],
-      \ 'y' : [':FloatermNew gotop -sbpa'                       , 'gotop'],
+      \ 's' : [':FloatermNew gotop -sbpa'                       , 'gotop'],
       \ 'm' : [':FloatermNew --width=50 --height=8 playm'       , 'play music'],
       \ 'v' : [':FloatermNew --width=50 --height=8 playv'       , 'play video'],
       \ 'c' : [':FloatermNew --width=50 --height=8 termv'       , 'play tv'],
@@ -991,6 +991,8 @@ let g:which_key_map.t = {
       \ 'Z' : [':FloatermNew --width=70 --height=15 typer'      , 'Go typer'],
       \ 'n' : [':FloatermNew --width=90 --height=30 nb'         , 'newsboat'],
       \ 'o' : [':FloatermNew --width=90 --height=30 tor'        , 'the old reader'],
+      \ 'y' : [':FloatermNew --width=110 --height=8 ytfzf -fm'   , 'ytfzf music'],
+      \ '/' : [':FloatermNew --width=110 --height=8 ytfzf -f'      , 'ytfzf video'],
       \ }
 " Diagnose
 let g:which_key_map.x = {
@@ -1166,4 +1168,33 @@ set guioptions-=m "remove menu bar"
 set guioptions-=T "remove toolbar"
 set guioptions-=r "remove right-hand scroll bar"
 set guioptions-=L "remove left-hand scroll bar"
+set completeopt=menuone,noinsert,noselect
+set shortmess+=c
+
+" ============================== nvim native lsp usage
+" " Code navigation shortcuts
+"nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> gD    <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> H     <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> g.    <cmd>lua vim.lsp.buf.code_action()<CR>
+" Set updatetime for CursorHold
+" 300ms of no cursor movement to trigger CursorHold
+set updatetime=300
+" Show diagnostic popup on cursor hold
+autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
+" Goto previous/next diagnostic warning/error
+nnoremap <silent> g[ <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+nnoremap <silent> g] <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+set signcolumn=yes " fix jitter
+" Enable type inlay hints
+autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
+\ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} }
+"nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+"nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+"nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+"nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+"nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+"nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+"nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
 " ================ settings ======================
