@@ -501,7 +501,7 @@ dracula.draw.blood(c, {
 ##   - lightness-cielab: Modify colors by converting them to CIELAB color space and inverting the L value. Not available with Qt < 5.14.
 ##   - lightness-hsl: Modify colors by converting them to the HSL color space and inverting the lightness (i.e. the "L" in HSL).
 ##   - brightness-rgb: Modify colors by subtracting each of r, g, and b from their maximum value.
-# c.colors.webpage.darkmode.algorithm = 'lightness-cielab'
+c.colors.webpage.darkmode.algorithm = 'lightness-cielab'
 
 ## Contrast for dark mode. This only has an effect when
 ## `colors.webpage.darkmode.algorithm` is set to `lightness-hsl` or
@@ -519,7 +519,7 @@ dracula.draw.blood(c, {
 ## `colors.webpage.darkmode.threshold.background` to 205.  - "With
 ## selective inversion of everything": Combines the two variants   above.
 ## Type: Bool
-# c.colors.webpage.darkmode.enabled = False
+c.colors.webpage.darkmode.enabled = True
 
 ## Render all colors as grayscale. This only has an effect when
 ## `colors.webpage.darkmode.algorithm` is set to `lightness-hsl` or
@@ -531,7 +531,7 @@ dracula.draw.blood(c, {
 ## left as-is. If set to 1, images are completely grayscale. Values
 ## between 0 and 1 desaturate the colors accordingly.
 ## Type: Float
-# c.colors.webpage.darkmode.grayscale.images = 0.0
+c.colors.webpage.darkmode.grayscale.images = 0.0
 
 ## Which images to apply dark mode to. With QtWebEngine 5.15.0, this
 ## setting can cause frequent renderer process crashes due to a
@@ -551,7 +551,7 @@ dracula.draw.blood(c, {
 ## Valid values:
 ##   - always: Apply dark mode filter to all frames, regardless of content.
 ##   - smart: Apply dark mode filter to frames based on background color.
-# c.colors.webpage.darkmode.policy.page = 'smart'
+c.colors.webpage.darkmode.policy.page = 'smart'
 
 ## Threshold for inverting background elements with dark mode. Background
 ## elements with brightness above this threshold will be inverted, and
@@ -583,12 +583,12 @@ c.colors.webpage.preferred_color_scheme = 'dark'
 ## Number of commands to save in the command history. 0: no history / -1:
 ## unlimited
 ## Type: Int
-# c.completion.cmd_history_max_items = 100
+# c.completion.cmd_history_max_items = 200
 
 ## Delay (in milliseconds) before updating completions after typing a
 ## character.
 ## Type: Int
-# c.completion.delay = 0
+c.completion.delay = 0
 
 ## Default filesystem autocomplete suggestions for :open. The elements of
 ## this list show up in the completion window under the Filesystem
@@ -598,7 +598,7 @@ c.colors.webpage.preferred_color_scheme = 'dark'
 
 ## Height (in pixels or as percentage of the window) of the completion.
 ## Type: PercOrInt
-# c.completion.height = '50%'
+c.completion.height = '40%'
 
 ## Minimum amount of characters needed to update completions.
 ## Type: Int
@@ -612,12 +612,12 @@ c.colors.webpage.preferred_color_scheme = 'dark'
 ##   - bookmarks
 ##   - history
 ##   - filesystem
-# c.completion.open_categories = ['searchengines', 'quickmarks', 'bookmarks', 'history', 'filesystem']
+c.completion.open_categories = ['searchengines', 'quickmarks', 'bookmarks', 'history', 'filesystem']
 
 ## Move on to the next part when there's only one possible completion
 ## left.
 ## Type: Bool
-# c.completion.quick = True
+c.completion.quick = True
 
 ## Padding (in pixels) of the scrollbar handle in the completion window.
 ## Type: Int
@@ -633,12 +633,12 @@ c.colors.webpage.preferred_color_scheme = 'dark'
 ##   - always: Whenever a completion is available.
 ##   - auto: Whenever a completion is requested.
 ##   - never: Never.
-# c.completion.show = 'always'
+c.completion.show = 'auto'
 
 ## Shrink the completion to be smaller than the configured size if there
 ## are no scrollbars.
 ## Type: Bool
-# c.completion.shrink = False
+c.completion.shrink = True
 
 ## Format of timestamps (e.g. for the history completion). See
 ## https://sqlite.org/lang_datefunc.html and
@@ -650,7 +650,7 @@ c.colors.webpage.preferred_color_scheme = 'dark'
 
 ## Execute the best-matching command on a partial match.
 ## Type: Bool
-# c.completion.use_best_match = False
+c.completion.use_best_match = True
 
 ## A list of patterns which should not be shown in the history. This only
 ## affects the completion. Matching URLs are still saved in the history
@@ -687,11 +687,11 @@ c.colors.webpage.preferred_color_scheme = 'dark'
 ## extracting it from the `location` parameter of the subscribe URL and
 ## URL-decoding it).
 ## Type: List of Url
-# c.content.blocking.adblock.lists = ['https://easylist.to/easylist/easylist.txt', 'https://easylist.to/easylist/easyprivacy.txt']
+c.content.blocking.adblock.lists = ['https://easylist.to/easylist/easylist.txt', 'https://easylist.to/easylist/easyprivacy.txt']
 
 ## Enable the ad/host blocker
 ## Type: Bool
-# c.content.blocking.enabled = True
+c.content.blocking.enabled = True
 
 ## List of URLs to host blocklists for the host blocker.  Only used when
 ## the simple host-blocker is used (see `content.blocking.method`).  The
@@ -703,7 +703,7 @@ c.colors.webpage.preferred_color_scheme = 'dark'
 ## lists.  The file `~/.config/qutebrowser/blocked-hosts` is always read
 ## if it exists.
 ## Type: List of Url
-# c.content.blocking.hosts.lists = ['https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts']
+c.content.blocking.hosts.lists = ['https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts']
 
 ## Which method of blocking ads should be used.  Support for Adblock Plus
 ## (ABP) syntax blocklists using Brave's Rust library requires the
@@ -716,7 +716,7 @@ c.colors.webpage.preferred_color_scheme = 'dark'
 ##   - adblock: Use Brave's ABP-style adblocker
 ##   - hosts: Use hosts blocking
 ##   - both: Use both hosts blocking and Brave's ABP-style adblocker
-# c.content.blocking.method = 'auto'
+c.content.blocking.method = 'auto'
 
 ## A list of patterns that should always be loaded, despite being blocked
 ## by the ad-/host-blocker. Local domains are always exempt from
@@ -754,7 +754,7 @@ c.colors.webpage.preferred_color_scheme = 'dark'
 ## Allow websites to read canvas elements. Note this is needed for some
 ## websites to work properly.
 ## Type: Bool
-# c.content.canvas_reading = True
+c.content.canvas_reading = True
 
 ## Which cookies to accept. With QtWebEngine, this setting also controls
 ## other features with tracking capabilities similar to those of cookies;
@@ -778,11 +778,11 @@ c.colors.webpage.preferred_color_scheme = 'dark'
 ##   - no-3rdparty: Accept cookies from the same origin only. This is known to break some sites, such as GMail.
 ##   - no-unknown-3rdparty: Accept cookies from the same origin only, unless a cookie is already set for the domain. On QtWebEngine, this is the same as no-3rdparty.
 ##   - never: Don't accept cookies at all.
-# c.content.cookies.accept = 'all'
+c.content.cookies.accept = 'no-unknown-3rdparty'
 
 ## Store cookies.
 ## Type: Bool
-# c.content.cookies.store = True
+c.content.cookies.store = True
 
 ## Default encoding to use for websites. The encoding must be a string
 ## describing an encoding such as _utf-8_, _iso-8859-1_, etc.
@@ -795,11 +795,11 @@ c.colors.webpage.preferred_color_scheme = 'dark'
 ##   - true
 ##   - false
 ##   - ask
-# c.content.desktop_capture = 'ask'
+c.content.desktop_capture = 'ask'
 
 ## Try to pre-fetch DNS entries to speed up browsing.
 ## Type: Bool
-# c.content.dns_prefetch = True
+c.content.dns_prefetch = True
 
 ## Expand each subframe to its contents. This will flatten all the frames
 ## to become one scrollable page.
@@ -822,7 +822,7 @@ c.colors.webpage.preferred_color_scheme = 'dark'
 ##   - true
 ##   - false
 ##   - ask
-# c.content.geolocation = 'ask'
+c.content.geolocation = 'ask'
 
 ## Value to send in the `Accept-Language` header. Note that the value
 ## read from JavaScript is always the global value.
@@ -837,7 +837,7 @@ c.colors.webpage.preferred_color_scheme = 'dark'
 ## qutebrowser asks websites to not track your identity. If set to null,
 ## the DNT header is not sent at all.
 ## Type: Bool
-# c.content.headers.do_not_track = True
+c.content.headers.do_not_track = True
 
 ## When to send the Referer header. The Referer header tells websites
 ## from which website you were coming from when visiting them. No restart
@@ -871,7 +871,7 @@ c.colors.webpage.preferred_color_scheme = 'dark'
 
 ## Load images automatically in web pages.
 ## Type: Bool
-# c.content.images = True
+c.content.images = True
 
 ## Show javascript alerts.
 ## Type: Bool
@@ -893,7 +893,7 @@ c.colors.webpage.preferred_color_scheme = 'dark'
 
 ## Enable JavaScript.
 ## Type: Bool
-# c.content.javascript.enabled = True
+c.content.javascript.enabled = True
 
 ## Log levels to use for JavaScript console logging messages. When a
 ## JavaScript message with the level given in the dictionary key is
@@ -1125,7 +1125,7 @@ c.colors.webpage.preferred_color_scheme = 'dark'
 ## Prompt the user for the download location. If set to false,
 ## `downloads.location.directory` will be used.
 ## Type: Bool
-# c.downloads.location.prompt = True
+c.downloads.location.prompt = True
 
 ## Remember the last used download directory.
 ## Type: Bool
@@ -1168,7 +1168,7 @@ c.colors.webpage.preferred_color_scheme = 'dark'
 
 ## Encoding to use for the editor.
 ## Type: Encoding
-# c.editor.encoding = 'utf-8'
+c.editor.encoding = 'utf-8'
 
 ## Command (and arguments) to use for selecting a single folder in forms.
 ## The command should write the selected folder path to the specified
@@ -1176,7 +1176,7 @@ c.colors.webpage.preferred_color_scheme = 'dark'
 ## Filename of the file to be written to. If not contained in any
 ## argument, the   standard output of the command is read instead.
 ## Type: ShellCommand
-# c.fileselect.folder.command = ['xterm', '-e', 'ranger', '--choosedir={}']
+c.fileselect.folder.command = ['kitty', 'ranger', '--choosedir={}']
 
 ## Handler for selecting file(s) in forms. If `external`, then the
 ## commands specified by `fileselect.single_file.command` and
@@ -1195,7 +1195,7 @@ c.colors.webpage.preferred_color_scheme = 'dark'
 ## contained in any argument, the   standard output of the command is
 ## read instead.
 ## Type: ShellCommand
-# c.fileselect.multiple_files.command = ['xterm', '-e', 'ranger', '--choosefiles={}']
+c.fileselect.multiple_files.command = ['kitty', 'ranger', '--choosefiles={}']
 
 ## Command (and arguments) to use for selecting a single file in forms.
 ## The command should write the selected file path to the specified file
@@ -1203,7 +1203,7 @@ c.colors.webpage.preferred_color_scheme = 'dark'
 ## the file to be written to. If not contained in any argument, the
 ## standard output of the command is read instead.
 ## Type: ShellCommand
-# c.fileselect.single_file.command = ['xterm', '-e', 'ranger', '--choosefile={}']
+c.fileselect.single_file.command = ['kitty', 'ranger', '--choosefile={}']
 
 ## Font used in the completion categories.
 ## Type: Font
@@ -1530,7 +1530,7 @@ c.fonts.web.size.minimum_logical = 16
 ##   - tab-bg-silent: Open a new background tab in the existing window without activating the window.
 ##   - window: Open in a new window.
 ##   - private-window: Open in a new private window.
-# c.new_instance_open_target = 'tab'
+c.new_instance_open_target = 'tab-silent'
 
 ## Which window to choose when opening links as new tabs. When
 ## `new_instance_open_target` is set to `window`, this is ignored.
@@ -1540,11 +1540,11 @@ c.fonts.web.size.minimum_logical = 16
 ##   - last-opened: Open new tabs in the last (newest) opened window.
 ##   - last-focused: Open new tabs in the most recently focused window.
 ##   - last-visible: Open new tabs in the most recently visible window.
-# c.new_instance_open_target_window = 'last-focused'
+c.new_instance_open_target_window = 'last-visible'
 
 ## Show a filebrowser in download prompts.
 ## Type: Bool
-# c.prompt.filebrowser = True
+c.prompt.filebrowser = True
 
 ## Rounding radius (in pixels) for the edges of prompts.
 ## Type: Int
@@ -1641,12 +1641,12 @@ c.fonts.web.size.minimum_logical = 16
 ##   - never: Never show the scrollbar.
 ##   - when-searching: Show the scrollbar when searching for text in the webpage. With the QtWebKit backend, this is equal to `never`.
 ##   - overlay: Show an overlay scrollbar. On macOS, this is unavailable and equal to `when-searching`; with the QtWebKit backend, this is equal to `never`. Enabling/disabling overlay scrollbars requires a restart.
-# c.scrolling.bar = 'overlay'
+c.scrolling.bar = 'never'
 
 ## Enable smooth scrolling for web pages. Note smooth scrolling does not
 ## work with the `:scroll-px` command.
 ## Type: Bool
-# c.scrolling.smooth = False
+c.scrolling.smooth = True
 
 ## When to find text on a page case-insensitively.
 ## Type: IgnoreCase
@@ -1654,17 +1654,17 @@ c.fonts.web.size.minimum_logical = 16
 ##   - always: Search case-insensitively.
 ##   - never: Search case-sensitively.
 ##   - smart: Search case-sensitively if there are capital characters.
-# c.search.ignore_case = 'smart'
+c.search.ignore_case = 'smart'
 
 ## Find text on a page incrementally, renewing the search for each typed
 ## character.
 ## Type: Bool
-# c.search.incremental = True
+c.search.incremental = True
 
 ## Wrap around at the top and bottom of the page when advancing through
 ## text matches using `:search-next` and `:search-prev`.
 ## Type: Bool
-# c.search.wrap = True
+c.search.wrap = True
 
 ## Name of the session to save by default. If this is set to null, the
 ## session which was last loaded is saved.
@@ -1723,7 +1723,7 @@ c.fonts.web.size.minimum_logical = 16
 ##   - tr-TR: Turkish (Turkey)
 ##   - uk-UA: Ukrainian (Ukraine)
 ##   - vi-VN: Vietnamese (Viet Nam)
-# c.spellcheck.languages = []
+c.spellcheck.languages = ['en-US']
 
 ## Padding (in pixels) for the statusbar.
 ## Type: Padding
@@ -1742,7 +1742,7 @@ c.fonts.web.size.minimum_logical = 16
 ##   - always: Always show the statusbar.
 ##   - never: Always hide the statusbar.
 ##   - in-mode: Show the statusbar when in modes other than normal mode.
-# c.statusbar.show = 'always'
+c.statusbar.show = 'in-mode'
 
 ## List of widgets displayed in the statusbar. In addition to the listed
 ## values there is also the possibility to add `text:foo` widgets that
@@ -1756,11 +1756,11 @@ c.fonts.web.size.minimum_logical = 16
 ##   - tabs: Current active tab, e.g. `2`.
 ##   - keypress: Display pressed keys when composing a vi command.
 ##   - progress: Progress bar for the current page loading.
-# c.statusbar.widgets = ['keypress', 'url', 'scroll', 'history', 'tabs', 'progress']
+c.statusbar.widgets = ['keypress', 'url', 'scroll', 'history', 'tabs', 'progress']
 
 ## Open new tabs (middleclick/ctrl+click) in the background.
 ## Type: Bool
-# c.tabs.background = True
+c.tabs.background = True
 
 ## Mouse button with which to close tabs.
 ## Type: String
@@ -1792,7 +1792,7 @@ c.fonts.web.size.minimum_logical = 16
 ##   - always: Always show favicons.
 ##   - never: Always hide favicons.
 ##   - pinned: Show favicons only on pinned tabs.
-# c.tabs.favicons.show = 'always'
+c.tabs.favicons.show = 'pinned'
 
 ## Maximum stack size to remember for tab switches (-1 for no maximum).
 ## Type: Int
@@ -1839,11 +1839,11 @@ c.fonts.web.size.minimum_logical = 16
 ##   - persist: Retain the current mode.
 ##   - restore: Restore previously saved mode.
 ##   - normal: Always revert to normal mode.
-# c.tabs.mode_on_change = 'normal'
+c.tabs.mode_on_change = 'normal'
 
 ## Switch between tabs using the mouse wheel.
 ## Type: Bool
-# c.tabs.mousewheel_switching = True
+c.tabs.mousewheel_switching = True
 
 ## Position of new tabs opened from another tab. See
 ## `tabs.new_position.stacking` for controlling stacking behavior.
@@ -1890,7 +1890,7 @@ c.fonts.web.size.minimum_logical = 16
 ##   - bottom
 ##   - left
 ##   - right
-# c.tabs.position = 'top'
+c.tabs.position = 'bottom'
 
 ## Which tab to select when the focused tab is removed.
 ## Type: SelectOnRemove
@@ -1907,7 +1907,7 @@ c.fonts.web.size.minimum_logical = 16
 ##   - never: Always hide the tab bar.
 ##   - multiple: Hide the tab bar if only one tab is open.
 ##   - switching: Show the tab bar when switching tabs.
-# c.tabs.show = 'always'
+c.tabs.show = 'switching'
 
 ## Duration (in milliseconds) to show the tab bar before hiding it when
 ## tabs.show is set to 'switching'.
@@ -2027,7 +2027,7 @@ c.fonts.web.size.minimum_logical = 16
 ## Hide the window decoration.  This setting requires a restart on
 ## Wayland.
 ## Type: Bool
-# c.window.hide_decoration = False
+c.window.hide_decoration = False
 
 ## Format to use for the window title. The same placeholders like for
 ## `tabs.title.format` are defined.
@@ -2045,11 +2045,11 @@ c.fonts.web.size.minimum_logical = 16
 
 ## Default zoom level.
 ## Type: Perc
-# c.zoom.default = '100%'
+c.zoom.default = '120%'
 
 ## Available zoom levels.
 ## Type: List of Perc
-# c.zoom.levels = ['25%', '33%', '50%', '67%', '75%', '90%', '100%', '110%', '125%', '150%', '175%', '200%', '250%', '300%', '400%', '500%']
+c.zoom.levels = ['25%', '33%', '50%', '67%', '75%', '90%', '100%', '110%', '125%', '150%', '175%', '200%', '250%', '300%', '400%', '500%']
 
 ## Number of zoom increments to divide the mouse wheel movements to.
 ## Type: Int
@@ -2061,24 +2061,27 @@ c.fonts.web.size.minimum_logical = 16
 
 ## Bindings for normal mode
 # config.bind("'", 'mode-enter jump_mark')
-# config.bind('+', 'zoom-in')
-# config.bind('-', 'zoom-out')
-# config.bind('.', 'repeat-command')
+config.bind('<Space>q', 'quit')
+config.bind('<Ctrl-r>', 'restart')
+config.bind('+', 'zoom-in')
+config.bind('=', 'zoom-in')
+config.bind('-', 'zoom-out')
+config.bind('.', 'repeat-command')
 # config.bind('/', 'set-cmd-text /')
 # config.bind(':', 'set-cmd-text :')
-# config.bind(';I', 'hint images tab')
-# config.bind(';O', 'hint links fill :open -t -r {hint-url}')
-# config.bind(';R', 'hint --rapid links window')
-# config.bind(';Y', 'hint links yank-primary')
-# config.bind(';b', 'hint all tab-bg')
-# config.bind(';d', 'hint links download')
-# config.bind(';f', 'hint all tab-fg')
-# config.bind(';h', 'hint all hover')
-# config.bind(';i', 'hint images')
-# config.bind(';o', 'hint links fill :open {hint-url}')
-# config.bind(';r', 'hint --rapid links tab-bg')
-# config.bind(';t', 'hint inputs')
-# config.bind(';y', 'hint links yank')
+config.bind(';I', 'hint images tab')
+config.bind(';O', 'hint links fill :open -t -r {hint-url}')
+config.bind(';R', 'hint --rapid links window')
+config.bind(';Y', 'hint links yank-primary')
+config.bind(';b', 'hint all tab-bg')
+config.bind(';d', 'hint links download')
+config.bind(';f', 'hint all tab-fg')
+config.bind(';h', 'hint all hover')
+config.bind(';i', 'hint images')
+config.bind(';o', 'hint links fill :open {hint-url}')
+config.bind(';r', 'hint --rapid links tab-bg')
+config.bind(';t', 'hint inputs')
+config.bind(';y', 'hint links yank')
 # config.bind('<Alt-1>', 'tab-focus 1')
 # config.bind('<Alt-2>', 'tab-focus 2')
 # config.bind('<Alt-3>', 'tab-focus 3')
@@ -2097,7 +2100,8 @@ c.fonts.web.size.minimum_logical = 16
 # config.bind('<Ctrl-F>', 'scroll-page 0 1')
 # config.bind('<Ctrl-N>', 'open -w')
 # config.bind('<Ctrl-PgDown>', 'tab-next')
-# config.bind('<Ctrl-PgUp>', 'tab-prev')
+config.bind(']', 'tab-next')
+config.bind('[', 'tab-prev')
 # config.bind('<Ctrl-Q>', 'quit')
 # config.bind('<Ctrl-Return>', 'selection-follow -t')
 # config.bind('<Ctrl-Shift-N>', 'open -p')
@@ -2109,6 +2113,7 @@ c.fonts.web.size.minimum_logical = 16
 # config.bind('<Ctrl-U>', 'scroll-page 0 -0.5')
 # config.bind('<Ctrl-V>', 'mode-enter passthrough')
 # config.bind('<Ctrl-W>', 'tab-close')
+config.bind('d', 'tab-close')
 # config.bind('<Ctrl-X>', 'navigate decrement')
 # config.bind('<Ctrl-^>', 'tab-focus last')
 # config.bind('<Ctrl-h>', 'home')
@@ -2116,38 +2121,40 @@ c.fonts.web.size.minimum_logical = 16
 # config.bind('<Ctrl-s>', 'stop')
 # config.bind('<Escape>', 'clear-keychain ;; search ;; fullscreen --leave')
 # config.bind('<F11>', 'fullscreen')
+config.bind('<Ctrl-f>', 'fullscreen')
 # config.bind('<F5>', 'reload')
 # config.bind('<Return>', 'selection-follow')
 # config.bind('<back>', 'back')
+# config.bind('<back>', 'back')
 # config.bind('<forward>', 'forward')
-# config.bind('=', 'zoom')
 # config.bind('?', 'set-cmd-text ?')
 # config.bind('@', 'macro-run')
 # config.bind('B', 'set-cmd-text -s :quickmark-load -t')
 # config.bind('D', 'tab-close -o')
 # config.bind('F', 'hint all tab')
-# config.bind('G', 'scroll-to-perc')
-# config.bind('H', 'back')
-# config.bind('J', 'tab-next')
-# config.bind('K', 'tab-prev')
-# config.bind('L', 'forward')
-# config.bind('M', 'bookmark-add')
-# config.bind('N', 'search-prev')
+config.bind('G', 'scroll-to-perc')
+config.bind('H', 'back')
+#config.bind('J', 'tab-next')
+#config.bind('K', 'tab-prev')
+config.bind('L', 'forward')
+config.bind('M', 'bookmark-add')
+config.bind('N', 'search-prev')
 # config.bind('O', 'set-cmd-text -s :open -t')
 # config.bind('PP', 'open -t -- {primary}')
 # config.bind('Pp', 'open -t -- {clipboard}')
-# config.bind('R', 'reload -f')
+config.bind('R', 'reload -f')
 # config.bind('Sb', 'bookmark-list --jump')
 # config.bind('Sh', 'history')
-# config.bind('Sq', 'bookmark-list')
+config.bind('<Ctrl-h>', 'history')
+config.bind('<Ctrl-b>', 'bookmark-list')
 # config.bind('Ss', 'set')
 # config.bind('T', 'set-cmd-text -sr :tab-focus')
 # config.bind('U', 'undo -w')
 # config.bind('V', 'mode-enter caret ;; selection-toggle --line')
 # config.bind('ZQ', 'quit')
-# config.bind('ZZ', 'quit --save')
-# config.bind('[[', 'navigate prev')
-# config.bind(']]', 'navigate next')
+config.bind('ZZ', 'quit --save')
+config.bind('[[', 'navigate prev')
+config.bind(']]', 'navigate next')
 # config.bind('`', 'mode-enter set_mark')
 # config.bind('ad', 'download-cancel')
 # config.bind('b', 'set-cmd-text -s :quickmark-load')
@@ -2155,25 +2162,27 @@ c.fonts.web.size.minimum_logical = 16
 # config.bind('co', 'tab-only')
 # config.bind('d', 'tab-close')
 # config.bind('f', 'hint')
-# config.bind('g$', 'tab-focus -1')
-# config.bind('g0', 'tab-focus 1')
+config.bind('g$', 'tab-focus -1')
+config.bind('g0', 'tab-focus 1')
 # config.bind('gB', 'set-cmd-text -s :bookmark-load -t')
 # config.bind('gC', 'tab-clone')
 # config.bind('gD', 'tab-give')
 # config.bind('gJ', 'tab-move +')
-# config.bind('gK', 'tab-move -')
-# config.bind('gO', 'set-cmd-text :open -t -r {url:pretty}')
+config.bind('gt', 'tab-next')
+config.bind('gT', 'tab-prev')
+config.bind('gO', 'set-cmd-text :open -t -r {url:pretty}')
 # config.bind('gU', 'navigate up -t')
 # config.bind('g^', 'tab-focus 1')
 # config.bind('ga', 'open -t')
 # config.bind('gb', 'set-cmd-text -s :bookmark-load')
 # config.bind('gd', 'download')
-# config.bind('gf', 'view-source')
-# config.bind('gg', 'scroll-to-perc 0')
+config.bind('gf', 'view-source')
+config.bind('gg', 'scroll-to-perc 0')
 # config.bind('gi', 'hint inputs --first')
 # config.bind('gm', 'tab-move')
-# config.bind('go', 'set-cmd-text :open {url:pretty}')
-# config.bind('gt', 'set-cmd-text -s :tab-select')
+config.bind('go', 'set-cmd-text :open {url:pretty}')
+#config.bind('gt', 'set-cmd-text -s :tab-select')
+config.bind('<Space>b', 'set-cmd-text -s :tab-select')
 # config.bind('gu', 'navigate up')
 # config.bind('h', 'scroll left')
 # config.bind('i', 'mode-enter insert')
@@ -2186,7 +2195,7 @@ c.fonts.web.size.minimum_logical = 16
 # config.bind('pP', 'open -- {primary}')
 # config.bind('pp', 'open -- {clipboard}')
 # config.bind('q', 'macro-record')
-# config.bind('r', 'reload')
+config.bind('r', 'reload')
 # config.bind('sf', 'save')
 # config.bind('sk', 'set-cmd-text -s :bind')
 # config.bind('sl', 'set-cmd-text -s :set -t')
@@ -2217,8 +2226,8 @@ c.fonts.web.size.minimum_logical = 16
 # config.bind('tsH', 'config-cycle -p -t -u *://*.{url:host}/* content.javascript.enabled ;; reload')
 # config.bind('tsh', 'config-cycle -p -t -u *://{url:host}/* content.javascript.enabled ;; reload')
 # config.bind('tsu', 'config-cycle -p -t -u {url} content.javascript.enabled ;; reload')
-# config.bind('u', 'undo')
-# config.bind('v', 'mode-enter caret')
+config.bind('u', 'undo')
+config.bind('v', 'mode-enter caret')
 # config.bind('wB', 'set-cmd-text -s :bookmark-load -w')
 # config.bind('wIf', 'devtools-focus')
 # config.bind('wIh', 'devtools left')
