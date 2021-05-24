@@ -463,11 +463,42 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 #zinit snippet OMZ::themes/afowler.zsh-theme
 #zinit ice pick"async.zsh" src"pure.zsh"; zinit light sindresorhus/pure
 
-export PATH=$PATH:$HOME/.config/nvcode/utils/bin
-# Setup python environment. It should be on >= v3
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
+#autoload -Uz history-beginning-search-menu
+#zle -N history-beginning-search-menu
+# ctrl-space to call out the history commnad menu.
+#bindkey '^Q' history-beginning-search-menu
+### ============ start zplug init ============= ###
+# ### Make plugin here may require dependent commands e.g. fzf, rg, etc
+# ### already in path, so make sure this happens after most of the
+# ### $PATH is populated
+# ###### ==== plugins ====== #####
+source ~/.zplug/init.zsh
+zplug "marlonrichert/zsh-autocomplete"
+# ###### ==== plugins ====== #####
+
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
 fi
+
+# Then, source plugins and add commands to $PATH
+zplug load --verbose
+### ============ start zplug init ============= ###
+#
+### ============ start zplug config ============= ###
+#
+### ============ start zplug config ============= ###
+
+export PATH=$PATH:$HOME/.config/nvcode/utils/bin
+
+# Setup python environment. It should be on >= v3
+#if command -v pyenv 1>/dev/null 2>&1; then
+#  eval "$(pyenv init -)"
+#fi
+#
 alias python=$HOME/homebrew/bin/python3
 
 # neovim as man pager.
