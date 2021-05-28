@@ -5,6 +5,9 @@ SAVEHIST=10000000
 
 # chars as part of filename
 WORDCHARS='*?_-[]~=&;!#$%^(){}<>'
+# GNU Colors
+[ -f /etc/DIR_COLORS ] && eval $(dircolors -b /etc/DIR_COLORS)
+export ZLSCOLORS="${LS_COLORS}"
 
 ### autoload -Uz compinit
 ### compinit
@@ -13,71 +16,68 @@ WORDCHARS='*?_-[]~=&;!#$%^(){}<>'
 limit coredumpsize 0
 
 zstyle ':completion:*' completer _oldlist _expand _complete _ignored _match _correct _approximate _prefix
-
+#
 zstyle ':completion:*' expand 'yes'
 zstyle ':completion::complete:*' '\\'
 zstyle ':completion:*' expand prefix suffix
-
-# Will do autofirst match and menu complete
-#zstyle ':completion:*:*:*:default' menu yes select
 #
-# will do list by the last modification time.
+## Will do autofirst match and menu complete
+##zstyle ':completion:*:*:*:default' menu yes select
+##
+## will do list by the last modification time.
 zstyle ':completion:*' file-sort modification
-
-# this provent the auto cd subdir working.
-#zstyle ':completion:*:*:default' force-list always
-
-# GNU Colors
-[ -f /etc/DIR_COLORS ] && eval $(dircolors -b /etc/DIR_COLORS)
-export ZLSCOLORS="${LS_COLORS}"
+#
+## this provent the auto cd subdir working.
+## zstyle ':completion:*:*:default' force-list always
+#
 zmodload zsh/complist
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31' 
-
+#
 zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
 zstyle ':completion:*' list-suffixes true
-
+#
 zstyle ':completion:*' matcher-list '' '' '' 'r:|[._-]=** r:|=** l:|=*'
 zstyle ':completion:*' max-errors 3 numeric
-
+#
 zstyle ':completion:*' menu select=0
 zstyle ':completion:*' original true
 zstyle ':completion:*' preserve-prefix '//[^/]##/'
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 zstyle ':completion:*' special-dirs true
-# do not squeeze-slashes
-# zstyle ':completion:*' squeeze-slashes true
+## do squeeze-slashes
+zstyle ':completion:*' squeeze-slashes true
 zstyle ':completion:*' use-compctl true
-
-# New stuff
+#
+## New stuff
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zsh/cache
 zstyle ':completion:*:(all-|)files' ignored-patterns '(|*/)CVS'
-zstyle ':completion:*:cd:*' ignored-patterns '(*/)#CVS'
-zstyle ':completion:*:cd:*' ignored-patterns parent pwd
+#zstyle ':completion:*:cd:*' ignored-patterns '(*/)#CVS'
+#zstyle ':completion:*:cd:*' ignored-patterns parent pwd
 zstyle ':completion:*:match:*' original only
 zstyle ':completion:*:approximate:*' max-errors 1 numeric
 zstyle ':completion:*:functions' ignored-patterns '_*'
 zstyle ':completion:*:*:kill:*' menu yes select
 zstyle ':completion:*:kill:*'   force-list always
-
+#
 zstyle ':completion::prefix-1:*' completer _complete
 zstyle ':completion:predict:*' completer _complete
 zstyle ':completion:incremental:*' completer _complete _correct
-
+#
 zstyle ':completion:*:processes' command 'ps -au$USER'
-
-# Group matches and Describe
+#
+## Group matches and Describe
 zstyle ':completion:*:matches' group 'yes'
 zstyle ':completion:*:options' description 'yes'
 zstyle ':completion:*:options' auto-description '%d'
 zstyle ':completion:*:descriptions' format $'\e[01;33m -- %d --\e[0m'
 zstyle ':completion:*:messages' format $'\e[01;35m -- %d --\e[0m'
 zstyle ':completion:*:warnings' format $'\e[01;31m -- No Matches Found --\e[0m'
-# cd dir color red
+## cd dir color red
 zstyle ':completion:*:default' list-colors ''
-########## experiment ###############
-zstyle ':completion:*:*:*:*:*' menu select
+########### experiment ###############
+#zstyle ':completion:*:*:*:*:*' menu select
 expand-or-complete-with-dots() {      # This bunch of code displays red dots when autocompleting
   echo -n "\e[31m......\e[0m"         # a command with the tab key, "Oh-my-zsh"-style.
   zle expand-or-complete
@@ -85,7 +85,68 @@ expand-or-complete-with-dots() {      # This bunch of code displays red dots whe
 }
 zle -N expand-or-complete-with-dots
 bindkey "^I" expand-or-complete-with-dots
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+zstyle :compinstall filename '/home/yongjian/.zshrc'
 ########## experiment ###############
+#
+########################## zsh-autocomplete settings ################################
+#zstyle ':autocomplete:*' default-context ''
+## '': Start each new command line with normal autocompletion.
+## history-incremental-search-backward: Start in live history search mode.
+#
+zstyle ':autocomplete:*' min-delay 0.4  # number of seconds (float)
+## 0.0: Start autocompletion immediately when you stop typing.
+## 0.4: Wait 0.4 seconds for more keyboard input before showing completions.
+#
+# Try 0 to see if it interacts with other completions or not.
+# if so, change back to 1.
+# If 1, then extendedglob to show the current pwd content would not work
+# anymore (because it needs 1 input), so a bit of feature lost.
+zstyle ':autocomplete:*' min-input 0 #number of characters (integer)
+## 0: Show completions immediately on each new command line.
+## 1: Wait for at least 1 character of input.
+#
+#zstyle ':autocomplete:*' ignored-input '' # extended glob pattern
+## '':     Always show completions.
+## '..##': Don't show completions when the input consists of two or more dots.
+#
+## When completions don't fit on screen, show up to this many lines:
+#zstyle ':autocomplete:*' list-lines 16  # (integer)
+## 💡 NOTE: The actual amount shown can be less.
+#
+## If any of the following are shown at the same time, list them in this order:
+zstyle ':completion:*:' group-order \
+    expansions history-words options \
+    aliases functions builtins reserved-words \
+    executables local-directories directories suffix-aliases
+## 💡 NOTE: This is NOT the order in which they are generated.
+#
+#zstyle ':autocomplete:*' insert-unambiguous no
+## no:  Tab inserts the top completion.
+## yes: Tab first inserts substring common to all listed completions, if any.
+#
+zstyle ':autocomplete:*' widget-style menu-select
+## complete-word: (Shift-)Tab inserts the top (bottom) completion.
+## menu-complete: Press again to cycle to next (previous) completion.
+## menu-select:   Same as `menu-complete`, but updates selection in menu.
+## ⚠️ NOTE: This can NOT be changed at runtime.
+#
+## CD with fzf worked.
+## Be careful enabling this, this seems to interact with zsh-autocomplete
+## once somehow activated fzf, it will randomly active while typing commands.
+#zstyle ':autocomplete:*' fzf-completion yes
+## no:  Tab uses Zsh's completion system only.
+## yes: Tab first tries Fzf's completion, then falls back to Zsh's.
+## ⚠️ NOTE: This can NOT be changed at runtime and requires that you have
+## installed Fzf's shell extensions.
+#
+## Add a space after these completions:
+zstyle ':autocomplete:*' add-space \
+    executables aliases functions builtins reserved-words commands \
+    expansions history-words options \
+    local-directories directories suffix-aliases
+########################## zsh-autocomplete settings ################################
 
 rationalise-dot() {
   if [[ $LBUFFER = *.. ]]; then
@@ -97,13 +158,14 @@ rationalise-dot() {
 zle -N rationalise-dot
 bindkey . rationalise-dot
 
+#extendedglob already provided by zsh-autocomplete
 compctl -o setopt unsetopt
-setopt aliases appendhistory autocd extendedglob notify completeinword listambiguous autolist complete_aliases no_list_beep list_packed bang_hist extended_history hist_reduce_blanks hist_verify inc_append_history no_clobber correct INTERACTIVE_COMMENTS path_dirs no_check_jobs no_hup share_history auto_name_dirs markdirs globsubst listpacked shwordsplit
+setopt aliases appendhistory autocd notify completeinword listambiguous autolist complete_aliases no_list_beep list_packed bang_hist extended_history hist_reduce_blanks hist_verify inc_append_history no_clobber correct INTERACTIVE_COMMENTS path_dirs no_check_jobs no_hup share_history auto_name_dirs markdirs globsubst listpacked 
+## will make zsh-autocomplete not work in command like mv, cp, etc..
+#shwordsplit
+#
 unsetopt beep nomatch
 bindkey -v
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-zstyle :compinstall filename '/home/yongjian/.zshrc'
 
 ### autoload -U compinit
 ### compinit
@@ -118,7 +180,6 @@ zstyle :compinstall filename '/home/yongjian/.zshrc'
 #prompt elite
 #prompt bart
 #
-#zmodload zsh/complist
 
 # screen key binding
 # ctrl-a :sessionname to find out the current session

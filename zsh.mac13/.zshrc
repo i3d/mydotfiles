@@ -1,10 +1,40 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-#if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-#  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-#fi
-
+###### !!!! VIM mode forever !!!! ########
+###### !!!! VIM mode forever !!!! ########
+###### !!!! VIM mode forever !!!! ########
+bindkey -v
+autoload -z edit-command-line
+zle -N edit-command-line
+[[ ! -d $HOME/src/zsh-vimode-visual ]] && \
+  git clone https://github.com/b4b4r07/zsh-vimode-visual $HOME/src/zsh-vimode-visual
+source $HOME/src/zsh-vimode-visual/zsh-vimode-visual.zsh
+# neovim as man pager.
+export MANPAGER="/bin/sh -c \"col -b | v -c 'set ft=man ts=8 nomod nolist noma nu' -\""
+export KEYTIMEOUT=1
+# https://dougblack.io/words/zsh-vi-mode.html
+function zle-line-init zle-keymap-select {
+  VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
+  RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}$(git_prompt_status) $EPS1"
+  zle reset-prompt
+}
+zle -N zle-line-init
+zle -N zle-keymap-select
+###### !!!! VIM mode forever !!!! ########
+###### !!!! VIM mode forever !!!! ########
+###### !!!! VIM mode forever !!!! ########
+export ZSH=/Users/jimxu/.oh-my-zsh
+#### init fzf ######
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+if `which rg &>/dev/null`; then
+    #export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
+    export FZF_DEFAULT_COMMAND='rg -S --trim --column -H --hidden ""'
+else
+    # if nothing else, this is the default.
+    export FZF_DEFAULT_COMMAND='find .'
+fi
+###### !!!! VIM mode forever !!!! ########
+###### !!!! VIM mode forever !!!! ########
+###### !!!! VIM mode forever !!!! ########
+#
 # ================ Before sourcing OMZ ====================
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -37,8 +67,7 @@ ZSH_THEME="archcraft"
 # ================ Before sourcing OMZ ====================
 #
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/jimxu/.oh-my-zsh
-source $ZSH/oh-my-zsh.sh
+plugins=(z jump cargo rust colorize command-not-found common-aliases copybuffer cp dircycle dirhistory dotenv iterm2 safe-paste osx pip python themes history vi-mode golang mercurial github brew betterbrew autoupdate git)
 # for awesome-terminal-fonts
 ### source $HOME/.local/src/awesome-terminal-fonts/fonts/*.sh
 #POWERLEVEL9K_MODE='nerdfont-complete'
@@ -83,44 +112,31 @@ CASE_SENSITIVE="true"
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 COMPLETION_WAITING_DOTS="true"
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-#plugins=(git rails textmate ruby lighthourse osx gdoc pip python screen themes history vi-mode go golang github brew mercurial tmux)
-plugins=(safe-paste rails textmate lighthourse osx gdoc pip python screen themes history vi-mode go golang mercurial tmux github brew betterbrew autoupdate zsh-iterm-touchbar)
+export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/symlinks:/usr/local/scripts:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/bin/g4bin:/usr/X11R6/bin:/Users/jimxu/pkgs/android-sdk-linux_x86-1.5_r3/tools:/usr/local/google/bin:/Users/jimxu/src/depot_tools
+export PATH=/Users/jimxu/homebrew/opt/llvm/bin:$PATH:$HOME/.rvm/bin:/$HOME/.rbenv/shims # Add RVM to PATH for scripting
+export CSCOPE_DB=/Users/jimxu/src/linux/cscope.out
 
+#### !!!! All ENV variables setup needed for OMZ and pre-oh-my-zsh ENDs here !!!! #######
+#### !!!! All ENV variables setup needed for OMZ and pre-oh-my-zsh ENDs here !!!! #######
+source $ZSH/oh-my-zsh.sh
 source ~/.zshrc.pre-oh-my-zsh
 [[ -f $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
-
-
-# Customize to your needs...
-export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/symlinks:/usr/local/scripts:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/bin/g4bin:/usr/X11R6/bin:/Users/jimxu/pkgs/android-sdk-linux_x86-1.5_r3/tools:/usr/local/google/bin:/Users/jimxu/src/depot_tools
-export CSCOPE_DB=/Users/jimxu/src/linux/cscope.out
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # Initialize HOMEBREW PATHs and ENVs before we add our own.
 HOMEBREW_PREFIX=/Users/jimxu/homebrew
+export HOMEBREW_INSTALL_CLEANUP=1
 eval $(${HOMEBREW_PREFIX}/bin/brew shellenv)
-
-export PATH=/Users/jimxu/homebrew/opt/llvm/bin:$PATH:$HOME/.rvm/bin:/$HOME/.rbenv/shims # Add RVM to PATH for scripting
+alias python=$HOME/homebrew/bin/python3
 
 #github qfc
 [[ -s "$HOME/.qfc/bin/qfc.sh"  ]] && source "$HOME/.qfc/bin/qfc.sh"
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-if `which rg &>/dev/null`; then
-    #export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
-    export FZF_DEFAULT_COMMAND='rg -S --trim --column -H --hidden ""'
-else
-    # if nothing else, this is the default.
-    export FZF_DEFAULT_COMMAND='find .'
-fi
-
 # for my kir workstation.
 #. $HOME/.bagpipe/setup.sh $HOME/.bagpipe jimxu-linux.kir.corp.google.com "corp-ssh-helper --stderrthreshold=INFO %h %p"
 # for my c.googler.com instance.
 . $HOME/.bagpipe/setup.sh $HOME/.bagpipe ujimux.c.googlers.com "corp-ssh-helper -relay=sup-ssh-relay.corp.google.com --stderrthreshold=INFO %h %p"
 #. $HOME/.bagpipe/setup.sh $HOME/.bagpipe ujimux.c.googlers.com
 #
-
 
 function renew_gcert_ifneeded() {
   HOURS_TILL_EOB=$((20 - $(date +%-H)))h
@@ -145,31 +161,62 @@ function pa() {
   #autossh -f -M20000 -t -A -X ujimux.c.googlers.com
 }
 
-#too slow on laptop.
-#pa
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-#[ -f /Users/jimxu/homebrew/opt/fzf/shell/completion.zsh ] &&  source /Users/jimxu/homebrew/opt/fzf/shell/completion.zsh
-#[ -f /Users/jimxu/homebrew/opt/fzf/shell/key-bindings.zsh ] &&  source /Users/jimxu/homebrew/opt/fzf/shell/key-bindings.zsh
-
-#BASE16_SHELL="$HOME/.config/base16-shell/"
-#[ -n "$PS1" ] && \
-#    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
-#        eval "$("$BASE16_SHELL/profile_helper.sh")"
-#
-#source /Users/jimxu/homebrew/share/antigen/antigen.zsh
+##### !!!! Start plugin managers !!!! ######
+##### !!!! Start plugin managers !!!! ######
 source /Users/jimxu/.zprezto/init.zsh
-
 ### Added by zinit's installer
+if [[ ! -d ~/.zinit ]];then
+  mkdir ~/.zinit
+  git clone https://github.com/zdharma/zinit.git ~/.zinit/bin
+fi
 source ~/.zinit/bin/zinit.zsh
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 ### End of zinit's installer chunk
 
-###
-zinit load zdharma/history-search-multi-word
+###############################
+# from https://github.com/lmintmate/zshrc/blob/master/.zshrc
+zinit light MichaelAquilina/zsh-auto-notify
+zinit light MichaelAquilina/zsh-you-should-use
+AUTO_NOTIFY_IGNORE+=("micro")
+AUTO_NOTIFY_IGNORE+=("mocp")
+export YSU_MESSAGE_POSITION="after"
+export LESS_TERMCAP_md=$(tput bold; tput setaf 1)
+export LESS_TERMCAP_me=$(tput sgr0)
+export LESS_TERMCAP_mb=$(tput bold; tput setaf 2)
+export LESS_TERMCAP_us=$(tput bold; tput setaf 2)
+export LESS_TERMCAP_ue=$(tput rmul; tput sgr0)
+export LESS_TERMCAP_so=$(tput bold; tput setaf 3; tput setab 4)
+export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
 
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+
+#autoload -Uz history-beginning-search-menu-space-end history-beginning-search-menu
+#zle -N history-beginning-search-menu-space-end history-beginning-search-menu
+#bindkey "^H" history-beginning-search-menu-space-end
+zmodload -i zsh/parameter
+#insert-last-command-output() {
+#  LBUFFER+="$(eval $history[$((HISTCMD-1))])"
+#}
+#zle -N insert-last-command-output
+#bindkey "^Q" insert-last-command-output
+#autoload -Uz compinit
+#compinit
+
+setopt list_rows_first
+setopt glob_complete
+setopt histignoredups
+setopt ignoreeof
+unsetopt flowcontrol
+setopt correct_all
+setopt promptsubst
+
+autoload -U colors && colors
+export SPROMPT="Correct $fg_bold[red]%R$reset_color to $fg_bold[green]%r?$reset_color ($fg_bold[green]Yes$reset_color, $fg_bold[yellow]No$reset_color, $fg_bold[red]Abort$reset_color, $fg_bold[blue]Edit$reset_color) "
+###############################
+
+zinit load zdharma/history-search-multi-word
 zinit ice compile"*.lzui" from"notabug"
 zinit load zdharma/zui
 
@@ -190,6 +237,12 @@ zinit light tj/git-extras
 
 # Two regular plugins loaded in default way (no `zinit ice ...` modifiers)
 
+# local change to the autosuggestions plugin is to add a <space> after the completion is filled to 
+# the BUFFER, so that the whole BUFFER has a " " at the end. This does not alter the semantic
+# of the complete but should help avoid some weird interactions with fzf/or other completion that
+# detects an accept-line at <cr>.
+# changed POSTDISPLAY="${suggestion#$BUFFER}"
+# to      POSTDISPLAY="${suggestion#$BUFFER} "
 zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma/fast-syntax-highlighting
 zinit light zsh-users/zsh-syntax-highlighting
@@ -201,26 +254,13 @@ zinit light trapd00r/LS_COLORS
 
 #zinit ice as"program" make'!' atclone'./direnv hook zsh > zhook.zsh' atpull'%atclone' src"zhook.zsh"
 #zinit light direnv/direnv
-#
-
-setopt promptsubst
-
 
 zinit creinstall %HOME/my_completions  # Handle completions without loading any plugin, see "clist" command
-# function issue. some highlight permission denied issue.
-#zinit light trapd00r/zsh-syntax-highlighting-filetypes
-zplg light unixorn/tumult.plugin.zsh
-
 # 4/24/2021 fzf utilities
 zinit load wfxr/forgit
 zinit light kazhala/dotbare
 
-# After zinit, override the prompt
-
-
 [ -f /Users/jimxu/homebrew/etc/profile.d/autojump.sh ] && . /Users/jimxu/homebrew/etc/profile.d/autojump.sh
-
-# if use homebrew go
 
 # node.js, nvm
 export NVM_DIR="$HOME/.nvm"
@@ -228,7 +268,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "${HOME}/homebrew/opt/nvm/etc/bash_completion" ] && . "${HOME}/homebrew/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
 
 #homebrew cleanup previous installs.
-export HOMEBREW_INSTALL_CLEANUP=1
 #or run this to cleanup.
 alias hbc='~/bin/hbc.sh'
 alias g4='p4'
@@ -318,17 +357,17 @@ BASE16_SHELL="$HOME/src/base16-shell/"
 [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
 eval "$("$BASE16_SHELL/profile_helper.sh")"
 
-. /Users/jimxu/homebrew/opt/asdf/asdf.sh
-. /Users/jimxu/homebrew/opt/asdf/etc/bash_completion.d/asdf.bash
+[[ -f  /Users/jimxu/homebrew/opt/asdf/asdf.sh ]] && \
+  . /Users/jimxu/homebrew/opt/asdf/asdf.sh
+[[ -f  /Users/jimxu/homebrew/opt/asdf/etc/bash_completion.d/asdf.bash ]] && \
+  . /Users/jimxu/homebrew/opt/asdf/etc/bash_completion.d/asdf.bash
 #
 # always make sure my own bin path is the first
 export PATH=/Users/jimxu/.cargo/bin:/Users/jimxu/src/Nim/bin:$PATH
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 
 # parth/dotfiles
-export VISUAL=vim
 stty -ixon
-source $HOME/.local/src/dotfiles/zsh/keybindings.sh
 
 # Fix for arrow-key searching
 # start typing + [Up-Arrow] - fuzzy find history forward
@@ -463,6 +502,8 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 #zinit snippet OMZ::themes/afowler.zsh-theme
 #zinit ice pick"async.zsh" src"pure.zsh"; zinit light sindresorhus/pure
 
+
+
 #autoload -Uz history-beginning-search-menu
 #zle -N history-beginning-search-menu
 # ctrl-space to call out the history commnad menu.
@@ -499,11 +540,7 @@ export PATH=$PATH:$HOME/.config/nvcode/utils/bin
 #  eval "$(pyenv init -)"
 #fi
 #
-alias python=$HOME/homebrew/bin/python3
-
-# neovim as man pager.
-export MANPAGER="/bin/sh -c \"col -b | v -c 'set ft=man ts=8 nomod nolist noma nu' -\""
-
+### !!! After zsh-autocomplete !!! #########
 #### FZF thems ######
 # serenade
 export FZF_DEFAULT_OPTS="--color=bg+:#3B4346,bg:#2A2F33,gutter:#2A2F33,spinner:#c1bf89,hl:#C76767,fg:#bfddb2,header:#CC9361,info:#87c095,pointer:#82abbc,marker:#c1bf89,fg+:#D49864,prompt:#e5a46b,hl+:#87c095 --header-lines=0 --ansi --keep-right --info=inline"
@@ -516,7 +553,6 @@ export FZF_DEFAULT_OPTS="--color=bg+:#3B4346,bg:#2A2F33,gutter:#2A2F33,spinner:#
 
 #### FZF thems ######
 #### FZF customized key bindings ####
-bindkey -v
 bindkey -M viins '^x' fzf-history-widget # r for reverse history search
 bindkey -M viins '^f' fzf-file-widget # f for file
 bindkey -M viins '^j' fzf-cd-widget # j for jump
@@ -622,6 +658,7 @@ zman() {
       | awk -F\( '{print $1}' | xargs -r man
 }
 source $HOME/.local/src/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
+#
 # FZF functions #########################
 #
 #eval $( gdircolors -b $HOME/.LS_COLORS )
@@ -636,10 +673,6 @@ export YTFZF_PLAYER="mpv --vd-queue-enable=yes --vd-lavc-threads=4"
 # Import colorscheme from 'wal' asynchronously
 # &   # Run the process in the background.
 # ( ) # Hide shell job control messages.
-unset VISUAL
-unset EDITOR
-export VISUAL=v
-export EDITOR=v
 # https://github.com/jarun/nnn/wiki/
 export NNN_OPTS="deHUeEDrRx"
 export NNN_PLUG='f:finder;o:fzopen;m:mocplay;d:diffs;v:imgview;j:autojump;k:bookmarks;z:fzz;u:getplugs;x:hexview;t:imagethumb;i:ipinfo;l:launch;b:nbak;p:pdfview'
@@ -681,4 +714,8 @@ wal --theme creature -nte
 # pid=$!; disown %1; sleep 1; ( [[ $(ps -p $pid) ]] && kill -9 $pid 1>/dev/null 2>/dev/null) &>/dev/null
 
 # These two stay the last since we need our own path to be at the top.
+unset VISUAL
+unset EDITOR
+export VISUAL=v
+export EDITOR=v
 export PATH=/Users/jimxu/bin:/Users/jimxu/go_code/bin:$PATH:/Users/jimxu/go/bin:/Users/jimxu/homebrew/opt/util-linux/bin:/Users/jimxu/homebrew/opt/util-linux/sbin
