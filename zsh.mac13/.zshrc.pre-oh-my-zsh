@@ -3,6 +3,21 @@ HISTFILE=~/.histfile
 HISTSIZE=10000000
 SAVEHIST=10000000
 
+[[ ! -d $HOME/my_completions ]]  && mkdir -p $HOME/my_completions
+if [[ ! -d $HOME/.local/src ]]; then
+  mkdir -p $HOME/.local/src
+  cd $HOME/.local/src  # startup dependencies
+  git clone https://github.com/i3d/mydotfiles.git
+  echo "mydotfiles is installed to $HOME/.local/src. Needs to be manually copied ..."
+  sleep 3
+  # git clone https://github.com/gabrielelana/awesome-terminal-fonts.git
+  git clone https://github.com/chriskempson/base16-shell.git
+  git clone https://github.com/Parth/dotfiles.git
+  git clone https://github.com/changyuheng/zsh-interactive-cd.git
+  git clone https://github.com/i3d/afetch.git
+  git clone https://github.com/b4b4r07/zsh-vimode-visual.git 
+fi
+
 # chars as part of filename
 WORDCHARS='*?_-[]~=&;!#$%^(){}<>'
 # GNU Colors
@@ -411,7 +426,7 @@ export P4CONFIG=.p4config
 export P4MERGE=/home/build/public/eng/perforce/mergep4.tcl
 export P4EDITOR=$EDITOR
 #export P4PORT=perforce6:6666
-export BASE=/home/jimxu/src
+export BASE=$HOME/src
 export JDK_HOME=/home/jimxu/pkgs/jdk1.6.0_12_32
 export GOOGLE_USE_CORP_SSL_AGENT=true
 if [ -x  /usr/local/scripts/ssx-agents ]; then

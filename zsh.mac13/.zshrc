@@ -4,9 +4,10 @@
 bindkey -v
 autoload -z edit-command-line
 zle -N edit-command-line
-[[ ! -d $HOME/src/zsh-vimode-visual ]] && \
-  git clone https://github.com/b4b4r07/zsh-vimode-visual $HOME/src/zsh-vimode-visual
-source $HOME/src/zsh-vimode-visual/zsh-vimode-visual.zsh
+[[ ! -d $HOME/.local/src/zsh-vimode-visual ]] && \
+  cd $HOME/.local/src && \
+  git clone https://github.com/b4b4r07/zsh-vimode-visual.git
+source $HOME/.local/src/zsh-vimode-visual/zsh-vimode-visual.zsh
 # neovim as man pager.
 export MANPAGER="/bin/sh -c \"col -b | v -c 'set ft=man ts=8 nomod nolist noma nu' -\""
 export KEYTIMEOUT=1
@@ -22,15 +23,6 @@ zle -N zle-keymap-select
 ###### !!!! VIM mode forever !!!! ########
 ###### !!!! VIM mode forever !!!! ########
 export ZSH=/Users/jimxu/.oh-my-zsh
-#### init fzf ######
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-if `which rg &>/dev/null`; then
-    #export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
-    export FZF_DEFAULT_COMMAND='rg -S --trim --column -H --hidden ""'
-else
-    # if nothing else, this is the default.
-    export FZF_DEFAULT_COMMAND='find .'
-fi
 ###### !!!! VIM mode forever !!!! ########
 ###### !!!! VIM mode forever !!!! ########
 ###### !!!! VIM mode forever !!!! ########
@@ -117,17 +109,114 @@ export PATH=/Users/jimxu/homebrew/opt/llvm/bin:$PATH:$HOME/.rvm/bin:/$HOME/.rben
 export CSCOPE_DB=/Users/jimxu/src/linux/cscope.out
 
 #### !!!! All ENV variables setup needed for OMZ and pre-oh-my-zsh ENDs here !!!! #######
-#### !!!! All ENV variables setup needed for OMZ and pre-oh-my-zsh ENDs here !!!! #######
 source $ZSH/oh-my-zsh.sh
 source ~/.zshrc.pre-oh-my-zsh
+#### !!!! All ENV variables setup needed for OMZ and pre-oh-my-zsh ENDs here !!!! #######
+
 [[ -f $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # Initialize HOMEBREW PATHs and ENVs before we add our own.
 HOMEBREW_PREFIX=/Users/jimxu/homebrew
+# we use alternative install because on corp machine /usr/local isn't free of change.
+NEED_INSTALL_BREW=0
+if [[ ! -d $HOMEBREW_PREFIX ]]; then
+  mkdir -p $HOMEBREW_PREFIX && curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C $HOMEBREW_PREFIX
+  # now, we install some base packages.
+  # some of the rust based packages will be installed from rust/cargo.
+  NEED_INSTALL_BREW=1
+fi
 export HOMEBREW_INSTALL_CLEANUP=1
 eval $(${HOMEBREW_PREFIX}/bin/brew shellenv)
 alias python=$HOME/homebrew/bin/python3
+
+# this will take a while
+if ((  $NEED_INSTALL_BREW )); then
+  # first install build tools
+  echo "Install build tools ..."
+  brew install \
+    autoconf automake base64 bison cmake gcc gettext global intltool \
+    m4 nasm readline wget yarn node python ipython && \
+  # install core tools
+  echo "Install core tools ..."
+  brew install \
+    iterm2-nightly git hub asdf autojump fasd fd tldr the_silver_searcher \
+    tree tmux zsh zsh-syntax-highlighting zsync alacritty amethyst \
+    kitty terminus glow wget irssi fontconfig font-firacode-nerd-font \
+    font-noto-nerd-font source-highlight && \
+  echo "Install secondary tools ..."
+  # if the above all went well, then install secondary tools
+  brew install \
+    colormake colortail coreutils cowsay cppcheck cppman \
+    cscope ctags ctail diffutils direnv fortune geoip gnu-sed \
+    go gotop htop lolcat lsof m-cli mas ncdu multitail mu neofetch \
+    nnn pcre pcre2 peco pidof pstree ranger shellcheck shfmt \
+    speedtest-cli ssh-copy-id tree-sitter  util-macros \
+    watch wifi-password && \
+  # everything went well, continue installing 
+  echo "Install network tools ..."
+  brew install \
+    fping geoip hping ifstat iftop iperf mtr nmap speedtest-cli tping \
+    tcptraceroute w3m wget && \
+  # continue installing media apps
+  echo "Install media apps ..."
+  brew install \
+    ffmpeg ffmpeg-iina flac imagemagick media-info mpv mplayershell \
+    transmission-cli youtube-dl && \
+  echo "Install other apps ..."
+  brew install \
+    freetype gdb util-linux typescript universal-ctags \
+    mark-text qutebrowser 
+
+  echo "Install node tools ..."
+  if [[ ! $(npm updatge -g --force && npm install -g neovim flake8) ]] ; then
+    yarn update && yarn instal -g neovim flake8
+  fi
+fi
+
+# fzf requires go, which comes from homebrew.
+#### init fzf ######
+if [[ ! -d $HOME/.fzf ]]; then
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  ~/.fzf/install
+fi
+
+[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
+if `which rg &>/dev/null`; then
+    #export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
+    export FZF_DEFAULT_COMMAND='rg -S --trim --column -H --hidden ""'
+else
+    # if nothing else, this is the default.
+    export FZF_DEFAULT_COMMAND='find .'
+fi
+
+if [[ ! -d $HOME/src ]]; then
+  mkdir -p $HOME/src
+  cd $HOME/src # non startup dependencies.
+  git clone https://github.com/vifm/vifm.git && \
+    cd $HOME/src/vifm && \
+    configure --prefix=$HOME/.local && \
+    make && make install
+  git clone https://github.com/nim-lang/Nim.git
+  git clone https://github.com/rust-lang/rust.git
+  git clone https://github.com/golang/go.git 
+fi
+
+[[ ! -d $HOME/src/ytfzf ]] && \
+  cd $HOME/src && \
+  git clone https://github.com/pystardust/ytfzf.git && \
+  cp $HOME/src/ytfzf/ytfzf $HOME/.local/bin
+# ytfzf config
+export YTFZF_PLAYER="mpv --vd-queue-enable=yes --vd-lavc-threads=4"
+
+if [[ ! -d $HOME/src/neovim ]]; then
+  echo "Install neoview.git ..."
+  cd $HOME/src
+  git clone https://github.com/neovim/neovim.git
+  cd neovim
+  make distclean && make CMAKE_EXTRA_FLAGS=-DCMAKE_INSTALL_PREFIX=$HOME/.local CMAKE_BUILD_TYPE=Release
+  make install
+fi
 
 #github qfc
 [[ -s "$HOME/.qfc/bin/qfc.sh"  ]] && source "$HOME/.qfc/bin/qfc.sh"
@@ -243,6 +332,7 @@ zinit light tj/git-extras
 # detects an accept-line at <cr>.
 # changed POSTDISPLAY="${suggestion#$BUFFER}"
 # to      POSTDISPLAY="${suggestion#$BUFFER} "
+ZSH_AUTOSUGGEST_USE_ASYNC=1
 zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma/fast-syntax-highlighting
 zinit light zsh-users/zsh-syntax-highlighting
@@ -267,13 +357,16 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "${HOME}/homebrew/opt/nvm/nvm.sh" ] && . "${HOME}/homebrew/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "${HOME}/homebrew/opt/nvm/etc/bash_completion" ] && . "${HOME}/homebrew/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
 
+[[ ! $(which xplr) ]] && brew install --head xplr && mkdir -p $HOME/.config/xplr
 #homebrew cleanup previous installs.
 #or run this to cleanup.
+alias x='xplr'
 alias hbc='~/bin/hbc.sh'
 alias g4='p4'
 alias bbbb='blaze'
 # g4d citc stuff.
-source /Library/GoogleCorpSupport/srcfs/shell_completion/enable_completion.sh
+[[ -f /Library/GoogleCorpSupport/srcfs/shell_completion/enable_completion.sh ]] && \
+  source /Library/GoogleCorpSupport/srcfs/shell_completion/enable_completion.sh
 
 #export CPLUS_INCLUDE_PATH=/Users/jimxu/homebrew/Cellar/gcc/HEAD-2d3af38/include/c++/9.0.1:/usr/include:/usr/local/include:$HOME/.local/include:$CPLUS_INCLUDE_PATH
 # for oni finding neovim
@@ -346,13 +439,11 @@ zinit cdclear -q # <- forget completions provided up to this moment
 fpath+=~/.zfunc
 eval "$(hub alias -s)"
 
-# Base16 Shell
-# some color did changes, seems better, the original is also very good.
-# both can try.
-#BASE16_SHELL="$HOME/src/vim-hybrid-material/base16-material/base16-material.dark.sh"
-#[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
-#
-BASE16_SHELL="$HOME/src/base16-shell/"
+[[ ! -d $HOME/.local/src/base16-shell ]] && \
+  mkdir -p $HOME/.local/src && \
+  cd $HOME/.local/src && \
+  git clone https://github.com/chriskempson/base16-shell.git
+BASE16_SHELL="$HOME/.local/src/base16-shell/"
 [ -n "$PS1" ] && \
 [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
 eval "$("$BASE16_SHELL/profile_helper.sh")"
@@ -363,6 +454,14 @@ eval "$("$BASE16_SHELL/profile_helper.sh")"
   . /Users/jimxu/homebrew/opt/asdf/etc/bash_completion.d/asdf.bash
 #
 # always make sure my own bin path is the first
+if [[ ! -d $HOME/.cargo ]]; then
+  # setup rustup.
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+  source $HOME/.cargo/env
+  rustup update && rustup default nightly
+  # install core rust tools.
+  cargo install bat ripgrep git-delta exa tokei procs dutree
+fi
 export PATH=/Users/jimxu/.cargo/bin:/Users/jimxu/src/Nim/bin:$PATH
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 
@@ -665,8 +764,6 @@ source $HOME/.local/src/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
 # this is a bit slow.
 #fm6000 -c random -w -de="Amethyst" -pa $(ls -l $HOMEBREW_CELLAR|wc -l) -g 3
 #
-# ytfzf config
-export YTFZF_PLAYER="mpv --vd-queue-enable=yes --vd-lavc-threads=4"
 #
 # put this at the end since it could hang.
 # TODO: figure out why.
