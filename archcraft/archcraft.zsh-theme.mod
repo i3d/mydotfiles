@@ -49,4 +49,4 @@ ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%})"
 # 
 # 
 # 
-#   , 
+#   ,   , 

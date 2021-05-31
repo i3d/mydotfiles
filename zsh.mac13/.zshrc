@@ -618,6 +618,7 @@ if [[ ! -d $HOME/.zplug ]]; then
 fi
 source ~/.zplug/init.zsh
 zplug "marlonrichert/zsh-autocomplete"
+zplug "zsh-users/zsh-history-substring-search"
 # ###### ==== plugins ====== #####
 
 # Install plugins if there are plugins that have not been installed
@@ -627,14 +628,15 @@ if ! zplug check --verbose; then
         echo; zplug install
     fi
 fi
+### ============ start zplug config ============= ###
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+### ============ end zplug config ============= ###
 # Then, source plugins and add commands to $PATH
 zplug load --verbose
-### ============ start zplug init ============= ###
-#
-### ============ start zplug config ============= ###
-#
-### ============ start zplug config ============= ###
-
+# after the plugin loaded.
+HISTORY_SUBSTRING_SEARCH_FUZZY=1
+### ============ end zplug init ============= ###
 export PATH=$PATH:$HOME/.config/nvcode/utils/bin
 
 # Setup python environment. It should be on >= v3
