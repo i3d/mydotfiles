@@ -232,15 +232,14 @@ if ! zplug check --verbose; then
     fi
 fi
 # config plugins before it is loaded.
-HISTORY_SUBSTRING_SEARCH_FUZZY=1
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 # config plugins before it is loaded.
 #
 # Then, source plugins and add commands to $PATH
 zplug load --verbose
+# have to be after the plugin loaded.
+HISTORY_SUBSTRING_SEARCH_FUZZY=1
 #### After zinit, load zplug.
 source $HOME/.local/src/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
 
