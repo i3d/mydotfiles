@@ -142,7 +142,7 @@ if ((  $NEED_INSTALL_BREW )); then
   brew install \
     iterm2-nightly git hub asdf autojump fasd fd tldr the_silver_searcher \
     tree tmux zsh zsh-syntax-highlighting zsync alacritty amethyst \
-    kitty terminus glow wget irssi fontconfig font-firacode-nerd-font \
+    kitty terminus glow irssi fontconfig font-firacode-nerd-font \
     font-noto-nerd-font source-highlight && \
   echo "Install secondary tools ..."
   # if the above all went well, then install secondary tools
@@ -151,13 +151,13 @@ if ((  $NEED_INSTALL_BREW )); then
     cscope ctags ctail diffutils direnv fortune geoip gnu-sed \
     go gotop htop lolcat lsof m-cli mas ncdu multitail mu neofetch \
     nnn pcre pcre2 peco pidof pstree ranger shellcheck shfmt \
-    speedtest-cli ssh-copy-id tree-sitter  util-macros \
+    ssh-copy-id tree-sitter  util-macros \
     watch wifi-password && \
   # everything went well, continue installing 
   echo "Install network tools ..."
   brew install \
     fping geoip hping ifstat iftop iperf mtr nmap speedtest-cli tping \
-    tcptraceroute w3m wget && \
+    tcptraceroute w3m && \
   # continue installing media apps
   echo "Install media apps ..."
   brew install \
@@ -612,6 +612,10 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 # ### already in path, so make sure this happens after most of the
 # ### $PATH is populated
 # ###### ==== plugins ====== #####
+if [[ ! -d $HOME/.zplug ]]; then
+    curl -sL --proto-redir -all,https \
+        https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+fi
 source ~/.zplug/init.zsh
 zplug "marlonrichert/zsh-autocomplete"
 # ###### ==== plugins ====== #####
@@ -623,7 +627,6 @@ if ! zplug check --verbose; then
         echo; zplug install
     fi
 fi
-
 # Then, source plugins and add commands to $PATH
 zplug load --verbose
 ### ============ start zplug init ============= ###

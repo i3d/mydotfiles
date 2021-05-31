@@ -1,119 +1,108 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-#if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-#  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-#fi
-
-# Set name of the theme to load. these need to be set __BEFORE__ sourcing OMZ.
-# Look in ~/.oh-my-zsh/themes/ or custom
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-#ZSH_THEME="robbyrussell"
-#
-#ZSH_THEME="terencehill"
-#SPACESHIP_BATTERY_SHOW=false
-#ZSH_THEME="budspencer"
-#ZSH_THEME="agnoster"
-#ZSH_THEME="spaceship"
-#ZSH_THEME="powerlevel9k/powerlevel9k"
-#ZSH_THEME="gitster"
-#ZSH_THEME="lambda-gitster"
-#ZSH_THEME="lambda-mod"
-#ZSH_THEME="psyrendust"
-#ZSH_THEME="starlight"
-#ZSH_THEME="kinda-fishy"
-#ZSH_THEME="bunnyruni"
-#
-# the current theme
-ZSH_THEME="archcraft"
-
-#bad
-#ZSH_THEME="lambda-pure"
-#ZSH_THEME="agnosterzak"
-#ZSH_THEME="zeta"
-#ZSH_THEME="haribo"
-#ZSH_THEME="bullet-train"
-
-# Path to your oh-my-zsh installation.
+###### !!!! VIM mode forever !!!! ########
+###### !!!! VIM mode forever !!!! ########
+###### !!!! VIM mode forever !!!! ########
+bindkey -v
+autoload -z edit-command-line
+zle -N edit-command-line
+[[ ! -d $HOME/.local/src/zsh-vimode-visual ]] && \
+  cd $HOME/.local/src && \
+  git clone https://github.com/b4b4r07/zsh-vimode-visual.git
+source $HOME/.local/src/zsh-vimode-visual/zsh-vimode-visual.zsh
+# neovim as man pager.
+export MANPAGER="/bin/sh -c \"col -b | v -c 'set ft=man ts=8 nomod nolist noma nu' -\""
+export KEYTIMEOUT=1
+# https://dougblack.io/words/zsh-vi-mode.html
+function zle-line-init zle-keymap-select {
+  VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
+  RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}$(git_prompt_status) $EPS1"
+  zle reset-prompt
+}
+zle -N zle-line-init
+zle -N zle-keymap-select
+###### !!!! VIM mode forever !!!! ########
+###### !!!! VIM mode forever !!!! ########
+###### !!!! VIM mode forever !!!! ########
 export ZSH=/home/jimxu/.oh-my-zsh
-
-source $ZSH/oh-my-zsh.sh
-
-# for awesome-terminal-fonts
-source $HOME/src/awesome-terminal-fonts/fonts/*.sh
-#POWERLEVEL9K_MODE='nerdfont-complete'
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
+###### !!!! VIM mode forever !!!! ########
+###### !!!! VIM mode forever !!!! ########
+###### !!!! VIM mode forever !!!! ########
 #
-# Example aliases
-# alias zshrc="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-# Example aliases
-# Set to this to use case-sensitive completion
+# ================ Before sourcing OMZ ====================
 CASE_SENSITIVE="true"
-
-# Comment this out to disable weekly auto-update checks
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment following line if you want to disable colors in ls
-# DISABLE_LS_COLORS="true"
-
-# Uncomment following line if you want to disable autosetting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment following line if you want red dots to be displayed while waiting for completion
 COMPLETION_WAITING_DOTS="true"
+ZSH_THEME="archcraft"
+plugins=(z jump cargo rust colorize command-not-found common-aliases copybuffer cp dircycle dirhistory dotenv iterm2 safe-paste osx pip python themes history vi-mode golang mercurial github brew betterbrew autoupdate git)
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-#plugins=(git rails textmate ruby lighthourse osx gdoc pip python screen themes history vi-mode go golang github brew mercurial tmux)
-plugins=(safe-paste rails textmate lighthourse osx gdoc pip python screen themes history vi-mode go golang mercurial tmux github brew betterbrew autoupdate zsh-iterm-touchbar)
+export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/symlinks:/usr/local/scripts:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/bin/g4bin:/usr/X11R6/bin:/home/jimxu/pkgs/android-sdk-linux_x86-1.5_r3/tools:/usr/local/google/bin:/home/jimxu/src/depot_tools
+export CSCOPE_DB=/home/jimxu/src/linux/cscope.out
+# ================ Before sourcing OMZ ====================
 
+#### !!!! All ENV variables setup needed for OMZ and pre-oh-my-zsh ENDs here !!!! #######
+source $ZSH/oh-my-zsh.sh
 source ~/.zshrc.pre-oh-my-zsh
+#### !!!! All ENV variables setup needed for OMZ and pre-oh-my-zsh ENDs here !!!! #######
 [[ -f $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
 
 
-# Customize to your needs...
-export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/symlinks:/usr/local/scripts:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/bin/g4bin:/usr/X11R6/bin:/home/jimxu/pkgs/android-sdk-linux_x86-1.5_r3/tools:/usr/local/google/bin:/home/jimxu/src/depot_tools
-export CSCOPE_DB=/home/jimxu/src/linux/cscope.out
 
 # Initialize HOMEBREW PATHs and ENVs before we add our own.
 HOMEBREW_PREFIX=/home/linuxbrew/.linuxbrew
+NEED_INSTALL_BREW=0
+if [[ ! -d $HOMEBREW_PREFIX ]]; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    NEED_INSTALL_BREW=1
+fi
+export HOMEBREW_INSTALL_CLEANUP=1
 eval $(${HOMEBREW_PREFIX}/bin/brew shellenv)
+
+# this will take a while
+if ((  $NEED_INSTALL_BREW )); then
+  # first install build tools
+  echo "Install build tools ..."
+  brew install \
+    wget yarn node ipython && \
+  # install core tools
+  echo "Install core tools ..."
+  brew install \
+    hub asdf autojump fasd fd tldr the_silver_searcher \
+    zsh-syntax-highlighting glow source-highlight && \
+  echo "Install secondary tools ..."
+  # if the above all went well, then install secondary tools
+  brew install \
+    colormake colortail cowsay cppcheck cppman \
+    cscope ctags ctail diffutils direnv fortune \
+    go gotop htop lolcat lsof ncdu multitail neofetch \
+    nnn pcre pcre2 peco pidof pstree ranger shellcheck shfmt \
+    ssh-copy-id tree-sitter && \
+  # everything went well, continue installing 
+  echo "Install network tools ..."
+  brew install \
+    fping geoip hping ifstat iftop iperf mtr nmap speedtest-cli tping \
+    tcptraceroute w3m && \
+  # continue installing media apps
+  echo "Install media apps ..."
+  brew install \
+    ffmpeg ffmpeg-iina flac imagemagick media-info mpv mplayershell \
+    transmission-cli youtube-dl && \
+  echo "Install other apps ..."
+  brew install \
+    util-linux typescript universal-ctags mark-text qutebrowser 
+
+  echo "Install node tools ..."
+  if [[ ! $(npm updatge -g --force && npm install -g neovim flake8) ]] ; then
+    yarn update && yarn instal -g neovim flake8
+  fi
+fi
 
 export PATH=/home/linuxbrew/.linuxbrew/opt/llvm/bin:$PATH:$HOME/.rvm/bin:/$HOME/.rbenv/shims # Add RVM to PATH for scripting
 
-#github qfc
-[[ -s "$HOME/.qfc/bin/qfc.sh"  ]] && source "$HOME/.qfc/bin/qfc.sh"
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# fzf requires go, which comes from homebrew.
+#### init fzf ######
+if [[ ! -d $HOME/.fzf ]]; then
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  ~/.fzf/install
+fi
+[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 if `which rg &>/dev/null`; then
     #export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
     export FZF_DEFAULT_COMMAND='rg -S --trim --column -H --hidden ""'
@@ -122,70 +111,129 @@ else
     export FZF_DEFAULT_COMMAND='find .'
 fi
 
-#BASE16_SHELL="$HOME/.config/base16-shell/"
-#[ -n "$PS1" ] && \
-#    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
-#        eval "$("$BASE16_SHELL/profile_helper.sh")"
-#
-# source /home/linuxbrew/.linuxbrew/share/antigen/antigen.zsh
-# source /home/jimxu/.zprezto/init.zsh
+if [[ ! -d $HOME/src ]]; then
+  mkdir -p $HOME/src
+  cd $HOME/src # non startup dependencies.
+  git clone https://github.com/vifm/vifm.git && \
+    cd $HOME/src/vifm && \
+    configure --prefix=$HOME/.local && \
+    make && make install
+  git clone https://github.com/nim-lang/Nim.git
+  git clone https://github.com/rust-lang/rust.git
+  git clone https://github.com/golang/go.git 
+fi
 
+[[ ! -d $HOME/src/ytfzf ]] && \
+  cd $HOME/src && \
+  git clone https://github.com/pystardust/ytfzf.git && \
+  cp $HOME/src/ytfzf/ytfzf $HOME/.local/bin
+# ytfzf config
+export YTFZF_PLAYER="mpv --vd-queue-enable=yes --vd-lavc-threads=4"
+
+if [[ ! -d $HOME/src/neovim ]]; then
+  echo "Install neoview.git ..."
+  cd $HOME/src
+  git clone https://github.com/neovim/neovim.git
+  cd neovim
+  make distclean && make CMAKE_EXTRA_FLAGS=-DCMAKE_INSTALL_PREFIX=$HOME/.local CMAKE_BUILD_TYPE=Release
+  make install
+fi
+
+#github qfc
+[[ -s "$HOME/.qfc/bin/qfc.sh"  ]] && source "$HOME/.qfc/bin/qfc.sh"
+##### !!!! Start plugin managers !!!! ######
+##### !!!! Start plugin managers !!!! ######
 ### Added by zinit's installer
+if [[ ! -d ~/.zinit ]];then
+  mkdir -p ~/.zinit
+  git clone https://github.com/zdharma/zinit.git ~/.zinit/bin
+fi
 source ~/.zinit/bin/zinit.zsh
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 ### End of zinit's installer chunk
+#
+###############################
+# from https://github.com/lmintmate/zshrc/blob/master/.zshrc
+zinit light MichaelAquilina/zsh-auto-notify
+zinit light MichaelAquilina/zsh-you-should-use
+AUTO_NOTIFY_IGNORE+=("micro")
+AUTO_NOTIFY_IGNORE+=("mocp")
+export YSU_MESSAGE_POSITION="after"
+export LESS_TERMCAP_md=$(tput bold; tput setaf 1)
+export LESS_TERMCAP_me=$(tput sgr0)
+export LESS_TERMCAP_mb=$(tput bold; tput setaf 2)
+export LESS_TERMCAP_us=$(tput bold; tput setaf 2)
+export LESS_TERMCAP_ue=$(tput rmul; tput sgr0)
+export LESS_TERMCAP_so=$(tput bold; tput setaf 3; tput setab 4)
+export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
+
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+
+#autoload -Uz history-beginning-search-menu-space-end history-beginning-search-menu
+#zle -N history-beginning-search-menu-space-end history-beginning-search-menu
+#bindkey "^H" history-beginning-search-menu-space-end
+zmodload -i zsh/parameter
+#insert-last-command-output() {
+#  LBUFFER+="$(eval $history[$((HISTCMD-1))])"
+#}
+#zle -N insert-last-command-output
+#bindkey "^Q" insert-last-command-output
+#autoload -Uz compinit
+#compinit
+
+setopt list_rows_first
+setopt glob_complete
+setopt histignoredups
+setopt ignoreeof
+unsetopt flowcontrol
+setopt correct_all
+setopt promptsubst
+
+autoload -U colors && colors
+export SPROMPT="Correct $fg_bold[red]%R$reset_color to $fg_bold[green]%r?$reset_color ($fg_bold[green]Yes$reset_color, $fg_bold[yellow]No$reset_color, $fg_bold[red]Abort$reset_color, $fg_bold[blue]Edit$reset_color) "
+###############################
 
 ###
 zinit load zdharma/history-search-multi-word
-
 zinit ice compile"*.lzui" from"notabug"
 zinit load zdharma/zui
-
-# One other binary release, it needs renaming from `docker-compose-Linux-x86_64`.
-# This is done by ice-mod `mv'{from} -> {to}'. There are multiple packages per
-# single version, for OS X, Linux and Windows – so ice-mod `bpick' is used to
-# select Linux package – in this case this is not needed, zinit will grep
-# operating system name and architecture automatically when there's no `bpick'
-
 zinit ice from"gh-r" as"program" mv"docker* -> docker-compose" bpick"*linux*"; zinit load docker/compose
-
-# Scripts that are built at install (there's single default make target, "install",
-# and it constructs scripts by `cat'ing a few files). The make"" ice could also be:
-# `make"install PREFIX=$ZPFX"`, if "install" wouldn't be the only, default target
-
 zinit ice as"program" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
 zinit light tj/git-extras
-
-# Two regular plugins loaded in default way (no `zinit ice ...` modifiers)
-
 zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma/fast-syntax-highlighting
 zinit light zsh-users/zsh-syntax-highlighting
-
 zinit ice atclone"gdircolors -b LS_COLORS > c.zsh" atpull'%atclone' pick"c.zsh" nocompile'!'
 zinit light trapd00r/LS_COLORS
-
-# This one to be ran just once, in interactive session
-
-#zinit ice as"program" make'!' atclone'./direnv hook zsh > zhook.zsh' atpull'%atclone' src"zhook.zsh"
-#zinit light direnv/direnv
-#
-
-setopt promptsubst
-
-
 zinit creinstall %HOME/my_completions  # Handle completions without loading any plugin, see "clist" command
-# function issue. some highlight permission denied issue.
-#zinit light trapd00r/zsh-syntax-highlighting-filetypes
 zplg light unixorn/tumult.plugin.zsh
-
-# 4/24/2021 fzf utilities
 zinit load wfxr/forgit
 zinit light kazhala/dotbare
-
-# After zinit, override the prompt
-
+zinit snippet OMZ::lib/git.zsh
+zinit snippet OMZ::plugins/git/git.plugin.zsh
+zinit cdclear -q # <- forget completions provided up to this moment
+#
+#### After zinit, load zplug.
+if [[ ! -d $HOME/.zplug ]]; then
+    curl -sL --proto-redir -all,https \
+        https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+fi
+source $HOME/.zplug/init.zsh
+zplug "marlonrichert/zsh-autocomplete"
+# ###### ==== plugins ====== #####
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+# Then, source plugins and add commands to $PATH
+zplug load --verbose
+#### After zinit, load zplug.
+source $HOME/.local/src/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
 
 [ -f /home/linuxbrew/.linuxbrew/etc/profile.d/autojump.sh ] && . /home/linuxbrew/.linuxbrew/etc/profile.d/autojump.sh
 
@@ -194,12 +242,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh" ] && . "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion" ] && . "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
 
-#homebrew cleanup previous installs.
-export HOMEBREW_INSTALL_CLEANUP=1
-#or run this to cleanup.
+[[ ! $(which xplr) ]] && brew install --head xplr && mkdir -p $HOME/.config/xplr
+alias x='xplr'
 alias hbc='~/bin/hbc.sh'
-
-# edit the vimrc.
 alias vim='nv -u ~/.vimrc -X -p'
 alias v='vim'
 alias zshrc="v -O ~/.zshrc ~/.zshrc.pre-oh-my-zsh"
@@ -211,72 +256,45 @@ alias vz='zshrc'
 alias z1='v -O ~/.zshrc'
 alias z2='v -O ~/.zshrc.pre-oh-my-zsh'
 alias vcheat='v $HOME/bin/cheat'
-#source /home/linuxbrew/.linuxbrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-#export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/home/linuxbrew/.linuxbrew/share/zsh-syntax-highlighting/highlighters
-#
-# currently using the following zsh prompt themes. either generate one from using vim promptline plguin,
-# or use zinit powerlevel9k, both works, or fallback to a fixed liquidprompt.
-# having git_prompt_status issue
-#source ~/.liquidprompt/liquidprompt
-#source ~/.promptline.sh
-# ==== load OMZ theme ====
-# Load OMZ Git library
-zinit snippet OMZ::lib/git.zsh
-
-# Load Git plugin from OMZ
-zinit snippet OMZ::plugins/git/git.plugin.zsh
-zinit cdclear -q # <- forget completions provided up to this moment
-#
-# having issues.
-#zinit light NicoSantangelo/Alpharized
-#
-# ==== load 3rd_party theme ====
-#
-# Load theme from github directly.
-# Load the pure theme, with zsh-async library that's bundled with it
-# use our own theme
-#
-#zinit light tannhuber/oh-my-zsh-budspencer
-#
-# ============ was enabled before =======================
-#zinit light denysdovhan/spaceship-prompt
-#SPACESHIP_BATTERY_SHOW=false
-#
-#
-# nice but ugly in vim term.
-#zinit light bhilburn/powerlevel9k
-#
-# ========== Current prompt ===================
-#
-# prompt_git:15: unknown group
-#zinit light caiogondim/bullet-train.zsh
-#BULLETTRAIN_STATUS_EXIT_SHOW=true
+alias python=/home/linuxbrew/.linuxbrew/bin/python3
+alias cat='bat -pp'
+alias less='bat -p'
+unalias vi 2>/dev/null
+unalias v 2>/dev/null
+unalias g  2>/dev/null # alias to git which never good.
+unalias rd 2>/dev/null # for mac remote desktop, not rmdir
 
 fpath+=~/.zfunc
 eval "$(hub alias -s)"
 
-# Base16 Shell
-# some color did changes, seems better, the original is also very good.
-# both can try.
-#BASE16_SHELL="$HOME/src/vim-hybrid-material/base16-material/base16-material.dark.sh"
-#[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
-#
+[[ ! -d $HOME/.local/src/base16-shell ]] && \
+  mkdir -p $HOME/.local/src && \
+  cd $HOME/.local/src && \
+  git clone https://github.com/chriskempson/base16-shell.git
 BASE16_SHELL="$HOME/src/base16-shell/"
 [ -n "$PS1" ] && \
 [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
 eval "$("$BASE16_SHELL/profile_helper.sh")"
 
-. /home/linuxbrew/.linuxbrew/opt/asdf/asdf.sh
-. /home/linuxbrew/.linuxbrew/opt/asdf/etc/bash_completion.d/asdf.bash
+[[ -f /home/linuxbrew/.linuxbrew/opt/asdf/asdf.sh ]] && \
+    . /home/linuxbrew/.linuxbrew/opt/asdf/asdf.sh
+[[ -f /home/linuxbrew/.linuxbrew/opt/asdf/etc/bash_completion.d/asdf.bash ]] && \
+    . /home/linuxbrew/.linuxbrew/opt/asdf/etc/bash_completion.d/asdf.bash
 #
 # always make sure my own bin path is the first
+if [[ ! -d $HOME/.cargo ]]; then
+  # setup rustup.
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+  source $HOME/.cargo/env
+  rustup update && rustup default nightly
+  # install core rust tools.
+  cargo install bat ripgrep git-delta exa tokei procs dutree
+fi
 export PATH=/home/jimxu/.cargo/bin:/home/jimxu/src/Nim/bin:$PATH
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 
 # parth/dotfiles
-export VISUAL=vim
 stty -ixon
-source $HOME/src/dotfiles/zsh/keybindings.sh
 
 # Fix for arrow-key searching
 # start typing + [Up-Arrow] - fuzzy find history forward
@@ -291,14 +309,7 @@ if [[ "${terminfo[kcud1]}" != "" ]]; then
 	zle -N down-line-or-beginning-search
 	bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
 fi
-
-# ===================== Was used before powerlevel10k ==================
-#source $HOME/src/dotfiles/zsh/prompt.sh
-#export PATH=$PATH:$HOME/src/dotfiles/utils
-
-# for doom emacs
 export PATH=$PATH:$HOME/.emacs.d/bin
-
 #######################################################################
 #                                                                     #
 #     Everything installed into .local/bin can only be referenced     #
@@ -307,24 +318,6 @@ export PATH=$PATH:$HOME/.emacs.d/bin
 #######################################################################
 # for everything that installed into .local/bin/
 export PATH=$HOME/.local/bin:$PATH
-
-# bash-hook            # add hook code to bash $PROMPT_COMMAND
-# bash-ccomp           # bash command mode completion definitions
-# bash-ccomp-install   # setup command mode completion for bash
-# posix-alias          # define aliases that applies to all posix shells
-# posix-hook           # setup $PS1 hook for shells that's posix compatible
-# tcsh-alias           # define aliases for tcsh
-# tcsh-hook            # setup tcsh precmd alias
-# zsh-hook             # define _fasd_preexec and add it to zsh preexec array
-# zsh-ccomp            # zsh command mode completion definitions
-# zsh-ccomp-install    # setup command mode completion for zsh
-# zsh-wcomp            # zsh word mode completion definitions
-# zsh-wcomp-install    # setup word mode completion for zsh
-
-# Example for a minimal zsh setup (no tab completion):
-# eval "$(fasd --init posix-alias zsh-hook)"
-# Note that this method will slightly increase your shell start-up time, since calling binaries has overhead.  You can cache fasd init code if you want min-
-# imal overhead.  Example code for bash (to be put into .bashrc):
 fasd_cache="$HOME/.fasd-init-zsh"
 if [[ "$(command -v fasd)" && ! -f "$fasd_cache" ]]; then
     fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install zsh-wcomp zsh-wcomp-install >| "$fasd_cache"
@@ -345,78 +338,13 @@ function vcp() {
   done
 }
 
-#fish
-#
-# bat has ln and syntax highlight.
-alias cat='bat -pp'
-alias less='bat -p'
-# always unalias vi
-unalias vi 2>/dev/null
-unalias v 2>/dev/null
-unalias g  2>/dev/null # alias to git which never good.
-unalias rd 2>/dev/null # for mac remote desktop, not rmdir
-#export PATH=$HOME/.config/nvim/utils/bin:$HOME/bin:$PATH
 fortune | cowsay -f $(cowsay -l| sed '1d' | shuf | tr ' ' '\n' | head -1) | lolcat
 # see https://unix.stackexchange.com/questions/140750/generate-random-numbers-in-specific-range
 # or jot -r 1 1 10000
 # head -200 /dev/urandom | cksum
-#
-# cbonsai -s $(shuf -i 1-10000 -n 1) -p
-# terminal logo
-#screenfetch
-#neofetch
 afetch
-# don't fatch the IP.
-#archey -o
-
-#unset ZSH_ENV
-# load the vim file manager if we aren't already in vifm
-# when vifmrc loaded, it will set this env to true.
-#[[ -z ${VIFM_ENABLED} ]] && vf .
-
-killwal() {
-    sleep 3
-    if ps -ef|grep $1 &>/dev/null; then
-      kill -9 $1 &>/dev/null
-    fi
-}
-
-# Disable for starship
-#zinit light romkatv/powerlevel10k
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-#[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-# Disable powerlevel9k for now and use starship prompt.
-#POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
-#typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
-#
-# Starship prompt starts here.
-# eval "$(starship init zsh)"
-#
-# zinit light halfo/lambda-mod-zsh-theme
-#zinit snippet OMZ::themes/cloud.zsh-theme
-#zinit snippet OMZ::themes/cypher.zsh-theme
-#zinit snippet OMZ::themes/kolo.zsh-theme
-#zinit snippet OMZ::themes/lambda.zsh-theme
-#zinit snippet OMZ::themes/lukerandall.zsh-theme
-#zinit snippet OMZ::themes/mikeh.zsh-theme
-#zinit snippet OMZ::themes/miloshadzic.zsh-theme
-#zinit snippet OMZ::themes/muse.zsh-theme
-#zinit snippet OMZ::themes/nicoulaj.zsh-theme
-#zinit snippet OMZ::themes/norm.zsh-theme
-#zinit snippet OMZ::themes/obraun.zsh-theme
-#zinit snippet OMZ::themes/afowler.zsh-theme
-#zinit ice pick"async.zsh" src"pure.zsh"; zinit light sindresorhus/pure
 
 export PATH=$PATH:$HOME/.config/nvcode/utils/bin
-# Setup python environment. It should be on >= v3
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
-alias python=/home/linuxbrew/.linuxbrew/bin/python3
-
-# neovim as man pager.
-export MANPAGER="/bin/sh -c \"col -b | v -c 'set ft=man ts=8 nomod nolist noma nu' -\""
-
 #### FZF thems ######
 # serenade
 export FZF_DEFAULT_OPTS="--color=bg+:#3B4346,bg:#2A2F33,gutter:#2A2F33,spinner:#c1bf89,hl:#C76767,fg:#bfddb2,header:#CC9361,info:#87c095,pointer:#82abbc,marker:#c1bf89,fg+:#D49864,prompt:#e5a46b,hl+:#87c095 --header-lines=0 --ansi --keep-right --info=inline"
@@ -534,18 +462,12 @@ zman() {
     man -k . | fzf -q "$1" --prompt='man> '  \
       | awk -F\( '{print $1}' | xargs -r man
 }
-source $HOME/src/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
-# FZF functions #########################
-#
-#eval $( gdircolors -b $HOME/.LS_COLORS )
-# These two stay the last since we need our own path to be at the top.
+# https://github.com/jarun/nnn/wiki/
+export NNN_OPTS="deHUeEDrRx"
+export NNN_PLUG='f:finder;o:fzopen;m:mocplay;d:diffs;v:imgview;j:autojump;k:bookmarks;z:fzz;u:getplugs;x:hexview;t:imagethumb;i:ipinfo;l:launch;b:nbak;p:pdfview'
+alias n3=nnn
 export PATH=/home/jimxu/bin:/home/jimxu/go_code/bin:$PATH:/home/jimxu/go/bin
-# this is a bit slow.
-#fm6000 -c random -w -de="Amethyst" -pa $(ls -l $HOMEBREW_CELLAR|wc -l) -g 3
-# put this at the end since it could hang.
-# TODO: figure out why.
-# Import colorscheme from 'wal' asynchronously
-# &   # Run the process in the background.
-# ( ) # Hide shell job control messages.
-#(cat ~/.cache/wal/sequences &)
-#wal -R -n -t -w -e &
+unset VISUAL
+unset EDITOR
+export VISUAL=v
+export EDITOR=v
