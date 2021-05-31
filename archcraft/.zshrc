@@ -216,12 +216,13 @@ zinit snippet OMZ::plugins/git/git.plugin.zsh
 zinit cdclear -q # <- forget completions provided up to this moment
 #
 #### After zinit, load zplug.
-if [[ ! -d $HOME/.zplug ]]; then
-    curl -sL --proto-redir -all,https \
-        https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+export ZPLUG_HOME=$HOME/.zplug
+if [[ ! -d $ZPLUG_HOME ]]; then
+  git clone https://github.com/zplug/zplug $ZPLUG_HOME
 fi
 source $HOME/.zplug/init.zsh
 zplug "marlonrichert/zsh-autocomplete"
+zplug "zsh-users/zsh-history-substring-search"
 # ###### ==== plugins ====== #####
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
@@ -230,6 +231,14 @@ if ! zplug check --verbose; then
         echo; zplug install
     fi
 fi
+# config plugins before it is loaded.
+HISTORY_SUBSTRING_SEARCH_FUZZY=1
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+# config plugins before it is loaded.
+#
 # Then, source plugins and add commands to $PATH
 zplug load --verbose
 #### After zinit, load zplug.
