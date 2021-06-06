@@ -167,6 +167,11 @@ zinit snippet OMZ::plugins/git/git.plugin.zsh
 zinit cdclear -q # <- forget completions provided up to this moment
 fpath+=~/.zfunc
 eval "$(hub alias -s)"
+
+[[ ! -d $HOME/.local/src/base16-shell ]] && \
+  mkdir -p $HOME/.local/src && \
+  cd $HOME/.local/src && \
+  git clone https://github.com/chriskempson/base16-shell.git && cd $HOME
 BASE16_SHELL="$HOME/.local/src/base16-shell/"
 [ -n "$PS1" ] && \
 [ -s "$BASE16_SHELL/profile_helper.sh" ] && \

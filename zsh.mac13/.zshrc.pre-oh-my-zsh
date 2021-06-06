@@ -16,6 +16,7 @@ if [[ ! -d $HOME/.local/src ]]; then
   git clone https://github.com/changyuheng/zsh-interactive-cd.git
   git clone https://github.com/i3d/afetch.git
   git clone https://github.com/b4b4r07/zsh-vimode-visual.git 
+  cd $HOME
 fi
 
 # chars as part of filename
@@ -106,7 +107,8 @@ zstyle :compinstall filename '/home/yongjian/.zshrc'
 ########## experiment ###############
 #
 ########################## zsh-autocomplete settings ################################
-#zstyle ':autocomplete:*' default-context ''
+zstyle ':autocomplete:*' default-context ''
+#zstyle ':autocomplete:*' default-context history-incremental-search-backward
 ## '': Start each new command line with normal autocompletion.
 ## history-incremental-search-backward: Start in live history search mode.
 #
@@ -122,12 +124,12 @@ zstyle ':autocomplete:*' min-input 0 #number of characters (integer)
 ## 0: Show completions immediately on each new command line.
 ## 1: Wait for at least 1 character of input.
 #
-#zstyle ':autocomplete:*' ignored-input '' # extended glob pattern
+zstyle ':autocomplete:*' ignored-input '' # extended glob pattern
 ## '':     Always show completions.
 ## '..##': Don't show completions when the input consists of two or more dots.
 #
 ## When completions don't fit on screen, show up to this many lines:
-#zstyle ':autocomplete:*' list-lines 16  # (integer)
+zstyle ':autocomplete:*' list-lines 8  # (integer)
 ## 💡 NOTE: The actual amount shown can be less.
 #
 ## If any of the following are shown at the same time, list them in this order:
@@ -137,7 +139,7 @@ zstyle ':completion:*:' group-order \
     executables local-directories directories suffix-aliases
 ## 💡 NOTE: This is NOT the order in which they are generated.
 #
-#zstyle ':autocomplete:*' insert-unambiguous no
+zstyle ':autocomplete:*' insert-unambiguous no
 ## no:  Tab inserts the top completion.
 ## yes: Tab first inserts substring common to all listed completions, if any.
 #
@@ -148,9 +150,7 @@ zstyle ':autocomplete:*' widget-style menu-select
 ## ⚠️ NOTE: This can NOT be changed at runtime.
 #
 ## CD with fzf worked.
-## Be careful enabling this, this seems to interact with zsh-autocomplete
-## once somehow activated fzf, it will randomly active while typing commands.
-#zstyle ':autocomplete:*' fzf-completion yes
+zstyle ':autocomplete:*' fzf-completion yes
 ## no:  Tab uses Zsh's completion system only.
 ## yes: Tab first tries Fzf's completion, then falls back to Zsh's.
 ## ⚠️ NOTE: This can NOT be changed at runtime and requires that you have
@@ -180,22 +180,6 @@ setopt aliases appendhistory autocd notify completeinword listambiguous autolist
 #shwordsplit
 #
 unsetopt beep nomatch
-bindkey -v
-
-### autoload -U compinit
-### compinit
-
-### autoload -U promptinit
-### promptinit
-#prompt clint
-### prompt fire
-#
-#prompt kerbaugh
-#prompt elite2
-#prompt elite
-#prompt bart
-#
-
 # screen key binding
 # ctrl-a :sessionname to find out the current session
 screen_kill() {
@@ -416,7 +400,6 @@ alias jade='/google/data/ro/teams/jade/jade'
 
 #
 # End of lines added by compinstall
-export EDITOR=vim
 export GFS_CLIENT_SECURITY_LEVEL=integrity
 #`keval `ssh-agent -s` 2>/dev/null 1>/dev/null && ssh-add 2>&1 >/dev/null
 [[ "$(type -p java)" =~ /usr/local/buildtools/java ]] || export PATH="/usr/local/buildtools/java/jdk/bin:$PATH"
@@ -504,7 +487,7 @@ anybar() { printf $1 | nc -4u -w0 localhost ${2:-1738}; }
 cdf() { cd "$(osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)')"; }
 #alias xcr="xcodebuild -configuration Release"
 #alias xtr="xctool -configuration Release -scheme"
-alias common='sort ~/.bash_history | uniq -c | sort -n -r | head -n10'
+alias common='sort ~/.histfile | uniq -c | sort -n -r | head -n10'
 alias shck='shellcheck -s sh'
 i() { osascript -e 'tell application "iTunes"' -e "$1" -e "end tell"; }
 serve() { nc -v -l 8080 <<< "HTTP/1.1 200 OK\n\n $(date) $(cat $@)"; }
