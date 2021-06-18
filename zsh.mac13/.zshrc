@@ -385,6 +385,7 @@ alias z2='v ~/.zshrc.pre-oh-my-zsh'
 alias vcheat='v $HOME/bin/cheat'
 alias cat='bat -pp'
 alias less='bat -p'
+alias xv='$HOME/bin/space'
 #
 # currently using the following zsh prompt themes. either generate one from using vim promptline plguin,
 # or use zinit powerlevel9k, both works, or fallback to a fixed liquidprompt.
@@ -515,6 +516,7 @@ unalias vi 2>/dev/null
 unalias v 2>/dev/null
 unalias g  2>/dev/null # alias to git which never good.
 unalias rd 2>/dev/null # for mac remote desktop, not rmdir
+unalias cp 2>/dev/null # don't ask.
 fortune | cowsay -f $(cowsay -l| sed '1d' | shuf | tr ' ' '\n' | head -1) | lolcat
 # see https://unix.stackexchange.com/questions/140750/generate-random-numbers-in-specific-range
 # or jot -r 1 1 10000
@@ -758,7 +760,7 @@ alias n3=nnn
 (cat ~/.cache/wal/sequences &)
 # themes:
 # wal --theme supernova -nte
-wal --theme neonhive -nte
+###wal --theme neonhive -nte
 # wal --theme vadar -nte
 # wal --theme matrix -nte
 # wal --theme dna -nte
@@ -787,9 +789,83 @@ wal --theme neonhive -nte
 export LIBRARY_PATH=$LIBRARY_PATH:/Users/jimxu/homebrew/lib
 #set -o vi
 # These two stay the last since we need our own path to be at the top.
-bindkey -v
+#bindkey -v
+set -o vi
 unset VISUAL
 unset EDITOR
 export VISUAL=v
 export EDITOR=v
+unalias a 2>/dev/null # was fasd -a
+
+#### fig setup
+unalias hgd 2>/dev/null
+export PAGER='bat -p'
+export LESS='FRX' # if PAGER == 'less'
+source /etc/bash_completion.d/hgd
+alias hgco='hg update'  # checkout a specfic rev.
+alias hghd='hg update p4head'  # checkout the head.
+alias hgam='hg amend'   # hg modify/update the existing rev.
+alias hgdf='hg diff | delta -ns'    # hg diff.
+alias hgdh='hg diff -r p4head'  # diff aginst piper head.
+alias hgpd='hg pdiff'  # diff aginst parent.
+alias hgdd='hg diff -r p4head | delta -ns'  # diff aginst piper head.
+alias hgxl='hg xl'      # hg current workspace log.
+alias hgll='hg ll'      # hg log list.
+alias hgup='hg sync'    # srcup current branch for hg.
+alias hgua='hg sync --all && hg uploadall'    # srcup all for hg.
+alias hgml='hg mail'    # hg mail for review.
+alias hguc='hg amend && uc'      # upload/populate cl.
+alias hgcm='hg commit'  # commit the change to local.
+alias hgum='hg uncommit'  # uncommit the change from local.
+alias hgsm='hg submit'  # commit the change to piper.
+alias hgnx='hg next'    # rebase/reorder edited to next child.
+alias hgpv='hg prev'    # rebase/reorder edited to parent rev.
+alias hgrb='hg rebase'  # move rev on graph.
+alias hgrc='hg rebase --continue' # continue the sync.
+alias hgra='hg rebase --abort'    # abort the sync.
+alias hgrs='hg rebase --stop'     # stop the sync.
+alias hgst='hg status'  # same as hgs.
+alias hgpl='hgxl'       # like g4 pending.
+alias hgps='hg pstatus' # like g4 whatsout.
+alias hgev='hg evolve --update'
+alias hgre='hg resolve -l'
+alias hghp='hg help'
+alias hgrm='hg rm'      # remove files from piper.
+alias hgrh='hg prune'   # absolute/hide a unexported rev (only commit).
+alias hgrv='hg cls-drop --prune -c' # revert cl.
+alias hgrf='hg revert' # revert uncommitted file.
+alias hgra='hg revert --all' # revert all uncommited change. (reset --hard)
+alias hgrp='hg revert -r p4base' # revert uncommited file to p4base.
+alias hgrw='hg citc --delete' # remove the workspace.
+alias hgun='hghd && hgua'  # checkout head and sync.
+alias hgpx='hg patch'      # patch someone else's cl.
+alias hgcp='hg cp'
+alias hgmv='hg mv'
+alias hgrg='hg grep --all' # find pattern in rev.
+alias hgwd='hg reword'    # change cl desc.
+alias hgfx='hg fix'
+alias hgnh='hg status -u' # g4 nothave
+alias hgls='hg ll -f'
+alias hgla='hg log -vf'
+
+xd() {
+    inputdir=$1
+    curdir=$PWD
+    target=${curdir##*google3/}
+
+    if [[ $target == $curdir ]]; then
+        # we are at google3 root, so
+        # no additional work needed.
+        hgd $inputdir
+        return
+    fi
+
+    hgdir=${inputdir%%@*}
+    afterdir=${inputdir##*@}
+    if [[ $afterdir == '.' ]]; then
+        hgd $hgdir && cd $target
+    fi
+}
+#### fig setup
+
 export PATH=/Users/jimxu/bin:/Users/jimxu/go_code/bin:$PATH:/Users/jimxu/go/bin:/Users/jimxu/homebrew/opt/util-linux/bin:/Users/jimxu/homebrew/opt/util-linux/sbin
