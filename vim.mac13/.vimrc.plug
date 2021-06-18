@@ -206,6 +206,8 @@ Plug 'christoomey/vim-tmux-navigator'
 " 3/7/2021
 Plug 'matsuuu/pinkmare'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+Plug 'RRethy/nvim-treesitter-textsubjects'
 Plug 'lighthaus-theme/vim-lighthaus'
 Plug 'ulwlu/elly.vim'
 
@@ -263,7 +265,14 @@ Plug 'folke/lsp-colors.nvim'
 Plug 'folke/lsp-trouble.nvim'
 Plug 'shaunsingh/moonlight.nvim'
 
-"
+" 5/31 2021
+" doesn't seem to work.
+" Plug 'Pocco81/ISuckAtSpelling.nvim'
+
+" 6/4 2021
+Plug 'ahmedkhalf/lsp-rooter.nvim'
+Plug 'ful1e5/onedark.nvim'
+
 call plug#end()
 " Automatically install missing plugins on startup
 autocmd VimEnter *
@@ -382,4 +391,5 @@ let g:lualine = {
 lua require("lualine").setup()
 lua require('symbols-outline').setup()
 lua require'colorizer'.setup()
+lua require("lsp-rooter").setup()
 luafile ~/.vim/init.lua

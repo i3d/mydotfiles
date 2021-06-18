@@ -148,7 +148,7 @@ com! -nargs=* AsyncCargoTest :call <SID>AsyncCargoTest()
 "color gruvbox
 "color palenight
 "let g:airline_theme='palenight'
-""color onedark
+"color onedark
 ""let g:airline_theme='onedark'
 "color atlas
 "let g:airline_theme='atlas'
@@ -215,10 +215,13 @@ com! -nargs=* AsyncCargoTest :call <SID>AsyncCargoTest()
 "let g:airline_theme='twofirewatch'
 "let g:two_firewatch_italics=1
 
-"set background=dark
-"set notermguicolors
-"color oncedark
-"let g:airline_theme='onedark'
+let g:onedark_italic_functions = 1
+let g:onedark_italic_variables = 1
+let g:onedark_sidebars = [ "qf", "vista_kind", "terminal", "packer" ]
+set background=dark
+set notermguicolors
+color onedark
+let g:airline_theme='onedark'
 
 "set background=dark
 "set termguicolors
@@ -361,15 +364,20 @@ com! -nargs=* AsyncCargoTest :call <SID>AsyncCargoTest()
 "colorscheme base16-darktooth
 "let g:airline_theme = 'base16_darktooth'
 "
-set background=dark
-set termguicolors
-colorscheme base16-gruvbox-dark-pale
-let g:airline_theme = 'base16_gruvbox_dark_hard'
+"set background=dark
+"set termguicolors
+"colorscheme base16-gruvbox-dark-pale
+"let g:airline_theme = 'base16_gruvbox_dark_hard'
 "
 "set background=dark
 "set termguicolors
 "colorscheme base16-horizon-terminal-dark
 "let g:airline_theme = 'base16_darktooth'
+"
+"set background=dark
+"set termguicolors
+"colorscheme base16-gruvbox-dark-hard
+"let g:airline_theme = 'base16_gruvbox_dark_hard'
 
 " ##########################################
 let g:javascript_plugin_flow = 1
@@ -592,8 +600,8 @@ nno <silent> gh :call PrevHunk(9999)<cr>
 "
 "nno <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]'
 "nno ; :   == ; is used in line search.
-"ino jk <esc>
-ino vv <esc>
+ino jk <esc>
+"ino vv <esc>
 nno <silent> <tab> <c-w>w
 cno w!! w !sudo tee % >/dev/null
 nno <F12> "%phr_I#ifndef __<Esc>gUwyypldwidefine <Esc>yypldwiendif //<Esc>O<Esc>
@@ -1154,7 +1162,6 @@ set wb  "writebackup"
 " always has to be the end.
 filetype plugin indent on
 set nu rnu
-set nospell
 set guifont=FiraCode\ Nerd\ Font\ Mono:h24
 
 "" neovide configs"
@@ -1197,4 +1204,8 @@ autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
 "nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 "nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 "nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
+" spell
+imap <c-l> <c-g>u<Esc>[s1z=`]a<c-g>u
+nmap <c-l> [s1z=`]a<c-g>u
+set spell
 " ================ settings ======================
