@@ -222,6 +222,7 @@ Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
 Plug 'i3d/vim-jimbothemes'
 
 " 4/6/2021
+" https://sharksforarms.dev/posts/neovim-rust/
 Plug 'neovim/nvim-lspconfig'
 Plug 'kabouzeid/nvim-lspinstall'
 Plug 'simrat39/rust-tools.nvim'
@@ -272,6 +273,12 @@ Plug 'shaunsingh/moonlight.nvim'
 " 6/4 2021
 Plug 'ahmedkhalf/lsp-rooter.nvim'
 Plug 'ful1e5/onedark.nvim'
+
+" 6/22/2021  ==> looongest daytime.
+Plug 'ray-x/lsp_signature.nvim'
+
+" 6/27/2021 ===> Hoooooot!!! (43c)
+
 
 call plug#end()
 " Automatically install missing plugins on startup
@@ -362,31 +369,32 @@ command! -bang -nargs=* GGrep
   \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
 " ============================== FZF ===============================
 " lualine setup.
-let g:lualine = {
-    \'options' : {
-    \  'section_separators' : ['', ''],
-    \  'component_separators' : ['', ''],
-    \  'icons_enabled' : v:true,
-    \  'theme': 'tokyonight',
-    \},
-    \'sections' : {
-    \  'lualine_a' : [ ['mode', {'upper': v:true,},], ],
-    \  'lualine_b' : [ ['branch', {'icon': '',}, ], ],
-    \  'lualine_c' : [ ['filename', {'file_status': v:true,},], ],
-    \  'lualine_x' : [ 'encoding', 'fileformat', 'filetype' ],
-    \  'lualine_y' : [ 'progress' ],
-    \  'lualine_z' : [ 'location'  ],
-    \},
-    \'inactive_sections' : {
-    \  'lualine_a' : [  ],
-    \  'lualine_b' : [  ],
-    \  'lualine_c' : [ 'filename' ],
-    \  'lualine_x' : [ 'location' ],
-    \  'lualine_y' : [  ],
-    \  'lualine_z' : [  ],
-    \},
-    \'extensions' : [ 'fzf' ],
-    \}
+
+"let g:lualine = {
+"    \'options' : {
+"    \  'section_separators' : ['', ''],
+"    \  'component_separators' : ['', ''],
+"    \  'icons_enabled' : v:true,
+"    \  'theme': 'tokyonight',
+"    \},
+"    \'sections' : {
+"    \  'lualine_a' : [ ['mode', {'upper': v:true,},], ],
+"    \  'lualine_b' : [ ['branch', {'icon': '',}, ], ],
+"    \  'lualine_c' : [ ['filename', {'file_status': v:true,},], ],
+"    \  'lualine_x' : [ 'encoding', 'fileformat', 'filetype' ],
+"    \  'lualine_y' : [ 'progress' ],
+"    \  'lualine_z' : [ 'location'  ],
+"    \},
+"    \'inactive_sections' : {
+"    \  'lualine_a' : [  ],
+"    \  'lualine_b' : [  ],
+"    \  'lualine_c' : [ 'filename' ],
+"    \  'lualine_x' : [ 'location' ],
+"    \  'lualine_y' : [  ],
+"    \  'lualine_z' : [  ],
+"    \},
+"    \'extensions' : [ 'fzf' ],
+"    \}
 
 lua require("lualine").setup()
 lua require('symbols-outline').setup()

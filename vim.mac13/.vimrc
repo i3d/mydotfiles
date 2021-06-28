@@ -215,13 +215,18 @@ com! -nargs=* AsyncCargoTest :call <SID>AsyncCargoTest()
 "let g:airline_theme='twofirewatch'
 "let g:two_firewatch_italics=1
 
-let g:onedark_italic_functions = 1
-let g:onedark_italic_variables = 1
-let g:onedark_sidebars = [ "qf", "vista_kind", "terminal", "packer" ]
-set background=dark
-set notermguicolors
-color onedark
-let g:airline_theme='onedark'
+"set background=dark
+"set termguicolors
+"color hybrid
+"let g:airline_theme='hybrid'
+
+"let g:onedark_italic_functions = 1
+"let g:onedark_italic_variables = 1
+"let g:onedark_sidebars = [ "qf", "vista_kind", "terminal", "packer" ]
+"set background=dark
+"set termguicolors
+"color onedark
+"let g:airline_theme='onedark'
 
 "set background=dark
 "set termguicolors
@@ -307,10 +312,10 @@ let g:airline_theme='onedark'
 "colorscheme neonhive
 "let g:airline_theme = 'minimalist'
 
-"set background=dark
-"set termguicolors
-"colorscheme matrix
-"let g:airline_theme = 'onedark'
+set background=dark
+set termguicolors
+colorscheme matrix
+let g:airline_theme = 'onedark'
 
 "set background=dark
 "set termguicolors
@@ -1064,9 +1069,16 @@ call which_key#register('<Space>', "g:which_key_map")
 set path+=**
 set wildmode=longest,list,full
 set wildmenu
+
+" https://sharksforarms.dev/posts/neovim-rust/
 " tab completion
 ino <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 ino <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
+" use <Tab> as trigger keys
+imap <Tab> <Plug>(completion_smart_tab)
+imap <S-Tab> <Plug>(completion_smart_s_tab)
+" https://sharksforarms.dev/posts/neovim-rust/
+
 set copyindent   "make the autoindent copying the existing indentation"
 set shiftround   "round the shift to multiple shiftwidth"
 set smarttab     "use shiftwidth when insert tab"
@@ -1167,7 +1179,7 @@ set guifont=FiraCode\ Nerd\ Font\ Mono:h24
 "" neovide configs"
 set mouse=nicr
 set mouse=a
-let g:neovide_transparency=0.95
+let g:neovide_transparency=0.97
 let g:neovide_cursor_antialiasing=v:true
 " also sonicboom, wireframe 
 let g:neovide_cursor_vfx_mode="torpedo"
@@ -1179,6 +1191,7 @@ set completeopt=menuone,noinsert,noselect
 set shortmess+=c
 
 " ============================== nvim native lsp usage
+" https://sharksforarms.dev/posts/neovim-rust/
 " " Code navigation shortcuts
 "nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>

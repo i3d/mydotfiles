@@ -277,10 +277,28 @@ local nvim_lsp = require'lspconfig'
 -- function to attach completion when setting up lsp
 local on_attach = function(client)
   require'completion'.on_attach(client)
+  require'lsp_signature'.on_attach({
+      bind = true,
+      doc_lines = 3,  -- insert mode doc.
+      fix_pos = true, -- not autoclose the window.
+      handler_opts = {
+        border = "shadow"
+      },
+  })
 end
 
 -- Enable rust_analyzer
 nvim_lsp.rust_analyzer.setup({ on_attach=on_attach })
+local opts = {
+  -- automatically set inlay hints (type hints)
+  -- There is an issue due to which the hints are not applied on the first
+  -- opened file. For now, write to the file to trigger a reapplication of
+  -- the hints or just run :RustSetInlayHints.
+  -- default: true
+  autoSetHints = true,
+}
+-- require('rust-tools').setup(opts)
+require('rust-tools').setup{}
 nvim_lsp.go.setup({ on_attach=on_attach })
 
 -- Enable diagnosetics
@@ -291,3 +309,36 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     update_in_insert = true,
   }
 )
+
+-- nvim-treesitter-textsubjects
+require'nvim-treesitter.configs'.setup {
+    textsubjects = {
+        enable = true,
+        keymaps = {
+            ['.'] = 'textsubjects-smart',
+        }
+    },
+    textobjects = {
+      select = {
+        enable = true,
+        keymaps = {
+          -- You can use the capture groups defined in textobjects.scm
+          ["af"] = "@function.outer",
+          ["if"] = "@function.inner",
+          ["ac"] = "@class.outer",
+          ["ic"] = "@class.inner",
+          ["ab"] = "@block.outer",
+          ["ib"] = "@block.inner",
+          ["at"] = "@comment.outer",
+          ["ad"] = "@conditional.outer",
+          ["id"] = "@conditional.inner",
+          ["al"] = "@loop.outer",
+          ["il"] = "@loop.inner",
+          ["aa"] = "parameter.outer",
+          ["ia"] = "parameter.inner",
+          ["an"] = "scopename.inner",
+          ["as"] = "statement.outer",
+        },
+      },
+    },
+}
