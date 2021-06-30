@@ -8,6 +8,24 @@ if fn.empty(fn.glob(install_path)) > 0 then
   execute 'packadd packer.nvim'
 end
 
+
+---- packer packages.
+require("packer").startup(function(use)
+  -- Packer can manage itself as an optional plugin
+  use "wbthomason/packer.nvim"
+
+  -- other packages.
+  -- other packages.
+  use "terrortylor/nvim-comment"
+end)
+
+require('nvim_comment').setup()
+
+---- packer packages.
+
+
+
+
 -- require('plugins') " no include this would make both lunar and native works.
 --
 require('numb').setup{
@@ -343,3 +361,4 @@ require'nvim-treesitter.configs'.setup {
       },
     },
 }
+

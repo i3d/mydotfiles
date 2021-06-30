@@ -701,7 +701,7 @@ nno <silent> <localleader>T :colo<cr>
 nno <silent> <localleader>S :split<cr>
 nno <silent> <localleader>V :vsplit<cr>
 nno <silent> <localleader>x :copen<cr>
-nno <silent> <localleader>l :clist<cr>
+nno <silent> <localleader>oe :clist<cr>
 "nor <silent> <localleader>r :RelatedFilesWindow<CR>
 nno <silent> <localleader>to :NERDTreeTabsOpen<cr>
 nno <silent> <localleader>tf :NERDTreeTabsFind<cr>
@@ -719,6 +719,8 @@ nno <silent> <localleader>t. :lua require('FTerm').toggle()<cr>
 "au VimEnter * nno <silent> gD :LspReferences<CR>
 "au VimEnter * nno <silent> gp :LspPeekDefinition<CR>
 nno <silent> <localleader>T :CocList colors<cr>
+nno <silent> <localleader>cc :CommentToggle<cr>
+nno <silent> <localleader>cv :'<,'>CommentToggle<cr>
 "NERDTree"
 nno <localleader>to :NERDTreeTabsOpen<cr>
 nno <localleader>tf :NERDTreeTabsFind<cr>
@@ -727,6 +729,39 @@ nno <localleader>tg :NERDTreeTabsToggle<cr>
 nno <localleader>vt :TabVifm<cr>
 nno <localleader>vs :VsplitVifm<cr>
 nno <localleader>vd :DiffVifm<cr>
+" == surround ==
+" S<sign to surround> for virtual mode.
+nno <localleader>lq :norm yss'<cr>
+nno <localleader>lQ :norm yss"<cr>
+nno <localleader>l* :norm yss*<cr>
+nno <localleader>l[ :norm yss[<cr>
+nno <localleader>l] :norm yss]<cr>
+nno <localleader>l{ :norm yss{<cr>
+nno <localleader>l} :norm yss}<cr>
+nno <localleader>l( :norm yss(<cr>
+nno <localleader>l) :norm yss)<cr>
+nno <localleader>wq :norm ysiw'<cr>
+nno <localleader>wQ :norm ysiw"<cr>
+nno <localleader>Wq :norm ysaw'<cr>
+nno <localleader>WQ :norm ysaw"<cr>
+nno <localleader>w) :norm ysiw)<cr>
+nno <localleader>w( :norm ysiw(<cr>
+nno <localleader>W) :norm ysaw)<cr>
+nno <localleader>W( :norm ysaw(<cr>
+nno <localleader>w* :norm ysiw*<cr>
+nno <localleader>W* :norm ysaw*<cr>
+nno <localleader>w] :norm ysiw]<cr>
+nno <localleader>w[ :norm ysiw[<cr>
+nno <localleader>W] :norm ysaw]<cr>
+nno <localleader>W[ :norm ysaw[<cr>
+nno <localleader>w} :norm ysiw{<cr>
+nno <localleader>w{ :norm ysiw}<cr>
+nno <localleader>W} :norm ysaw{<cr>
+nno <localleader>W{ :norm ysaw}<cr>
+nno <localleader>p} :norm ysip}<cr>
+nno <localleader>p{ :norm ysip{<cr>
+" ds and cs works.
+" == surround == "
 
 " au BufWrite *.rs :RustFmt
 let g:rustfmt_autosave = 1
