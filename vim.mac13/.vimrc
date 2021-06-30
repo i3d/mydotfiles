@@ -719,7 +719,7 @@ nno <silent> <localleader>t. :lua require('FTerm').toggle()<cr>
 "au VimEnter * nno <silent> gD :LspReferences<CR>
 "au VimEnter * nno <silent> gp :LspPeekDefinition<CR>
 nno <silent> <localleader>T :CocList colors<cr>
-nno <silent> <localleader>cc :CommentToggle<cr>
+nno <silent> <localleader>ct :CommentToggle<cr>
 nno <silent> <localleader>cv :'<,'>CommentToggle<cr>
 "NERDTree"
 nno <localleader>to :NERDTreeTabsOpen<cr>
