@@ -112,8 +112,8 @@ let g:rainbow#max_level = 16
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 autocmd FileType * RainbowParentheses
 
-Plug 'airblade/vim-rooter'
-let g:rooter_silent_chdir = 1
+"Plug 'airblade/vim-rooter'
+"let g:rooter_silent_chdir = 1
 
 Plug 'sheerun/vim-polyglot'
 set encoding=UTF-8

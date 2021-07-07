@@ -1,4 +1,8 @@
-source ~/.vimrc.bundles
+source ~/.vimrc.plug
+
+" for italic
+set t_ZH=[3m
+set t_ZR=[23m
 
 set rtp+=~/homebrew/opt/vim
 set rtp+=/Users/i3dmaster/homebrew/opt/fzf
@@ -14,6 +18,91 @@ com! -nargs=+ Greph execute 'silent grep! <args> *.h' | cwindow
 com! -nargs=+ Grepcc execute 'silent grep! <args> *.cc' | cwindow
 com! -nargs=+ Grepgo execute 'silent grep! <args> *.go' | cwindow
 " ================ functions and commands ======================
+" window management
+function! MaximizeToggle() abort
+  if exists("s:maximize_session")
+    exec "source " . s:maximize_session
+    call delete(s:maximize_session)
+    unlet s:maximize_session
+    let &hidden=s:maximize_hidden_save
+    unlet s:maximize_hidden_save
+  else
+    let s:maximize_hidden_save = &hidden
+    let s:maximize_session = tempname()
+    set hidden
+    exec "mksession! " . s:maximize_session
+    only
+  endif
+endfunction
+function! s:AsyncRustBuild() abort
+  "open cwindow manually.
+  let l:aro = g:asyncrun_open
+  let g:asyncrun_open = 0
+  let l:target = expand('%')
+  call setqflist([]) | copen 30
+  " don't use !, so we scrolling the output.
+  call asyncrun#run("", {"rows": 30}, 'rustc '.l:target)
+  let g:asyncrun_open = l:aro
+endfunction
+function! s:AsyncRustRun() abort
+	"open cwindow manually.
+  let l:aro = g:asyncrun_open
+  let g:asyncrun_open = 0
+  let l:target = expand('%')
+  let l:runtarget = expand('%:r')
+  call setqflist([]) | copen 30
+  " don't use !, so we scrolling the output.
+  call asyncrun#run("", {"rows": 30}, 'rustc '.l:target.' && ./'.l:runtarget)
+  let g:asyncrun_open = l:aro
+endfunction
+function! s:AsyncCargoBuild() abort
+	"open cwindow manually.
+  let l:aro = g:asyncrun_open
+  let g:asyncrun_open = 0
+  call setqflist([]) | copen 30
+  " don't use !, so we scrolling the output.
+  call asyncrun#run("", {"rows": 30}, 'cargo build')
+  let g:asyncrun_open = l:aro
+endfunction
+function! s:AsyncCargoTest() abort
+	"open cwindow manually.
+  let l:aro = g:asyncrun_open
+  let g:asyncrun_open = 0
+  call setqflist([]) | copen 30
+  " don't use !, so we scrolling the output.
+  call asyncrun#run("", {"rows": 30}, 'cargo test')
+  let g:asyncrun_open = l:aro
+endfunction
+function! s:AsyncCargoRun() abort
+	"open cwindow manually.
+  let l:aro = g:asyncrun_open
+  let g:asyncrun_open = 0
+  call setqflist([]) | copen 30
+  " don't use !, so we scrolling the output.
+  call asyncrun#run("", {"rows": 30}, 'cargo run')
+  let g:asyncrun_open = l:aro
+endfunction
+" NERDTrees File highlighting
+function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+ exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+ exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+endfunction
+function! NextHunk(size) abort
+  if a:size > 1
+    execute "normal " . a:size . "\<plug>(signify-next-hunk)"
+  else
+    execute "normal \<plug>(signify-next-hunk)"
+  endif
+endfunction
+function! PrevHunk(size) abort
+  if a:size > 1
+    execute "normal " . a:size . "\<plug>(signify-prev-hunk)"
+  else
+    execute "normal \<plug>(signify-prev-hunk)"
+  endif
+endfunction
+
+
 " ================ themes ======================
 "colorscheme mustang
 "colorscheme molokai
@@ -108,12 +197,65 @@ com! -nargs=+ Grepgo execute 'silent grep! <args> *.go' | cwindow
 "color oncedark
 "let g:airline_theme='onedark'
 
+"set background=dark
+"set termguicolors
+"color one
+"let g:airline_theme='one'
+
+"set background=dark
+"set termguicolors
+"colorscheme pinkmare
+"let g:airline_theme = 'minimalist'
+
+"set background=dark
+"set termguicolors
+"colorscheme elly
+"let g:airline_theme = 'elly'
+"
+"set background=dark
+"set termguicolors
+"colorscheme cody 
+"let g:airline_theme = 'minimalist'
+
+"set background=dark
+"set termguicolors
+"colorscheme breakingbad 
+"let g:airline_theme = 'minimalist'
+
 set background=dark
 set termguicolors
-color one
-let g:airline_theme='one'
+colorscheme serenade
+let g:serenade_enable_italic = 1
+let g:serenade_disable_comment_italic = 0
+let g:serenade_transparent_background = 0
+let g:serenade_diagnostic_text_highlight = 1
+let g:serenade_diagnostic_line_highlight = 1
+let g:airline_theme = 'serenade'
+
+"set background=dark
+"set termguicolors
+"colorscheme lighthaus
+"let g:airline_theme = 'lighthaus'
+
 set t_8b=^[[48;2;%lu;%lu;%lum
 set t_8f=^[[38;2;%lu;%lu;%lum
+
+" Prettier configuration
+" https://github.com/prettier/vim-prettier
+let g:prettier#autoformat = 1
+let g:prettier#autoformat_require_pragma = 0
+" may try this if slow?
+let g:prettier#exec_cmd_async = 0
+" don't use <leader>p
+nno zcp <Plug>(Prettier)
+" now maps to it's real usage.
+nno <silent> <leader>cp :Prettier<cr>
+" ================== prettier on every keystroke =========
+" ============ Not doing it now. =========================
+" when running at every change you may want to disable quickfix
+" let g:prettier#quickfix_enabled = 0
+" autocmd TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+
 " ##########################################
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -296,9 +438,17 @@ vno K :m '<-2<cr>gv=gv
 nor <silent> go <c-o>
 nor <silent> gi <c-i>
 nno <silent> cp :copen<cr>
+
+" !!! important !!! don't map to gj/gk, unfortunately they aren't reliable.
+nno <silent> gj :call NextHunk(1)<cr>
+nno <silent> gk :call PrevHunk(1)<cr>
+nno <silent> gl :call NextHunk(9999)<cr>
+nno <silent> gh :call PrevHunk(9999)<cr>
+" !!! important !!! don't map to gj/gk, unfortunately they aren't reliable.
+"
 nno ; :
-"ino jk <esc>
-ino vv <esc>
+ino jk <esc>
+"ino vv <esc>
 nno <silent> <tab> <c-w>w
 cno w!! w !sudo tee % >/dev/null
 nno <F12> "%phr_I#ifndef __<Esc>gUwyypldwidefine <Esc>yypldwiendif //<Esc>O<Esc>
@@ -352,15 +502,22 @@ nno <silent> <localleader>T :colo<cr>
 nno <silent> <localleader>S :split<cr>
 nno <silent> <localleader>V :vsplit<cr>
 nno <silent> <localleader>x :copen<cr>
-nno <silent> <localleader>l :clist<cr>
+nno <silent> <localleader>oe :clist<cr>
 nno <silent> <localleader>to :NERDTreeTabsOpen<cr>
 nno <silent> <localleader>tf :NERDTreeTabsFind<cr>
 nno <silent> <localleader>tg :NERDTreeTabsToggle<cr>
 nno <silent> <localleader>te :NERDTreeFind<cr>
-nno <silent> <localleader>tt :NERDTreeToggle<cr>
-nno <silent> <localleader>tv :FloatermToggle<cr>
+nno <silent> <localleader>t= :NERDTreeToggle<cr>
+nno <silent> <localleader>t; :FloatermToggle<cr>
 nno <silent> <localleader>th :FloatermHide<cr>
+nno <silent> <localleader>tk :FloatermKill<cr>
+nno <silent> <localleader>tn :FloatermNext<cr>
+nno <silent> <localleader>tp :FloatermPrev<cr>
+nno <silent> <localleader>tt :FloatermNew --width=50 --height=60<cr>
+nno <silent> <localleader>t. :lua require('FTerm').toggle()<cr>
 nno <silent> <localleader>T :CocList colors<cr>
+nno <silent> <localleader>ct :CommentToggle<cr>
+nno <silent> <localleader>cv :'<,'>CommentToggle<cr>
 "NERDTree"
 nno <localleader>to :NERDTreeTabsOpen<cr>
 nno <localleader>tf :NERDTreeTabsFind<cr>
@@ -369,14 +526,50 @@ nno <localleader>tg :NERDTreeTabsToggle<cr>
 nno <localleader>vt :TabVifm<cr>
 nno <localleader>vs :VsplitVifm<cr>
 nno <localleader>vd :DiffVifm<cr>
+" == surround ==
+" S<sign to surround> for virtual mode.
+nno <localleader>lq :norm yss'<cr>
+nno <localleader>lQ :norm yss"<cr>
+nno <localleader>l* :norm yss*<cr>
+nno <localleader>l[ :norm yss[<cr>
+nno <localleader>l] :norm yss]<cr>
+nno <localleader>l{ :norm yss{<cr>
+nno <localleader>l} :norm yss}<cr>
+nno <localleader>l( :norm yss(<cr>
+nno <localleader>l) :norm yss)<cr>
+nno <localleader>wq :norm ysiw'<cr>
+nno <localleader>wQ :norm ysiw"<cr>
+nno <localleader>Wq :norm ysaw'<cr>
+nno <localleader>WQ :norm ysaw"<cr>
+nno <localleader>w) :norm ysiw)<cr>
+nno <localleader>w( :norm ysiw(<cr>
+nno <localleader>W) :norm ysaw)<cr>
+nno <localleader>W( :norm ysaw(<cr>
+nno <localleader>w* :norm ysiw*<cr>
+nno <localleader>W* :norm ysaw*<cr>
+nno <localleader>w] :norm ysiw]<cr>
+nno <localleader>w[ :norm ysiw[<cr>
+nno <localleader>W] :norm ysaw]<cr>
+nno <localleader>W[ :norm ysaw[<cr>
+nno <localleader>w} :norm ysiw{<cr>
+nno <localleader>w{ :norm ysiw}<cr>
+nno <localleader>W} :norm ysaw{<cr>
+nno <localleader>W{ :norm ysaw}<cr>
+nno <localleader>p} :norm ysip}<cr>
+nno <localleader>p{ :norm ysip{<cr>
+" ds and cs works.
+" == surround == "
+" au BufWrite *.rs :RustFmt
+let g:rustfmt_autosave = 1
 " ==================== space macs simulation layer ========
 " ==================== space macs simulation layer ========
-source $HOME/.config/nvim/plug-config/coc.vim
+"source $HOME/.config/nvim.03192021/plug-config/coc/coc.vim
 " ==================== space macs simulation layer ========
 " Create map to add keys to
 let g:which_key_map =  {}
 " Define a separator
-let g:which_key_sep = '➥'
+"let g:which_key_sep = '➥'
+let g:which_key_sep = '✑'
 set timeoutlen=100
 " Not a fan of floating windows for this
 let g:which_key_use_floating_win = 0
@@ -390,6 +583,7 @@ autocmd! FileType which_key
 autocmd  FileType which_key set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
 " Single mappings
+let g:which_key_map['0'] = [ ':Restart'                   , 'Restart Nvim' ]
 let g:which_key_map['1'] = [ '<C-W>s'                     , '2 stacks' ]
 let g:which_key_map['2'] = [ '<C-W>v'                     , '2 columns' ]
 let g:which_key_map['/'] = [ ':CocList grep'              , 'coc grep' ]
@@ -418,6 +612,15 @@ let g:which_key_map['q'] = [ ':q!'                        , 'quit']
 let g:which_key_map['n'] = [ ':bnext'                     , 'cycle buffers' ]
 " Group mappings
 " a is for actions
+" Rust 
+let g:which_key_map.R = {
+      \ 'name' : '+Rust',
+      \ 'r' : [ ':AsyncRustRun'                  , 'Run file'],
+      \ 'b' : [ ':AsyncRustBuild'                , 'Compile file'],
+      \ 'c' : [ ':AsyncCargoBuild'               , 'Compile cargo'],
+      \ 'x' : [ ':AsyncCargoRun'                 , 'Run cargo bin'],
+      \ 't' : [ ':AsyncCargoTest'                , 'Test cargo'],
+      \ }
 let g:which_key_map.a = {
       \ 'name' : '+actions' ,
       \ 'c' : [':ColorizerToggle'        , 'colorizer'],
@@ -513,8 +716,13 @@ let g:which_key_map.l = {
 " open
 let g:which_key_map.o = {
       \ 'name' : '+open',
-      \ '1' : [':e ~/.vimrc'                                     , 'vimrc'],
-      \ '2' : [':e ~/.vimrc.bundles'                             , 'vimrc bundle'],
+      \ '1' : [':50vs | e ~/.vimrc'                                    , 'vimrc'],
+      \ '2' : [':50vs | e ~/.vimrc.plug'                               , 'vimrc plug'],
+      \ '3' : [':50vs | e ~/.vim/init.lua'                             , 'vimrc init.lua'],
+      \ '4' : [':50vs | e ~/.zshrc'                                    , 'zshrc'],
+      \ '5' : [':50vs | e ~/.zshrc.pre-oh-my-zsh'                      , 'zshrc pre-omz'],
+      \ '6' : [':50vs | e ~/.zshenv'                      						 , 'zshenv'],
+      \ '7' : [':50vs | e ~/bin/cheat'                                 , 'cheatsheet'],
       \ 'i' : [':e ~/.config/nvim/init.vim'                            , 'open init'],
       \ 'k' : [':e ~/.config/nvim/keys/which-key.vim'                  , 'which keys'],
       \ 'p' : [':e ~/.config/nvim/vim-plug/plugins.vim'                , 'vim-plug'],
@@ -528,6 +736,7 @@ let g:which_key_map.p = {
       \ 'e' : [':e ~/.vimrc'                          , 'open init' ],
       \ 'b' : [':e ~/.vimrc.bundles'                  , 'open bundles' ],
       \ 'h' : ['Startify'                                   , 'home' ],
+      \ 'f' : [':Prettier'                                  , 'Pretties' ],
       \ }
 " s is for search
 let g:which_key_map.s = {
@@ -557,22 +766,36 @@ let g:which_key_map.s = {
       \ 'y' : [':Filetypes'             , 'file types'],
       \ 'z' : [':FZF'                   , 'FZF'],
       \ '?' : [':FZF'                   , 'FZF'],
+      \ 'e' : [":call InterestingWords('n')"          , 'search words'],
       \ }
       " \ 's' : [':Snippets'     , 'snippets'],
 " t is for terminal
 let g:which_key_map.t = {
       \ 'name' : '+terminal' ,
-      \ ';' : [':FloatermNew --wintype=popup --height=6'        , 'terminal'],
+      \ 't' : [':FloatermNew --wintype=popup --width=50 --height=60'   , 'terminal'],
+      \ '?' : [':FloatermNew --wintype=popup --width=90 --height=50 w3m https://quickref.me/vim'   , 'vim quickref'],
+      \ '.' : [':FloatermNew --wintype=popup --width=60 --height=25'   , 'small terminal'],
+      \ '1' : [':FloatermFirst'                                        , 'first terminal'],
+      \ '0' : [':FloatermLast'                                         , 'last terminal'],
+      \ 'j' : [':FloatermNext'                                         , 'next terminal'],
+      \ 'k' : [':FloatermPrev'                                         , 'prev terminal'],
+      \ 'q' : [':FloatermKill'                                         , 'kill terminal'],
+      \ 'h' : [':FloatermHide'                                         , 'hide terminal'],
       \ 'f' : [':FloatermNew fzf'                               , 'fzf'],
       \ 'g' : [':FloatermNew lazygit'                           , 'git'],
-      \ 'd' : [':FloatermNew lazydocker'                        , 'docker'],
-      \ 'n' : [':FloatermNew node'                              , 'node'],
-      \ 'N' : [':FloatermNew nnn'                               , 'nnn'],
-      \ 'p' : [':FloatermNew python'                            , 'python'],
+      \ 'i' : [':FloatermNew ipython'                           , 'ipython'],
       \ 'r' : [':FloatermNew ranger'                            , 'ranger'],
-      \ 't' : [':FloatermToggle'                                , 'toggle'],
-      \ 'y' : [':FloatermNew ytop'                              , 'ytop'],
-      \ 's' : [':FloatermNew ncdu'                              , 'ncdu'],
+      \ ';' : [':FloatermToggle'                                , 'toggle'],
+      \ 's' : [':FloatermNew gotop -sbpa'                       , 'gotop'],
+      \ 'm' : [':FloatermNew --width=50 --height=8 playm'       , 'play music'],
+      \ 'v' : [':FloatermNew --width=50 --height=8 playv'       , 'play video'],
+      \ 'c' : [':FloatermNew --width=50 --height=8 termv'       , 'play tv'],
+      \ 'T' : [':FloatermNew --width=70 --height=15 ttyper'     , 'Rust typer'],
+      \ 'Z' : [':FloatermNew --width=70 --height=15 typer'      , 'Go typer'],
+      \ 'n' : [':FloatermNew --width=90 --height=30 nb'         , 'newsboat'],
+      \ 'o' : [':FloatermNew --width=90 --height=30 tor'        , 'the old reader'],
+      \ 'y' : [':FloatermNew --width=110 --height=8 ytfzf -fm'   , 'ytfzf music'],
+      \ '/' : [':FloatermNew --width=110 --height=8 ytfzf -f'      , 'ytfzf video'],
       \ }
 " windows
 let g:which_key_map.w = {
@@ -594,12 +817,36 @@ let g:which_key_map.w = {
       \ 'V' : [':VsplitVifm'                                    , 'VTab vifm'],
       \ '?' : ['Windows'                                        , 'fzf windows'],
       \ }
+" Telescope                                                                            
+let g:which_key_map.T = {                                                         
+        \ 'name' : '+Telescope' ,                                                   
+        \ 'A' : [':Telescope autocommands'                         , 'Telescope autocommands'],
+        \ 'B' : [':Telescope builtin'                              , 'Telescope builtin'],
+        \ 'C' : [':Telescope commands'                             , 'Telescope vim commands'],
+        \ 'K' : [':Telescope keymaps'                              , 'Telescope keymaps'],
+        \ 'O' : [':Telescope vim_options'                          , 'Telescope vim options'],
+        \ 'R' : [':Telescope registers'                            , 'Telescope registers'],
+        \ 'H' : [':Telescope search_history'                       , 'Telescope search history'],
+        \ 'M' : [':Telescope man_pages'                            , 'Telescope man page'],
+        \ 'L' : [':Telescope loclist'                              , 'Telescope loclist'],
+        \ 'Q' : [':Telescope quickfix'                             , 'Telescope quickfix'],
+        \ '/' : [':Telescope current_buffer_fuzzy_find'            , 'Telescope curbuf search'],
+        \ '.' : [':Telescope file_browser theme=get_dropdown'      , 'Telescope browser'],
+        \ 'b' : [':Telescope buffers'                              , 'Telescope buffers'],
+        \ 'f' : [':Telescope find_files theme=get_dropdown find_command=rg,--hidden,-i,--files,-l'       , 'Telescope find files'],
+        \ 'g' : [':Telescope live_grep'                            , 'Telescope grep'],
+        \ 'h' : [':Telescope help_tags'                            , 'Telescope vim help'],
+        \ 'm' : [':Telescope marks'                                , 'Telescope marks'],
+        \ 'c' : [':Telescope command_history'                      , 'Telescope q:'],
+        \ 's' : [':Telescope oldfiles'                             , 'Telescope switch files'],
+        \ }
 " Register which key map
 call which_key#register('<Space>', "g:which_key_map")
 " ================ key maps ======================
 "
 " ================ settings ======================
 set path+=**
+set wildmode=longest,list,full
 set wildmenu
 set copyindent   "make the autoindent copying the existing indentation"
 set shiftround   "round the shift to multiple shiftwidth"
@@ -610,6 +857,16 @@ set visualbell
 set noerrorbells
 set nobackup
 set noswapfile
+
+" https://sharksforarms.dev/posts/neovim-rust/
+" tab completion
+ino <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+ino <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
+" use <Tab> as trigger keys
+imap <Tab> <Plug>(completion_smart_tab)
+imap <S-Tab> <Plug>(completion_smart_s_tab)
+" https://sharksforarms.dev/posts/neovim-rust/
+"
 vmap Q gq
 nmap Q gqap"
 cmap w!! w !sudo tee % >/dev/null
@@ -645,12 +902,47 @@ let g:NERDTreeWinSize=27
 let g:NERDTreeChDirMode=2
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
+autocmd VimEnter * call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('h', 'Red', 'none', '#ffa500', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('cc', 'cyan', 'none', 'cyan', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('c', 'cyan', 'none', 'cyan', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('go', 'Magenta', 'none', '#ff00ff', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('ds_store', 'Gray', 'none', '#686868', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('rs', 'Gray', 'none', '#686868', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('gitconfig', 'Gray', 'none', '#686868', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('gitignore', 'Gray', 'none', '#686868', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('bashrc', 'Gray', 'none', '#686868', '#151515')
+autocmd VimEnter * call NERDTreeHighlightFile('bashprofile', 'Gray', 'none', '#686868', '#151515')
+" NERDTrees File highlighting only the glyph/icon
+" test highlight just the glyph (icons) in nerdtree:
+autocmd filetype nerdtree highlight haskell_icon ctermbg=none ctermfg=Red guifg=#ffa500
+autocmd filetype nerdtree highlight html_icon ctermbg=none ctermfg=Red guifg=#ffa500
+autocmd filetype nerdtree highlight go_icon ctermbg=none ctermfg=Red guifg=#ffa500
+
+autocmd filetype nerdtree syn match haskell_icon ## containedin=NERDTreeFlags
+" if you are using another syn highlight for a given line (e.g.
+" NERDTreeHighlightFile) need to give that name in the 'containedin' for this
+" other highlight to work with it
+autocmd filetype nerdtree syn match html_icon ## containedin=NERDTreeFlags,html
+autocmd filetype nerdtree syn match go_icon ## containedin=NERDTreeFlags
 "fish
 au BufNewFile,BufRead fish_funced set ft=fish
 "from makc => My New Terminal: Alaritty 19:05
 " allow alaritty to have a transparent background."
-hi! Normal ctermbg=None guibg=None
-hi! NonText ctermbg=None guibg=None guifg=None ctermfg=None
+hi! Normal ctermbg=NONE guibg=NONE
+hi! NonText ctermbg=NONE guibg=NONE guifg=NONE ctermfg=NONE
 syntax on
 set shiftround
 set ignorecase
@@ -658,8 +950,51 @@ set smartcase
 set incsearch
 set ws  " wrap search"
 set wb  "writebackup"
+set mouse=nicr
+set mouse=a
+let g:neovide_transparency=0.97
+let g:neovide_cursor_antialiasing=v:true
+" also sonicboom, wireframe 
+let g:neovide_cursor_vfx_mode="torpedo"
+set guioptions-=m "remove menu bar"
+set guioptions-=T "remove toolbar"
+set guioptions-=r "remove right-hand scroll bar"
+set guioptions-=L "remove left-hand scroll bar"
+set completeopt=menuone,noinsert,noselect
+set shortmess+=c
+" ============================== nvim native lsp usage
+" https://sharksforarms.dev/posts/neovim-rust/
+" " Code navigation shortcuts
+"nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> gD    <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> H     <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> g.    <cmd>lua vim.lsp.buf.code_action()<CR>
+" Set updatetime for CursorHold
+" 300ms of no cursor movement to trigger CursorHold
+set updatetime=300
+" Show diagnostic popup on cursor hold
+autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
+" Goto previous/next diagnostic warning/error
+nnoremap <silent> g[ <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+nnoremap <silent> g] <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+set signcolumn=yes " fix jitter
+" Enable type inlay hints
+autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
+\ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} }
+"nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+"nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+"nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+"nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+"nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+"nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+"nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
+" ============================== nvim native lsp usage
 " always has to be the end.
 filetype plugin indent on
 set nu rnu
-set nospell
+set spell
+" spell
+imap <c-l> <c-g>u<Esc>[s1z=`]a<c-g>u
+nmap <c-l> [s1z=`]a<c-g>u
 " ================ settings ======================
