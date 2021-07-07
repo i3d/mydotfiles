@@ -606,6 +606,7 @@ nno <silent> gh :call PrevHunk(9999)<cr>
 "nno <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]'
 "nno ; :   == ; is used in line search.
 ino jk <esc>
+ino <capslock> <esc>
 "ino vv <esc>
 nno <silent> <tab> <c-w>w
 cno w!! w !sudo tee % >/dev/null
@@ -701,7 +702,7 @@ nno <silent> <localleader>T :colo<cr>
 nno <silent> <localleader>S :split<cr>
 nno <silent> <localleader>V :vsplit<cr>
 nno <silent> <localleader>x :copen<cr>
-nno <silent> <localleader>l :clist<cr>
+nno <silent> <localleader>oe :clist<cr>
 "nor <silent> <localleader>r :RelatedFilesWindow<CR>
 nno <silent> <localleader>to :NERDTreeTabsOpen<cr>
 nno <silent> <localleader>tf :NERDTreeTabsFind<cr>
@@ -719,6 +720,8 @@ nno <silent> <localleader>t. :lua require('FTerm').toggle()<cr>
 "au VimEnter * nno <silent> gD :LspReferences<CR>
 "au VimEnter * nno <silent> gp :LspPeekDefinition<CR>
 nno <silent> <localleader>T :CocList colors<cr>
+nno <silent> <localleader>ct :CommentToggle<cr>
+nno <silent> <localleader>cv :'<,'>CommentToggle<cr>
 "NERDTree"
 nno <localleader>to :NERDTreeTabsOpen<cr>
 nno <localleader>tf :NERDTreeTabsFind<cr>
@@ -727,6 +730,39 @@ nno <localleader>tg :NERDTreeTabsToggle<cr>
 nno <localleader>vt :TabVifm<cr>
 nno <localleader>vs :VsplitVifm<cr>
 nno <localleader>vd :DiffVifm<cr>
+" == surround ==
+" S<sign to surround> for virtual mode.
+nno <localleader>lq :norm yss'<cr>
+nno <localleader>lQ :norm yss"<cr>
+nno <localleader>l* :norm yss*<cr>
+nno <localleader>l[ :norm yss[<cr>
+nno <localleader>l] :norm yss]<cr>
+nno <localleader>l{ :norm yss{<cr>
+nno <localleader>l} :norm yss}<cr>
+nno <localleader>l( :norm yss(<cr>
+nno <localleader>l) :norm yss)<cr>
+nno <localleader>wq :norm ysiw'<cr>
+nno <localleader>wQ :norm ysiw"<cr>
+nno <localleader>Wq :norm ysaw'<cr>
+nno <localleader>WQ :norm ysaw"<cr>
+nno <localleader>w) :norm ysiw)<cr>
+nno <localleader>w( :norm ysiw(<cr>
+nno <localleader>W) :norm ysaw)<cr>
+nno <localleader>W( :norm ysaw(<cr>
+nno <localleader>w* :norm ysiw*<cr>
+nno <localleader>W* :norm ysaw*<cr>
+nno <localleader>w] :norm ysiw]<cr>
+nno <localleader>w[ :norm ysiw[<cr>
+nno <localleader>W] :norm ysaw]<cr>
+nno <localleader>W[ :norm ysaw[<cr>
+nno <localleader>w} :norm ysiw{<cr>
+nno <localleader>w{ :norm ysiw}<cr>
+nno <localleader>W} :norm ysaw{<cr>
+nno <localleader>W{ :norm ysaw}<cr>
+nno <localleader>p} :norm ysip}<cr>
+nno <localleader>p{ :norm ysip{<cr>
+" ds and cs works.
+" == surround == "
 
 " au BufWrite *.rs :RustFmt
 let g:rustfmt_autosave = 1
@@ -773,6 +809,7 @@ let g:which_key_map['r'] = [ ':RnvimrToggle'              , 'ranger' ]
 let g:which_key_map['S'] = [ ':SSave'                     , 'save session' ]
 let g:which_key_map['v'] = [ '<C-W>v'                     , 'split right']
 let g:which_key_map['z'] = [ 'Goyo'                       , 'zen' ]
+let g:which_key_map['m'] = [ ':TZFocus'                   , 'Focus/UnFocus' ]
 let g:which_key_map['?'] = [ ':CocList maps'              , 'maps' ]
 let g:which_key_map['B'] = [ ':!xxd -g1 %'                , 'show hex' ]
 let g:which_key_map["'"] = [ 'FloatermNew --width=50 --height=60' , 'shell' ]
@@ -911,7 +948,8 @@ let g:which_key_map.o = {
       \ '3' : [':50vs | e ~/.vim/init.lua'                             , 'vimrc init.lua'],
       \ '4' : [':50vs | e ~/.zshrc'                                    , 'zshrc'],
       \ '5' : [':50vs | e ~/.zshrc.pre-oh-my-zsh'                      , 'zshrc pre-omz'],
-      \ '6' : [':50vs | e ~/bin/cheat'                                 , 'cheatsheet'],
+      \ '6' : [':50vs | e ~/.zshenv'                                   , 'zshenv'],
+      \ '7' : [':50vs | e ~/bin/cheat'                                 , 'cheatsheet'],
       \ 'i' : [':50vs | e ~/.config/nvim/init.vim'                     , 'open init'],
       \ 'k' : [':50vs | e ~/.config/nvim/keys/which-key.vim'           , 'which keys'],
       \ 'p' : [':50vs | e ~/.config/nvim/vim-plug/plugins.vim'         , 'vim-plug'],
