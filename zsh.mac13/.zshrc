@@ -8,7 +8,8 @@ zle -N edit-command-line
   git clone https://github.com/b4b4r07/zsh-vimode-visual.git && cd $HOME
 source $HOME/.local/src/zsh-vimode-visual/zsh-vimode-visual.zsh
 # neovim as man pager.
-export MANPAGER="/bin/sh -c \"col -b | v -c 'set ft=man ts=8 nomod nolist noma nu' -\""
+#export MANPAGER="/bin/sh -c \"col -b | v -c 'set ft=man ts=8 nomod nolist noma nu' -\""
+export MANPAGER="less -FRX"
 export KEYTIMEOUT=1
 # https://dougblack.io/words/zsh-vi-mode.html
 function zle-line-init zle-keymap-select {
@@ -216,7 +217,7 @@ export YTFZF_PLAYER="mpv --vd-queue-enable=yes --vd-lavc-threads=4"
 
 if [[ ! -d $HOME/src/neovim ]]; then
   echo "Install neoview.git ..."
-  cd $HOME/src
+  cd $HOME/src && \
   git clone https://github.com/neovim/neovim.git
   cd neovim
   make distclean && make CMAKE_EXTRA_FLAGS=-DCMAKE_INSTALL_PREFIX=$HOME/.local CMAKE_BUILD_TYPE=Release
@@ -361,6 +362,7 @@ export NVM_DIR="$HOME/.nvm"
 #homebrew cleanup previous installs.
 #or run this to cleanup.
 alias x='xplr'
+alias r='ranger'
 alias hbc='~/bin/hbc.sh'
 alias g4='p4'
 alias bbbb='blaze'
@@ -379,12 +381,17 @@ alias ohmyzsh="v ~/.oh-my-zsh"
 alias va='v ~/.vimrc ~/.vimrc.plug'
 alias v1='v ~/.vimrc'
 alias v2='v ~/.vimrc.plug'
+alias v3='v ~/.vim/init.lua'
 alias vz='zshrc'
 alias z1='v ~/.zshrc'
 alias z2='v ~/.zshrc.pre-oh-my-zsh'
+alias z3='v ~/.zshenv'
 alias vcheat='v $HOME/bin/cheat'
 alias cat='bat -pp'
 alias less='bat -p'
+alias b='less'
+alias c='/bin/cat'
+alias D='delta -ns --diff-highlight --true-color=auto --paging=always'
 alias xv='$HOME/bin/space'
 #
 # currently using the following zsh prompt themes. either generate one from using vim promptline plguin,
@@ -428,6 +435,30 @@ eval "$("$BASE16_SHELL/profile_helper.sh")"
   . /Users/jimxu/homebrew/opt/asdf/asdf.sh
 [[ -f  /Users/jimxu/homebrew/opt/asdf/etc/bash_completion.d/asdf.bash ]] && \
   . /Users/jimxu/homebrew/opt/asdf/etc/bash_completion.d/asdf.bash
+alias asif='asdf info'
+alias aspa='asdf plugin add'
+alias aspl='asdf plugin list'
+alias aspp='asdf plugin list all'
+alias aspr='asdf plugin remove'
+alias aspu='asdf plugin update'
+alias asua='asdf plugin update --all'
+alias asis='asdf install'
+alias asus='asdf uninstall'
+alias ascr='asdf current'
+alias aswh='asdf where'
+alias aswi='asdf which'
+alias aslo='asdf local'
+alias asgl='asdf global'
+alias assh='asdf shell'
+alias asst='asdf latest'
+alias asls='asdf list'
+alias asla='asdf list all'
+alias ashl='asdf help'
+alias asex='asdf exec'
+alias asev='asdf env'
+alias asre='asdf reshim'
+alias assv='asdf shim-versions'
+
 #
 # always make sure my own bin path is the first
 if [[ ! -d $HOME/.cargo ]]; then
@@ -517,6 +548,7 @@ unalias v 2>/dev/null
 unalias g  2>/dev/null # alias to git which never good.
 unalias rd 2>/dev/null # for mac remote desktop, not rmdir
 unalias cp 2>/dev/null # don't ask.
+unalias fd 2>/dev/null # don't alias to find -t f
 fortune | cowsay -f $(cowsay -l| sed '1d' | shuf | tr ' ' '\n' | head -1) | lolcat
 # see https://unix.stackexchange.com/questions/140750/generate-random-numbers-in-specific-range
 # or jot -r 1 1 10000
@@ -669,7 +701,7 @@ zkill() {
 }
 alias glNoGraph='git --no-pager log --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr% C(auto)%an" "$@"'
 _gitLogLineToHash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1"
-_viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git --no-pager show --color=always % | delta -n -s'"
+_viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git --no-pager show --color=always % | D'"
 
 # zgitco - checkout git commit with previews
 zgitco() {
@@ -688,7 +720,7 @@ zgitcb() {
             --no-sort --reverse --tiebreak=index --no-multi \
             --ansi --preview="$_viewGitLogLine" \
                 --header "enter to view, alt-y to copy hash" \
-                --bind "enter:execute:$_viewGitLogLine   | delta -n -s" \
+                --bind "enter:execute:$_viewGitLogLine   | D" \
                 --bind "alt-y:execute:$_gitLogLineToHash | xclip"
 }
 alias zcb=zgitcb
@@ -700,7 +732,7 @@ zgitlog() {
       --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
       --bind "ctrl-m:execute:
                 (grep -o '[a-f0-9]\{7\}' | head -1 |
-                xargs -I % sh -c 'git show --color=always % | delta -n -s') << 'FZF-EOF'
+                xargs -I % sh -c 'git show --color=always % | D') << 'FZF-EOF'
                 {}
 FZF-EOF"
 }
@@ -805,10 +837,10 @@ source /etc/bash_completion.d/hgd
 alias hgco='hg update'  # checkout a specfic rev.
 alias hghd='hg update p4head'  # checkout the head.
 alias hgam='hg amend'   # hg modify/update the existing rev.
-alias hgdf='hg diff | delta -ns'    # hg diff.
+alias hgdf='hg diff | D'    # hg diff.
 alias hgdh='hg diff -r p4head'  # diff aginst piper head.
 alias hgpd='hg pdiff'  # diff aginst parent.
-alias hgdd='hg diff -r p4head | delta -ns'  # diff aginst piper head.
+alias hgdd='hg diff -r p4head | D'  # diff aginst piper head.
 alias hgxl='hg xl'      # hg current workspace log.
 alias hgll='hg ll'      # hg log list.
 alias hgup='hg sync'    # srcup current branch for hg.
@@ -867,5 +899,25 @@ xd() {
     fi
 }
 #### fig setup
+
+#### MacPorts setup
+export PATH=$PATH:/opt/local/bin:/opt/local/sbin
+export MANPATH=/opt/local/share/man:$MANPATH
+alias pt='sudo /opt/local/bin/port'
+alias ptsp='pt -v selfupdate'
+alias ptup='pt upgrade'
+alias ptuo='ptup outdated'
+alias ptif='pt info'
+alias ptfd='pt search'
+alias ptcl='pt clean --all'
+alias ptis='pt -v install'
+alias ptus='pt uninstall'
+alias ptua='pt uninstall --follow-dependents'
+alias ptuf='pt -f uninstall'
+alias ptct='pt --size contents'
+alias ptls='pt -v installed'
+alias ptdp='pt dependents'
+alias ptvr='pt variants'
+#### MacPorts setup
 
 export PATH=/Users/jimxu/bin:/Users/jimxu/go_code/bin:$PATH:/Users/jimxu/go/bin:/Users/jimxu/homebrew/opt/util-linux/bin:/Users/jimxu/homebrew/opt/util-linux/sbin

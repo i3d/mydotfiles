@@ -312,10 +312,10 @@ com! -nargs=* AsyncCargoTest :call <SID>AsyncCargoTest()
 "colorscheme neonhive
 "let g:airline_theme = 'minimalist'
 
-set background=dark
-set termguicolors
-colorscheme matrix
-let g:airline_theme = 'onedark'
+"set background=dark
+"set termguicolors
+"colorscheme matrix
+"let g:airline_theme = 'onedark'
 
 "set background=dark
 "set termguicolors
@@ -383,6 +383,15 @@ let g:airline_theme = 'onedark'
 "set termguicolors
 "colorscheme base16-gruvbox-dark-hard
 "let g:airline_theme = 'base16_gruvbox_dark_hard'
+"
+let g:calvera_italic_comments = 1
+let g:calvera_italic_keywords = 1
+let g:calvera_italic_functions = 1
+let g:calvera_contrast = 1
+set background=dark
+set termguicolors
+colorscheme calvera
+let g:airline_theme = 'calvera'
 
 " ##########################################
 let g:javascript_plugin_flow = 1

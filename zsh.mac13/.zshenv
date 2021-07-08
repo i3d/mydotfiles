@@ -10,7 +10,30 @@ unalias vi 2>/dev/null
 unalias v 2>/dev/null
 unalias g  2>/dev/null # alias to git which never good.
 unalias rd 2>/dev/null # for mac remote desktop, not rmdir
+unalias fd 2>/dev/null # don't alias to find -t f
 
+alias dfa='df -ha .'
+alias asif='asdf info'
+alias aspa='asdf plugin add'
+alias aspl='asdf plugin list'
+alias aspp='asdf plugin list all'
+alias aspr='asdf plugin remove'
+alias aspu='asdf plugin update'
+alias asua='asdf plugin update --all'
+alias asis='asdf install'
+alias asus='asdf uninstall'
+alias ascr='asdf current'
+alias aswh='asdf where'
+alias aswi='asdf which'
+alias aslo='asdf local'
+alias asgl='asdf global'
+alias assh='asdf shell'
+alias asst='asdf latest'
+alias asls='asdf list'
+alias asla='asdf list all'
+alias ashl='asdf help'
+alias asex='asdf exec'
+alias asev='asdf env'
 alias python=$HOME/homebrew/bin/python3
 alias x='xplr'
 alias hbc='~/bin/hbc.sh'
@@ -26,9 +49,13 @@ alias v2='v ~/.vimrc.plug'
 alias vz='zshrc'
 alias z1='v ~/.zshrc'
 alias z2='v ~/.zshrc.pre-oh-my-zsh'
+alias z3='v ~/.zshenv'
 alias vcheat='v $HOME/bin/cheat'
 alias cat='bat -pp'
 alias less='bat -p'
+alias b='less'
+alias c='/bin/cat'
+alias D='delta -ns --diff-highlight --true-color=auto --paging=always'
 alias xv='$HOME/bin/space'
 alias xcd=zx
 alias his=zh
@@ -38,14 +65,22 @@ alias zcb=zgitcb
 alias zcl=zgitlog
 alias zst=zgitstash
 alias n3=nnn
+alias brup='brew upgrade'
+alias bris='brew install'
+alias brus='brew uninstall'
+alias brif='brew info'
+alias brcs='brew cleanup -s'
+alias brdo='brew doctor'
+alias brfd='brew search'
+alias dupp='doom sync -up'
 
 alias hgco='hg update'  # checkout a specfic rev.
 alias hghd='hg update p4head'  # checkout the head.
 alias hgam='hg amend'   # hg modify/update the existing rev.
-alias hgdf='hg diff | delta -ns'    # hg diff.
+alias hgdf='hg diff | D'    # hg diff.
 alias hgdh='hg diff -r p4head'  # diff aginst piper head.
 alias hgpd='hg pdiff'  # diff aginst parent.
-alias hgdd='hg diff -r p4head | delta -ns'  # diff aginst piper head.
+alias hgdd='hg diff -r p4head | D'  # diff aginst piper head.
 alias hgxl='hg xl'      # hg current workspace log.
 alias hgll='hg ll'      # hg log list.
 alias hgup='hg sync'    # srcup current branch for hg.

@@ -277,8 +277,17 @@ Plug 'ful1e5/onedark.nvim'
 " 6/22/2021  ==> looongest daytime.
 Plug 'ray-x/lsp_signature.nvim'
 
-" 6/27/2021 ===> Hoooooot!!! (43c)
+" 6/27/2021 ===> Hoooooot!!! (45c)
+Plug 'Pocco81/TrueZen.nvim'
 
+" 7/6/2021
+" TODO: maybe migrate to use this commenter.
+" Plug 'preservim/nerdcommenter'
+" TODO: optimized version of gruvbox.
+" Plug 'lifepillar/vim-gruvbox8'
+" TODO: investigate, could be useful.
+" Plug 'tpope/vim-abolish'
+Plug 'yashguptaz/calvera-dark.nvim'
 
 call plug#end()
 " Automatically install missing plugins on startup

@@ -107,12 +107,12 @@ zstyle :compinstall filename '/home/yongjian/.zshrc'
 ########## experiment ###############
 #
 ########################## zsh-autocomplete settings ################################
-zstyle ':autocomplete:*' default-context ''
+#### zstyle ':autocomplete:*' default-context ''
 #zstyle ':autocomplete:*' default-context history-incremental-search-backward
 ## '': Start each new command line with normal autocompletion.
 ## history-incremental-search-backward: Start in live history search mode.
 #
-zstyle ':autocomplete:*' min-delay 0.4  # number of seconds (float)
+zstyle ':autocomplete:*' min-delay 3 # number of seconds (float)
 ## 0.0: Start autocompletion immediately when you stop typing.
 ## 0.4: Wait 0.4 seconds for more keyboard input before showing completions.
 #
@@ -120,16 +120,16 @@ zstyle ':autocomplete:*' min-delay 0.4  # number of seconds (float)
 # if so, change back to 1.
 # If 1, then extendedglob to show the current pwd content would not work
 # anymore (because it needs 1 input), so a bit of feature lost.
-zstyle ':autocomplete:*' min-input 0 #number of characters (integer)
+#### zstyle ':autocomplete:*' min-input 0 #number of characters (integer)
 ## 0: Show completions immediately on each new command line.
 ## 1: Wait for at least 1 character of input.
 #
-zstyle ':autocomplete:*' ignored-input '' # extended glob pattern
+#### zstyle ':autocomplete:*' ignored-input '' # extended glob pattern
 ## '':     Always show completions.
 ## '..##': Don't show completions when the input consists of two or more dots.
 #
 ## When completions don't fit on screen, show up to this many lines:
-zstyle ':autocomplete:*' list-lines 8  # (integer)
+#### zstyle ':autocomplete:*' list-lines 8  # (integer)
 ## 💡 NOTE: The actual amount shown can be less.
 #
 ## If any of the following are shown at the same time, list them in this order:
@@ -150,7 +150,7 @@ zstyle ':autocomplete:*' widget-style menu-select
 ## ⚠️ NOTE: This can NOT be changed at runtime.
 #
 ## CD with fzf worked.
-zstyle ':autocomplete:*' fzf-completion yes
+zstyle ':autocomplete:*' fzf-completion no
 ## no:  Tab uses Zsh's completion system only.
 ## yes: Tab first tries Fzf's completion, then falls back to Zsh's.
 ## ⚠️ NOTE: This can NOT be changed at runtime and requires that you have
@@ -309,9 +309,15 @@ alias gtagsjs='/home/build/nonconf/google3/tools/tags/gtags.sh --lang=javascript
 alias gtagspb='/home/build/nonconf/google3/tools/tags/gtags.sh --lang=proto'
 alias gtagspy='/home/build/nonconf/google3/tools/tags/gtags.sh --lang=python'
 alias vless='vi -u /usr/share/vim/vim80/macros/less.vim'
+alias dfa='df -ha .'
 alias bls='/bin/ls -trABipFG'
-alias ls='exa -aBFG --sort=type --icons --time=modified --git --color=always'
-alias l='ls -Hlghi --sort=modified --group-directories-first'
+alias ls='exa --sort=type --icons --time=modified --git --color=always'
+alias la='ls -laFh'
+#alias l='ls -Hlghi --sort=modified --group-directories-first'
+alias l='ls -1la@BFGbgHhi --sort=modified --group-directories-first'
+alias ll='bls -la'
+alias lr='l -T'
+alias lss='l --sort=size'
 alias lsd='l -D'
 #alias s='cd ..'
 alias md='mkdir -p'
