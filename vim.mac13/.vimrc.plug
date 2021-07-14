@@ -289,6 +289,10 @@ Plug 'Pocco81/TrueZen.nvim'
 " Plug 'tpope/vim-abolish'
 Plug 'yashguptaz/calvera-dark.nvim'
 
+" 13/7/2021
+Plug 'folke/zen-mode.nvim'   " another zen-mode
+Plug 'folke/twilight.nvim'   " dim unfocused code
+
 call plug#end()
 " Automatically install missing plugins on startup
 autocmd VimEnter *

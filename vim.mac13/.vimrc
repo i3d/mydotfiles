@@ -312,10 +312,11 @@ com! -nargs=* AsyncCargoTest :call <SID>AsyncCargoTest()
 "colorscheme neonhive
 "let g:airline_theme = 'minimalist'
 
-"set background=dark
-"set termguicolors
-"colorscheme matrix
-"let g:airline_theme = 'onedark'
+set background=dark
+set termguicolors
+colorscheme matrix
+" perfect fit for matrix!!
+let g:airline_theme = 'biogoo'
 
 "set background=dark
 "set termguicolors
@@ -384,15 +385,15 @@ com! -nargs=* AsyncCargoTest :call <SID>AsyncCargoTest()
 "colorscheme base16-gruvbox-dark-hard
 "let g:airline_theme = 'base16_gruvbox_dark_hard'
 "
-let g:calvera_italic_comments = 1
-let g:calvera_italic_keywords = 1
-let g:calvera_italic_functions = 1
-let g:calvera_contrast = 1
-set background=dark
-set termguicolors
-colorscheme calvera
-let g:airline_theme = 'calvera'
-
+"let g:calvera_italic_comments = 1
+"let g:calvera_italic_keywords = 1
+"let g:calvera_italic_functions = 1
+"let g:calvera_contrast = 1
+"set background=dark
+"set termguicolors
+"colorscheme calvera
+"let g:airline_theme = 'calvera'
+"
 " ##########################################
 let g:javascript_plugin_flow = 1
 let g:airline_powerline_fonts = 1
@@ -816,13 +817,13 @@ let g:which_key_map['e'] = [ ':CocCommand explorer'       , 'explorer' ]
 let g:which_key_map['f'] = [ ':Files'                     , 'search files' ]
 let g:which_key_map['r'] = [ ':RnvimrToggle'              , 'ranger' ]
 let g:which_key_map['S'] = [ ':SSave'                     , 'save session' ]
-let g:which_key_map['v'] = [ '<C-W>v'                     , 'split right']
-let g:which_key_map['z'] = [ 'Goyo'                       , 'zen' ]
-let g:which_key_map['m'] = [ ':TZFocus'                   , 'Focus/UnFocus' ]
+let g:which_key_map['v'] = [ ':<C-W>v'                    , 'split right']
+let g:which_key_map['z'] = [ ':ZenMode'                   , 'zen' ]
+let g:which_key_map['m'] = [ ':TZFocus'                   , 'Max/UnMax' ]
 let g:which_key_map['?'] = [ ':CocList maps'              , 'maps' ]
 let g:which_key_map['B'] = [ ':!xxd -g1 %'                , 'show hex' ]
-let g:which_key_map["'"] = [ 'FloatermNew --width=50 --height=60' , 'shell' ]
-let g:which_key_map['h'] = [ 'FloatermKill'               , 'kill shell' ]
+let g:which_key_map["'"] = [ ':FloatermNew --width=50 --height=60' , 'shell' ]
+let g:which_key_map['h'] = [ ':FloatermKill'               , 'kill shell' ]
 let g:which_key_map['q'] = [ ':q!'                        , 'quit']
 let g:which_key_map['n'] = [ ':bnext'                     , 'cycle buffers' ]
 " Group mappings
@@ -840,17 +841,17 @@ let g:which_key_map.a = {
 " b is for buffer
 let g:which_key_map.b = {
       \ 'name' : '+buffer',
-      \ '1' : ['b1'                                         , 'buffer 1']        ,
-      \ '2' : ['b2'                                         , 'buffer 2']        ,
-      \ 'd' : ['bd'                                         , 'delete-buffer']   ,
-      \ 'f' : ['bfirst'                                     , 'first-buffer']    ,
-      \ 'h' : ['Startify'                                   , 'home-buffer']     ,
-      \ 'l' : ['blast'                                      , 'last-buffer']     ,
-      \ 'n' : ['bnext'                                      , 'next-buffer']     ,
-      \ 'p' : ['bprevious'                                  , 'previous-buffer'] ,
-      \ '?' : ['Buffers'                                    , 'fzf-buffer']      ,
-      \ 'b' : [ 'CocList buffers'                           , 'all buffers'],
-      \ 'm' : [ 'CocList marks'                             , 'all marks'],
+      \ '1' : [':b1'                                         , 'buffer 1']        ,
+      \ '2' : [':b2'                                         , 'buffer 2']        ,
+      \ 'd' : [':bd'                                         , 'delete-buffer']   ,
+      \ 'f' : [':bfirst'                                     , 'first-buffer']    ,
+      \ 'h' : [':Startify'                                   , 'home-buffer']     ,
+      \ 'l' : [':blast'                                      , 'last-buffer']     ,
+      \ 'n' : [':bnext'                                      , 'next-buffer']     ,
+      \ 'p' : [':bprevious'                                  , 'previous-buffer'] ,
+      \ '?' : [':Buffers'                                    , 'fzf-buffer']      ,
+      \ 'b' : [':CocList buffers'                           , 'all buffers'],
+      \ 'm' : [':CocList marks'                             , 'all marks'],
       \ }
 " code
 let g:which_key_map.c = {
@@ -858,6 +859,8 @@ let g:which_key_map.c = {
       \ 'h' : [':Greph'                                         , 'search .h'],
       \ 'c' : [':Grephcc'                                       , 'search .cc'],
       \ 'g' : [':Grephgo'                                       , 'search .go'],
+      \ 't' : [':Twilight'                                      , 'Twilight coding'],
+      \ 'z' : [':ZenMode'                                       , 'ZenMode coding'],
       \ }
 " g is for git
 let g:which_key_map.g = {
@@ -899,8 +902,8 @@ let g:which_key_map.G = {
       \ 'p' : [ ':CritiquePreviousComments'               , 'CL previous comments'],
       \ 'n' : [ ':CritiqueNextComments'                   , 'CL next comments'],
       \ 'u' : [ ':CritiqueUnresolvedComments'             , 'CL unresolved comments'],
-      \ 'B' : [ 'BlazeBuild'                              , 'Async Build'],
-      \ 'T' : [ 'BlazeTest'                               , 'Async Test'],
+      \ 'B' : [ ':BlazeBuild'                              , 'Async Build'],
+      \ 'T' : [ ':BlazeTest'                               , 'Async Test'],
       \ }
 " Rust 
 let g:which_key_map.R = {

@@ -197,14 +197,15 @@ fi
 
 if [[ ! -d $HOME/src ]]; then
   mkdir -p $HOME/src
-  cd $HOME/src # non startup dependencies.
+  # non startup dependencies.
+  cd $HOME/src &&
   git clone https://github.com/vifm/vifm.git && \
     cd $HOME/src/vifm && \
     configure --prefix=$HOME/.local && \
     make && make install
-  git clone https://github.com/nim-lang/Nim.git
-  git clone https://github.com/rust-lang/rust.git
-  git clone https://github.com/golang/go.git 
+  cd $HOME/src && git clone https://github.com/nim-lang/Nim.git
+  cd $HOME/src && git clone https://github.com/rust-lang/rust.git
+  cd $HOME/src && git clone https://github.com/golang/go.git 
   cd $HOME
 fi
 
@@ -463,11 +464,12 @@ alias assv='asdf shim-versions'
 # always make sure my own bin path is the first
 if [[ ! -d $HOME/.cargo ]]; then
   # setup rustup.
+  cd $HOME/src && cd $HOME && \
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
   source $HOME/.cargo/env
   rustup update && rustup default nightly
   # install core rust tools.
-  cargo install bat ripgrep git-delta exa tokei procs dutree
+  cd $HOME/src && cd $HOME && cargo install bat ripgrep git-delta exa tokei procs dutree
 fi
 export PATH=/Users/jimxu/.cargo/bin:/Users/jimxu/src/Nim/bin:$PATH
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
@@ -792,9 +794,9 @@ alias n3=nnn
 (cat ~/.cache/wal/sequences &)
 # themes:
 # wal --theme supernova -nte
-###wal --theme neonhive -nte
+# wal --theme neonhive -nte
 # wal --theme vadar -nte
-# wal --theme matrix -nte
+#=> wal --theme matrix -nte
 # wal --theme dna -nte
 # wal --theme topology -nte
 # wal --theme neon -nte
