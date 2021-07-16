@@ -7,6 +7,13 @@ set t_ZR=[23m
 let g:asyncrun_open = 10
 let g:asyncrun_rootmarks = ['.git', '.svn', '.root', '.project', '.hg', '.projectile']
 
+" intend + manual folding
+augroup folding
+  au!
+  au! BufReadPre * setlocal foldmethod=indent
+  au! BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
+augroup END
+
 set rtp+=~/homebrew/opt/vim
 set rtp+=/Users/jimxu/homebrew/opt/fzf
 set rtp+=/Users/jimxu/.vim/lua
@@ -781,6 +788,9 @@ let g:rustfmt_autosave = 1
 " ==================== space macs simulation layer ========
 " source $HOME/.config/nvim_back/plug-config/coc.vim
 " source $HOME/.vim/plugged/coc.nvim/plugin/coc.vim
+" https://github.com/neoclide/coc.nvim/blob/master/doc/coc.txt
+let g:coc_user_config = {}
+let g:coc_user_config['coc.preferences.jumpCommand'] = 'vsplit'
 " ==================== space macs simulation layer ========
 " Create map to add keys to
 let g:which_key_map =  {}
@@ -814,7 +824,10 @@ let g:which_key_map['='] = [ '<C-W>='                     , 'balance windows' ]
 "let g:which_key_map['c'] = [ ':Codi!!'                    , 'virtual repl']
 let g:which_key_map['d'] = [ ':bd'                        , 'delete buffer']
 let g:which_key_map['e'] = [ ':CocCommand explorer'       , 'explorer' ]
-let g:which_key_map['f'] = [ ':Files'                     , 'search files' ]
+" use <leader>sf
+" let g:which_key_map['f'] = [ ':Files'                     , 'search files' ]
+"let g:which_key_map['f'] = [':Telescope find_files theme=get_dropdown find_command=rg,--hidden,-i,--files,-l'  , 'files']
+let g:which_key_map['f'] = [':Telescope file_browser theme=get_dropdown'  , 'files']
 let g:which_key_map['r'] = [ ':RnvimrToggle'              , 'ranger' ]
 let g:which_key_map['S'] = [ ':SSave'                     , 'save session' ]
 let g:which_key_map['v'] = [ ':<C-W>v'                    , 'split right']
@@ -1271,4 +1284,9 @@ autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
 imap <c-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 nmap <c-l> [s1z=`]a<c-g>u
 set spell
+
+"function! CustomFold()
+"  return printf('   %6d%s', v:foldend - v:foldstart + 1, getline(v:foldstart))
+"endfunction
+"set fillchars=fold:\ | set foldtext=CustomFold()
 " ================ settings ======================
