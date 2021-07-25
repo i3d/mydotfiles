@@ -10,7 +10,7 @@ window:
 scrolling:
   history: 100000
   multiplier: 3
-background_opacity: 0.98
+background_opacity: 0.99
 window.dynamic_title: true
 
 url:
@@ -27,23 +27,27 @@ font:
     #family: FiraCode Nerd Font Mono
     #family: Iosevka Term SS03
     #family: Iosevka Nerd Font Mono
-    family: BlexMono Nerd Font Mono ## no regular
+    #family: BlexMono Nerd Font Mono ## no regular
+    family: SFMono Nerd Font ## no regular
     #style: Regular
   bold:
     #family: JetBrainsMono Nerd Font Mono
     #family: FiraCode Nerd Font Mono
     #family: Iosevka Term SS03
     #family: Iosevka Nerd Font Mono
-    family: BlexMono Nerd Font Mono
+    #family: BlexMono Nerd Font Mono
+    family: SFMono Nerd Font
     style: Bold
   italic:
     #family: JetBrainsMono Nerd Font Mono
     #family: FiraCode Nerd Font Mono
     #family: Iosevka Term SS03
     #family: Iosevka Nerd Font Mono
-    family: BlexMono Nerd Font Mono
+    #family: BlexMono Nerd Font Mono
+    #family: Mononoki Nerd Font Mono
+    family: SFMono Nerd Font
     style: Italic
-  size: 26
+  size: 24
   offset:
     x: 0
     y: 0
@@ -398,32 +402,100 @@ key_bindings:
 #  cyan:    '#56b6c2'
 #  white:   '#ffffff'
 
-# #Colors (Pencil Dark)
+## #Colors (matrix)
+#colors:
+#  # #Default Colors
+#  primary:
+#    background: "#0F191C"
+#    foreground: "#426644"
+#  # #Normal colors
+#  normal:
+#    black: "#688060"
+#    red: "#23755A"
+#    green: "#82D967"
+#    yellow: "#FFD700"
+#    blue: "#3F5242"
+#    magenta: "#409931"
+#    cyan: "#50B45A"
+#    white: "#507350"
+#  # #Bright colors
+#  bright:
+#    black: "#688060"
+#    red: "#2FC079"
+#    green: "#90D762"
+#    yellow: "#FAFF00"
+#    blue: "#4F7E7E"
+#    magenta: "#11FF25"
+#    cyan: "#C1FF8A"
+#    white: "#678C61"
+#  selection:
+#    text: "#00FF87"
+#    background: "#18282E"
+#    white: "#FFFFFF"
+#  cursor:
+#    cursor: "#384545"
+#    text: "#00FF00"
+
+# #Colors (dark matrix)
 colors:
   # #Default Colors
   primary:
-    background: "#212121"
-    foreground: "#f1f1f1"
-# #Normal colors
-normal:
-  black: "#212121"
-  red: "#c30771"
-  green: "#10a778"
-  yellow: "#a89c14"
-  blue: "#008ec4"
-  magenta: "#523c79"
-  cyan: "#20a5ba"
-  white: "#e0e0e0"
-# #Bright colors
-bright:
-  black: "#212121"
-  red: "#fb007a"
-  green: "#5fd7af"
-  yellow: "#f3e430"
-  blue: "#20bbfc"
-  magenta: "#6855de"
-  cyan: "#4fb8cc"
-  white: "#f1f1f1"
+    background: "#091013"
+    foreground: "#81B32C"
+  # #Normal colors
+  normal:
+    black: "#091013"
+    red: "#00cd6d"
+    green: "#90D762"
+    yellow: "#00cd6d"
+    blue: "#9CE667"
+    magenta: "#00cd6d"
+    cyan: "#0ECC1E"
+    white: "#00cd6d"
+  # #Bright colors
+  bright:
+    black: "#00CD6D"
+    red: "#00cd6d"
+    green: "#90D762"
+    yellow: "#00cd6d"
+    blue: "#9CE667"
+    magenta: "#00cd6d"
+    cyan: "#0ECC1E"
+    white: "#00cd6d"
+  selection:
+    text: "#00FF87"
+    background: "#0F191C"
+    white: "#FFFFFF"
+  cursor:
+    cursor: "#81B32C"
+    text: "#00FF87"
+
+## #Colors (Pencil Dark)
+#colors:
+#  # #Default Colors
+#  primary:
+#    background: "#212121"
+#    foreground: "#f1f1f1"
+## #Normal colors
+#normal:
+#  black: "#212121"
+#  red: "#c30771"
+#  green: "#10a778"
+#  yellow: "#a89c14"
+#  blue: "#008ec4"
+#  magenta: "#523c79"
+#  cyan: "#20a5ba"
+#  white: "#e0e0e0"
+## #Bright colors
+#bright:
+#  black: "#212121"
+#  red: "#fb007a"
+#  green: "#5fd7af"
+#  yellow: "#f3e430"
+#  blue: "#20bbfc"
+#  magenta: "#6855de"
+#  cyan: "#4fb8cc"
+#  white: "#f1f1f1"
 
 # Colors (Oceanic Next)
 #colors:
