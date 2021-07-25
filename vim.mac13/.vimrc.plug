@@ -63,20 +63,20 @@ Plug 'tpope/vim-surround'
 Plug 'rakr/vim-one'
 Plug 'edkolev/promptline.vim'
 Plug 'nikvdp/neomux'
-Plug 'huyvohcmc/atlas.vim'
+"Plug 'huyvohcmc/atlas.vim'
 Plug 'arcticicestudio/nord-vim'
 Plug 'sjl/badwolf'
 Plug 'jacoborus/tender.vim'
 Plug 'kristijanhusak/vim-hybrid-material'
-Plug 'yuttie/hydrangea-vim'
+"Plug 'yuttie/hydrangea-vim'
 " imcompatible with zah's nim.vim plugin.
 Plug 'baabelfish/nvim-nim'
 Plug 'vifm/vifm.vim'
 " use homebrew version
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'dylanaraps/wal.vim'
-Plug 'ajh17/Spacegray.vim'
+"Plug 'dylanaraps/wal.vim'
+"Plug 'ajh17/Spacegray.vim'
 Plug 'dikiaap/minimalist'
 
 
@@ -115,7 +115,7 @@ autocmd FileType * RainbowParentheses
 "Plug 'airblade/vim-rooter'
 "let g:rooter_silent_chdir = 1
 
-Plug 'sheerun/vim-polyglot'
+"Plug 'sheerun/vim-polyglot'
 set encoding=UTF-8
 
 Plug 'alvan/vim-closetag'
@@ -142,30 +142,27 @@ autocmd FileType floaterm call s:floatermSettings()
 autocmd User Startified setlocal buflisted
 
 Plug 'mhinz/vim-startify'
-Plug 'liuchengxu/vista.vim'
-let g:vista_default_executive = 'coc'
-let g:vista_fzf_preview = ['right:50%']
-let g:vista#renderer#enable_icon = 1
-let g:vista#renderer#icons = {
-\   "function": "\uf794",
-\   "variable": "\uf71b",
-\  }
+"Plug 'liuchengxu/vista.vim'
+"let g:vista_default_executive = 'coc'
+"let g:vista_fzf_preview = ['right:50%']
+"let g:vista#renderer#enable_icon = 1
+"let g:vista#renderer#icons = {
+"\   "function": "\uf794",
+"\   "variable": "\uf71b",
+"\  }
 Plug 'Rigellute/rigel'
-Plug 'pangloss/vim-javascript'
-Plug 'AlphaMycelium/pathfinder.vim'
+"Plug 'AlphaMycelium/pathfinder.vim'
 let g:python3_host_prog = '/Users/jimxu/homebrew/bin/python3'
 Plug 'rainglow/vim'
 Plug 'nightsense/vimspectr'
-Plug 'nightsense/snow'
 Plug 'mswift42/vim-themes'
 Plug 'rakr/vim-two-firewatch'
-Plug 'sts10/vim-pink-moon'
 Plug 'owickstrom/vim-colors-paramount'
 Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'danilo-augusto/vim-afterglow'
 Plug 'romainl/Apprentice'
 Plug 'nightsense/carbonized'
-Plug 'junegunn/goyo.vim'
+"Plug 'junegunn/goyo.vim'
 Plug 'liuchengxu/vim-which-key'
 Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-rhubarb'
@@ -196,7 +193,7 @@ augroup END
 Plug 'lfv89/vim-interestingwords'
 Plug 'AndrewRadev/linediff.vim'
 " for some reason, g:loaded_matchit always show 1.
-Plug 'SpaceVim/vim-matchup'
+"Plug 'SpaceVim/vim-matchup'
 Plug 'jceb/vim-orgmode'
 Plug 'kshenoy/vim-signature'
 Plug 'wellle/targets.vim'
@@ -204,10 +201,11 @@ Plug 'markonm/traces.vim'
 Plug 'christoomey/vim-tmux-navigator'
 
 " 3/7/2021
-Plug 'matsuuu/pinkmare'
+"Plug 'matsuuu/pinkmare'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'RRethy/nvim-treesitter-textsubjects'
+Plug 'nvim-treesitter/nvim-treesitter-refactor'
 Plug 'lighthaus-theme/vim-lighthaus'
 Plug 'ulwlu/elly.vim'
 
@@ -287,11 +285,13 @@ Plug 'Pocco81/TrueZen.nvim'
 " Plug 'lifepillar/vim-gruvbox8'
 " TODO: investigate, could be useful.
 " Plug 'tpope/vim-abolish'
-Plug 'yashguptaz/calvera-dark.nvim'
+" Plug 'yashguptaz/calvera-dark.nvim'
 
 " 13/7/2021
 Plug 'folke/zen-mode.nvim'   " another zen-mode
 Plug 'folke/twilight.nvim'   " dim unfocused code
+Plug 'tweekmonster/startuptime.vim'
+Plug 'onsails/vimway-lsp-diag.nvim'
 
 call plug#end()
 " Automatically install missing plugins on startup
