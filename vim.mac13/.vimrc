@@ -8,11 +8,13 @@ let g:asyncrun_open = 10
 let g:asyncrun_rootmarks = ['.git', '.svn', '.root', '.project', '.hg', '.projectile']
 
 " intend + manual folding
-augroup folding
-  au!
-  au! BufReadPre * setlocal foldmethod=indent
-  au! BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
-augroup END
+"augroup folding
+"  au!
+"  au! BufReadPre * setlocal foldmethod=indent
+"  au! BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
+"augroup END
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
 
 set rtp+=~/homebrew/opt/vim
 set rtp+=/Users/jimxu/homebrew/opt/fzf
@@ -93,6 +95,20 @@ function! s:AsyncCargoRun() abort
   let g:asyncrun_open = l:aro
 endfunction
 
+function! s:AsyncGoRunThis() abort
+  call s:AsyncGoRunFile(expand('%'))
+endfunction
+
+function! s:AsyncGoRunFile(file) abort
+	"open cwindow manually.
+  let l:aro = g:asyncrun_open
+  let g:asyncrun_open = 0
+  call setqflist([]) | copen 30
+  " don't use !, so we scrolling the output.
+  call asyncrun#run("", {"rows": 30}, 'go run '.a:file)
+  let g:asyncrun_open = l:aro
+endfunction
+
 " NERDTrees File highlighting
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
  exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
@@ -132,6 +148,7 @@ com! -nargs=* AsyncRustRun :call <SID>AsyncRustRun()
 com! -nargs=* AsyncCargoBuild :call <SID>AsyncCargoBuild()
 com! -nargs=* AsyncCargoRun :call <SID>AsyncCargoRun()
 com! -nargs=* AsyncCargoTest :call <SID>AsyncCargoTest()
+com! -nargs=* AsyncGoRunThis :call <SID>AsyncGoRunThis()
 " ================ functions and commands ======================
 " ================ themes ======================
 "colorscheme mustang
@@ -302,7 +319,7 @@ com! -nargs=* AsyncCargoTest :call <SID>AsyncCargoTest()
 "set background=dark
 "set termguicolors
 "colorscheme breakingbad
-"let g:airline_theme = 'minimalist'
+"let g:airline_theme = 'biogoo'
 
 "set background=dark
 "set termguicolors
@@ -592,6 +609,78 @@ nno <silent> <leader>cp :Prettier<cr>
 " ================ themes ======================
 "
 " ================ key maps ======================
+" select the whole line. 
+nno Y y$
+nno n nzzzv
+nno N Nzzzv
+nno J mzJ`z
+nno <c-j> :cnext<cr>zzzv
+nno <leader><tab> <c-^>
+nno cn *``cgn
+nno cN *``cgN
+" fp => paste whatever yanked to the end of cursor line.
+" ap => paste whatever yanked to the beginning of the cursor line.
+" ep => copy the line above and paste to the end of cursor line.
+" xp => copy the line below and paste to the end of cursor line.
+" sp => copy the line below and paste to the beginning of the curso line.
+" ep => copy the line above and paste to the beginning of the curso line.
+" key layouts on keyboard indicates the directions:
+"    e
+" a s d f
+"    x
+" s => mimic "j", go down; d => mimic "k", go up.
+nno vl ^v$
+nno fp $a<space><esc>p
+nno ap ^PJ
+nno ep k^v$yj$a<space><esc>p
+nno xp j^v$yk$a<space><esc>p
+nno sp j^v$yk^PJ
+nno dp k^v$yj^PJ
+
+vno < <gv
+vno > >gv
+
+vno v; :'<,'>normal! A;<cr>
+vno v0 :'<,'>normal! A)<cr>
+vno v9 :'<,'>normal! A}<cr>
+vno v] :'<,'>normal! A]<cr>
+vno v, :'<,'>normal! A,<cr>
+vno v. :'<,'>normal! A.<cr>
+vno v/ :'<,'>normal! I// <cr>
+
+nno o o<esc>
+nno O O<esc>
+" jump break, this is super.
+ino , ,<c-g>u
+ino ; ;<c-g>u
+ino ' '<c-g>u
+ino " "<c-g>u
+ino . .<c-g>u
+ino ! !<c-g>u
+ino ? ?<c-g>u
+ino : :<c-g>u
+ino [ [<c-g>u
+ino ] ]<c-g>u
+ino { {<c-g>u
+ino } }<c-g>u
+ino ( (<c-g>u
+ino ) )<c-g>u
+ino / /<c-g>u
+ino = =<c-g>u
+ino + +<c-g>u
+ino - -<c-g>u
+ino _ _<c-g>u
+ino @ @<c-g>u
+ino $ $<c-g>u
+ino % %<c-g>u
+ino ^ ^<c-g>u
+ino & &<c-g>u
+ino * *<c-g>u
+
+" jumplist
+nno <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
+nno <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
+
 " select last paste in visual mode
 " Map leader to which_key
 "split"
@@ -602,6 +691,10 @@ nno < <C-W><
 nno > <C-W>>
 vno J :m '>+1<cr>gv=gv
 vno K :m '<-2<cr>gv=gv
+vno C :CommentToggle<cr>
+nno <c-c> :CommentToggle<cr>
+ino <c-j> <esc>:m .+1<cr>==
+ino <c-k> <esc>:m .-2<cr>==
 " sync with cider -- myciderkeys on mac
 nor <silent> go <c-o>
 nor <silent> gi <c-i>
@@ -612,6 +705,7 @@ nno <silent> ga :G4Add<cr>
 nno <silent> gl :Blame<cr>
 nno <silent> gf :GFiles<cr>
 nno <silent> cp :copen<cr>
+
 
 " !!! important !!! don't map to gj/gk, unfortunately they aren't reliable.
 nno <silent> gj :call NextHunk(1)<cr>
@@ -629,6 +723,8 @@ nno <silent> <tab> <c-w>w
 cno w!! w !sudo tee % >/dev/null
 nno <F12> "%phr_I#ifndef __<Esc>gUwyypldwidefine <Esc>yypldwiendif //<Esc>O<Esc>
 ",ig"
+nno <localleader>da <cmd>lua require('vimway-lsp-diag').open_all_diagnostics()<cr>
+nno <localleader>d0 <cmd>lua require('vimway-lsp-diag').open_buffer_diagnostics()<cr>
 nno <silent> <localleader>sf :SignifyToggleHighlight<cr>
 ino <silent> <localleader>w <esc>:w!<cr>
 ino <silent> <localleader>ww <esc>:wa!<cr>
@@ -738,7 +834,6 @@ nno <silent> <localleader>t. :lua require('FTerm').toggle()<cr>
 "au VimEnter * nno <silent> gp :LspPeekDefinition<CR>
 nno <silent> <localleader>T :CocList colors<cr>
 nno <silent> <localleader>ct :CommentToggle<cr>
-nno <silent> <localleader>cv :'<,'>CommentToggle<cr>
 "NERDTree"
 nno <localleader>to :NERDTreeTabsOpen<cr>
 nno <localleader>tf :NERDTreeTabsFind<cr>
@@ -831,7 +926,8 @@ let g:which_key_map['f'] = [':Telescope file_browser theme=get_dropdown'  , 'fil
 let g:which_key_map['r'] = [ ':RnvimrToggle'              , 'ranger' ]
 let g:which_key_map['S'] = [ ':SSave'                     , 'save session' ]
 let g:which_key_map['v'] = [ ':<C-W>v'                    , 'split right']
-let g:which_key_map['z'] = [ ':ZenMode'                   , 'zen' ]
+"let g:which_key_map['z'] = [ ':ZenMode'                   , 'zen' ]
+let g:which_key_map['z'] = [ ':Twilight'                   , 'zen' ]
 let g:which_key_map['m'] = [ ':TZFocus'                   , 'Max/UnMax' ]
 let g:which_key_map['?'] = [ ':CocList maps'              , 'maps' ]
 let g:which_key_map['B'] = [ ':!xxd -g1 %'                , 'show hex' ]
@@ -918,7 +1014,7 @@ let g:which_key_map.G = {
       \ 'B' : [ ':BlazeBuild'                              , 'Async Build'],
       \ 'T' : [ ':BlazeTest'                               , 'Async Test'],
       \ }
-" Rust 
+" Rust & Go
 let g:which_key_map.R = {
       \ 'name' : '+Rust',
       \ 'r' : [ ':AsyncRustRun'                  , 'Run file'],
@@ -926,6 +1022,7 @@ let g:which_key_map.R = {
       \ 'c' : [ ':AsyncCargoBuild'               , 'Compile cargo'],
       \ 'x' : [ ':AsyncCargoRun'                 , 'Run cargo bin'],
       \ 't' : [ ':AsyncCargoTest'                , 'Test cargo'],
+      \ 'g' : [ ':AsyncGoRunThis'                , 'go run this'],
       \ }
 " l is for language server protocol
 let g:which_key_map.l = {
@@ -968,24 +1065,25 @@ let g:which_key_map.l = {
 " open
 let g:which_key_map.o = {
       \ 'name' : '+open',
-      \ '1' : [':50vs | e ~/.vimrc'                                    , 'vimrc'],
-      \ '2' : [':50vs | e ~/.vimrc.plug'                               , 'vimrc plug'],
-      \ '3' : [':50vs | e ~/.vim/init.lua'                             , 'vimrc init.lua'],
-      \ '4' : [':50vs | e ~/.zshrc'                                    , 'zshrc'],
-      \ '5' : [':50vs | e ~/.zshrc.pre-oh-my-zsh'                      , 'zshrc pre-omz'],
-      \ '6' : [':50vs | e ~/.zshenv'                                   , 'zshenv'],
-      \ '7' : [':50vs | e ~/bin/cheat'                                 , 'cheatsheet'],
-      \ 'i' : [':50vs | e ~/.config/nvim/init.vim'                     , 'open init'],
-      \ 'k' : [':50vs | e ~/.config/nvim/keys/which-key.vim'           , 'which keys'],
-      \ 'p' : [':50vs | e ~/.config/nvim/vim-plug/plugins.vim'         , 'vim-plug'],
-      \ 'h' : [':O h'                                                  , 'open .h'],
-      \ 'c' : [':O cc'                                                 , 'open .cc'],
-      \ 'b' : [':O b'                                                  , 'open BUILD'],
-      \ 't' : [':O t'                                                  , 'open test'],
-      \ 'g' : [':O go'                                                 , 'open .go'],
-      \ 'l' : [':OpenCL'                                               , 'open CL'],
-      \ 'w' : [':!vieb "<cWORD>"'                                      , 'open link'],
-      \ 's' : [':!vieb "google.com/search?q=<cword>"'                  , 'search web'],
+      \ '1' : [':vsp ~/.vimrc'                                    , 'vimrc'],
+      \ '2' : [':vsp ~/.vimrc.plug'                               , 'vimrc plug'],
+      \ '3' : [':vsp ~/.vim/init.lua'                             , 'vimrc init.lua'],
+      \ '4' : [':vsp ~/.zshrc'                                    , 'zshrc'],
+      \ '5' : [':vsp ~/.zshrc.pre-oh-my-zsh'                      , 'zshrc pre-omz'],
+      \ '6' : [':vsp ~/.zshenv'                                   , 'zshenv'],
+      \ '7' : [':vsp ~/bin/cheat'                                 , 'cheatsheet'],
+      \ 'i' : [':vsp ~/.config/nvim/init.vim'                     , 'open init'],
+      \ 'k' : [':vsp ~/.config/nvim/keys/which-key.vim'           , 'which keys'],
+      \ 'p' : [':vsp ~/.config/nvim/vim-plug/plugins.vim'         , 'vim-plug'],
+      \ 'h' : [':O h'                                             , 'open .h'],
+      \ 'c' : [':O cc'                                            , 'open .cc'],
+      \ 'b' : [':O b'                                             , 'open BUILD'],
+      \ 't' : [':O t'                                             , 'open test'],
+      \ 'g' : [':O go'                                            , 'open .go'],
+      \ 'l' : [':OpenCL'                                          , 'open CL'],
+      \ 'w' : [':!vieb "<cWORD>"'                                 , 'open link'],
+      \ 's' : [':!vieb "google.com/search?q=<cword>"'             , 'search web'],
+      \ 'v' : [':vsp /tmp/foo.go'                  		  , 'vsp file'],
       \ }
 " Piper
 let g:which_key_map.P = {
@@ -1002,7 +1100,7 @@ let g:which_key_map.P = {
 " project
 let g:which_key_map.p = {
       \ 'name' : '+projects' ,
-      \ 'q' : [':qa!'                                       , 'quit all'],
+      \ 'a' : [':qa!'                                       , 'quit all'],
       \ 's' : [':wqa!'                                      , 'save&quit all'],
       \ 'w' : [':w!'                                        , 'save!'],
       \ 'S' : [':SSave'                                     , 'save session'],
@@ -1132,6 +1230,9 @@ call which_key#register('<Space>', "g:which_key_map")
 set path+=**
 set wildmode=longest,list,full
 set wildmenu
+" c-x/c-a +- num/alpha.
+set nrformats+=alpha
+
 
 " https://sharksforarms.dev/posts/neovim-rust/
 " tab completion
@@ -1158,11 +1259,22 @@ autocmd filetype html,xml set listchars-=tab:>.
 if &term == 'xterm' || &term == 'screen' || !&term
     set t_Co=256            " Enable 256 colors to stop the CSApprox warning and make xterm vim shine
 endif
+" ident guide
+let g:indent_guides_guide_size = 1
+
 "Go lang mapping"
 let g:go_fmt_command = "goimports"
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+let g:go_auto_type_info = 1
+" autocomplete for Go using omnifunc. <TAB> doesn't work for some reason.
+" maybe related to the rust setup, need investigate.
+" https://tpaschalis.github.io/vim-go-setup/
+" another one with coc: https://octetz.com/docs/2019/2019-04-24-vim-as-a-go-ide/
+au filetype go inoremap <buffer> . .<C-x><C-o>
 "disable ruby warning.
 let g:LustyJugglerSuppressRubyWarning = 1
 "supertab
@@ -1257,18 +1369,18 @@ set shortmess+=c
 " https://sharksforarms.dev/posts/neovim-rust/
 " " Code navigation shortcuts
 "nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> gD    <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> H     <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> g.    <cmd>lua vim.lsp.buf.code_action()<CR>
+nno <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+nno <silent> gD    <cmd>lua vim.lsp.buf.references()<CR>
+nno <silent> H     <cmd>lua vim.lsp.buf.hover()<CR>
+nno <silent> g.    <cmd>lua vim.lsp.buf.code_action()<CR>
 " Set updatetime for CursorHold
 " 300ms of no cursor movement to trigger CursorHold
 set updatetime=300
 " Show diagnostic popup on cursor hold
 autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
 " Goto previous/next diagnostic warning/error
-nnoremap <silent> g[ <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
-nnoremap <silent> g] <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+nno <silent> g[ <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+nno <silent> g] <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 set signcolumn=yes " fix jitter
 " Enable type inlay hints
 autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *

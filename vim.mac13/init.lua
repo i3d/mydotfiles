@@ -260,7 +260,7 @@ require('FTerm').setup({
 
 -- trouble
 require('trouble').setup( {
-    height = 20,
+    height = 10,
 } )
 local trouble = require("trouble.providers.telescope")
 local telescope_t = require("telescope")
@@ -319,6 +319,8 @@ local opts = {
 -- require('rust-tools').setup(opts)
 require('rust-tools').setup{}
 nvim_lsp.go.setup({ on_attach=on_attach })
+require 'lsp_signature'.setup()
+nvim_lsp.gopls.setup({on_attach=on_attach})
 
 -- Enable diagnosetics
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
@@ -329,8 +331,51 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   }
 )
 
--- nvim-treesitter-textsubjects
+-- nvim-treesitter settings
 require'nvim-treesitter.configs'.setup {
+    refactor = {
+      highlight_definitions = { enable = true  },
+      highlight_current_scope = { enable = false },
+      -- smart_rename = {
+      --  enable = true,
+      --  keymaps = {
+      --    smart_rename = "gB",
+      --  },
+      --},
+      navigation = {
+        enable = true,
+        keymaps = {
+          goto_definition = "gnd",
+          list_definitions = "gnD",
+          list_definitions_toc = "gO",
+          goto_next_usage = "<m-*>",
+          goto_previous_usage = "<m-#>",
+        },
+      },
+    },
+    ensure_installed = "maintained",
+    ignore_install = { },
+    highlight = {
+      enable = true,              -- false will disable the whole extension
+      disable = {},  -- list of language that will be disabled
+      -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+      -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+      -- Using this option may slow down your editor, and you may see some duplicate highlights.
+      -- Instead of true it can also be a list of languages
+      additional_vim_regex_highlighting = false,
+    },
+    incremental_selection = {
+      enable = true,
+      keymaps = {
+        init_selection = "gnn",
+        node_incremental = "grn",
+        scope_incremental = "grc",
+        node_decremental = "grm",
+      },
+      indent = {
+        enable = true
+      }
+    },
     textsubjects = {
         enable = true,
         keymaps = {
@@ -417,7 +462,7 @@ require("zen-mode").setup {
 require("twilight").setup {
  -- https://github.com/folke/twilight.nvim/
  dimming = {
-   alpha = 0.30, -- amount of dimming
+   alpha = 0.20, -- amount of dimming
    -- we try to get the foreground from the highlight groups or fallback color
    -- color = { "Normal", "#ffffff" },
  }, 
@@ -432,3 +477,8 @@ require("twilight").setup {
  -- },
  -- exclude = {}, -- exclude these filetypes
 }
+
+-- vim-way for diagnose.
+require("vimway-lsp-diag").init({
+    debounce_ms = 50, -- default
+})
