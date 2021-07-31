@@ -375,8 +375,10 @@ alias bbbb='blaze'
 export ONI_NEOVIM_PATH=$HOME/bin/v
 
 # edit the vimrc.
-alias vim='nv -u ~/.vimrc -X -O'
+alias vim='nv -u ~/.vimrc -XOn'
 alias v='vim'
+alias vv='~/bin/nvim.asdf -u ~/.vimrc -XOn'
+alias vc='~/bin/nvim.asdf -u ~/.vimrc -XOn --clean'
 alias zshrc="v ~/.zshrc ~/.zshrc.pre-oh-my-zsh"
 alias ohmyzsh="v ~/.oh-my-zsh"
 alias va='v ~/.vimrc ~/.vimrc.plug'
@@ -466,7 +468,7 @@ if [[ ! -d $HOME/.cargo ]]; then
   # setup rustup.
   cd $HOME/src && cd $HOME && \
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-  source $HOME/.cargo/env
+  cd $HOME/src && cd $HOME && source $HOME/.cargo/env && \
   rustup update && rustup default nightly
   # install core rust tools.
   cd $HOME/src && cd $HOME && cargo install bat ripgrep git-delta exa tokei procs dutree
@@ -551,6 +553,8 @@ unalias g  2>/dev/null # alias to git which never good.
 unalias rd 2>/dev/null # for mac remote desktop, not rmdir
 unalias cp 2>/dev/null # don't ask.
 unalias fd 2>/dev/null # don't alias to find -t f
+unalias ff 2>/dev/null # don't alias ff as find file, there is a rust ff binary.
+unalias sk 2>/dev/null # sk => skim.
 fortune | cowsay -f $(cowsay -l| sed '1d' | shuf | tr ' ' '\n' | head -1) | lolcat
 # see https://unix.stackexchange.com/questions/140750/generate-random-numbers-in-specific-range
 # or jot -r 1 1 10000
@@ -791,7 +795,7 @@ alias n3=nnn
 #BLK="0B" CHR="0B" DIR="04" EXE="06" REG="00" HARDLINK="06" SYMLINK="06" MISSING="00" ORPHAN="09" FIFO="06" SOCK="0B" OTHER="06"
 #export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
 #
-(cat ~/.cache/wal/sequences &)
+#(cat ~/.cache/wal/sequences &)
 # themes:
 # wal --theme supernova -nte
 # wal --theme neonhive -nte
