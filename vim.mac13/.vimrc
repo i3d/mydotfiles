@@ -655,8 +655,10 @@ vno v3 :'<,'>normal! I# <cr>
 vno < <gv
 vno > >gv
 
-nno w, bvw
-nno w. BvE
+nno e, bvey
+nno e. BvEy
+nno w, bvwy
+nno w. BvWy
 nno o o<esc>
 nno O O<esc>
 
