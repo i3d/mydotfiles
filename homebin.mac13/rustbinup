@@ -1,0 +1,4 @@
+#!/bin/zsh
+
+cargo install --force bat ripgrep git-delta exa tokei procs dutree alacritty \
+	rargs skim lsd fselect hx bingrep find-files xplr ttyper racer cargo-rls-install
