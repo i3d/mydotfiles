@@ -643,7 +643,14 @@ vno v9 :'<,'>normal! A}<cr>
 vno v] :'<,'>normal! A]<cr>
 vno v, :'<,'>normal! A,<cr>
 vno v. :'<,'>normal! A.<cr>
-vno v/ :'<,'>normal! I// <cr>
+" most langs.
+vno v/ :'<,'>normal! I// <cr> 
+" for vim.
+vno v' :'<,'>normal! I" <cr> 
+" for lua.
+vno v- :'<,'>normal! I-- <cr>
+" for scripts.
+vno v3 :'<,'>normal! I# <cr>
 
 vno < <gv
 vno > >gv
