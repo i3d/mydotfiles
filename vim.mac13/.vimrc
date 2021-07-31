@@ -629,16 +629,13 @@ nno cN *``cgN
 " a s d f
 "    x
 " s => mimic "j", go down; d => mimic "k", go up.
-nno vl ^v$
-nno fp $a<space><esc>p
-nno ap ^PJ
-nno ep k^v$yj$a<space><esc>p
-nno xp j^v$yk$a<space><esc>p
-nno sp j^v$yk^PJ
-nno dp k^v$yj^PJ
-
-vno < <gv
-vno > >gv
+nno vl A<esc>v^
+nno fp A<space><esc>p
+nno ap ^Pa<space><esc>
+nno ep kA<esc>v^yjA<space><esc>p
+nno xp jA<esc>v^ykA<space><esc>p
+nno sp jA<esc>v^yk^Pa<space><esc>
+nno dp kA<esc>v^yj^Pa<space><esc>
 
 vno v; :'<,'>normal! A;<cr>
 vno v0 :'<,'>normal! A)<cr>
@@ -648,8 +645,14 @@ vno v, :'<,'>normal! A,<cr>
 vno v. :'<,'>normal! A.<cr>
 vno v/ :'<,'>normal! I// <cr>
 
+vno < <gv
+vno > >gv
+
+nno w, bvw
+nno w. BvE
 nno o o<esc>
 nno O O<esc>
+
 " jump break, this is super.
 ino , ,<c-g>u
 ino ; ;<c-g>u
