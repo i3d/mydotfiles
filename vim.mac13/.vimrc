@@ -3,7 +3,7 @@ source ~/.vimrc.plug
 " for italic
 set t_ZH=[3m
 set t_ZR=[23m
-    
+
 let g:asyncrun_open = 10
 let g:asyncrun_rootmarks = ['.git', '.svn', '.root', '.project', '.hg', '.projectile']
 
@@ -235,7 +235,7 @@ com! -nargs=* AsyncGoRunThis :call <SID>AsyncGoRunThis()
 
 "set background=dark
 "set termguicolors
-"color two-firewatch 
+"color two-firewatch
 "let g:airline_theme='twofirewatch'
 "let g:two_firewatch_italics=1
 
@@ -551,7 +551,7 @@ let g:airline#extensions#vimtex#right = "}"
 " https://github.com/vim-airline/vim-airline/wiki/Screenshots
 "let g:airline_theme='jellybeans'
 "let g:airline_theme='lucius'
-"let g:airline_theme='wombat'
+"let g:airline_theme= 'wombat'
 "let g:airline_theme='night_owl'
 "let g:airline_theme='understated'
 "let g:airline_theme='ubaryd'
@@ -609,7 +609,7 @@ nno <silent> <leader>cp :Prettier<cr>
 " ================ themes ======================
 "
 " ================ key maps ======================
-" select the whole line. 
+" select the whole line.
 nno Y y$
 nno n nzzzv
 nno N Nzzzv
@@ -644,9 +644,9 @@ vno v] :'<,'>normal! A]<cr>
 vno v, :'<,'>normal! A,<cr>
 vno v. :'<,'>normal! A.<cr>
 " most langs.
-vno v/ :'<,'>normal! I// <cr> 
+vno v/ :'<,'>normal! I// <cr>
 " for vim.
-vno v' :'<,'>normal! I" <cr> 
+vno v' :'<,'>normal! I" <cr>
 " for lua.
 vno v- :'<,'>normal! I-- <cr>
 " for scripts.
