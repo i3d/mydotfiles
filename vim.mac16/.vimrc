@@ -4,6 +4,10 @@ source ~/.vimrc.plug
 set t_ZH=[3m
 set t_ZR=[23m
 
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+let g:asyncrun_open = 10
+let g:asyncrun_rootmarks = ['.git', '.svn', '.root', '.project', '.hg', '.projecti  le']
 set rtp+=~/homebrew/opt/vim
 set rtp+=/Users/i3dmaster/homebrew/opt/fzf
 let g:mapleader = "\<Space>"
@@ -17,6 +21,12 @@ com! -nargs=* Google execute 'silent !google <args>'
 com! -nargs=+ Greph execute 'silent grep! <args> *.h' | cwindow
 com! -nargs=+ Grepcc execute 'silent grep! <args> *.cc' | cwindow
 com! -nargs=+ Grepgo execute 'silent grep! <args> *.go' | cwindow
+com! -nargs=* AsyncRustBuild :call <SID>AsyncRustBuild()
+com! -nargs=* AsyncRustRun :call <SID>AsyncRustRun()
+com! -nargs=* AsyncCargoBuild :call <SID>AsyncCargoBuild()
+com! -nargs=* AsyncCargoRun :call <SID>AsyncCargoRun()
+com! -nargs=* AsyncCargoTest :call <SID>AsyncCargoTest()
+com! -nargs=* AsyncCargoCheck :call <SID>AsyncCargoCheck()
 " ================ functions and commands ======================
 " window management
 function! MaximizeToggle() abort
@@ -80,6 +90,15 @@ function! s:AsyncCargoRun() abort
   call setqflist([]) | copen 30
   " don't use !, so we scrolling the output.
   call asyncrun#run("", {"rows": 30}, 'cargo run')
+  let g:asyncrun_open = l:aro
+endfunction
+function! s:AsyncCargoCheck() abort
+	"open cwindow manually.
+  let l:aro = g:asyncrun_open
+  let g:asyncrun_open = 0
+  call setqflist([]) | copen 30
+  " don't use !, so we scrolling the output.
+  call asyncrun#run("", {"rows": 30}, 'cargo check')
   let g:asyncrun_open = l:aro
 endfunction
 " NERDTrees File highlighting
@@ -219,19 +238,24 @@ endfunction
 
 "set background=dark
 "set termguicolors
-"colorscheme breakingbad 
+"colorscheme breakingbad
 "let g:airline_theme = 'minimalist'
-
+"
 set background=dark
 set termguicolors
-colorscheme serenade
-let g:serenade_enable_italic = 1
-let g:serenade_disable_comment_italic = 0
-let g:serenade_transparent_background = 0
-let g:serenade_diagnostic_text_highlight = 1
-let g:serenade_diagnostic_line_highlight = 1
-let g:airline_theme = 'serenade'
+colorscheme matrix
+let g:airline_theme = 'biogoo'
 
+"set background=dark
+"set termguicolors
+"colorscheme serenade
+"let g:serenade_enable_italic = 1
+"let g:serenade_disable_comment_italic = 0
+"let g:serenade_transparent_background = 0
+"let g:serenade_diagnostic_text_highlight = 1
+"let g:serenade_diagnostic_line_highlight = 1
+"let g:airline_theme = 'serenade'
+"
 "set background=dark
 "set termguicolors
 "colorscheme lighthaus
@@ -424,6 +448,90 @@ endif
 " ================ themes ======================
 "
 " ================ key maps ======================
+" select the whole line.
+nno Y y$
+nno n nzzzv
+nno N Nzzzv
+nno J mzJ`z
+nno <c-j> :cnext<cr>zzzv
+nno <leader><tab> <c-^>
+nno cn *``cgn
+nno cN *``cgN
+" fp => paste whatever yanked to the end of cursor line.
+" ap => paste whatever yanked to the beginning of the cursor line.
+" ep => copy the line above and paste to the end of cursor line.
+" xp => copy the line below and paste to the end of cursor line.
+" sp => copy the line below and paste to the beginning of the curso line.
+" ep => copy the line above and paste to the beginning of the curso line.
+" key layouts on keyboard indicates the directions:
+"    e
+" a s d f
+"    x
+" s => mimic "j", go down; d => mimic "k", go up.
+nno vl A<esc>v^y
+nno fp A<space><esc>p
+nno ap ^Pa<space><esc>
+nno ep kA<esc>v^yjA<space><esc>p
+nno xp jA<esc>v^ykA<space><esc>p
+nno sp jA<esc>v^yk^Pa<space><esc>
+nno dp kA<esc>v^yj^Pa<space><esc>
+
+vno v; :'<,'>normal! A;<cr>
+vno v0 :'<,'>normal! A)<cr>
+vno v9 :'<,'>normal! A}<cr>
+vno v] :'<,'>normal! A]<cr>
+vno v, :'<,'>normal! A,<cr>
+vno v. :'<,'>normal! A.<cr>
+" most langs.
+vno v/ :'<,'>normal! I// <cr>
+" for scripts.
+vno v\ :'<,'>normal! I# <cr>
+" for vim.
+vno v' :'<,'>normal! I" <cr>
+" for lua.
+vno v- :'<,'>normal! I-- <cr>
+
+vno < <gv
+vno > >gv
+
+nno e, bvey
+nno e. BvEy
+nno w, bvwy
+nno w. BvWy
+nno o o<esc>
+nno O O<esc>
+
+" jump break, this is super.
+ino , ,<c-g>u
+ino ; ;<c-g>u
+ino ' '<c-g>u
+ino " "<c-g>u
+ino . .<c-g>u
+ino ! !<c-g>u
+ino ? ?<c-g>u
+ino : :<c-g>u
+ino [ [<c-g>u
+ino ] ]<c-g>u
+ino { {<c-g>u
+ino } }<c-g>u
+ino ( (<c-g>u
+ino ) )<c-g>u
+ino / /<c-g>u
+ino = =<c-g>u
+ino + +<c-g>u
+ino - -<c-g>u
+ino _ _<c-g>u
+ino @ @<c-g>u
+ino $ $<c-g>u
+ino % %<c-g>u
+ino ^ ^<c-g>u
+ino & &<c-g>u
+ino * *<c-g>u
+
+" jumplist
+nno <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
+nno <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
+
 " select last paste in visual mode
 " Map leader to which_key
 "split"
@@ -434,6 +542,10 @@ nno < <C-W><
 nno > <C-W>>
 vno J :m '>+1<cr>gv=gv
 vno K :m '<-2<cr>gv=gv
+vno C :CommentToggle<cr>
+nno <c-c> :CommentToggle<cr>
+ino <c-j> <esc>:m .+1<cr>==
+ino <c-k> <esc>:m .-2<cr>==
 " sync with cider -- myciderkeys on mac
 nor <silent> go <c-o>
 nor <silent> gi <c-i>
@@ -446,8 +558,9 @@ nno <silent> gl :call NextHunk(9999)<cr>
 nno <silent> gh :call PrevHunk(9999)<cr>
 " !!! important !!! don't map to gj/gk, unfortunately they aren't reliable.
 "
-nno ; :
+"nno ; :
 ino jk <esc>
+ino <capslock> <esc>
 "ino vv <esc>
 nno <silent> <tab> <c-w>w
 cno w!! w !sudo tee % >/dev/null
@@ -602,12 +715,13 @@ let g:which_key_map['r'] = [ ':RnvimrToggle'              , 'ranger' ]
 let g:which_key_map['S'] = [ ':SSave'                     , 'save session' ]
 let g:which_key_map['T'] = [ ':Rg'                        , 'search text' ]
 let g:which_key_map['v'] = [ '<C-W>v'                     , 'split right']
-let g:which_key_map['z'] = [ 'Goyo'                       , 'zen' ]
+let g:which_key_map['z'] = [ ':Twilight'                   , 'zen' ]
+let g:which_key_map['m'] = [ ':TZFocus'                   , 'Max/UnMax' ]
 let g:which_key_map['?'] = [ ':CocList maps'              , 'maps' ]
 let g:which_key_map['B'] = [ ':!xxd -g1 %'                , 'show hex' ]
 let g:which_key_map['x'] = [ 'copen'                      , 'show quickfix' ]
-let g:which_key_map["'"] = [ 'FloatermToggle'             , 'shell' ]
-let g:which_key_map['h'] = [ 'FloatermHide'               , 'kill shell' ]
+let g:which_key_map["'"] = [ ':FloatermNew --width=50 --height=60' , 'shell' ]
+let g:which_key_map['h'] = [ ':FloatermKill'               , 'kill shell' ]
 let g:which_key_map['q'] = [ ':q!'                        , 'quit']
 let g:which_key_map['n'] = [ ':bnext'                     , 'cycle buffers' ]
 " Group mappings
@@ -620,6 +734,7 @@ let g:which_key_map.R = {
       \ 'c' : [ ':AsyncCargoBuild'               , 'Compile cargo'],
       \ 'x' : [ ':AsyncCargoRun'                 , 'Run cargo bin'],
       \ 't' : [ ':AsyncCargoTest'                , 'Test cargo'],
+      \ '?' : [ ':AsyncCargoCheck'               , 'cargo check'],
       \ }
 let g:which_key_map.a = {
       \ 'name' : '+actions' ,
@@ -628,22 +743,21 @@ let g:which_key_map.a = {
       \ 'n' : [':set nonumber!'          , 'line-numbers'],
       \ 'r' : [':set norelativenumber!'  , 'relative line nums'],
       \ 's' : [':let @/ = ""'            , 'remove search highlight'],
-      \ 't' : [':FloatermToggle'         , 'terminal'],
-      \ 'v' : [':Vista!!'                , 'tag viewer'],
+      \ 't' : [':FloatermNew --width=50 --height=60' , 'terminal'],
       \ }
 " b is for buffer
 let g:which_key_map.b = {
       \ 'name' : '+buffer',
-      \ '1' : ['b1'                                         , 'buffer 1']        ,
-      \ '2' : ['b2'                                         , 'buffer 2']        ,
-      \ 'd' : ['bd'                                         , 'delete-buffer']   ,
-      \ 'f' : ['bfirst'                                     , 'first-buffer']    ,
-      \ 'h' : ['Startify'                                   , 'home-buffer']     ,
-      \ 'l' : ['blast'                                      , 'last-buffer']     ,
-      \ 'n' : ['bnext'                                      , 'next-buffer']     ,
-      \ 'p' : ['bprevious'                                  , 'previous-buffer'] ,
-      \ '?' : ['Buffers'                                    , 'fzf-buffer']      ,
-      \ 'b' : [ 'CocList marks'                             , 'all marks'],
+      \ '1' : [':b1'                                         , 'buffer 1']        ,
+      \ '2' : [':b2'                                         , 'buffer 2']        ,
+      \ 'd' : [':bd'                                         , 'delete-buffer']   ,
+      \ 'f' : [':bfirst'                                     , 'first-buffer']    ,
+      \ 'h' : [':Startify'                                   , 'home-buffer']     ,
+      \ 'l' : [':blast'                                      , 'last-buffer']     ,
+      \ 'n' : [':bnext'                                      , 'next-buffer']     ,
+      \ 'p' : [':bprevious'                                  , 'previous-buffer'] ,
+      \ '?' : [':Buffers'                                    , 'fzf-buffer']      ,
+      \ 'b' : [':CocList marks'                             , 'all marks'],
       \ }
 " code
 let g:which_key_map.c = {
@@ -716,21 +830,21 @@ let g:which_key_map.l = {
 " open
 let g:which_key_map.o = {
       \ 'name' : '+open',
-      \ '1' : [':50vs | e ~/.vimrc'                                    , 'vimrc'],
-      \ '2' : [':50vs | e ~/.vimrc.plug'                               , 'vimrc plug'],
-      \ '3' : [':50vs | e ~/.vim/init.lua'                             , 'vimrc init.lua'],
-      \ '4' : [':50vs | e ~/.zshrc'                                    , 'zshrc'],
-      \ '5' : [':50vs | e ~/.zshrc.pre-oh-my-zsh'                      , 'zshrc pre-omz'],
-      \ '6' : [':50vs | e ~/.zshenv'                      						 , 'zshenv'],
-      \ '7' : [':50vs | e ~/bin/cheat'                                 , 'cheatsheet'],
-      \ 'i' : [':e ~/.config/nvim/init.vim'                            , 'open init'],
-      \ 'k' : [':e ~/.config/nvim/keys/which-key.vim'                  , 'which keys'],
-      \ 'p' : [':e ~/.config/nvim/vim-plug/plugins.vim'                , 'vim-plug'],
+      \ '1' : [':vsp ~/.vimrc'                                    , 'vimrc'],
+      \ '2' : [':vsp ~/.vimrc.plug'                               , 'vimrc plug'],
+      \ '3' : [':vsp ~/.vim/init.lua'                             , 'vimrc init.lua'],
+      \ '4' : [':vsp ~/.zshrc'                                    , 'zshrc'],
+      \ '5' : [':vsp ~/.zshrc.pre-oh-my-zsh'                      , 'zshrc pre-omz'],
+      \ '6' : [':vsp ~/.zshenv'                      						 , 'zshenv'],
+      \ '7' : [':vsp ~/bin/cheat'                                 , 'cheatsheet'],
+      \ 'i' : [':vsp ~/.config/nvim/init.vim'                            , 'open init'],
+      \ 'k' : [':vsp ~/.config/nvim/keys/which-key.vim'                  , 'which keys'],
+      \ 'p' : [':vsp ~/.config/nvim/vim-plug/plugins.vim'                , 'vim-plug'],
       \ }
 " project
 let g:which_key_map.p = {
       \ 'name' : '+projects' ,
-      \ 'q' : [':qa!'                                       , 'quit all'],
+      \ 'a' : [':qa!'                                       , 'quit all'],
       \ 's' : [':wqa!'                                      , 'save&quit all'],
       \ 'S' : [':SSave'                                     , 'save session'],
       \ 'e' : [':e ~/.vimrc'                          , 'open init' ],
@@ -846,8 +960,9 @@ call which_key#register('<Space>', "g:which_key_map")
 "
 " ================ settings ======================
 set path+=**
-set wildmode=longest,list,full
 set wildmenu
+set wildmode=longest:full,full
+
 set copyindent   "make the autoindent copying the existing indentation"
 set shiftround   "round the shift to multiple shiftwidth"
 set smarttab     "use shiftwidth when insert tab"
@@ -874,11 +989,17 @@ autocmd filetype html,xml set listchars-=tab:>.
 if &term == 'xterm' || &term == 'screen' || !&term
     set t_Co=256            " Enable 256 colors to stop the CSApprox warning and make xterm vim shine
 endif
+" ident guide
+let g:indent_guides_guide_size = 1
 "Go lang mapping"
 let g:go_fmt_command = "goimports"
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+let g:go_auto_type_info = 1
+au filetype go inoremap <buffer> . .<C-x><C-o>
 "disable ruby warning.
 let g:LustyJugglerSuppressRubyWarning = 1
 "supertab
@@ -965,30 +1086,30 @@ set shortmess+=c
 " ============================== nvim native lsp usage
 " https://sharksforarms.dev/posts/neovim-rust/
 " " Code navigation shortcuts
-"nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> gD    <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> H     <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> g.    <cmd>lua vim.lsp.buf.code_action()<CR>
+"nno <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
+nno <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+nno <silent> gD    <cmd>lua vim.lsp.buf.references()<CR>
+nno <silent> H     <cmd>lua vim.lsp.buf.hover()<CR>
+nno <silent> g.    <cmd>lua vim.lsp.buf.code_action()<CR>
 " Set updatetime for CursorHold
 " 300ms of no cursor movement to trigger CursorHold
 set updatetime=300
 " Show diagnostic popup on cursor hold
 autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
 " Goto previous/next diagnostic warning/error
-nnoremap <silent> g[ <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
-nnoremap <silent> g] <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+nno <silent> g[ <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+nno <silent> g] <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 set signcolumn=yes " fix jitter
 " Enable type inlay hints
 autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
 \ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} }
-"nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
-"nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
-"nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-"nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
-"nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
-"nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-"nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
+"nno <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+"nno <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+"nno <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+"nno <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+"nno <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+"nno <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+"nno <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
 " ============================== nvim native lsp usage
 " always has to be the end.
 filetype plugin indent on
