@@ -17,6 +17,7 @@ macro , open-in-browser
 macro t set browser "tsp youtube-dl --add-metadata -ic"; open-in-browser ; set browser "vieb %u"
 macro a set browser "tsp youtube-dl --add-metadata -xic -f bestaudio/best"; open-in-browser ; set browser "vieb %u"
 macro v set browser "nohup mpv"; open-in-browser ; set browser "vieb %u"
+#macro m set browser "nohup mpv --ytdl-format=bestaudio"; open-in-browser ; set browser "vieb %u" no UI, had to use ctrl-c to stop the music.
 macro m set browser "nohup mpv"; open-in-browser ; set browser "vieb %u"
 macro w set browser "w3m"; open-in-browser ; set browser "vieb %u"
 macro r set browser "vieb"; open-in-browser ;  set browser "vieb %u"
@@ -48,6 +49,7 @@ bind-key p prev-unread
 bind-key U show-urls
 bind-key x pb-delete
 
+#https://newsboat.org/releases/2.12/docs/newsboat.html
 # solarized
 #color background         default   default
 #color listnormal         default   default
@@ -56,12 +58,14 @@ bind-key x pb-delete
 #color listfocus_unread   black     cyan
 #color info               default   black
 #color article            default   default
-color listnormal cyan default
-color listfocus black yellow standout bold
-color listnormal_unread blue default
-color listfocus_unread yellow default bold
-color info red black bold
-color article cyan default
+# matrix
+color background         default   default
+color listnormal color28 default
+color listfocus color233 color220 standout bold
+color listnormal_unread color106 default
+color listfocus_unread color47 default bold
+color info color40 black bold
+color article color34 default
 
 # highlights
 #highlight article "^(Title):.*$" blue default
