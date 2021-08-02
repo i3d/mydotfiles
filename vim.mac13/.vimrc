@@ -366,7 +366,7 @@ let g:airline_theme = 'biogoo'
 "let g:serenade_diagnostic_text_highlight = 1
 "let g:serenade_diagnostic_line_highlight = 0
 "let g:airline_theme = 'serenade'
-
+"
 "set background=dark
 "set termguicolors
 "let g:material_style = 'palenight'
@@ -1240,11 +1240,13 @@ call which_key#register('<Space>', "g:which_key_map")
 "
 " ================ settings ======================
 set path+=**
-set wildmode=longest,list,full
-set wildmenu
 " c-x/c-a +- num/alpha.
 set nrformats+=alpha
 
+set wildmenu
+set wildmode=longest:full,full
+"set wildmode=list:longest,full
+"set wildmode=longest,list,full
 
 " https://sharksforarms.dev/posts/neovim-rust/
 " tab completion
@@ -1388,8 +1390,9 @@ nno <silent> g.    <cmd>lua vim.lsp.buf.code_action()<CR>
 " Set updatetime for CursorHold
 " 300ms of no cursor movement to trigger CursorHold
 set updatetime=300
-" Show diagnostic popup on cursor hold
-autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
+" Show diagnostic popup on cursor hold, this is pretty annoying, 
+" we changed to use vimway diagnose.
+" autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
 " Goto previous/next diagnostic warning/error
 nno <silent> g[ <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
 nno <silent> g] <cmd>lua vim.lsp.diagnostic.goto_next()<CR>

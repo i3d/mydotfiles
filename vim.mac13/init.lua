@@ -35,7 +35,6 @@ require('numb').setup{
 
 
 -- ----------------------------------------------
-local lualine = require'lualine'
 
 -- Color table for highlights
 local colors = {
@@ -479,6 +478,6 @@ require("twilight").setup {
 }
 
 -- vim-way for diagnose.
-require("vimway-lsp-diag").init({
-    debounce_ms = 50, -- default
-})
+-- require("vimway-lsp-diag").init({
+    -- debounce_ms = 50, -- default
+-- })

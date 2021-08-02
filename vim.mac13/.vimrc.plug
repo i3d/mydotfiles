@@ -27,22 +27,16 @@ endif
 call plug#begin('~/.vim/plugged')
 " ===== from old spf13
 Plug 'fatih/vim-go'
-"Plug 'ervandew/supertab'
 Plug 'edkolev/tmuxline.vim'
 Plug 'uarun/vim-protobuf'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-endwise'
-Plug 'NLKNguyen/papercolor-theme'
-"Plug 'chriskempson/base16-vim'
 Plug 'fnune/base16-vim'   " superset of above.
-Plug 'fcpg/vim-farout'
 Plug 'vim-scripts/mru.vim'
-Plug 'w0rp/ale'
 Plug 'ayu-theme/ayu-vim' " or other package manager
 "set termguicolors     " enable true colors support
 let ayucolor="mirage" " for mirage version of theme
 "let ayucolor="dark"   " for dark version of theme
-"Plug 'auto-pairs-gentle'
 "let g:AutoPairsUseInsertedCount = 1
 Plug 'jiangmiao/auto-pairs'
 Plug 'drewtempelmeyer/palenight.vim'
@@ -63,22 +57,15 @@ Plug 'tpope/vim-surround'
 Plug 'rakr/vim-one'
 Plug 'edkolev/promptline.vim'
 Plug 'nikvdp/neomux'
-"Plug 'huyvohcmc/atlas.vim'
 Plug 'arcticicestudio/nord-vim'
-Plug 'sjl/badwolf'
-Plug 'jacoborus/tender.vim'
 Plug 'kristijanhusak/vim-hybrid-material'
-"Plug 'yuttie/hydrangea-vim'
 " imcompatible with zah's nim.vim plugin.
 Plug 'baabelfish/nvim-nim'
 Plug 'vifm/vifm.vim'
 " use homebrew version
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-"Plug 'dylanaraps/wal.vim'
-"Plug 'ajh17/Spacegray.vim'
 Plug 'dikiaap/minimalist'
-
 
 " use <leader><leader>
 Plug 'easymotion/vim-easymotion'
@@ -112,12 +99,6 @@ let g:rainbow#max_level = 16
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 autocmd FileType * RainbowParentheses
 
-"Plug 'airblade/vim-rooter'
-"let g:rooter_silent_chdir = 1
-
-"Plug 'sheerun/vim-polyglot'
-set encoding=UTF-8
-
 Plug 'alvan/vim-closetag'
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
 let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.js'
@@ -142,39 +123,18 @@ autocmd FileType floaterm call s:floatermSettings()
 autocmd User Startified setlocal buflisted
 
 Plug 'mhinz/vim-startify'
-"Plug 'liuchengxu/vista.vim'
-"let g:vista_default_executive = 'coc'
-"let g:vista_fzf_preview = ['right:50%']
-"let g:vista#renderer#enable_icon = 1
-"let g:vista#renderer#icons = {
-"\   "function": "\uf794",
-"\   "variable": "\uf71b",
-"\  }
-Plug 'Rigellute/rigel'
-"Plug 'AlphaMycelium/pathfinder.vim'
 let g:python3_host_prog = '/Users/jimxu/homebrew/bin/python3'
-Plug 'rainglow/vim'
 Plug 'nightsense/vimspectr'
-Plug 'mswift42/vim-themes'
-Plug 'rakr/vim-two-firewatch'
-Plug 'owickstrom/vim-colors-paramount'
-Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'danilo-augusto/vim-afterglow'
-Plug 'romainl/Apprentice'
-Plug 'nightsense/carbonized'
-"Plug 'junegunn/goyo.vim'
-Plug 'liuchengxu/vim-which-key'
-Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-rhubarb'
 Plug 'junegunn/gv.vim'
-Plug 'neomake/neomake'
+"Plug 'neomake/neomake'
 Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
 " Keeping up to date with master
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'skywind3000/asynctasks.vim'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'zhaocai/GoldenView.Vim'
-Plug 'rhysd/vim-color-spring-night'
 Plug 'KKPMW/sacredforest-vim'
 Plug 'sainnhe/forest-night'
 Plug 'machakann/vim-highlightedyank'
@@ -192,8 +152,6 @@ augroup illuminate_augroup
 augroup END
 Plug 'lfv89/vim-interestingwords'
 Plug 'AndrewRadev/linediff.vim'
-" for some reason, g:loaded_matchit always show 1.
-"Plug 'SpaceVim/vim-matchup'
 Plug 'jceb/vim-orgmode'
 Plug 'kshenoy/vim-signature'
 Plug 'wellle/targets.vim'
@@ -201,21 +159,17 @@ Plug 'markonm/traces.vim'
 Plug 'christoomey/vim-tmux-navigator'
 
 " 3/7/2021
-"Plug 'matsuuu/pinkmare'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'RRethy/nvim-treesitter-textsubjects'
 Plug 'nvim-treesitter/nvim-treesitter-refactor'
-Plug 'lighthaus-theme/vim-lighthaus'
 Plug 'ulwlu/elly.vim'
-
+" 
 " 3/12/2021
 Plug 'sainnhe/gruvbox-material'
 Plug 'b4skyx/serenade'
 
 " 3/22/2021
-Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
-
 " 4/3/2021
 Plug 'i3d/vim-jimbothemes'
 
@@ -226,6 +180,8 @@ Plug 'kabouzeid/nvim-lspinstall'
 Plug 'simrat39/rust-tools.nvim'
 Plug 'nvim-lua/lsp_extensions.nvim'
 Plug 'nvim-lua/completion-nvim'
+Plug 'liuchengxu/vim-which-key'
+Plug 'mhinz/vim-signify'
 
 " Optional dependencies
 Plug 'nvim-lua/popup.nvim'
@@ -241,7 +197,7 @@ Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 " 4/19/2021
 Plug 'folke/tokyonight.nvim'
-Plug 'hoob3rt/lualine.nvim'
+" Plug 'hoob3rt/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'ryanoasis/vim-devicons'
 
@@ -255,14 +211,12 @@ Plug 'marko-cerovac/material.nvim'
 Plug 'famiu/nvim-reload'
 
 " 4/30/2021 " the iPad Pro day
-Plug 'norcalli/nvim-colorizer.lua'
 Plug 'tversteeg/registers.nvim'
 Plug 'npxbr/glow.nvim', {'do': ':GlowInstall'}
 
 " 5/3/2021
 Plug 'folke/lsp-colors.nvim'
 Plug 'folke/lsp-trouble.nvim'
-Plug 'shaunsingh/moonlight.nvim'
 
 " 5/31 2021
 " doesn't seem to work.
@@ -292,6 +246,9 @@ Plug 'folke/zen-mode.nvim'   " another zen-mode
 Plug 'folke/twilight.nvim'   " dim unfocused code
 Plug 'tweekmonster/startuptime.vim'
 Plug 'onsails/vimway-lsp-diag.nvim'
+
+" 31/7/2021
+"Plug 'gelguy/wilder.nvim'
 
 call plug#end()
 " Automatically install missing plugins on startup
@@ -381,35 +338,6 @@ command! -bang -nargs=* GGrep
   \   'git grep --line-number '.shellescape(<q-args>), 0,
   \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
 " ============================== FZF ===============================
-" lualine setup.
-
-"let g:lualine = {
-"    \'options' : {
-"    \  'section_separators' : ['', ''],
-"    \  'component_separators' : ['', ''],
-"    \  'icons_enabled' : v:true,
-"    \  'theme': 'tokyonight',
-"    \},
-"    \'sections' : {
-"    \  'lualine_a' : [ ['mode', {'upper': v:true,},], ],
-"    \  'lualine_b' : [ ['branch', {'icon': '',}, ], ],
-"    \  'lualine_c' : [ ['filename', {'file_status': v:true,},], ],
-"    \  'lualine_x' : [ 'encoding', 'fileformat', 'filetype' ],
-"    \  'lualine_y' : [ 'progress' ],
-"    \  'lualine_z' : [ 'location'  ],
-"    \},
-"    \'inactive_sections' : {
-"    \  'lualine_a' : [  ],
-"    \  'lualine_b' : [  ],
-"    \  'lualine_c' : [ 'filename' ],
-"    \  'lualine_x' : [ 'location' ],
-"    \  'lualine_y' : [  ],
-"    \  'lualine_z' : [  ],
-"    \},
-"    \'extensions' : [ 'fzf' ],
-"    \}
-
-lua require("lualine").setup()
 lua require('symbols-outline').setup()
 lua require'colorizer'.setup()
 lua require("lsp-rooter").setup()
