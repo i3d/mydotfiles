@@ -1912,7 +1912,7 @@ c.tabs.show = 'switching'
 ## Duration (in milliseconds) to show the tab bar before hiding it when
 ## tabs.show is set to 'switching'.
 ## Type: Int
-# c.tabs.show_switching_delay = 800
+c.tabs.show_switching_delay = 5000
 
 ## Open a new window for every tab.
 ## Type: Bool
@@ -2100,8 +2100,10 @@ config.bind(';y', 'hint links yank')
 # config.bind('<Ctrl-F>', 'scroll-page 0 1')
 # config.bind('<Ctrl-N>', 'open -w')
 # config.bind('<Ctrl-PgDown>', 'tab-next')
-config.bind(']', 'tab-next')
-config.bind('[', 'tab-prev')
+config.bind(']', 'forward')
+config.bind('w', 'tab-next')
+config.bind('[', 'back')
+config.bind('b', 'tab-prev')
 # config.bind('<Ctrl-Q>', 'quit')
 # config.bind('<Ctrl-Return>', 'selection-follow -t')
 # config.bind('<Ctrl-Shift-N>', 'open -p')
@@ -2181,6 +2183,7 @@ config.bind('gg', 'scroll-to-perc 0')
 # config.bind('gi', 'hint inputs --first')
 # config.bind('gm', 'tab-move')
 config.bind('go', 'set-cmd-text :open {url:pretty}')
+config.bind('gL', ':open https://outline.com/{url}')
 #config.bind('gt', 'set-cmd-text -s :tab-select')
 config.bind('<Space>b', 'set-cmd-text -s :tab-select')
 # config.bind('gu', 'navigate up')
