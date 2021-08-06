@@ -629,13 +629,13 @@ nno cN *``cgN
 " a s d f
 "    x
 " s => mimic "j", go down; d => mimic "k", go up.
-nno vl A<esc>v^
+nno vl $v^y
 nno fp A<space><esc>p
 nno ap ^Pa<space><esc>
-nno ep kA<esc>v^yjA<space><esc>p
-nno xp jA<esc>v^ykA<space><esc>p
-nno sp jA<esc>v^yk^Pa<space><esc>
-nno dp kA<esc>v^yj^Pa<space><esc>
+nno ep k$v^yjA<space><esc>p
+nno xp j$v^ykA<space><esc>p
+nno sp j$v^yk^Pa<space><esc>
+nno dp k$v^yj^Pa<space><esc>
 
 vno v; :'<,'>normal! A;<cr>
 vno v0 :'<,'>normal! A)<cr>
@@ -655,10 +655,10 @@ vno v- :'<,'>normal! I-- <cr>
 vno < <gv
 vno > >gv
 
-nno e, bvey
-nno e. BvEy
-nno w, bvwy
-nno w. BvWy
+nno e, yiw
+nno e. yiW
+nno w, yaw
+nno w. yaW
 nno o o<esc>
 nno O O<esc>
 

@@ -249,6 +249,7 @@ Plug 'onsails/vimway-lsp-diag.nvim'
 
 " 31/7/2021
 "Plug 'gelguy/wilder.nvim'
+Plug 'roosta/fzfolds.vim'
 
 call plug#end()
 " Automatically install missing plugins on startup
