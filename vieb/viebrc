@@ -56,6 +56,11 @@ nmap , <decreaseWidthSplitWindow>
 nmap ; <decreaseHeightSplitWindow>
 nmap <Space>h :history<CR>
 nmap <M-c> <p.copyText>
+" J,K does the same.
+nmap q <backInHistory>
+nmap go <backInHistory>
+nmap gi <forwardInHistory>
+nmap z <forwardInHistory>
 
 " Commands
 command work <:set containernewtab=work><openNewTab><:set containernewtab=s:usecurrent>
