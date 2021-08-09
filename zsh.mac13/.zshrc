@@ -145,9 +145,9 @@ if ((  $NEED_INSTALL_BREW )); then
   # install core tools
   echo "Install core tools ..."
   brew install \
-    iterm2-nightly git hub asdf autojump fasd fd tldr the_silver_searcher \
+    iterm2 git hub asdf autojump fasd fd tldr the_silver_searcher \
     tree tmux zsh zsh-syntax-highlighting zsync alacritty amethyst \
-    kitty terminus glow irssi fontconfig font-firacode-nerd-font \
+    kitty terminus glow vscodium irssi fontconfig font-firacode-nerd-font \
     font-noto-nerd-font source-highlight && \
   echo "Install secondary tools ..."
   # if the above all went well, then install secondary tools
@@ -235,14 +235,13 @@ fi
 #. $HOME/.bagpipe/setup.sh $HOME/.bagpipe ujimux.c.googlers.com
 #
 
+# script is ~/bin/renew.pa
 function renew_gcert_ifneeded() {
-  HOURS_TILL_EOB=$((20 - $(date +%-H)))h
-  #gcertstatus -ssh_cert_comment=corp/normal -check_remaining=$HOURS_TILL_EOB || gcert
-  gcertstatus -ssh_cert_comment=corp/normal -check_remaining=$HOURS_TILL_EOB || ~/bin/pa.py
+	~/bin/renew.pa
 }
 
 function renew_bagpipe_ifneeded() {
-  p4 info > /dev/null 2>&1 || (gcert --nounruffled="not ready" && p4 bagpipe-prodaccess)
+	~/bin/bagpipe.pa
 }
 
 function pa() {
@@ -655,8 +654,11 @@ export PATH=$PATH:$HOME/.config/nvcode/utils/bin
 #
 ### !!! After zsh-autocomplete !!! #########
 #### FZF thems ######
+# matrix
+export FZF_DEFAULT_OPTS="--color=bg+:#333333,bg:#091013,gutter:#6fa64c,spinner:#e2e500,hl:#e2e500,fg:#90d762,header:#46d8b8,info:#90d762,pointer:#90d762,marker:#00ff87,fg+:#00ff87,prompt:#00cd6d,hl+:#90d762 --header-lines=0 --ansi --keep-right --info=inline"
+
 # serenade
-export FZF_DEFAULT_OPTS="--color=bg+:#3B4346,bg:#2A2F33,gutter:#2A2F33,spinner:#c1bf89,hl:#C76767,fg:#bfddb2,header:#CC9361,info:#87c095,pointer:#82abbc,marker:#c1bf89,fg+:#D49864,prompt:#e5a46b,hl+:#87c095 --header-lines=0 --ansi --keep-right --info=inline"
+#export FZF_DEFAULT_OPTS="--color=bg+:#3B4346,bg:#2A2F33,gutter:#2A2F33,spinner:#c1bf89,hl:#C76767,fg:#bfddb2,header:#CC9361,info:#87c095,pointer:#82abbc,marker:#c1bf89,fg+:#D49864,prompt:#e5a46b,hl+:#87c095 --header-lines=0 --ansi --keep-right --info=inline"
 
 # molokai
 #export FZF_DEFAULT_OPTS='--color=bg+:#293739,bg:#1B1D1E,border:#808080,spinner:#E6DB74,hl:#7E8E91,fg:#F8F8F2,header:#7E8E91,info:#A6E22E,pointer:#A6E22E,marker:#F92672,fg+:#F8F8F2,prompt:#F92672,hl+:#F92672'
