@@ -26,6 +26,16 @@ export ZSH=/Users/jimxu/.oh-my-zsh
 ###### !!!! VIM mode forever !!!! ########
 ###### !!!! VIM mode forever !!!! ########
 ###### !!!! VIM mode forever !!!! ########
+# always make sure my own bin path is the first
+if [[ ! -d $HOME/.cargo ]]; then
+  # setup rustup.
+  cd $HOME/src && cd $HOME && \
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+  cd $HOME/src && cd $HOME && source $HOME/.cargo/env && \
+  rustup update && rustup default nightly
+  # install core rust tools.
+  cd $HOME/src && cd $HOME && cargo install bat ripgrep git-delta exa tokei procs dutree
+fi
 #
 # ================ Before sourcing OMZ ====================
 # Set name of the theme to load.
@@ -462,16 +472,6 @@ alias asre='asdf reshim'
 alias assv='asdf shim-versions'
 
 #
-# always make sure my own bin path is the first
-if [[ ! -d $HOME/.cargo ]]; then
-  # setup rustup.
-  cd $HOME/src && cd $HOME && \
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-  cd $HOME/src && cd $HOME && source $HOME/.cargo/env && \
-  rustup update && rustup default nightly
-  # install core rust tools.
-  cd $HOME/src && cd $HOME && cargo install bat ripgrep git-delta exa tokei procs dutree
-fi
 export PATH=/Users/jimxu/.cargo/bin:/Users/jimxu/src/Nim/bin:$PATH
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 
