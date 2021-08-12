@@ -47,7 +47,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'dempfi/vim-airline-neka'
 Plug 'frazrepo/vim-rainbow'
 Plug 'bling/vim-bufferline'
-Plug 'flazz/vim-colorschemes'
+"Plug 'flazz/vim-colorschemes'
 Plug 'tpope/vim-fugitive'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'jistr/vim-nerdtree-tabs'
@@ -60,7 +60,7 @@ Plug 'nikvdp/neomux'
 Plug 'arcticicestudio/nord-vim'
 Plug 'kristijanhusak/vim-hybrid-material'
 " imcompatible with zah's nim.vim plugin.
-Plug 'baabelfish/nvim-nim'
+"Plug 'baabelfish/nvim-nim'
 Plug 'vifm/vifm.vim'
 " use homebrew version
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -248,7 +248,7 @@ Plug 'tweekmonster/startuptime.vim'
 Plug 'onsails/vimway-lsp-diag.nvim'
 
 " 31/7/2021
-"Plug 'gelguy/wilder.nvim'
+Plug 'gelguy/wilder.nvim'
 Plug 'roosta/fzfolds.vim'
 
 call plug#end()

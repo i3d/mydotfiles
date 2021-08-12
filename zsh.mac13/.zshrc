@@ -26,16 +26,18 @@ export ZSH=/Users/jimxu/.oh-my-zsh
 ###### !!!! VIM mode forever !!!! ########
 ###### !!!! VIM mode forever !!!! ########
 ###### !!!! VIM mode forever !!!! ########
-# always make sure my own bin path is the first
+# These rust tools are essential, build them first.
+[[ -f $HOME/.cargo/env  ]] && source $HOME/.cargo/env
 if [[ ! -d $HOME/.cargo ]]; then
   # setup rustup.
-  cd $HOME/src && cd $HOME && \
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-  cd $HOME/src && cd $HOME && source $HOME/.cargo/env && \
+  [[ -f $HOME/.cargo/env  ]] && source $HOME/.cargo/env
   rustup update && rustup default nightly
   # install core rust tools.
-  cd $HOME/src && cd $HOME && cargo install bat ripgrep git-delta exa tokei procs dutree
+  cargo install bat ripgrep git-delta exa tokei procs dutree cargo-rls-install hub
 fi
+
+export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 #
 # ================ Before sourcing OMZ ====================
 # Set name of the theme to load.
@@ -70,7 +72,7 @@ ZSH_THEME="archcraft"
 #
 # Path to your oh-my-zsh installation.
 # Don't put vi-mode as it conflict with zsh-autocomplete
-plugins=(z jump cargo rust colorize command-not-found common-aliases copybuffer cp dircycle dirhistory dotenv iterm2 safe-paste osx pip python themes history golang mercurial github brew betterbrew autoupdate git)
+plugins=(z jump cargo rust colorize command-not-found common-aliases copybuffer cp dircycle dirhistory dotenv iterm2 safe-paste osx pip python themes history golang mercurial github brew git)
 # for awesome-terminal-fonts
 ### source $HOME/.local/src/awesome-terminal-fonts/fonts/*.sh
 #POWERLEVEL9K_MODE='nerdfont-complete'
@@ -115,7 +117,7 @@ CASE_SENSITIVE="true"
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 COMPLETION_WAITING_DOTS="true"
 
-export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/symlinks:/usr/local/scripts:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/bin/g4bin:/usr/X11R6/bin:/Users/jimxu/pkgs/android-sdk-linux_x86-1.5_r3/tools:/usr/local/google/bin:/Users/jimxu/src/depot_tools
+export PATH=$PATH:/usr/local/bin:/usr/local/sbin:/usr/local/symlinks:/usr/local/scripts:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/bin/g4bin:/usr/X11R6/bin:/usr/local/google/bin
 export PATH=/Users/jimxu/homebrew/opt/llvm/bin:$PATH:$HOME/.rvm/bin:/$HOME/.rbenv/shims # Add RVM to PATH for scripting
 export CSCOPE_DB=/Users/jimxu/src/linux/cscope.out
 
@@ -136,7 +138,8 @@ export HOMEBREW_PREFIX=/Users/jimxu/homebrew
 # we use alternative install because on corp machine /usr/local isn't free of change.
 NEED_INSTALL_BREW=0
 if [[ ! -d $HOMEBREW_PREFIX ]]; then
-  mkdir -p $HOMEBREW_PREFIX && curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C $HOMEBREW_PREFIX
+  mkdir -p $HOMEBREW_PREFIX && \
+  	  curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C $HOMEBREW_PREFIX
   # now, we install some base packages.
   # some of the rust based packages will be installed from rust/cargo.
   NEED_INSTALL_BREW=1
@@ -155,10 +158,10 @@ if ((  $NEED_INSTALL_BREW )); then
   # install core tools
   echo "Install core tools ..."
   brew install \
-    iterm2 git hub asdf autojump fasd fd tldr the_silver_searcher \
+    git hub asdf autojump fasd fd tldr the_silver_searcher \
     tree tmux zsh zsh-syntax-highlighting zsync alacritty amethyst \
-    kitty terminus glow vscodium irssi fontconfig font-firacode-nerd-font \
-    font-noto-nerd-font source-highlight && \
+    kitty glow vscodium irssi fontconfig font-firacode-nerd-font \
+    font-noto-nerd-font source-highlight
   echo "Install secondary tools ..."
   # if the above all went well, then install secondary tools
   brew install \
@@ -166,18 +169,17 @@ if ((  $NEED_INSTALL_BREW )); then
     cscope ctags ctail diffutils direnv fortune geoip gnu-sed \
     go gotop htop lolcat lsof m-cli mas ncdu multitail mu neofetch \
     nnn pcre pcre2 peco pidof pstree ranger shellcheck shfmt \
-    ssh-copy-id tree-sitter  util-macros \
-    watch wifi-password && \
+    ssh-copy-id tree-sitter  util-macros watch wifi-password
   # everything went well, continue installing 
   echo "Install network tools ..."
   brew install \
     fping geoip hping ifstat iftop iperf mtr nmap speedtest-cli tping \
-    tcptraceroute w3m && \
+    tcptraceroute w3m
   # continue installing media apps
   echo "Install media apps ..."
   brew install \
     ffmpeg ffmpeg-iina flac imagemagick media-info mpv mplayershell \
-    transmission-cli youtube-dl && \
+    transmission-cli youtube-dl
   echo "Install other apps ..."
   brew install \
     freetype gdb util-linux typescript universal-ctags \
@@ -185,7 +187,7 @@ if ((  $NEED_INSTALL_BREW )); then
 
   echo "Install node tools ..."
   if [[ ! $(npm updatge -g --force && npm install -g neovim flake8) ]] ; then
-    yarn update && yarn instal -g neovim flake8
+    yarn update && yarn install -g neovim flake8
   fi
 fi
 
@@ -205,34 +207,45 @@ else
     export FZF_DEFAULT_COMMAND='find .'
 fi
 
-if [[ ! -d $HOME/src ]]; then
+if [[ ! -d $HOME/src/vifm ]]; then
   mkdir -p $HOME/src
   # non startup dependencies.
   cd $HOME/src &&
   git clone https://github.com/vifm/vifm.git && \
     cd $HOME/src/vifm && \
-    configure --prefix=$HOME/.local && \
+    configure --prefix=$HOME/.local --without-X11 && \
     make && make install
-  cd $HOME/src && git clone https://github.com/nim-lang/Nim.git
-  cd $HOME/src && git clone https://github.com/rust-lang/rust.git
-  cd $HOME/src && git clone https://github.com/golang/go.git 
-  cd $HOME
 fi
+
+[[ ! -d $HOME/src/Nim ]] && cd $HOME/src && git clone https://github.com/nim-lang/Nim.git
+[[ ! -d $HOME/src/rust ]] && cd $HOME/src && git clone https://github.com/rust-lang/rust.git
+[[ ! -d $HOME/go ]] && cd $HOME && git clone https://github.com/golang/go.git 
+cd $HOME
 
 [[ ! -d $HOME/src/ytfzf ]] && \
   cd $HOME/src && \
+  brew install jq \
   git clone https://github.com/pystardust/ytfzf.git && \
-  cp $HOME/src/ytfzf/ytfzf $HOME/.local/bin && cd $HOME
+  cp $HOME/src/ytfzf/ytfzf $HOME/.local/bin/ytfzf && cd $HOME
 # ytfzf config
 export YTFZF_PLAYER="mpv --vd-queue-enable=yes --vd-lavc-threads=4"
 
 if [[ ! -d $HOME/src/neovim ]]; then
-  echo "Install neoview.git ..."
+  echo "Install neovim.git ..."
   cd $HOME/src && \
   git clone https://github.com/neovim/neovim.git
   cd neovim
+  mkdir -p $HOME/.local/bin && \
   make distclean && make CMAKE_EXTRA_FLAGS=-DCMAKE_INSTALL_PREFIX=$HOME/.local CMAKE_BUILD_TYPE=Release
   make install
+  cd $HOME
+fi
+
+if [[ ! -d $HOME/src/neovide ]]; then
+  cd $HOME/src && \
+  git clone https://github.com/neovide/neovide.git  && \
+  cd neovide && cargo build --release && \
+  mkdir -p $HOME/bin && cp target/release/neovide $HOME/bin
   cd $HOME
 fi
 
@@ -241,6 +254,7 @@ fi
 # for my kir workstation.
 #. $HOME/.bagpipe/setup.sh $HOME/.bagpipe jimxu-linux.kir.corp.google.com "corp-ssh-helper --stderrthreshold=INFO %h %p"
 # for my c.googler.com instance.
+[[ -d $HOME/.bagpipe ]] && \
 . $HOME/.bagpipe/setup.sh $HOME/.bagpipe ujimux.c.googlers.com "corp-ssh-helper -relay=sup-ssh-relay.corp.google.com --stderrthreshold=INFO %h %p"
 #. $HOME/.bagpipe/setup.sh $HOME/.bagpipe ujimux.c.googlers.com
 #
@@ -269,10 +283,12 @@ function pa() {
 
 ##### !!!! Start plugin managers !!!! ######
 ##### !!!! Start plugin managers !!!! ######
-source /Users/jimxu/.zprezto/init.zsh
+[[ ! -d $HOME/.zprezto ]] && \
+  git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto" && \
+[[ -d $HOME/.zprezto ]] && source $HOME/.zprezto/init.zsh
 ### Added by zinit's installer
 if [[ ! -d ~/.zinit ]];then
-  mkdir ~/.zinit
+  mkdir -p ~/.zinit
   git clone https://github.com/zdharma/zinit.git ~/.zinit/bin
 fi
 source ~/.zinit/bin/zinit.zsh
@@ -357,7 +373,7 @@ zinit snippet OMZ::plugins/git/git.plugin.zsh
 zinit cdclear -q # <- forget completions provided up to this moment
 ##### end zinit plguin manager #################################
 
-[[ ! -f $HOMEBREW_PREFIX/etc/profile.d/autojump.sh ]] && brwe install autojump
+[[ ! -f $HOMEBREW_PREFIX/etc/profile.d/autojump.sh ]] && brew install autojump
 [[ -f $HOMEBREW_PREFIX/etc/profile.d/autojump.sh ]] && \
   . $HOMEBREW_PREFIX/etc/profile.d/autojump.sh
 
@@ -472,8 +488,6 @@ alias asre='asdf reshim'
 alias assv='asdf shim-versions'
 
 #
-export PATH=/Users/jimxu/.cargo/bin:/Users/jimxu/src/Nim/bin:$PATH
-export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 
 # parth/dotfiles
 stty -ixon
@@ -613,7 +627,7 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
     cd $HOME/.local/src && \
     git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git && cd $HOME
 [[ -f  $HOME/.local/src/zsh-autocomplete/zsh-autocomplete.plugin.zsh ]] && \
-    source $HOME/.local/src/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+     source $HOME/.local/src/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 ### ============ start zplug init ============= ###
 # ### Make plugin here may require dependent commands e.g. fzf, rg, etc
 # ### already in path, so make sure this happens after most of the

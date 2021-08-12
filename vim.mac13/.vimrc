@@ -1,3 +1,4 @@
+set nocompatible
 source ~/.vimrc.plug
 
 " for italic
@@ -339,7 +340,7 @@ com! -nargs=* AsyncGoRunThis :call <SID>AsyncGoRunThis()
 set background=dark
 set termguicolors
 colorscheme matrix
-" perfect fit for matrix!!
+""" perfect fit for matrix!!
 let g:airline_theme = 'biogoo'
 
 "set background=dark
@@ -1411,6 +1412,50 @@ autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
 imap <c-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 nmap <c-l> [s1z=`]a<c-g>u
 set spell
+
+""""""""""""""""""""""""""""""""""""""""""""""
+" wilder setup
+" need to run :UpdateRemotePlugins
+call wilder#enable_cmdline_enter()
+set wildcharm=<Tab>
+cmap <expr> <Tab> wilder#in_context() ? wilder#next() : "\Tab><"
+cmap <expr> <S-Tab> wilder#in_context() ? wilder#previous() : "\<S-Tab>"
+call wilder#set_option('modes', ['/', '?', ':'])
+
+call wilder#set_option('pipeline', [
+	      \   wilder#branch(
+      \     wilder#cmdline_pipeline({
+      \       'fuzzy': 1,
+      \       'sorter': wilder#python_difflib_sorter(),
+      \     }),
+      \     wilder#python_search_pipeline({
+      \       'pattern': 'fuzzy',
+      \     }),
+      \   ),
+      \ ])
+
+let s:highlighters = [
+	        \ wilder#pcre2_highlighter(),
+        \ wilder#basic_highlighter(),
+        \ ]
+
+
+call wilder#set_option('renderer', wilder#renderer_mux({
+      \ ':': wilder#popupmenu_renderer({
+      \   'highlighter': s:highlighters,
+      \   'left': [
+      	      \     wilder#popupmenu_devicons(),
+      \   ],
+      \   'right': [
+      	      \     ' ',
+      \     wilder#popupmenu_scrollbar(),
+      \   ],
+      \ }),
+      \ '/': wilder#wildmenu_renderer({
+      \   'highlighter': s:highlighters,
+      \ }),
+      \ }))
+""""""""""""""""""""""""""""""""""""""""""""""
 
 "function! CustomFold()
 "  return printf('   %6d%s', v:foldend - v:foldstart + 1, getline(v:foldstart))
