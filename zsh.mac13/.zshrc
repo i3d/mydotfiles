@@ -561,7 +561,10 @@ function vcp() {
 #fish
 # always unalias vi
 unalias vi 2>/dev/null
-unalias v 2>/dev/null
+# the command in bin/v has some unknown issue with zsh-autocomplete:
+# https://github.com/marlonrichert/zsh-autocomplete/issues/322
+# so disable it for now and use the alias.
+#unalias v 2>/dev/null
 unalias g  2>/dev/null # alias to git which never good.
 unalias rd 2>/dev/null # for mac remote desktop, not rmdir
 unalias cp 2>/dev/null # don't ask.

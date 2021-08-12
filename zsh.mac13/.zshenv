@@ -6,10 +6,6 @@ unalias rd 2>/dev/null # for mac remote desktop, not rmdir
 unalias cp 2>/dev/null # don't ask.
 unalias a 2>/dev/null # was fasd -a
 unalias hgd 2>/dev/null
-unalias vi 2>/dev/null
-unalias v 2>/dev/null
-unalias g  2>/dev/null # alias to git which never good.
-unalias rd 2>/dev/null # for mac remote desktop, not rmdir
 unalias fd 2>/dev/null # don't alias to find -t f
 
 alias dfa='df -ha .'
@@ -237,3 +233,4 @@ alias shck='shellcheck -s sh'
 alias yl="yamllint -d \"rules: {line-length: disable}\""
 alias ls2="find . -type d -mindepth 1 -maxdepth 1 ! -path '*app' -exec basename {} \;"
 alias wgetimg="wget -nd -H -r -l 2 -A jpg"
+. "$HOME/.cargo/env"
