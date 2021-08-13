@@ -1,0 +1,15 @@
+#!/bin/zsh
+
+
+# make sure we got gcert.
+pa
+
+if ! ps -ef | grep -v grep | grep -sq 'ssh -L 6666:localhost' 1>/dev/null; then
+	echo "setup ssh tennel..."
+	ssh -L 6666:localhost:6666 ujimux nvim -u /usr/local/google/home/jimxu/.vimrc --headless --listen localhost:6666 &
+	sleep 1
+fi
+# this is different from the 
+# https://github.com/ChristianChiarulli/nvcode
+# setup. It uses the src build nvim.
+$HOME/bin/neovide --frameless --geometry 300x100 --remote-tcp=localhost:6666 -- -u $HOME/.vimrc -XO "$@" 2>/dev/null 1>/dev/null 

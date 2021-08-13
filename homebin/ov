@@ -1,0 +1,3 @@
+#!/bin/bash
+
+NOTRUECOLOR=1 nvim -u $HOME/.vimrc -XOn "$@"

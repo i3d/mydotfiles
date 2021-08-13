@@ -338,7 +338,11 @@ com! -nargs=* AsyncGoRunThis :call <SID>AsyncGoRunThis()
 "let g:airline_theme = 'minimalist'
 
 set background=dark
-set termguicolors
+if $NOTRUECOLOR
+	set notermguicolors
+else
+	set termguicolors
+endif
 colorscheme matrix
 """ perfect fit for matrix!!
 let g:airline_theme = 'biogoo'
@@ -611,6 +615,9 @@ nno <silent> <leader>cp :Prettier<cr>
 "
 " ================ key maps ======================
 " select the whole line.
+nno Z :set nonu nornu mouse=<cr>
+nno X :set nu rnu mouse=nvicar<cr>
+nno C :set mouse=<cr>
 nno Y y$
 nno n nzzzv
 nno N Nzzzv
@@ -1367,8 +1374,8 @@ set nu rnu
 set guifont=FiraCode\ Nerd\ Font\ Mono:h24
 
 "" neovide configs"
-set mouse=nicr
-set mouse=a
+set mouse=nvicar
+"set mouse=a
 let g:neovide_transparency=0.97
 let g:neovide_cursor_antialiasing=v:true
 " also sonicboom, wireframe 

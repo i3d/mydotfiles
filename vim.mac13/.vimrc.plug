@@ -1,5 +1,9 @@
 let $MYVIMRC = "$HOME/.vimrc"
-set termguicolors
+if $NOTRUECOLOR
+	set notermguicolors
+else 
+	set termguicolors
+endif
 """""""""""""""""""""""""""""""""""""""""""""""
 "https://github.com/ChristianChiarulli/nvim
 """""""""""""""""""""""""""""""""""""""""""""""
@@ -340,6 +344,8 @@ command! -bang -nargs=* GGrep
   \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
 " ============================== FZF ===============================
 lua require('symbols-outline').setup()
-lua require'colorizer'.setup()
+if !$NOTRUECOLOR
+  lua require'colorizer'.setup()
+endif
 lua require("lsp-rooter").setup()
 luafile ~/.vim/init.lua
