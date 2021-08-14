@@ -401,8 +401,8 @@ export ONI_NEOVIM_PATH=$HOME/bin/v
 
 # edit the vimrc.
 alias vim='nv -u ~/.vimrc -XOn'
-alias v='vim'
-alias vv='~/bin/nvim.asdf -u ~/.vimrc -XOn'
+alias vv='vim'
+alias v='~/bin/nvim.asdf -u ~/.vimrc -XOn'
 alias vc='~/bin/nvim.asdf -u ~/.vimrc -XOn --clean'
 alias zshrc="v ~/.zshrc ~/.zshrc.pre-oh-my-zsh"
 alias ohmyzsh="v ~/.oh-my-zsh"
@@ -643,7 +643,7 @@ fi
 source ~/.zplug/init.zsh
 # for some reason not work fully with zplug.
 #zplug "marlonrichert/zsh-autocomplete"
-zplug "zsh-users/zsh-history-substring-search"
+#zplug "zsh-users/zsh-history-substring-search"
 # ###### ==== plugins ====== #####
 
 # Install plugins if there are plugins that have not been installed
@@ -654,8 +654,8 @@ if ! zplug check --verbose; then
     fi
 fi
 ### ============ start zplug config ============= ###
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
+#bindkey -M vicmd 'k' history-substring-search-up
+#bindkey -M vicmd 'j' history-substring-search-down
 ### ============ end zplug config ============= ###
 # Then, source plugins and add commands to $PATH
 zplug load --verbose
@@ -685,9 +685,14 @@ export FZF_DEFAULT_OPTS="--color=bg+:#333333,bg:#091013,gutter:#6fa64c,spinner:#
 
 #### FZF thems ######
 #### FZF customized key bindings ####
-bindkey -M viins '^x' fzf-history-widget # r for reverse history search
+#bindkey -M viins '^x' fzf-history-widget # r for reverse history search
+bindkey -M vicmd 'k' fzf-history-widget
+bindkey -M vicmd 'r' fzf-history-widget
+bindkey -M vicmd '?' fzf-history-widget
 bindkey -M viins '^f' fzf-file-widget # f for file
+bindkey -M vicmd 'f' fzf-file-widget # f for file
 bindkey -M viins '^j' fzf-cd-widget # j for jump
+bindkey -M vicmd 'j' fzf-cd-widget # j for jump
 bindkey -M viins '^t' transpose-chars # t for transpose
 bindkey -M viins '\ec' capitalize-word # c for capitalizae
 #### FZF customized key bindings ####
@@ -726,7 +731,8 @@ zkill() {
 }
 alias glNoGraph='git --no-pager log --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr% C(auto)%an" "$@"'
 _gitLogLineToHash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1"
-_viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git --no-pager show --color=always % | D'"
+#_viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git --no-pager show --color=always % | D'"
+_viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git --no-pager show --color=always %'"
 
 # zgitco - checkout git commit with previews
 zgitco() {
@@ -757,7 +763,7 @@ zgitlog() {
       --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
       --bind "ctrl-m:execute:
                 (grep -o '[a-f0-9]\{7\}' | head -1 |
-                xargs -I % sh -c 'git show --color=always % | D') << 'FZF-EOF'
+                xargs -I % sh -c 'git show --color=always % ; read') << 'FZF-EOF'
                 {}
 FZF-EOF"
 }
