@@ -1,0 +1,7 @@
+# Insert your preferred key mappings here.
+map b previousTab
+map w nextTab
+map q goBack
+map n goForward
+map d removeTab
+map u restoreTab
