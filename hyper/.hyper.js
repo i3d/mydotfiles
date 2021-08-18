@@ -9,11 +9,14 @@ module.exports = {
 		updateChannel: "canary",
 
 		// default font size in pixels for all tabs
-		fontSize: 26,
+		fontSize: 24,
 
 		// font family with optional fallbacks
 		// fontFamily: '"VictorMono Nerd Font Mono"',
-		fontFamily: '"JetBrainsMono Nerd Font Mono"',
+		// fontFamily: '"JetBrainsMono Nerd Font Mono"',
+		// fontFamily: '"ProFontWindows Nerd Font Mono"',
+		// fontFamily: '"ShureTechMono Nerd Font Mono"',
+		fontFamily: '"SFMono Nerd Font"',
 		// 'Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
 
 		// default font weight: 'normal' or 'bold'
@@ -201,6 +204,7 @@ module.exports = {
 		// "hyperterm-snazzy",
 		// "hyperterm-material-dark",
 		// "hyper-hybrid-reduced-contrast",
+		// "hyper-keymap",
 	],
 
 	// in development, you can create a directory under
@@ -209,7 +213,15 @@ module.exports = {
 	localPlugins: [],
 
 	keymaps: {
-		// Example
-		// 'window:devtools': 'cmd+alt+o',
+		// https://github.com/vercel/hyper/blob/master/app/keymaps/darwin.json
+		//
+		"editor:clearBuffer": "command+c",
+		"pane:next": "command+j",
+		"pane:prev": "command+k",
+		"tab:next": ["command+esc", "command+]"],
+		"tab:prev": ["command+shift+tab", "command+["],
+		"window:close": ["command+q"],
+		"pane:close": ["command+w"],
+		"pane:splitRight": ["command+d", "command+enter"],
 	},
 };
