@@ -17,8 +17,7 @@ mappings.default_mappings = config.values.default_mappings
       ["<Down>"] = actions.move_selection_next,
       ["<Up>"] = actions.move_selection_previous,
 
-      ["<C-o>"] = actions.select_default + actions.center,
-      ["<CR>"] = actions.select_default + actions.center,
+      -- ["<CR>"] = actions.select_default,
       ["<C-x>"] = actions.select_horizontal,
       ["<C-v>"] = actions.select_vertical,
       ["<C-t>"] = actions.select_tab,
@@ -31,25 +30,32 @@ mappings.default_mappings = config.values.default_mappings
       ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
       ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
       ["<C-l>"] = actions.complete_tag,
+
+      -- local edit
+      ["<C-o>"] = actions.select_default + actions.center,
+      ["<CR>"] = actions.select_vertical,
     },
 
     n = {
       ["<esc>"] = actions.close,
-      ["<CR>"] = actions.select_default + actions.center,
+      -- ["<CR>"] = actions.select_default,
       ["<C-x>"] = actions.select_horizontal,
       ["<C-v>"] = actions.select_vertical,
       ["<C-t>"] = actions.select_tab,
+
+      ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
+      ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
+      ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+      ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+
+      -- local edit.
+      ["<CR>"] = actions.select_vertical,
       ["o"] = actions.select_default + actions.center,
       ["s"] = actions.select_horizontal,
       ["h"] = actions.select_horizontal,
       ["l"] = actions.select_vertical,
       ["v"] = actions.select_vertical,
       ["t"] = actions.select_tab,
-
-      ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
-      ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
-      ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
-      ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
 
       -- TODO: This would be weird if we switch the ordering.
       ["j"] = actions.move_selection_next,
@@ -205,7 +211,7 @@ mappings.apply_keymap = function(prompt_bufnr, attach_mappings, buffer_keymap)
     end
   end
 
-  -- TODO: Probalby should not overwrite any keymaps
+  -- TODO: Probably should not overwrite any keymaps
   for mode, mode_map in pairs(mappings.default_mappings) do
     mode = string.lower(mode)
 
