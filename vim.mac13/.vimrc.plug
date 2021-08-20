@@ -53,7 +53,7 @@ Plug 'frazrepo/vim-rainbow'
 Plug 'bling/vim-bufferline'
 "Plug 'flazz/vim-colorschemes'
 Plug 'tpope/vim-fugitive'
-Plug 'nathanaelkane/vim-indent-guides'
+"Plug 'nathanaelkane/vim-indent-guides'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'tpope/vim-surround'
 " ===== from old spf13
@@ -185,7 +185,7 @@ Plug 'simrat39/rust-tools.nvim'
 Plug 'nvim-lua/lsp_extensions.nvim'
 Plug 'nvim-lua/completion-nvim'
 Plug 'liuchengxu/vim-which-key'
-Plug 'mhinz/vim-signify'
+"Plug 'mhinz/vim-signify'
 
 " Optional dependencies
 Plug 'nvim-lua/popup.nvim'
@@ -254,6 +254,20 @@ Plug 'onsails/vimway-lsp-diag.nvim'
 " 31/7/2021
 Plug 'gelguy/wilder.nvim'
 Plug 'roosta/fzfolds.vim'
+
+" 14/8/2021
+Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+
+" 19/8/2021
+Plug 'lukas-reineke/indent-blankline.nvim'
+let g:indent_blankline_char_list = ['|', '¦', '┆', '┊']    
+let g:indent_blankline_char_highlight_list = ['Error', 'Function']    
+let g:indent_blankline_space_char_highlight_list = ['Error', 'Function']    
+let g:indent_blankline_use_treesitter = v:true    
+let g:indent_blankline_show_current_context = v:true    
+let g:indent_blankline_context_highlight_list = ['Error', 'Warning']  
+Plug 'lewis6991/gitsigns.nvim'
 
 call plug#end()
 " Automatically install missing plugins on startup

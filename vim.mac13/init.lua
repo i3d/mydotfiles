@@ -481,3 +481,16 @@ require("twilight").setup {
 -- require("vimway-lsp-diag").init({
     -- debounce_ms = 50, -- default
 -- })
+--
+-- indent blankline
+require("indent_blankline").setup {
+    -- char = "|",
+    buftype_exclude = {"terminal"}
+}
+
+-- gitsigns
+require('gitsigns').setup{
+  numhl = true,
+  linehl = true,
+  current_line_blame = true,
+}

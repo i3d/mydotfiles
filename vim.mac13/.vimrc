@@ -1,4 +1,4 @@
-set nocompatible
+set nocompatible cul
 source ~/.vimrc.plug
 
 " for italic
@@ -7,6 +7,11 @@ set t_ZR=[23m
 
 let g:asyncrun_open = 10
 let g:asyncrun_rootmarks = ['.git', '.svn', '.root', '.project', '.hg', '.projectile']
+
+augroup nongo_indent
+au!
+au VimEnter *.rs,*.sh,*.vim*,*.bash*,*.zsh*,*.h,*.cc,*.html,*.toml,*.py set ts=2 sw=2 sts tw=0 expandtab
+augroup END
 
 " intend + manual folding
 "augroup folding
@@ -343,7 +348,7 @@ if $NOTRUECOLOR
 else
 	set termguicolors
 endif
-colorscheme matrix
+colorscheme darkmatrix
 """ perfect fit for matrix!!
 let g:airline_theme = 'biogoo'
 
@@ -659,6 +664,8 @@ vno v\ :'<,'>normal! I# <cr>
 vno v' :'<,'>normal! I" <cr>
 " for lua.
 vno v- :'<,'>normal! I-- <cr>
+" remove trailing spaces.
+vno v= :s/\v\s+$//g<cr>
 
 vno < <gv
 vno > >gv
@@ -1264,6 +1271,11 @@ ino <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
 imap <Tab> <Plug>(completion_smart_tab)
 imap <S-Tab> <Plug>(completion_smart_s_tab)
 " https://sharksforarms.dev/posts/neovim-rust/
+"
+"
+" COQ config
+let g:coq_settings = {}
+autocmd VimEnter * execute 'COQnow'
 
 set copyindent   "make the autoindent copying the existing indentation"
 set shiftround   "round the shift to multiple shiftwidth"
@@ -1357,10 +1369,17 @@ autocmd filetype nerdtree syn match html_icon ## containedin=NERDTreeFlags,ht
 autocmd filetype nerdtree syn match go_icon ## containedin=NERDTreeFlags
 "fish
 au BufNewFile,BufRead fish_funced set ft=fish
+"
 "from makc => My New Terminal: Alaritty 19:05
 " allow alaritty to have a transparent background."
+" !!!! These two lines have side effect of the new neovim syntax
+" highlight loading change. 
+" https://github.com/neovim/neovim/pull/14771
+" The theme after enable these doesn't look too bad but it's still unexpected.
 hi! Normal ctermbg=NONE guibg=NONE
 hi! NonText ctermbg=NONE guibg=NONE guifg=NONE ctermfg=NONE
+" !!!! These two lines have side effect of the new neovim syntax
+"
 syntax on
 set shiftround
 set ignorecase
@@ -1469,3 +1488,4 @@ call wilder#set_option('renderer', wilder#renderer_mux({
 "endfunction
 "set fillchars=fold:\ | set foldtext=CustomFold()
 " ================ settings ======================
+
