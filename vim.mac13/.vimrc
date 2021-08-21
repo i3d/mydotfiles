@@ -947,9 +947,9 @@ let g:which_key_map['='] = [ '<C-W>='                     , 'balance windows' ]
 let g:which_key_map['d'] = [ ':bd'                        , 'delete buffer']
 let g:which_key_map['e'] = [ ':CocCommand explorer'       , 'explorer' ]
 " use <leader>sf
-" let g:which_key_map['f'] = [ ':Files'                     , 'search files' ]
-"let g:which_key_map['f'] = [':Telescope find_files theme=get_dropdown find_command=rg,--hidden,-i,--files,-l'  , 'files']
-let g:which_key_map['f'] = [':Telescope file_browser theme=get_dropdown'  , 'files']
+let g:which_key_map['F'] = [ ':Files'                     , 'FZF Files' ]
+let g:which_key_map['f'] = [':Telescope find_files find_command=rg,-.,-i,--files'  	  , 'Tele Files']
+"let g:which_key_map['f'] = [':Telescope file_browser theme=get_dropdown'  , 'files']
 let g:which_key_map['r'] = [ ':RnvimrToggle'              , 'ranger' ]
 let g:which_key_map['S'] = [ ':SSave'                     , 'save session' ]
 let g:which_key_map['v'] = [ ':<C-W>v'                    , 'split right']
@@ -957,11 +957,12 @@ let g:which_key_map['v'] = [ ':<C-W>v'                    , 'split right']
 let g:which_key_map['z'] = [ ':Twilight'                   , 'zen' ]
 let g:which_key_map['m'] = [ ':TZFocus'                   , 'Max/UnMax' ]
 let g:which_key_map['?'] = [ ':CocList maps'              , 'maps' ]
-let g:which_key_map['B'] = [ ':!xxd -g1 %'                , 'show hex' ]
+let g:which_key_map['B'] = [ ':Vista'                     , 'Tags' ]
 let g:which_key_map["'"] = [ ':FloatermNew --width=50 --height=60' , 'shell' ]
 let g:which_key_map['h'] = [ ':FloatermKill'               , 'kill shell' ]
 let g:which_key_map['q'] = [ ':q!'                        , 'quit']
 let g:which_key_map['n'] = [ ':bnext'                     , 'cycle buffers' ]
+let g:which_key_map['`'] = [ ':TSHighlightCapturesUnderCursor' , 'TSInfo' ]
 " Group mappings
 " a is for actions
 let g:which_key_map.a = {
@@ -1139,6 +1140,7 @@ let g:which_key_map.p = {
 " s is for search
 let g:which_key_map.s = {
       \ 'name' : '+search' ,
+      \ '.' : [':Vista finder'          , 'Tags'],
       \ '/' : [':History/'              , 'history'],
       \ ';' : [':Commands'              , 'commands'],
       \ 'a' : [':Ag'                    , 'text Ag'],
@@ -1390,7 +1392,7 @@ set wb  "writebackup"
 " always has to be the end.
 filetype plugin indent on
 set nu rnu
-set guifont=FiraCode\ Nerd\ Font\ Mono:h24
+set guifont=FiraCode\ Nerd\ Font\ Mono:h22
 
 "" neovide configs"
 set mouse=nvicar

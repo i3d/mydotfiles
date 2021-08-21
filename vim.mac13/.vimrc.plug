@@ -67,28 +67,29 @@ Plug 'kristijanhusak/vim-hybrid-material'
 "Plug 'baabelfish/nvim-nim'
 Plug 'vifm/vifm.vim'
 " use homebrew version
-"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'dikiaap/minimalist'
 
 " use <leader><leader>
-Plug 'easymotion/vim-easymotion'
-hi link EasyMotionTarget ErrorMsg
-hi link EasyMotionShade  Comment
+"Plug 'easymotion/vim-easymotion'
+"hi link EasyMotionTarget ErrorMsg
+"hi link EasyMotionShade  Comment
 "
-hi link EasyMotionTarget2First MatchParen
-hi link EasyMotionTarget2Second MatchParen
+"hi link EasyMotionTarget2First MatchParen
+"hi link EasyMotionTarget2Second MatchParen
 
-hi link EasyMotionMoveHL Search
-hi link EasyMotionIncSearch Search
+"hi link EasyMotionMoveHL Search
+"hi link EasyMotionIncSearch Search
 "Lower case finds upper & lower case but upper case only finds upper case
-let g:EasyMotion_smartcase = 1
+"let g:EasyMotion_smartcase = 1
 
 Plug 'norcalli/nvim-colorizer.lua'
+
 " by default use s.
-Plug 'justinmk/vim-sneak'
-let g:sneak#s_next = 1
-let g:sneak#label = 1
+"Plug 'justinmk/vim-sneak'
+"let g:sneak#s_next = 1
+"let g:sneak#label = 1
 
 Plug 'unblevable/quick-scope'
 " Trigger a highlight in the appropriate direction when pressing these keys:
@@ -192,6 +193,7 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
 Plug 'nacro90/numb.nvim'
 
@@ -269,6 +271,18 @@ let g:indent_blankline_show_current_context = v:true
 let g:indent_blankline_context_highlight_list = ['Error', 'Warning']  
 Plug 'lewis6991/gitsigns.nvim'
 
+" modern tagbar
+Plug 'liuchengxu/vista.vim'
+function! NearestMethodOrFunction() abort
+  return get(b:, 'vista_nearest_method_or_function', '')
+endfunction
+autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+
+" 21/8/2021 easymotion.
+Plug 'phaazon/hop.nvim'
+nno S :HopPattern<cr>
+Plug 'nvim-treesitter/playground'
+
 call plug#end()
 " Automatically install missing plugins on startup
 autocmd VimEnter *
@@ -302,7 +316,9 @@ let g:fzf_tags_command = 'ctags -R'
 " Border color
 let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp' } }
 
-let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info --color=bg+:#3B4346,bg:#2A2F33,gutter:#2A2F33,spinner:#c1bf89,hl:#C76767,fg:#bfddb2,header:#CC9361,info:#87c095,pointer:#82abbc,marker:#c1bf89,fg+:#D49864,prompt:#e5a46b,hl+:#87c095 --header-lines=0 --ansi --keep-right'
+"let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info --color=bg+:#3B4346,bg:#2A2F33,gutter:#2A2F33,spinner:#c1bf89,hl:#C76767,fg:#bfddb2,header:#CC9361,info:#87c095,pointer:#82abbc,marker:#c1bf89,fg+:#D49864,prompt:#e5a46b,hl+:#87c095 --header-lines=0 --ansi --keep-right'
+" matrix theme
+let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info --color=bg+:#18282e,bg:#091013,gutter:#6fa64c,spinner:#e2e500,hl:#e2e500,fg:#90d762,header:#46d8b8,info:#90d762,pointer:#90d762,marker:#00ff87,fg+:#00ff87,prompt:#00cd6d,hl+:#90d762 --header-lines=0 --keep-right'
 let $FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/**'"
 "-g '!{node_modules,.git}'
 
@@ -362,4 +378,5 @@ if !$NOTRUECOLOR
   lua require'colorizer'.setup()
 endif
 lua require("lsp-rooter").setup()
+lua require('hop').setup()
 luafile ~/.vim/init.lua
