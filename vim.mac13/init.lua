@@ -17,6 +17,10 @@ require("packer").startup(function(use)
   -- other packages.
   -- other packages.
   use "terrortylor/nvim-comment"
+  use {
+    "SmiteshP/nvim-gps",
+    requires = "nvim-treesitter/nvim-treesitter"
+  }
 end)
 
 require('nvim_comment').setup()

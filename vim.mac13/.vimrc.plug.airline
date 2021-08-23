@@ -73,6 +73,9 @@ Plug 'drewtempelmeyer/palenight.vim'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeTabsOpen', 'NERDTreeTabsFind', 'NERDTreeFind' ] }
 Plug 'jistr/vim-nerdtree-tabs', { 'on': ['NERDTreeToggle', 'NERDTreeTabsOpen', 'NERDTreeTabsFind', 'NERDTreeFind' ] }
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'dempfi/vim-airline-neka'
 "Plug 'bling/vim-bufferline'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
