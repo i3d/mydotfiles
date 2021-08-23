@@ -523,3 +523,6 @@ require('gitsigns').setup{
   linehl = false,
   current_line_blame = true,
 }
+
+-- local plugins
+require('plugs')

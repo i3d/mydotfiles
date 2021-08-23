@@ -23,8 +23,8 @@ set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 
 set rtp+=~/homebrew/opt/vim
-set rtp+=/Users/jimxu/homebrew/opt/fzf
-set rtp+=/Users/jimxu/.vim/lua
+set rtp+=~/homebrew/opt/fzf
+set rtp+=~/.vim
 let g:mapleader = "\<Space>"
 let g:maplocalleader = ','
 nno <silent> <leader> :silent <c-u> :silent WhichKey '<Space>'<CR>
