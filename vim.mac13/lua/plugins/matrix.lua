@@ -104,12 +104,28 @@ gl.section.left[4] = {
     provider = 'FileName',
     condition = condition.buffer_not_empty,
     highlight = {colors.teal, colors.bg_dim},
-    separator_highlight = {colors.bg_dim, colors.bg},
-    separator = '  ',
+    separator_highlight = {colors.bg_dim, colors.bg_dim},
+    separator = '',
   }
 }
 
 gl.section.left[5] = {
+    CitcClient = {
+        -- icon = '  ',
+        icon = ' ',
+        highlight = {colors.yellow, colors.bg_dim},
+        provider = function()
+            local path = vim.fn.fnamemodify(vim.fn.expand('%'), ':p:h')
+            if not path.find(path, "google3") then return '' end
+            local tail = vim.fn.substitute(path, ".*" .. vim.fn.getenv("USER") .. "/", "","g")
+            return '' ..  vim.fn.substitute(tail, "/google3.*", "", "g") .. ' '
+        end,
+        separator = '  ',
+        separator_highlight = {colors.bg_dim, colors.bg},
+    }
+}
+
+gl.section.left[6] = {
   DiffAdd = {
     icon = '  ',
     provider = 'DiffAdd',
@@ -118,7 +134,7 @@ gl.section.left[5] = {
   }
 }
 
-gl.section.left[6] = {
+gl.section.left[7] = {
   DiffModified = {
     icon = '  ',
     provider = 'DiffModified',
@@ -127,7 +143,7 @@ gl.section.left[6] = {
   }
 }
 
-gl.section.left[7] = {
+gl.section.left[8] = {
   DiffRemove = {
     icon = '  ',
     provider = 'DiffRemove',
@@ -136,7 +152,7 @@ gl.section.left[7] = {
   }
 }
 
-gl.section.left[8] = {
+gl.section.left[9] = {
   CocStatus = {
     highlight = {colors.gray, colors.bg},
     provider = function()
@@ -147,7 +163,7 @@ gl.section.left[8] = {
   }
 }
 
-gl.section.left[9] = {
+gl.section.left[10] = {
   CocFunction = {
     icon = 'λ ',
     highlight = {colors.gray, colors.bg},
@@ -160,7 +176,7 @@ gl.section.left[9] = {
 }
 
 local gps = require('nvim-gps')
-gl.section.left[10]= {
+gl.section.left[11]= {
 	nvimGPS = {
 		provider = function()
 			return gps.get_location()
