@@ -118,14 +118,44 @@ gl.section.left[5] = {
             local path = vim.fn.fnamemodify(vim.fn.expand('%'), ':p:h')
             if not path.find(path, "google3") then return '' end
             local tail = vim.fn.substitute(path, ".*" .. vim.fn.getenv("USER") .. "/", "","g")
-            return '' ..  vim.fn.substitute(tail, "/google3.*", "", "g") .. ' '
+            return vim.fn.substitute(tail, "/google3.*", "", "g") -- add this if no [6] .. ' '
         end,
         separator = '  ',
-        separator_highlight = {colors.bg_dim, colors.bg},
+        separator_highlight = {colors.bg_dim, colors.bg_dim},  -- change bg to colors.bg if no [6]
     }
 }
 
-gl.section.left[6] = {
+local revcl_t = {}
+local function revcl()
+  if #revcl_t > 0 then return nil end
+  local hginfo = vim.fn.system("hgll -r . | grep -v 'p4head' | grep 'cl/'")  -- the expensive call
+  if hginfo == nil or hginfo == '' then return nil end
+  local t = {}
+  for w in string.gmatch(hginfo, "%S+") do
+    table.insert(t, w)
+  end
+  -- -- example: @ 424b0bfe jimxu cl/391835689 tip <exported as http://url>
+  -- -- ^    ^       ^       ^         ^      ^
+  -- -- br   rev    owner    cl       st      url
+  -- -- we just need #2 and #4.
+  table.insert(revcl_t, t[2])
+  table.insert(revcl_t, t[4])
+  return nil
+end
+gl.section.left[6]= {
+ HgInfo = {
+   icon = ' ',
+   provider = function()
+    revcl()
+    return revcl_t[1] .. '::' .. revcl_t[2] .. ' '
+   end,
+   highlight = {colors.gray, colors.bg_dim},
+   separator = '  ',
+   separator_highlight = {colors.bg_dim, colors.bg},
+ }
+}
+
+gl.section.left[7] = {
   DiffAdd = {
     icon = '  ',
     provider = 'DiffAdd',
@@ -134,7 +164,7 @@ gl.section.left[6] = {
   }
 }
 
-gl.section.left[7] = {
+gl.section.left[8] = {
   DiffModified = {
     icon = '  ',
     provider = 'DiffModified',
@@ -143,7 +173,7 @@ gl.section.left[7] = {
   }
 }
 
-gl.section.left[8] = {
+gl.section.left[9] = {
   DiffRemove = {
     icon = '  ',
     provider = 'DiffRemove',
@@ -152,31 +182,31 @@ gl.section.left[8] = {
   }
 }
 
-gl.section.left[9] = {
+gl.section.left[10] = {
   CocStatus = {
     highlight = {colors.gray, colors.bg},
     provider = function()
-      return vim.fn['coc#status']()
+    return vim.fn['coc#status']()
         :gsub('\u{274c}', '\u{f06a}')         -- 
         :gsub('\u{26a0}\u{fe0f}', '\u{f071}') -- 
     end
   }
 }
 
-gl.section.left[10] = {
+gl.section.left[11] = {
   CocFunction = {
     icon = 'λ ',
     highlight = {colors.gray, colors.bg},
     provider = function()
       local has_func, func_name = pcall(vim.api.nvim_buf_get_var, 0, 'coc_current_function')
       if not has_func then return '' end
-      return func_name or ''
+    return func_name or ''
     end,
   }
 }
 
 local gps = require('nvim-gps')
-gl.section.left[11]= {
+gl.section.left[12]= {
 	nvimGPS = {
 		provider = function()
 			return gps.get_location()
@@ -187,7 +217,17 @@ gl.section.left[11]= {
 	}
 }
 
-gl.section.right[1] = {
+
+-- provided by gps.
+-- gl.section.right[1] = {
+  -- VistaPlugin = {
+    -- highlight = {colors.gray, colors.bg},
+    -- provider = 'VistaPlugin',
+    -- separator = ' '
+  -- }
+-- }
+
+gl.section.right[2] = {
   FileType = {
     highlight = {colors.gray, colors.bg},
     provider = function()
@@ -197,7 +237,7 @@ gl.section.right[1] = {
   }
 }
 
-gl.section.right[2] = {
+gl.section.right[3] = {
   GitBranch = {
     icon = ' ',
     separator = '  ',
@@ -207,7 +247,7 @@ gl.section.right[2] = {
   }
 }
 
-gl.section.right[3] = {
+gl.section.right[4] = {
   FileLocation = {
     icon = ' ',
     separator = ' ',
@@ -224,11 +264,23 @@ gl.section.right[3] = {
       end
 
       local percent, _ = math.modf((current_line / total_lines) * 100)
-      return '' .. percent .. '%'
+      return '' .. percent .. '% '
     end,
   }
 }
-gl.section.right[4]= {
+gl.section.right[5]= {
+  LineColumn = {
+    provider = 'LineColumn',
+    condition = function()
+      if vim.fn.empty(vim.fn.expand('%:t')) ~= 1 then
+        return true
+      end
+      return false
+      end,
+    highlight = {colors.gray, colors.bg_dim},
+  }
+}
+gl.section.right[6]= {
   FileSize = {
     provider = 'FileSize',
     condition = function()
@@ -245,8 +297,7 @@ gl.section.right[4]= {
 }
 
 vim.api.nvim_command('hi GalaxyViModeReverse guibg=' .. colors.bg_dim)
-
-gl.section.right[5] = {
+gl.section.right[7] = {
   ViMode = {
     icon = function()
         local icons = {
