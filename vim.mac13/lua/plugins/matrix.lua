@@ -147,6 +147,7 @@ gl.section.left[6]= {
    icon = ' ',
    provider = function()
     revcl()
+    if #revcl_t <= 0 then return '' end
     return revcl_t[1] .. '::' .. revcl_t[2] .. ' '
    end,
    highlight = {colors.gray, colors.bg_dim},
