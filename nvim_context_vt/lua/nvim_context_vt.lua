@@ -41,6 +41,7 @@ local targets = {
     'for_expression',
     'function_item',
     'struct_item',
+    'mod_item',
 
     -- ruby target
     'class',
