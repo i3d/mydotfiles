@@ -4,5 +4,6 @@ defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms)
 defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
 # for vscodium
 defaults write com.visualstudio.code.oss ApplePressAndHoldEnabled -bool false
-
+# turn off hold globally
+defaults write -g ApplePressAndHoldEnabled -bool false
 
