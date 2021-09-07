@@ -51,7 +51,7 @@ let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
 let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.js'
 let g:closetag_filetypes = 'html,xhtml,phtml,javascript'
 " use <c-w><c-w> to switch.
-Plug 'voldikss/vim-floaterm', { 'on': ['FloatermNew', 'FloatermToggle', 'FloatermHide'] }
+Plug 'voldikss/vim-floaterm'
 set shell=/bin/zsh
 let g:floaterm_wintype="floating"
 let g:floaterm_gitcommit='floaterm'
@@ -73,7 +73,7 @@ Plug 'tpope/vim-rhubarb'
 Plug 'junegunn/gv.vim'
 Plug 'kevinhwang91/rnvimr', {'do': 'make sync', 'on': 'RnvimrToggle'}
 " Keeping up to date with master
-"Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'skywind3000/asynctasks.vim'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'zhaocai/GoldenView.Vim'
@@ -515,8 +515,8 @@ nno <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
 nno - <C-W>-
 nno = <C-W>+
 "vsplit"
-nno < <C-W><
-nno > <C-W>>
+nno < 100<C-W><
+nno > 100<C-W>>
 vno J :m '>+1<cr>gv=gv
 vno K :m '<-2<cr>gv=gv
 vno C :CommentToggle<cr>
@@ -717,24 +717,24 @@ let g:which_key_map['='] = [ '<C-W>='                     , 'balance windows' ]
 let g:which_key_map['d'] = [ ':bd'                        , 'delete buffer']
 let g:which_key_map['e'] = [ ':CocCommand explorer'       , 'explorer' ]
 " use <leader>sf
-let g:which_key_map['F'] = [ ':Files'                     , 'FZF Files' ]
-let g:which_key_map['f'] = [':Telescope find_files find_command=rg,-.,-i,--files'  	  , 'Tele Files']
+let g:which_key_map['f'] = [ ':CocList mru'                     , 'FZF Files' ]
+"let g:which_key_map['f'] = [':Telescope find_files find_command=rg,-.,-i,--files'  	  , 'Tele Files']
 "let g:which_key_map['f'] = [':Telescope file_browser theme=get_dropdown'  , 'files']
 let g:which_key_map['r'] = [ ':RnvimrToggle'              , 'ranger' ]
 let g:which_key_map['S'] = [ ':SSave'                     , 'save session' ]
 let g:which_key_map['v'] = [ ':<C-W>v'                    , 'split right']
 "let g:which_key_map['z'] = [ ':ZenMode'                   , 'zen' ]
-let g:which_key_map['z'] = [ ':Twilight'                   , 'zen' ]
-let g:which_key_map['m'] = [ ':TZFocus'                   , 'Max/UnMax' ]
+"let g:which_key_map['z'] = [ ':Twilight'                   , 'zen' ]
+"let g:which_key_map['m'] = [ ':TZFocus'                   , 'Max/UnMax' ]
+let g:which_key_map['m'] = [':call MaximizeToggle()'      , 'max/unmax']
 let g:which_key_map['?'] = [ ':CocList maps'              , 'maps' ]
-let g:which_key_map['B'] = [ ':Vista'                     , 'Tags' ]
+let g:which_key_map['B'] = [ ':Vista!!'                     , 'Tags' ]
 let g:which_key_map["'"] = [ ':FloatermNew --width=50 --height=60' , 'shell' ]
 let g:which_key_map['h'] = [ ':FloatermKill'               , 'kill shell' ]
 let g:which_key_map['q'] = [ ':q!'                        , 'quit']
 let g:which_key_map['n'] = [ ':bnext'                     , 'cycle buffers' ]
 let g:which_key_map['`'] = [ ':TSHighlightCapturesUnderCursor' , 'TSInfo' ]
 let g:which_key_map['u'] = [ ':e #'                       , 'ropen' ]
-let g:which_key_map['\'] = [ ':TSPlaygroundToggle'        , 'TS' ]
 " Group mappings
 " a is for actions
 let g:which_key_map.a = {
@@ -960,40 +960,6 @@ let g:which_key_map.t = {
       \ 'y' : [':FloatermNew --width=110 --height=8 ytfzf -fm'   , 'ytfzf music'],
       \ '/' : [':FloatermNew --width=110 --height=8 ytfzf -f'      , 'ytfzf video'],
       \ }
-" Diagnose
-let g:which_key_map.x = {
-      \ 'name' : '+Diagnose' ,
-      \ 'q' : [ 'copen'                                         , 'show quickfix' ],
-      \ 'x' : [ ':LspTroubleToggle'                             , 'toggle lsp trouble' ],
-      \ 'w' : [ ':LspTroubleToggle lsp_workspace_diagnostics'   , 'lsp workspace' ],
-      \ 'd' : [ ':LspTroubleToggle lsp_document_diagnostics'    , 'lsp document' ],
-      \ 'c' : [ ':LspTroubleToggle quickfix'                    , 'lsp quickfix' ],
-      \ 'l' : [ ':LspTroubleToggle loclist'                     , 'lsp loclist' ],
-      \ 'r' : [ ':LspTroubleToggle lsp_references'              , 'lsp refs' ],
-      \}
-" Telescope                                                                            
-let g:which_key_map.T = {                                                         
-        \ 'name' : '+Telescope' ,                                                   
-        \ 'A' : [':Telescope autocommands'                         , 'Telescope autocommands'],
-        \ 'B' : [':Telescope builtin'                              , 'Telescope builtin'],
-        \ 'C' : [':Telescope commands'                             , 'Telescope vim commands'],
-        \ 'K' : [':Telescope keymaps'                              , 'Telescope keymaps'],
-        \ 'O' : [':Telescope vim_options'                          , 'Telescope vim options'],
-        \ 'R' : [':Telescope registers'                            , 'Telescope registers'],
-        \ 'H' : [':Telescope search_history'                       , 'Telescope search history'],
-        \ 'M' : [':Telescope man_pages'                            , 'Telescope man page'],
-        \ 'L' : [':Telescope loclist'                              , 'Telescope loclist'],
-        \ 'Q' : [':Telescope quickfix'                             , 'Telescope quickfix'],
-        \ '/' : [':Telescope current_buffer_fuzzy_find'            , 'Telescope curbuf search'],
-        \ '.' : [':Telescope file_browser theme=get_dropdown'      , 'Telescope browser'],
-        \ 'b' : [':Telescope buffers'                              , 'Telescope buffers'],
-        \ 'f' : [':Telescope find_files theme=get_dropdown find_command=rg,--hidden,-i,--files,-l'       , 'Telescope find files'],
-        \ 'g' : [':Telescope live_grep'                            , 'Telescope grep'],
-        \ 'h' : [':Telescope help_tags'                            , 'Telescope vim help'],
-        \ 'm' : [':Telescope marks'                                , 'Telescope marks'],
-        \ 'c' : [':Telescope command_history'                      , 'Telescope q:'],
-        \ 's' : [':Telescope oldfiles'                             , 'Telescope switch files'],
-        \ }
 " windows
 let g:which_key_map.w = {
       \ 'name' : '+windows' ,
@@ -1018,6 +984,9 @@ let g:which_key_map.w = {
 call which_key#register('<Space>', "g:which_key_map")
 " ================ key maps ======================
 set path+=**
+" ['|', '¦', '┆', '┊']    
+"set list lcs=tab:\|\ 
+set list lcs=tab:\¦\ 
 " c-x/c-a +- num/alpha.
 set nrformats+=alpha
 set wildmenu
