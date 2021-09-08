@@ -9,7 +9,8 @@ zle -N edit-command-line
 source $HOME/.local/src/zsh-vimode-visual/zsh-vimode-visual.zsh
 # neovim as man pager.
 #export MANPAGER="/bin/sh -c \"col -b | v -c 'set ft=man ts=8 nomod nolist noma nu' -\""
-export MANPAGER="less -FRX"
+#export MANPAGER="less -FRX"
+export MANPAGER="v +Man!"
 export KEYTIMEOUT=1
 # https://dougblack.io/words/zsh-vi-mode.html
 function zle-line-init zle-keymap-select {
@@ -117,9 +118,13 @@ CASE_SENSITIVE="true"
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 COMPLETION_WAITING_DOTS="true"
 
-export PATH=$PATH:/usr/local/bin:/usr/local/sbin:/usr/local/symlinks:/usr/local/scripts:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/bin/g4bin:/usr/X11R6/bin:/usr/local/google/bin
+# explicit PATH starts. make sure HOMEBREW_SHELLENV_PREFIX also reset
+# so that eval can do the right thing every time.
+unset HOMEBREW_SHELLENV_PREFIX
+export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/symlinks:/usr/local/scripts:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/bin/g4bin:/usr/X11R6/bin:/usr/local/google/bin
 export PATH=/Users/jimxu/homebrew/opt/llvm/bin:$PATH:$HOME/.rvm/bin:/$HOME/.rbenv/shims # Add RVM to PATH for scripting
 export CSCOPE_DB=/Users/jimxu/src/linux/cscope.out
+[[ -f $HOME/.cargo/env  ]] && source $HOME/.cargo/env
 
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ #
 #### !!!! All ENV variables setup needed for OMZ and pre-oh-my-zsh ENDs here !!!! #######
@@ -166,7 +171,7 @@ if ((  $NEED_INSTALL_BREW )); then
   # if the above all went well, then install secondary tools
   brew install \
     colormake colortail coreutils cowsay cppcheck cppman \
-    cscope ctags ctail diffutils direnv fortune geoip gnu-sed \
+    cscope universal-ctags ctail diffutils direnv fortune geoip gnu-sed \
     go gotop htop lolcat lsof m-cli mas ncdu multitail mu neofetch \
     nnn pcre pcre2 peco pidof pstree ranger shellcheck shfmt \
     ssh-copy-id tree-sitter  util-macros watch wifi-password
@@ -400,9 +405,12 @@ alias bbbb='blaze'
 export ONI_NEOVIM_PATH=$HOME/bin/v
 
 # edit the vimrc.
-alias vim='nv -u ~/.vimrc -XOn'
-alias vv='vim'
-alias v='~/bin/nvim.asdf -u ~/.vimrc -XOn'
+alias vim='~/.local/bin/vim -u ~/.virc -XOn'
+alias vi='vim'
+alias v='~/.local/bin/nvim -u ~/.vimrc -XOn'
+alias vv='$HOME/homebrew/bin/nvim -u ~/.vimrc -XOn'
+alias av='~/bin/nvim.asdf -u ~/.vimrc -XOn'
+alias qv='~/.local/bin/nvim -u ~/.vvimrc -XOn'
 alias vc='~/bin/nvim.asdf -u ~/.vimrc -XOn --clean'
 alias zshrc="v ~/.zshrc ~/.zshrc.pre-oh-my-zsh"
 alias ohmyzsh="v ~/.oh-my-zsh"

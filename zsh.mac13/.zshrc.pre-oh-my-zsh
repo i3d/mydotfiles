@@ -4,6 +4,9 @@ HISTSIZE=10000000
 SAVEHIST=10000000
 
 [[ ! -d $HOME/my_completions ]]  && mkdir -p $HOME/my_completions
+[[ ! -d $HOME/.local/bin ]]  && mkdir -p $HOME/.local/bin
+[[ ! -d $HOME/.config ]]  && mkdir -p $HOME/.config
+
 if [[ ! -d $HOME/.local/src ]]; then
   mkdir -p $HOME/.local/src
   cd $HOME/.local/src  # startup dependencies
@@ -107,7 +110,7 @@ zstyle :compinstall filename '/home/yongjian/.zshrc'
 ########## experiment ###############
 #
 ########################## zsh-autocomplete settings ################################
-#### zstyle ':autocomplete:*' default-context ''
+zstyle ':autocomplete:*' default-context ''
 #zstyle ':autocomplete:*' default-context history-incremental-search-backward
 ## '': Start each new command line with normal autocompletion.
 ## history-incremental-search-backward: Start in live history search mode.
@@ -124,7 +127,7 @@ zstyle ':autocomplete:*' min-delay 3 # number of seconds (float)
 ## 0: Show completions immediately on each new command line.
 ## 1: Wait for at least 1 character of input.
 #
-#### zstyle ':autocomplete:*' ignored-input '' # extended glob pattern
+zstyle ':autocomplete:*' ignored-input '' # extended glob pattern
 ## '':     Always show completions.
 ## '..##': Don't show completions when the input consists of two or more dots.
 #
@@ -150,7 +153,7 @@ zstyle ':autocomplete:*' widget-style menu-select
 ## ⚠️ NOTE: This can NOT be changed at runtime.
 #
 ## CD with fzf worked.
-zstyle ':autocomplete:*' fzf-completion no
+zstyle ':autocomplete:*' fzf-completion yes
 ## no:  Tab uses Zsh's completion system only.
 ## yes: Tab first tries Fzf's completion, then falls back to Zsh's.
 ## ⚠️ NOTE: This can NOT be changed at runtime and requires that you have
@@ -431,7 +434,7 @@ export DOCKER_HOST=tcp://localhost:4243
 
 function cd() {
   ([[ "$@" =~ "google3" ]] || [[ "$PWD" =~ "google3" ]]) && unset P4PORT #|| export P4PORT=perforce:6666
-  builtin cd "$@" && ls
+  builtin cd "$@" && /bin/ls
 }
 
 # for mac only

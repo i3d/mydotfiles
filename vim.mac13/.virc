@@ -67,7 +67,7 @@ function s:floatermSettings()
 endfunction
 autocmd FileType floaterm call s:floatermSettings()
 autocmd User Startified setlocal buflisted
-Plug 'mhinz/vim-startify'
+" Plug 'mhinz/vim-startify'
 Plug 'nightsense/vimspectr'
 Plug 'tpope/vim-rhubarb'
 Plug 'junegunn/gv.vim'
@@ -96,12 +96,12 @@ Plug 'markonm/traces.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'liuchengxu/vim-which-key'
 Plug 'mhinz/vim-signify'
-Plug 'ulwlu/elly.vim'
-Plug 'b4skyx/serenade'
+" Plug 'ulwlu/elly.vim'
+" Plug 'b4skyx/serenade'
 Plug 'i3d/vim-jimbothemes'
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+" Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'gruvbox-community/gruvbox'
-Plug 'tweekmonster/startuptime.vim'
+" Plug 'tweekmonster/startuptime.vim'
 Plug 'roosta/fzfolds.vim'
 " modern tagbar
 Plug 'liuchengxu/vista.vim'

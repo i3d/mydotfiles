@@ -266,13 +266,21 @@ vno v] :'<,'>normal! A]<cr>
 vno v, :'<,'>normal! A,<cr>
 vno v. :'<,'>normal! A.<cr>
 " most langs.
-vno v/ :'<,'>normal! I// <cr>
+"vno v/ :'<,'>normal! I// <cr>
+vno v/ :s/^/\/\/ /g<cr>
+vno r/ :s/^\/\/ //g<cr>
 " for scripts.
-vno v\ :'<,'>normal! I# <cr>
+"vno v\ :'<,'>normal! I# <cr>
+vno v\ :s/^/# /g<cr>
+vno r\ :s/^# //g<cr>
 " for vim.
-vno v' :'<,'>normal! I" <cr>
+"vno v' :'<,'>normal! I" <cr>
+vno v' :s/^/" /g<cr>
+vno r' :s/^" //g<cr>
 " for lua.
-vno v- :'<,'>normal! I-- <cr>
+"vno v- :'<,'>normal! I-- <cr>
+vno v- :s/^/-- /g<cr>
+vno r- :s/^-- //g<cr>
 " remove trailing spaces.
 vno v= :s/\v\s+$//g<cr>
 vno < <gv
@@ -464,22 +472,22 @@ nno <localleader>l( :norm yss(<cr>
 nno <localleader>l) :norm yss)<cr>
 nno <localleader>wq :norm ysiw'<cr>
 nno <localleader>wQ :norm ysiw"<cr>
-nno <localleader>Wq :norm ysaw'<cr>
-nno <localleader>WQ :norm ysaw"<cr>
+nno <localleader>Wq :norm ysaW'<cr>
+nno <localleader>WQ :norm ysaW"<cr>
 nno <localleader>w) :norm ysiw)<cr>
 nno <localleader>w( :norm ysiw(<cr>
-nno <localleader>W) :norm ysaw)<cr>
-nno <localleader>W( :norm ysaw(<cr>
+nno <localleader>W) :norm ysaW)<cr>
+nno <localleader>W( :norm ysaW(<cr>
 nno <localleader>w* :norm ysiw*<cr>
-nno <localleader>W* :norm ysaw*<cr>
+nno <localleader>W* :norm ysaW*<cr>
 nno <localleader>w] :norm ysiw]<cr>
 nno <localleader>w[ :norm ysiw[<cr>
-nno <localleader>W] :norm ysaw]<cr>
-nno <localleader>W[ :norm ysaw[<cr>
+nno <localleader>W] :norm ysaW]<cr>
+nno <localleader>W[ :norm ysaW[<cr>
 nno <localleader>w} :norm ysiw{<cr>
 nno <localleader>w{ :norm ysiw}<cr>
-nno <localleader>W} :norm ysaw{<cr>
-nno <localleader>W{ :norm ysaw}<cr>
+nno <localleader>W} :norm ysaW{<cr>
+nno <localleader>W{ :norm ysaW}<cr>
 nno <localleader>p} :norm ysip}<cr>
 nno <localleader>p{ :norm ysip{<cr>
 " ds and cs works.
@@ -544,16 +552,15 @@ let g:which_key_map['q'] = [ ':q!'                        , 'quit']
 let g:which_key_map['n'] = [ ':bnext'                     , 'cycle buffers' ]
 let g:which_key_map['`'] = [ ':TSHighlightCapturesUnderCursor' , 'TSInfo' ]
 let g:which_key_map['u'] = [ ':e #'                       , 'ropen' ]
+let g:which_key_map['\'] = [ ':TSPlaygroundToggle'        , 'TS' ]
 " Group mappings
 " a is for actions
 let g:which_key_map.a = {
       \ 'name' : '+actions' ,
       \ 'c' : [':ColorizerToggle'        , 'colorizer'],
       \ 'e' : [':CocCommand explorer'    , 'explorer'],
-      \ 'n' : [':set nonumber!'          , 'line-numbers'],
-      \ 'r' : [':set norelativenumber!'  , 'relative line nums'],
+      \ 'r' : [':luafile %'              , 'lua run %'],
       \ 's' : [':let @/ = ""'            , 'remove search highlight'],
-      \ 't' : [':FloatermNew --width=50 --height=60' , 'terminal'],
       \ 'v' : [':Vista!!'                , 'tag viewer'],
       \ }
 " b is for buffer
@@ -977,7 +984,7 @@ nno <silent> H     <cmd>lua vim.lsp.buf.hover()<CR>
 nno <silent> g.    <cmd>lua vim.lsp.buf.code_action()<CR>
 " Set updatetime for CursorHold
 " 300ms of no cursor movement to trigger CursorHold
-set updatetime=300
+set updatetime=3000
 " Show diagnostic popup on cursor hold, this is pretty annoying, 
 " we changed to use vimway diagnose.
 " autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
