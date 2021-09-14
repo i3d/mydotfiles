@@ -51,35 +51,36 @@ bind-key x pb-delete
 
 #https://newsboat.org/releases/2.12/docs/newsboat.html
 # solarized
-#color background         default   default
-#color listnormal         default   default
-#color listnormal_unread  default   default
-#color listfocus          black     cyan
-#color listfocus_unread   black     cyan
-#color info               default   black
-#color article            default   default
-# matrix
 color background         default   default
-color listnormal color28 default
-color listfocus color233 color220 standout bold
-color listnormal_unread color106 default
-color listfocus_unread color47 default bold
-color info color40 black bold
-color article color34 default
+color listnormal         color10   default
+color listnormal_unread  default   default
+color listfocus          black     cyan
+color listfocus_unread   black     cyan
+color info               default   black
+color article            default   default
+# matrix
+#color background         color233 color233
+#color listnormal color28 default
+#color listfocus color233 color220 standout bold
+#color listnormal_unread color106 default
+#color listfocus_unread color47 default bold
+#color info color40 color233 bold
+#color article color34 default
+
 
 # highlights
 #highlight article "^(Title):.*$" blue default
 #highlight article "https?://[^ ]+" red default
 #highlight article "\\[image\\ [0-9]+\\]" green default
-highlight article "^Feed:.*" color5 color0
-highlight article "^Title:.*" color3 color0 bold
-highlight article "^Author:.*" color2 color0
-highlight article "^Date:.*" color223 color0
-highlight article "^Link:.*" color4 color0
-highlight article "^Flags:.*" color9 color0
+highlight article "^Feed:.*" color5 color233
+highlight article "^Title:.*" color3 color233 bold
+highlight article "^Author:.*" color2 color233
+highlight article "^Date:.*" color223 color233
+highlight article "^Link:.*" color4 color233
+highlight article "^Flags:.*" color9 color233
 highlight article "\\[[0-9[0-9]*\\]" color66 default bold
-highlight article "\\[image [0-9][0-9]*\\]" color109 default bold
-highlight article "\\[embedded flash: [0-9][0-9]*\\]" color66 default bold
+highlight article "\\[image [0-9][0-9]*\\]" color109 color233 bold
+highlight article "\\[embedded flash: [0-9][0-9]*\\]" color66 color233 bold
 
 # for the old reader
 #urls-source "oldreader"
