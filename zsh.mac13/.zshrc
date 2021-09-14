@@ -4,8 +4,9 @@
 autoload -z edit-command-line
 zle -N edit-command-line
 [[ ! -d $HOME/.local/src/zsh-vimode-visual ]] && \
-  cd $HOME/.local/src && \
-  git clone https://github.com/b4b4r07/zsh-vimode-visual.git && cd $HOME
+  mkdir -p $HOME/.local/src && \
+  cd $HOME/.local/src >/dev/null && \
+  git clone https://github.com/b4b4r07/zsh-vimode-visual.git && cd $HOME >/dev/null
 source $HOME/.local/src/zsh-vimode-visual/zsh-vimode-visual.zsh
 # neovim as man pager.
 #export MANPAGER="/bin/sh -c \"col -b | v -c 'set ft=man ts=8 nomod nolist noma nu' -\""
@@ -33,11 +34,15 @@ if [[ ! -d $HOME/.cargo ]]; then
   # setup rustup.
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
   [[ -f $HOME/.cargo/env  ]] && source $HOME/.cargo/env
-  rustup update && rustup default nightly
+  cd $HOME >/dev/null
+  rustup update && rustup default nightly && \
   # install core rust tools.
-  cargo install bat ripgrep git-delta exa tokei procs dutree cargo-rls-install hub
+  # this is close to what rustbinup offers.
+  cargo install bat ripgrep git-delta exa procs dutree \
+	      lsd fselect hx bingrep find-files xplr ttyper \
+	      racer cargo-rls-install hub
 fi
-
+# if everything goes well, we should have rustc in PATH.
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 #
 # ================ Before sourcing OMZ ====================
@@ -215,43 +220,43 @@ fi
 if [[ ! -d $HOME/src/vifm ]]; then
   mkdir -p $HOME/src
   # non startup dependencies.
-  cd $HOME/src &&
+  cd $HOME/src >/dev/null && \
   git clone https://github.com/vifm/vifm.git && \
-    cd $HOME/src/vifm && \
+    cd $HOME/src/vifm && automake && \
     configure --prefix=$HOME/.local --without-X11 && \
     make && make install
 fi
 
-[[ ! -d $HOME/src/Nim ]] && cd $HOME/src && git clone https://github.com/nim-lang/Nim.git
+# [[ ! -d $HOME/src/Nim ]] && cd $HOME/src && git clone https://github.com/nim-lang/Nim.git
 [[ ! -d $HOME/src/rust ]] && cd $HOME/src && git clone https://github.com/rust-lang/rust.git
 [[ ! -d $HOME/go ]] && cd $HOME && git clone https://github.com/golang/go.git 
-cd $HOME
+cd $HOME >/dev/null
 
 [[ ! -d $HOME/src/ytfzf ]] && \
-  cd $HOME/src && \
+  cd $HOME/src >/dev/null && \
   brew install jq \
   git clone https://github.com/pystardust/ytfzf.git && \
-  cp $HOME/src/ytfzf/ytfzf $HOME/.local/bin/ytfzf && cd $HOME
+  cp $HOME/src/ytfzf/ytfzf $HOME/.local/bin/ytfzf && cd $HOME >/dev/null
 # ytfzf config
 export YTFZF_PLAYER="mpv --vd-queue-enable=yes --vd-lavc-threads=4"
 
 if [[ ! -d $HOME/src/neovim ]]; then
   echo "Install neovim.git ..."
-  cd $HOME/src && \
+  cd $HOME/src >/dev/null && \
   git clone https://github.com/neovim/neovim.git
   cd neovim
   mkdir -p $HOME/.local/bin && \
   make distclean && make CMAKE_EXTRA_FLAGS=-DCMAKE_INSTALL_PREFIX=$HOME/.local CMAKE_BUILD_TYPE=Release
   make install
-  cd $HOME
+  cd $HOME >/dev/null
 fi
 
 if [[ ! -d $HOME/src/neovide ]]; then
-  cd $HOME/src && \
+  cd $HOME/src >/dev/null && \
   git clone https://github.com/neovide/neovide.git  && \
   cd neovide && cargo build --release && \
   mkdir -p $HOME/bin && cp target/release/neovide $HOME/bin
-  cd $HOME
+  cd $HOME >/dev/null
 fi
 
 #github qfc
@@ -408,6 +413,7 @@ export ONI_NEOVIM_PATH=$HOME/bin/v
 alias vim='~/.local/bin/vim -u ~/.virc -XOn'
 alias vi='vim'
 alias v='~/.local/bin/nvim -u ~/.vimrc -XOn'
+#alias v='~/homebrew/bin/nvim -u ~/.vimrc -XOn'
 alias vv='$HOME/homebrew/bin/nvim -u ~/.vimrc -XOn'
 alias av='~/bin/nvim.asdf -u ~/.vimrc -XOn'
 alias qv='~/.local/bin/nvim -u ~/.vvimrc -XOn'
@@ -460,8 +466,9 @@ eval "$(hub alias -s)"
 
 [[ ! -d $HOME/.local/src/base16-shell ]] && \
   mkdir -p $HOME/.local/src && \
-  cd $HOME/.local/src && \
-  git clone https://github.com/chriskempson/base16-shell.git && cd $HOME
+  cd $HOME/.local/src >/dev/null && \
+  git clone https://github.com/chriskempson/base16-shell.git && \
+  cd $HOME >/dev/null
 BASE16_SHELL="$HOME/.local/src/base16-shell/"
 [ -n "$PS1" ] && \
 [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
@@ -635,8 +642,8 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 # ctrl-space to call out the history commnad menu.
 #bindkey '^Q' history-beginning-search-menu
 [[ ! -d $HOME/.local/src/zsh-autocomplete ]] && \
-    cd $HOME/.local/src && \
-    git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git && cd $HOME
+    cd $HOME/.local/src >/dev/null && \
+    git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git && cd $HOME >/dev/null
 [[ -f  $HOME/.local/src/zsh-autocomplete/zsh-autocomplete.plugin.zsh ]] && \
      source $HOME/.local/src/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 ### ============ start zplug init ============= ###

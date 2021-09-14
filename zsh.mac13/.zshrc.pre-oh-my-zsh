@@ -9,7 +9,7 @@ SAVEHIST=10000000
 
 if [[ ! -d $HOME/.local/src ]]; then
   mkdir -p $HOME/.local/src
-  cd $HOME/.local/src  # startup dependencies
+  cd $HOME/.local/src >/dev/null # startup dependencies
   git clone https://github.com/i3d/mydotfiles.git
   echo "mydotfiles is installed to $HOME/.local/src. Needs to be manually copied ..."
   sleep 3
@@ -18,8 +18,7 @@ if [[ ! -d $HOME/.local/src ]]; then
   git clone https://github.com/Parth/dotfiles.git
   git clone https://github.com/changyuheng/zsh-interactive-cd.git
   git clone https://github.com/i3d/afetch.git
-  git clone https://github.com/b4b4r07/zsh-vimode-visual.git 
-  cd $HOME
+  cd $HOME >/dev/null
 fi
 
 # chars as part of filename
