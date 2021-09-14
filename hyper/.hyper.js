@@ -215,7 +215,7 @@ module.exports = {
 	keymaps: {
 		// https://github.com/vercel/hyper/blob/master/app/keymaps/darwin.json
 		//
-		"editor:clearBuffer": "command+c",
+		"editor:clearBuffer": "command+z",
 		"pane:next": "command+j",
 		"pane:prev": "command+k",
 		"tab:next": ["command+esc", "command+]"],
