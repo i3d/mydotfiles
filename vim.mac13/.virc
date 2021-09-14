@@ -18,39 +18,21 @@ if empty(glob('~/.vi/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 call plug#begin('~/.vi/plugged')
-Plug 'fatih/vim-go'
-Plug 'edkolev/tmuxline.vim'
-Plug 'fnune/base16-vim'   " superset of above.
-Plug 'vim-scripts/mru.vim'
-Plug 'ayu-theme/ayu-vim' " or other package manager
-"set termguicolors     " enable true colors support
-let ayucolor="mirage" " for mirage version of theme
-"let ayucolor="dark"   " for dark version of theme
-Plug 'drewtempelmeyer/palenight.vim'
-Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeTabsOpen', 'NERDTreeTabsFind', 'NERDTreeFind' ] }
-Plug 'jistr/vim-nerdtree-tabs', { 'on': ['NERDTreeToggle', 'NERDTreeTabsOpen', 'NERDTreeTabsFind', 'NERDTreeFind' ] }
-Plug 'Xuyuanp/nerdtree-git-plugin'
-"Plug 'bling/vim-bufferline'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
-Plug 'edkolev/promptline.vim'
-Plug 'nikvdp/neomux'
-Plug 'vifm/vifm.vim'
-" use homebrew version
+" ====== MUST HAVE ===== "
+if fnamemodify(resolve(expand('%:p')), ':h') !~ 'google3'
+  " Plug 'fatih/vim-go'
+endif
+Plug 'i3d/vim-jimbothemes'
+Plug 'liuchengxu/vim-which-key'
+Plug 'mhinz/vim-signify'
+" for ciderlsp setup
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'dikiaap/minimalist'
-Plug 'unblevable/quick-scope'
-" Trigger a highlight in the appropriate direction when pressing these keys:
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-highlight QuickScopePrimary guifg='#00FF87' gui=underline ctermfg=155 cterm=underline
-highlight QuickScopeSecondary guifg='#FFAF00' gui=underline ctermfg=81 cterm=underline
-let g:qs_max_chars=150
-Plug 'alvan/vim-closetag'
-let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
-let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.js'
-let g:closetag_filetypes = 'html,xhtml,phtml,javascript'
-" use <c-w><c-w> to switch.
 Plug 'voldikss/vim-floaterm'
 set shell=/bin/zsh
 let g:floaterm_wintype="floating"
@@ -67,21 +49,21 @@ function s:floatermSettings()
 endfunction
 autocmd FileType floaterm call s:floatermSettings()
 autocmd User Startified setlocal buflisted
-" Plug 'mhinz/vim-startify'
-Plug 'nightsense/vimspectr'
-Plug 'tpope/vim-rhubarb'
-Plug 'junegunn/gv.vim'
-Plug 'kevinhwang91/rnvimr', {'do': 'make sync', 'on': 'RnvimrToggle'}
-" Keeping up to date with master
+let g:vista_update_on_text_changed = 1     
+let g:vista_stay_on_open = 0  " don't focus on it by default.
+let g:vista_keep_fzf_colors = 1
+let g:vista_sidebar_width = 25
+Plug 'liuchengxu/vista.vim'
+function! NearestMethodOrFunction() abort
+  return get(b:, 'vista_nearest_method_or_function', '')
+endfunction
+au VimEnter * call vista#RunForNearestMethodOrFunction()
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'skywind3000/asynctasks.vim'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'zhaocai/GoldenView.Vim'
 Plug 'machakann/vim-highlightedyank'
 let g:highlightedyank_highlight_duration = -1
-Plug 'pangloss/vim-javascript'
-let g:javascript_plugin_flow = 1
-Plug 'brooth/far.vim', {'on': ['F', 'Far', 'Farr', 'Fardo']}
 Plug 'RRethy/vim-illuminate'
 let g:Illuminate_ftblacklist = ['nerdtree']
 augroup illuminate_augroup
@@ -89,26 +71,62 @@ augroup illuminate_augroup
   autocmd VimEnter * hi illuminatedCurWord cterm=italic gui=italic
 augroup END
 Plug 'lfv89/vim-interestingwords'
-Plug 'AndrewRadev/linediff.vim', {'on': 'Linediff'}
-Plug 'kshenoy/vim-signature'
-Plug 'wellle/targets.vim'
-Plug 'markonm/traces.vim'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'liuchengxu/vim-which-key'
-Plug 'mhinz/vim-signify'
-" Plug 'ulwlu/elly.vim'
-" Plug 'b4skyx/serenade'
-Plug 'i3d/vim-jimbothemes'
-" Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
-Plug 'gruvbox-community/gruvbox'
-" Plug 'tweekmonster/startuptime.vim'
+" ====== MUST HAVE ===== "
+" ====== NICE HAVE ===== "
+Plug 'vifm/vifm.vim'
+Plug 'tpope/vim-surround'
+let g:session_directory = '~/.vi/sessions'
+"let g:session_autoload = 'yes'
+let g:session_autosave = 'yes'
+let g:session_autosave_periodic = 1
+let g:session_autosave_silent = 1
+let g:session_default_to_last = 1
+let g:session_command_aliases = 1
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-session'
+" ====== NICE HAVE ===== "
+" ====== OK HAVE ===== "
+Plug 'dikiaap/minimalist'
+Plug 'tpope/vim-fugitive'
 Plug 'roosta/fzfolds.vim'
-" modern tagbar
-Plug 'liuchengxu/vista.vim'
-function! NearestMethodOrFunction() abort
-  return get(b:, 'vista_nearest_method_or_function', '')
-endfunction
-autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+Plug 'unblevable/quick-scope'
+" Trigger a highlight in the appropriate direction when pressing these keys:
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+highlight QuickScopePrimary guifg='#00FF87' gui=underline ctermfg=155 cterm=underline
+highlight QuickScopeSecondary guifg='#FFAF00' gui=underline ctermfg=81 cterm=underline
+let g:qs_max_chars=150
+" ====== OK HAVE ===== "
+" ====== PROBABLY OK HAVE ===== "
+" Plug 'edkolev/tmuxline.vim'
+" Plug 'fnune/base16-vim'   " superset of above.
+" Plug 'ayu-theme/ayu-vim' " or other package manager
+" "set termguicolors     " enable true colors support
+" let ayucolor="mirage" " for mirage version of theme
+" "let ayucolor="dark"   " for dark version of theme
+" Plug 'drewtempelmeyer/palenight.vim'
+" Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeTabsOpen', 'NERDTreeTabsFind', 'NERDTreeFind' ] }
+" Plug 'jistr/vim-nerdtree-tabs', { 'on': ['NERDTreeToggle', 'NERDTreeTabsOpen', 'NERDTreeTabsFind', 'NERDTreeFind' ] }
+" Plug 'Xuyuanp/nerdtree-git-plugin'
+" Plug 'alvan/vim-closetag'
+" let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
+" let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.js'
+" let g:closetag_filetypes = 'html,xhtml,phtml,javascript'
+" Plug 'junegunn/gv.vim'
+" Plug 'brooth/far.vim', {'on': ['F', 'Far', 'Farr', 'Fardo']}
+" Plug 'AndrewRadev/linediff.vim', {'on': 'Linediff'}
+" Plug 'kshenoy/vim-signature'
+" Plug 'wellle/targets.vim'
+" Plug 'markonm/traces.vim'
+" Plug 'christoomey/vim-tmux-navigator'
+" " Plug 'ulwlu/elly.vim'
+" " Plug 'b4skyx/serenade'
+" Plug 'gruvbox-community/gruvbox'
+" ====== PROBABLY OK HAVE ===== "
+" ====== NOT OK HAVE ===== "
+" This is performance hog"
+" Plug 'wellle/tmux-complete.vim'  " this is *very* cool!!!
+" This is performance hog"
+" ====== NOT OK HAVE ===== "
 " ================== PLUG END ====================== "
 call plug#end()
 " Automatically install missing plugins on startup
@@ -204,8 +222,9 @@ let g:asyncrun_open = 10
 let g:asyncrun_rootmarks = ['.git', '.svn', '.root', '.project', '.hg', '.projectile']
 augroup nongo_indent
 au!
-au VimEnter *.lua,*.rs,*.sh,*.vim*,*.bash*,*.zsh*,*.h,*.cc,*.html,*.toml,*.py set ts=2 sw=2 sts tw=0 expandtab
+au VimEnter *.virc,*.lua,*.rs,*.sh,*.vim*,*.bash*,*.zsh*,*.h,*.cc,*.html,*.toml,*.py set ts=2 sw=2 sts tw=0 expandtab
 augroup END
+" ====================== GOOGLE3 ============================"
 if fnamemodify(resolve(expand('%:p')), ':h') =~ 'google3'
   highlight SignifySignAdd    cterm=bold ctermbg=0  ctermfg=2
   highlight SignifySignDelete cterm=bold ctermbg=0  ctermfg=4
@@ -223,7 +242,76 @@ if fnamemodify(resolve(expand('%:p')), ':h') =~ 'google3'
   let g:signify_vcs_cmds_diffmode = { 'perforce': 'citcdiff.bin -b %f || true' }
   let g:signify_skip_filename_pattern = ['\.pipertmp.*']
   let g:signify_line_highlight = 0
+" ====================== LSP ============================"
+" ====================== LSP ============================"
+" ====================== LSP ============================"
+" does not work on MAC "
+" augroup ciderlsp_config
+" au!
+" au VimEnter *.go nested :Vista!!
+" " this will keep vista not able to jump window."
+" " au BufLeave,BufWinLeave,BufDelete,BufHidden,BufUnload,WinLeave,VimLeave <buffer> ++once :Vista!
+"     au FileType bzl,cpp,go,java,proto,python nno <silent> gd :vert LspDefinition<CR>
+"     au FileType bzl,cpp,go,java,proto,python nno <silent> gm :LspRename<CR>
+"     au FileType bzl,cpp,go,java,proto,python nno <silent> gr :LspReferences<CR>
+"     au FileType bzl,cpp,go,java,proto,python nno <silent> gp :LspPeekDefinition<CR>
+"     au FileType bzl,cpp,go,java,proto,python nno <silent> g. :LspDocumentSymbol<CR>
+"     au FileType bzl,cpp,go,java,proto,python nno <silent> g= :LspDocumentFormat<CR>
+"     au FileType bzl,cpp,go,java,proto,python nno <silent> ] :LspNextDiagnostic<CR>
+"     au FileType bzl,cpp,go,java,proto,python nno <silent> [ :LspPreviousDiagnostic<CR>
+"     au FileType bzl,cpp,go,java,proto,python nno <silent> g/ :LspDocumentSymbolSearch<CR>
+"     au FileType bzl,cpp,go,java,proto,python nno <silent> g\ :LspCodeAction<CR>
+"     au FileType bzl,cpp,go,java,proto,python nno <silent> H :LspHover<CR>
+"     " :setfiletype <c-d>
+"     au FileType
+"           \ bzl,cpp,go,java,proto,python,
+"           \textproto,yaml,typescript,javascript,
+"           \gslb,html,json,ncl,p4-spec,pbtxt,piccolo,
+"           \gcl,sdl,sh,sql,text,textpb,tf,tpl,tpp,xml,zsh
+"           \ nno <silent> K <cmd>lua require"plugins.blame".desc()<CR>
+" au User lsp_setup call lsp#register_server({                                                                      
+" \ 'name': 'CiderLSP',                                                                                         
+" \ 'cmd': {server_info->[                                                                                      
+" \   '~/bin/ciderlsp',                                                          
+" \   '--tooltag=vim-lsp',                                                                                      
+" \   '--noforward_sync_responses',                                                                             
+" \   '--hub_addr=blade:languageservices',                                                                      
+" \ ]},                                                                                                         
+" \ 'whitelist': ['c', 'cpp', 'java', 'proto', 'python', 'textproto', 'go', 'swift', 'BUILD'],                  
+" \})
+" augroup END
 endif
+" ====================== GOOGLE3 ============================"
+augroup lsp_config
+" register_server provided by lsp-settings
+  au!
+  function! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+    setlocal signcolumn=yes
+    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+    nmap <buffer> gd :vert LspDefinition<cr>
+    nmap <buffer> gp :LspPeekDefinition<cr>
+    nmap <buffer> g/ :LspDocumentSymbolSearch<cr>
+    nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
+    nmap <buffer> gr <plug>(lsp-references)
+    nmap <buffer> gi <plug>(lsp-implementation)
+    nmap <buffer> gt <plug>(lsp-type-definition)
+    nmap <buffer> gm :LspRename<cr>
+    nmap <buffer> [ :LspPreviousDiagnostic<cr>
+    nmap <buffer> ] :LspNextDiagnostic<cr>
+    nmap <buffer> K :LspHover<cr>
+    "ino <buffer> <expr><c-f> lsp#scroll(+4)
+    "ino <buffer> <expr><c-d> lsp#scroll(-4)
+    let g:lsp_format_sync_timeout = 1000
+    au! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
+    " refer to doc to add more commands
+  endfunction
+  " call s:on_lsp_buffer_enabled only for languages that has the server registered.
+  au User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
+" ====================== LSP ============================"
+" ====================== LSP ============================"
+" ====================== LSP ============================"
 " intend + manual folding
 augroup folding
   au!
@@ -372,6 +460,7 @@ colorscheme darkmatrix
 " ##########################################
 let g:javascript_plugin_flow = 1
 " ================ themes ======================
+set ai gdefault 
 set encoding=utf-8
 set fillchars+=stl:\ ,stlnc:\
 set term=xterm-256color
@@ -396,21 +485,6 @@ let g:ranger_map_keys = 0
 if executable('rg')
   set grepprg=rg\ -C1\ -S\ --column\ -H\ --vimgrep\ --color=never
 endif
-" Prettier configuration
-" https://github.com/prettier/vim-prettier
-let g:prettier#autoformat = 1
-let g:prettier#autoformat_require_pragma = 0
-" may try this if slow?
-let g:prettier#exec_cmd_async = 0
-" don't use <leader>p
-nno zcp <Plug>(Prettier)
-" now maps to it's real usage.
-nno <silent> <leader>cp :Prettier<cr>
-" ================== prettier on every keystroke =========
-" ============ Not doing it now. =========================
-" when running at every change you may want to disable quickfix
-" let g:prettier#quickfix_enabled = 0
-" autocmd TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 " ================ themes ======================
 "
 " ================ key maps ======================
@@ -564,6 +638,8 @@ nno <silent> <localleader>ob :O b<cr>
 nno <silent> <localleader>oc :O cc<cr>
 nno <silent> <localleader>og :O go<cr>
 nno <silent> <localleader>ol :OpenCL<cr>
+nno <silent> <localleader>oo :SessionOpen<cr>
+nno <silent> <localleader>ss :SessionSave
 nno <silent> <localleader>sh :History<cr>
 nno <silent> <localleader>sH :History:<cr>
 nno <silent> <localleader>s/ :CocList grep<cr>
@@ -582,7 +658,6 @@ nno <silent> <localleader>st :Rg<cr>
 nno <silent> <localleader>sT :BTags<cr>
 nno <silent> <localleader>sw :Windows<cr>
 nno <silent> <localleader>sz :FZF<cr>
-nno <silent> <localleader>sr :RnvimrToggle<cr>
 nno <silent> <localleader>ps :!p4 diff<cr>
 nno <silent> <localleader>pe :exe ':!p4 edit '.bufname('%')<cr>
 nno <silent> <localleader>pz :!p4 revert<cr>
@@ -597,7 +672,6 @@ nno <silent> <localleader>pw :wqa!<cr>
 nno <silent> <localleader>pR :so $MYVIMRC<cr>
 nno <silent> <localleader>pS :SSave<cr>
 nno <silent> <localleader>pE :e ~/.virc<cr>
-nno <silent> <localleader>pf :Prettier<cr>
 nno <silent> <localleader>Gb :!blaze build<cr>
 nno <silent> <localleader>GB :BlazeBuild<cr>
 nno <silent> <localleader>Gt :!blaze test<cr>
@@ -716,12 +790,14 @@ let g:which_key_map['='] = [ '<C-W>='                     , 'balance windows' ]
 "let g:which_key_map['c'] = [ ':Codi!!'                    , 'virtual repl']
 let g:which_key_map['d'] = [ ':bd'                        , 'delete buffer']
 let g:which_key_map['e'] = [ ':CocCommand explorer'       , 'explorer' ]
+let g:which_key_map['f'] = [ ':CocList mru'                     , 'mru' ]
 " use <leader>sf
-let g:which_key_map['f'] = [ ':CocList mru'                     , 'FZF Files' ]
+let g:which_key_map['F'] = [ ':Files'                           , 'Files' ]
 "let g:which_key_map['f'] = [':Telescope find_files find_command=rg,-.,-i,--files'  	  , 'Tele Files']
 "let g:which_key_map['f'] = [':Telescope file_browser theme=get_dropdown'  , 'files']
-let g:which_key_map['r'] = [ ':RnvimrToggle'              , 'ranger' ]
-let g:which_key_map['S'] = [ ':SSave'                     , 'save session' ]
+"let g:which_key_map['S'] = [ ':SSave'                     , 'save session' ]
+let g:which_key_map['S'] = [ ':SessionSave'               , 'save session' ]
+let g:which_key_map['L'] = [ ':exe ":SessionOpen "'      , 'open session' ]
 let g:which_key_map['v'] = [ ':<C-W>v'                    , 'split right']
 "let g:which_key_map['z'] = [ ':ZenMode'                   , 'zen' ]
 "let g:which_key_map['z'] = [ ':Twilight'                   , 'zen' ]
@@ -862,6 +938,7 @@ let g:which_key_map.l = {
 " open
 let g:which_key_map.o = {
       \ 'name' : '+open',
+      \ 'o' : [':SessionOpen'             			 , 'open session'],
       \ '1' : [':vsp ~/.virc'                                    , 'virc'],
       \ '4' : [':vsp ~/.zshrc'                                    , 'zshrc'],
       \ '5' : [':vsp ~/.zshrc.pre-oh-my-zsh'                      , 'zshrc pre-omz'],
@@ -895,10 +972,9 @@ let g:which_key_map.p = {
       \ 'a' : [':qa!'                                       , 'quit all'],
       \ 's' : [':wqa!'                                      , 'save&quit all'],
       \ 'w' : [':w!'                                        , 'save!'],
-      \ 'S' : [':SSave'                                     , 'save session'],
+      \ 'S' : [':SessionSave '                              , 'save session'],
       \ 'e' : [':e ~/.virc'                          	    , 'open init' ],
       \ 'h' : ['Startify'                                   , 'home' ],
-      \ 'f' : [':Prettier'                                  , 'Pretties' ],
       \ }
 " s is for search
 let g:which_key_map.s = {
@@ -995,6 +1071,7 @@ set wildmode=longest:full,full
 " tab completion
 ino <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 ino <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
+ino <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
 " use <Tab> as trigger keys
 "imap <Tab> <Plug>(completion_smart_tab)
 "imap <S-Tab> <Plug>(completion_smart_s_tab)
@@ -1007,7 +1084,7 @@ set shiftround   "round the shift to multiple shiftwidth"
 set smarttab     "use shiftwidth when insert tab"
 set wildignore=*.swp,*.bak,*.pyc,*.class,*.o
 set title
-set visualbell
+set vb t_vb= 
 set noerrorbells
 set nobackup
 set noswapfile
@@ -1115,7 +1192,7 @@ set guioptions-=T "remove toolbar"
 set guioptions-=r "remove right-hand scroll bar"
 set guioptions-=L "remove left-hand scroll bar"
 set completeopt=menuone,noinsert,noselect
-set shortmess+=c
+set shortmess+=tToOIc
 set updatetime=3000
 set signcolumn=yes " fix jitter
 " spell

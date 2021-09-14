@@ -41,7 +41,7 @@ require('symbols-outline').setup()
 if not os.getenv('NOTRUECOLOR') then
   require'colorizer'.setup()
 end
-require("lsp-rooter").setup()
+-- require("lsp-rooter").setup()
 require('hop').setup()
 require('lspkind').init({
     -- enables text annotations
@@ -115,29 +115,29 @@ require("telescope").setup{
 require('telescope').load_extension('fzf')
 -- ----------------------------------------------
 --
-require('FTerm').setup({
-    dimensions = {
-        height = 0.8,
-        width = 0.45,
-        x = 0.95,
-        y = 0.8
-    },
-    border = 'single' -- or 'double'
-})
+-- require('FTerm').setup({
+--     dimensions = {
+--         height = 0.8,
+--         width = 0.45,
+--         x = 0.95,
+--         y = 0.8
+--     },
+--     border = 'single' -- or 'double'
+-- })
 -- trouble
-require('trouble').setup( {
-    height = 10,
-} )
-local trouble = require("trouble.providers.telescope")
-local telescope_t = require("telescope")
-telescope_t.setup {
-  defaults = {
-    mappings = {
-      i = { ["<c-t>"] = trouble.open_with_trouble },
-      n = { ["<c-t>"] = trouble.open_with_trouble },
-    },
-  },
-}
+-- require('trouble').setup( {
+--     height = 10,
+-- } )
+-- local trouble = require("trouble.providers.telescope")
+-- local telescope_t = require("telescope")
+-- telescope_t.setup {
+--   defaults = {
+--     mappings = {
+--       i = { ["<c-t>"] = trouble.open_with_trouble },
+--       n = { ["<c-t>"] = trouble.open_with_trouble },
+--     },
+--   },
+-- }
 -- function to attach completion when setting up lsp
 local on_attach = function(client)
   require'completion'.on_attach(client)
@@ -150,6 +150,7 @@ local on_attach = function(client)
       },
   })
 end
+
 -- lspinstall
 local function setup_servers()
   require'lspinstall'.setup()
@@ -321,6 +322,7 @@ require("zen-mode").setup {
   on_close = function()
   end,
 }
+
 -- dim unfocused area.
 require("twilight").setup {
  -- https://github.com/folke/twilight.nvim/
@@ -350,6 +352,7 @@ require("indent_blankline").setup {
     -- char = "|",
     buftype_exclude = {"terminal"}
 }
+-- this crash nvim for some reason.
 -- gitsigns
 -- https://github.com/lewis6991/gitsigns.nvim
 require('gitsigns').setup{
@@ -357,6 +360,7 @@ require('gitsigns').setup{
   linehl = false,
   current_line_blame = true,
 }
+-- this crash nvim for some reason.
 -- autopairs
 require('nvim-autopairs').setup{}
 local remap = api.nvim_set_keymap

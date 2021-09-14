@@ -11,8 +11,22 @@ let g:asyncrun_open = 10
 let g:asyncrun_rootmarks = ['.git', '.svn', '.root', '.project', '.hg', '.projectile']
 augroup nongo_indent
 au!
-au VimEnter *.lua,*.rs,*.sh,*.vim*,*.bash*,*.zsh*,*.h,*.cc,*.html,*.toml,*.py set ts=2 sw=2 sts tw=0 expandtab
+au VimEnter *.virc,*.lua,*.rs,*.sh,*.vim*,*.bash*,*.zsh*,*.h,*.cc,*.html,*.toml,*.py set ts=2 sw=2 sts tw=0 expandtab
 augroup END
+" intend + manual folding
+"augroup folding
+"  au!
+"  au! BufReadPre * setlocal foldmethod=indent
+"  au! BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
+"augroup END
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+let g:mapleader = "\<Space>"
+let g:maplocalleader = ','
+nno <silent> <leader> :silent <c-u> :silent WhichKey '<Space>'<CR>
+vno <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
+nno <silent> <localleader> :silent <c-u> :silent WhichKey ','<CR>
+" ============================ GOOGLE3 =========================="
 if fnamemodify(resolve(expand('%:p')), ':h') =~ 'google3'
   highlight SignifySignAdd    cterm=bold ctermbg=0  ctermfg=2
   highlight SignifySignDelete cterm=bold ctermbg=0  ctermfg=4
@@ -30,20 +44,57 @@ if fnamemodify(resolve(expand('%:p')), ':h') =~ 'google3'
   let g:signify_vcs_cmds_diffmode = { 'perforce': 'citcdiff.bin -b %f || true' }
   let g:signify_skip_filename_pattern = ['\.pipertmp.*']
   let g:signify_line_highlight = 0
+  let g:blazevim_quickfix_autoopen = 1
+  let g:blazevim_execution='background'
+  let s:ignore_warnings = 0
+  " Cider
+  " Send async completion requests.
+  let g:lsp_async_completion = 1
+  let g:lsp_signs_enabled = 1           " enable diagnostics signs in the gutter
+  let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
+  let g:lsp_highlight_references_enabled = 1
+  let g:lsp_signature_help_enabled = 1
+  let g:asyncomplete_auto_popup = 1
+  "let g:asyncomplete_smart_completion = 1
+  if has('nvim')
+    let g:lsp_preview_float = 1
+  endif
+  au User lsp_setup call lsp#register_server({
+        \ 'name': 'CiderLSP',
+        \ 'cmd': {server_info->[
+        \   '~/bin/ciderlsp',
+        \   '--tooltag=vim-lsp',
+        \   '--noforward_sync_responses',
+        \   '--hub_addr=blade:languageservices',
+        \ ]},
+        \ 'whitelist': ['c', 'cpp', 'java', 'proto', 'python', 'textproto', 'go', 'swift', 'BUILD'],
+        \})
+  augroup corp_programming
+    au!
+    au VimEnter *.go nested :Vista!!
+    " this will make vista can't jump window.
+    "au BufLeave,BufWinLeave,BufDelete,BufHidden,BufUnload,WinLeave,VimLeave <buffer> ++once :Vista!
+    au FileType bzl,cpp,go,java,proto,python nno <silent> gd :vert LspDefinition<CR>
+    au FileType bzl,cpp,go,java,proto,python nno <silent> gm :LspRename<CR>
+    au FileType bzl,cpp,go,java,proto,python nno <silent> gr :LspReferences<CR>
+    au FileType bzl,cpp,go,java,proto,python nno <silent> gp :LspPeekDefinition<CR>
+    au FileType bzl,cpp,go,java,proto,python nno <silent> g. :LspDocumentSymbol<CR>
+    au FileType bzl,cpp,go,java,proto,python nno <silent> g= :LspDocumentFormat<CR>
+    au FileType bzl,cpp,go,java,proto,python nno <silent> ] :LspNextDiagnostic<CR>
+    au FileType bzl,cpp,go,java,proto,python nno <silent> [ :LspPreviousDiagnostic<CR>
+    au FileType bzl,cpp,go,java,proto,python nno <silent> g/ :LspDocumentSymbolSearch<CR>
+    au FileType bzl,cpp,go,java,proto,python nno <silent> g\ :LspCodeAction<CR>
+    au FileType bzl,cpp,go,java,proto,python nno <silent> H :LspHover<CR>
+    " :setfiletype <c-d>
+    au FileType
+          \ bzl,cpp,go,java,proto,python,
+          \textproto,yaml,typescript,javascript,
+          \gslb,html,json,ncl,p4-spec,pbtxt,piccolo,
+          \gcl,sdl,sh,sql,text,textpb,tf,tpl,tpp,xml,zsh
+          \ nno <silent> K <cmd>lua require"plugins.blame".desc()<CR>
+  augroup END
 endif
-" intend + manual folding
-"augroup folding
-"  au!
-"  au! BufReadPre * setlocal foldmethod=indent
-"  au! BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
-"augroup END
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
-let g:mapleader = "\<Space>"
-let g:maplocalleader = ','
-nno <silent> <leader> :silent <c-u> :silent WhichKey '<Space>'<CR>
-vno <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
-nno <silent> <localleader> :silent <c-u> :silent WhichKey ','<CR>
+" ============================ GOOGLE3 =========================="
 " ================ functions and commands ======================
 " window management
 function! ResCur() abort
@@ -377,6 +428,8 @@ nno <silent> <localleader>ob :O b<cr>
 nno <silent> <localleader>oc :O cc<cr>
 nno <silent> <localleader>og :O go<cr>
 nno <silent> <localleader>ol :OpenCL<cr>
+nno <silent> <localleader>oo :SessionOpen<cr>
+nno <silent> <localleader>ss :SessionSave
 nno <silent> <localleader>oi :e ~/.config/nvim/init.vim<cr>
 nno <silent> <localleader>ok :e ~/.config/nvim/keys/which-key.vim<cr>
 nno <silent> <localleader>op :e ~/.config/nvim/vim-plug/plugins.vim<cr>
@@ -531,23 +584,24 @@ let g:which_key_map[';'] = [ ':CocList outline'           , 'search words' ]
 let g:which_key_map['V'] = [ ':Commands'                  , 'commands' ]
 let g:which_key_map['='] = [ '<C-W>='                     , 'balance windows' ]
 " not yet
-"let g:which_key_map['c'] = [ ':Codi!!'                    , 'virtual repl']
+"let g:which_key_map['c'] = [ ':Codi!!'                   , 'virtual repl']
 let g:which_key_map['d'] = [ ':bd'                        , 'delete buffer']
 let g:which_key_map['e'] = [ ':CocCommand explorer'       , 'explorer' ]
 " use <leader>sf
 let g:which_key_map['F'] = [ ':Files'                     , 'FZF Files' ]
 let g:which_key_map['f'] = [':Telescope find_files find_command=rg,-.,-i,--files'  	  , 'Tele Files']
 "let g:which_key_map['f'] = [':Telescope file_browser theme=get_dropdown'  , 'files']
-let g:which_key_map['r'] = [ ':RnvimrToggle'              , 'ranger' ]
-let g:which_key_map['S'] = [ ':SSave'                     , 'save session' ]
+let g:which_key_map['r'] = [ ':RnvimrToggle'              ,'ranger' ]
+let g:which_key_map['S'] = [ ':SessionSave '              , 'save session' ]
+let g:which_key_map['L'] = [ ':SessionOpen'               , 'open session' ]
 let g:which_key_map['v'] = [ ':<C-W>v'                    , 'split right']
-"let g:which_key_map['z'] = [ ':ZenMode'                   , 'zen' ]
-let g:which_key_map['z'] = [ ':Twilight'                   , 'zen' ]
+"let g:which_key_map['z'] = [ ':ZenMode'                  , 'zen' ]
+let g:which_key_map['z'] = [ ':Twilight'                  , 'zen' ]
 let g:which_key_map['m'] = [ ':TZFocus'                   , 'Max/UnMax' ]
 let g:which_key_map['?'] = [ ':CocList maps'              , 'maps' ]
 let g:which_key_map['B'] = [ ':Vista'                     , 'Tags' ]
 let g:which_key_map["'"] = [ ':FloatermNew --width=50 --height=60' , 'shell' ]
-let g:which_key_map['h'] = [ ':FloatermKill'               , 'kill shell' ]
+let g:which_key_map['h'] = [ ':FloatermKill'              , 'kill shell' ]
 let g:which_key_map['q'] = [ ':q!'                        , 'quit']
 let g:which_key_map['n'] = [ ':bnext'                     , 'cycle buffers' ]
 let g:which_key_map['`'] = [ ':TSHighlightCapturesUnderCursor' , 'TSInfo' ]
@@ -681,6 +735,7 @@ let g:which_key_map.l = {
 " open
 let g:which_key_map.o = {
       \ 'name' : '+open',
+      \ 'o' : [':SessionOpen'             			  , 'open session'],
       \ '1' : [':vsp ~/.vimrc'                                    , 'vimrc'],
       \ '2' : [':vsp ~/.vimrc.plug'                               , 'vimrc plug'],
       \ '3' : [':vsp ~/.vim/init.lua'                             , 'vimrc init.lua'],
@@ -719,9 +774,9 @@ let g:which_key_map.p = {
       \ 'a' : [':qa!'                                       , 'quit all'],
       \ 's' : [':wqa!'                                      , 'save&quit all'],
       \ 'w' : [':w!'                                        , 'save!'],
-      \ 'S' : [':SSave'                                     , 'save session'],
+      \ 'S' : [':SessionSave '                              , 'save session'],
       \ 'e' : [':e ~/.vimrc'                          	    , 'open init' ],
-      \ 'b' : [':e ~/.vimrc.plug'                        , 'open plug' ],
+      \ 'b' : [':e ~/.vimrc.plug'                           , 'open plug' ],
       \ 'h' : ['Startify'                                   , 'home' ],
       \ 'f' : [':Prettier'                                  , 'Pretties' ],
       \ }
@@ -859,7 +914,7 @@ imap <S-Tab> <Plug>(completion_smart_s_tab)
 " https://sharksforarms.dev/posts/neovim-rust/
 " COQ config
 let g:coq_settings = {}
-autocmd VimEnter * execute 'COQnow'
+" autocmd VimEnter * execute 'COQnow'
 set copyindent   "make the autoindent copying the existing indentation"
 set shiftround   "round the shift to multiple shiftwidth"
 set smarttab     "use shiftwidth when insert tab"
@@ -978,7 +1033,7 @@ set shortmess+=c
 " https://sharksforarms.dev/posts/neovim-rust/
 " " Code navigation shortcuts
 "nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
-nno <silent> gd :vert <cmd>lua vim.lsp.buf.definition()<CR>
+nno <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
 nno <silent> gD    <cmd>lua vim.lsp.buf.references()<CR>
 nno <silent> H     <cmd>lua vim.lsp.buf.hover()<CR>
 nno <silent> g.    <cmd>lua vim.lsp.buf.code_action()<CR>

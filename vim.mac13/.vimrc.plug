@@ -56,44 +56,22 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 call plug#begin('~/.vim/plugged')
-" ===== from old spf13
-Plug 'fatih/vim-go'
-Plug 'edkolev/tmuxline.vim'
-Plug 'fnune/base16-vim'   " superset of above.
-Plug 'vim-scripts/mru.vim'
-Plug 'ayu-theme/ayu-vim' " or other package manager
-"set termguicolors     " enable true colors support
-let ayucolor="mirage" " for mirage version of theme
-"let ayucolor="dark"   " for dark version of theme
-Plug 'drewtempelmeyer/palenight.vim'
-Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeTabsOpen', 'NERDTreeTabsFind', 'NERDTreeFind' ] }
-Plug 'jistr/vim-nerdtree-tabs', { 'on': ['NERDTreeToggle', 'NERDTreeTabsOpen', 'NERDTreeTabsFind', 'NERDTreeFind' ] }
-Plug 'Xuyuanp/nerdtree-git-plugin'
-"Plug 'bling/vim-bufferline'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
-" ===== from old spf13
-Plug 'edkolev/promptline.vim'
-Plug 'nikvdp/neomux'
-" imcompatible with zah's nim.vim plugin.
-Plug 'vifm/vifm.vim'
-" use homebrew version
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" ====== MUST HAVE ===== "
+if fnamemodify(resolve(expand('%:p')), ':h') !~ 'google3'
+  " Plug 'fatih/vim-go' " with  CiderLSP, it surrpassed  vim-go's functionality.
+endif
+Plug 'i3d/vim-jimbothemes'
+Plug 'mhinz/vim-signify' " this is copied over.
+Plug 'liuchengxu/vim-which-key'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'dikiaap/minimalist'
-Plug 'norcalli/nvim-colorizer.lua'
-Plug 'unblevable/quick-scope'
-" Trigger a highlight in the appropriate direction when pressing these keys:
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-highlight QuickScopePrimary guifg='#00FF87' gui=underline ctermfg=155 cterm=underline
-highlight QuickScopeSecondary guifg='#FFAF00' gui=underline ctermfg=81 cterm=underline
-let g:qs_max_chars=150
-Plug 'alvan/vim-closetag'
-let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
-let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.js'
-let g:closetag_filetypes = 'html,xhtml,phtml,javascript'
-" use <c-w><c-w> to switch.
-Plug 'voldikss/vim-floaterm', { 'on': ['FloatermNew', 'FloatermToggle', 'FloatermHide'] }
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+au! FileType * let g:coc_suggest_disable = 1
+Plug 'voldikss/vim-floaterm'  " can't load lazily.
 set shell=/bin/zsh
 let g:floaterm_wintype="floating"
 let g:floaterm_gitcommit='floaterm'
@@ -109,22 +87,55 @@ function s:floatermSettings()
 endfunction
 autocmd FileType floaterm call s:floatermSettings()
 autocmd User Startified setlocal buflisted
-Plug 'mhinz/vim-startify'
-let g:python3_host_prog = '/Users/jimxu/homebrew/bin/python3'
-Plug 'nightsense/vimspectr'
-Plug 'tpope/vim-rhubarb'
-Plug 'junegunn/gv.vim'
-Plug 'kevinhwang91/rnvimr', {'do': 'make sync', 'on': 'RnvimrToggle'}
-" Keeping up to date with master
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'skywind3000/asynctasks.vim'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'zhaocai/GoldenView.Vim'
-Plug 'machakann/vim-highlightedyank'
-let g:highlightedyank_highlight_duration = -1
-Plug 'pangloss/vim-javascript'
-let g:javascript_plugin_flow = 1
-Plug 'brooth/far.vim', {'on': ['F', 'Far', 'Farr', 'Fardo']}
+let g:goldenview__enable_at_startup = 1
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+Plug 'RRethy/nvim-treesitter-textsubjects'
+Plug 'nvim-treesitter/nvim-treesitter-refactor'
+Plug 'neovim/nvim-lspconfig'
+Plug 'kabouzeid/nvim-lspinstall'
+Plug 'nvim-lua/lsp_extensions.nvim'
+Plug 'ray-x/lsp_signature.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzy-native.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'gelguy/wilder.nvim'
+let g:vista_update_on_text_changed = 1
+let g:vista_stay_on_open = 0  " don't focus on it by default.
+let g:vista_keep_fzf_colors = 1
+let g:vista_sidebar_width = 20
+Plug 'liuchengxu/vista.vim'
+function! NearestMethodOrFunction() abort
+  return get(b:, 'vista_nearest_method_or_function', '')
+endfunction
+au VimEnter * call vista#RunForNearestMethodOrFunction()
+Plug 'haringsrob/nvim_context_vt'
+let g:session_directory = '~/.vim/sessions'
+"let g:session_autoload = 'yes'
+let g:session_autosave = 'yes'
+let g:session_autosave_periodic = 1
+let g:session_autosave_silent = 1
+let g:session_default_to_last = 1
+let g:session_command_aliases = 1
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-session'
+Plug 'windwp/nvim-autopairs'
+Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
+" ====== MUST HAVE ===== "
+" ====== NICE HAVE ===== "
+Plug 'lukas-reineke/indent-blankline.nvim'
+let g:indent_blankline_char_list = ['|', '¦', '┆', '┊']
+let g:indent_blankline_char_highlight_list = ['Error', 'Function']
+let g:indent_blankline_space_char_highlight_list = ['Error', 'Function']
+let g:indent_blankline_use_treesitter = v:true
+let g:indent_blankline_show_current_context = v:true
+let g:indent_blankline_context_highlight_list = ['Error', 'Warning']
+Plug 'phaazon/hop.nvim'
+nno S :HopPattern<cr>
 Plug 'RRethy/vim-illuminate'
 let g:Illuminate_ftblacklist = ['nerdtree']
 augroup illuminate_augroup
@@ -132,96 +143,312 @@ augroup illuminate_augroup
   autocmd VimEnter * hi illuminatedCurWord cterm=italic gui=italic
 augroup END
 Plug 'lfv89/vim-interestingwords'
-Plug 'AndrewRadev/linediff.vim', {'on': 'Linediff'}
-Plug 'kshenoy/vim-signature'
-Plug 'wellle/targets.vim'
-Plug 'markonm/traces.vim'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'liuchengxu/vim-which-key'
-Plug 'mhinz/vim-signify'
-" 3/7/2021
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-Plug 'RRethy/nvim-treesitter-textsubjects'
-Plug 'nvim-treesitter/nvim-treesitter-refactor'
-Plug 'ulwlu/elly.vim'
-" 3/12/2021
-Plug 'b4skyx/serenade'
-" 3/22/2021
-" 4/3/2021
-Plug 'i3d/vim-jimbothemes'
-" 4/6/2021
-" https://sharksforarms.dev/posts/neovim-rust/
-Plug 'neovim/nvim-lspconfig'
-Plug 'kabouzeid/nvim-lspinstall'
-Plug 'simrat39/rust-tools.nvim'
-Plug 'nvim-lua/lsp_extensions.nvim'
-Plug 'nvim-lua/completion-nvim'
-" Optional dependencies
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
-Plug 'nacro90/numb.nvim'
-" 4/15/2021
-" post install (yarn install | npm install) then load plugin only for editing supported files
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
-" 4/19/2021
-Plug 'kyazdani42/nvim-web-devicons'
+Plug 'machakann/vim-highlightedyank'
+let g:highlightedyank_highlight_duration = -1
 Plug 'ryanoasis/vim-devicons'
-" 4/23/2021 (AirTag day)
-Plug 'numtostr/FTerm.nvim'
-Plug 'simrat39/symbols-outline.nvim'
-Plug 'gruvbox-community/gruvbox'
-" 4/26/2021
-Plug 'famiu/nvim-reload'
-" 4/30/2021 " the iPad Pro day
+Plug 'kyazdani42/nvim-web-devicons'
 Plug 'tversteeg/registers.nvim'
-Plug 'npxbr/glow.nvim', {'do': ':GlowInstall'}
-" 5/3/2021
-Plug 'folke/lsp-colors.nvim'
-Plug 'folke/lsp-trouble.nvim'
-" 6/4 2021
-Plug 'ahmedkhalf/lsp-rooter.nvim'
-" 6/22/2021  ==> looongest daytime.
-Plug 'ray-x/lsp_signature.nvim'
-" 6/27/2021 ===> Hoooooot!!! (45c)
-Plug 'Pocco81/TrueZen.nvim'
-" 7/6/2021
-" 13/7/2021
-Plug 'folke/zen-mode.nvim'   " another zen-mode
-Plug 'folke/twilight.nvim'   " dim unfocused code
-Plug 'tweekmonster/startuptime.vim'
-Plug 'onsails/vimway-lsp-diag.nvim'
-" 31/7/2021
-Plug 'gelguy/wilder.nvim'
-Plug 'roosta/fzfolds.vim'
-" 14/8/2021
-Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
-Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
-" 19/8/2021
-Plug 'lukas-reineke/indent-blankline.nvim'
-let g:indent_blankline_char_list = ['|', '¦', '┆', '┊']    
-let g:indent_blankline_char_highlight_list = ['Error', 'Function']    
-let g:indent_blankline_space_char_highlight_list = ['Error', 'Function']    
-let g:indent_blankline_use_treesitter = v:true    
-let g:indent_blankline_show_current_context = v:true    
-let g:indent_blankline_context_highlight_list = ['Error', 'Warning']  
+Plug 'ms-jpq/coq_nvim'
+Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts', 'on': 'COQnow'}
 Plug 'lewis6991/gitsigns.nvim'
-" modern tagbar
-Plug 'liuchengxu/vista.vim'
-function! NearestMethodOrFunction() abort
-  return get(b:, 'vista_nearest_method_or_function', '')
-endfunction
-autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
-" 21/8/2021 easymotion.
-Plug 'phaazon/hop.nvim'
-nno S :HopPattern<cr>
-Plug 'nvim-treesitter/playground'
-Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
-Plug 'haringsrob/nvim_context_vt'
+Plug 'vifm/vifm.vim'
+" ====== NICE HAVE ===== "
+" ====== OK HAVE ===== "
+Plug 'roosta/fzfolds.vim'
 Plug 'onsails/lspkind-nvim'
-Plug 'windwp/nvim-autopairs'
+Plug 'nvim-treesitter/playground', { 'on': 'TSPlaygroundToggle' }
+Plug 'Pocco81/TrueZen.nvim', {'on': 'TZFocus'}  " used only for max/restore window effect.
+Plug 'folke/zen-mode.nvim' " another zen-mode
+Plug 'folke/twilight.nvim' " dim unfocused code
+Plug 'nacro90/numb.nvim'
+Plug 'simrat39/rust-tools.nvim', { 'for': 'rust' }
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'ThePrimeagen/git-worktree.nvim'
+Plug 'nvim-lua/completion-nvim'
+imap <Tab> <Plug>(completion_smart_tab)
+imap <S-Tab> <Plug>(completion_smart_s_tab)
+Plug 'simrat39/symbols-outline.nvim'
+Plug 'tpope/vim-surround'
+Plug 'norcalli/nvim-colorizer.lua'
+" ====== OK HAVE ===== "
+" ====== PROBABLY OK HAVE ===== "
+" Plug 'sso://user/mcdermottm/vim-csearch'
+"""" OLD spf13 migrated """"
+" Plug 'edkolev/tmuxline.vim', { 'on': 'Tmuxline' }
+" Plug 'fnune/base16-vim'
+" Plug 'tomtom/quickfixsigns_vim'
+" Plug 'ayu-theme/ayu-vim' " or other package manager
+" "termguicolors will affect the terminal color display.
+" "set termguicolors     " enable true colors support
+" "let ayucolor="light"  " for light version of theme
+" "let ayucolor="mirage" " for mirage version of theme
+" let ayucolor="dark"   " for dark version of theme
+" Plug 'tpope/vim-fugitive'
+" set statusline+=%{fugitive#statusline()} " Git Hotness
+" Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeTabsOpen', 'NERDTreeTabsFind', 'NERDTreeFind' ] }
+" Plug 'jistr/vim-nerdtree-tabs', { 'on': ['NERDTreeToggle', 'NERDTreeTabsOpen', 'NERDTreeTabsFind', 'NERDTreeFind' ] }
+" Plug 'mbbill/undotree'
+" """" OLD spf13 migrated """"
+" Plug 'drewtempelmeyer/palenight.vim'
+" Plug 'mhartington/oceanic-next'
+" Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+" Plug 'dikiaap/minimalist'
+" " for ciderlsp setup
+let g:lsp_semantic_enabled = 0
+let g:lsp_format_sync_timeout = 1000
+
+""" " this is *very* cool!!! but this will make things really slow.
+" Plug 'wellle/tmux-complete.vim'
+""" " this is *very* cool!!! but this will make things really slow.
+
+" " Keeping up to date with master
+" Plug 'norcalli/nvim-colorizer.lua'
+" Plug 'unblevable/quick-scope'
+" " Trigger a highlight in the appropriate direction when pressing these keys:
+" let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+" highlight QuickScopePrimary guifg='#00FF87' gui=underline ctermfg=155 cterm=underline
+" highlight QuickScopeSecondary guifg='#FFAF00' gui=underline ctermfg=81 cterm=underline
+" let g:qs_max_chars=150
+" Plug 'junegunn/rainbow_parentheses.vim'
+" let g:rainbow#max_level = 16
+" let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+" Plug 'ahmedkhalf/lsp-rooter.nvim'
+" Plug 'alvan/vim-closetag'
+" let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
+" let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.js'
+" let g:closetag_filetypes = 'html,xhtml,phtml,javascript'
+" " use <c-w><c-w> to switch.
+" Plug 'mhinz/vim-startify'
+" Plug 'brooth/far.vim', { 'on': ['F', 'Farr', 'Far', 'Fardo'] }
+" Plug 'AndrewRadev/linediff.vim', { 'on': 'Linediff' }
+" Plug 'kshenoy/vim-signature'
+" Plug 'wellle/targets.vim'
+" Plug 'markonm/traces.vim'
+" Plug 'christoomey/vim-tmux-navigator'
+" Plug 'benmills/vimux'
+" " Plug 'tpope/vim-rhubarb', { 'on': 'GBrowse' }
+" Plug 'junegunn/gv.vim'
+" Plug 'skbolton/embark'
+" " 3/7/2021
+" Plug 'ulwlu/elly.vim'
+" " 3/11/2021
+" " 3/12/2021
+" Plug 'b4skyx/serenade'
+" " 4/6/2021
+" " https://github.com/romgrk/barbar.nvim#install
+" Plug 'romgrk/barbar.nvim'
+" let bufferline = get(g:, 'bufferline', {})
+" let bufferline.animation = v:true
+" let bufferline.icon_separator_active = '▎'
+" let bufferline.icon_separator_inactive = '▎'
+" let bufferline.icon_close_tab = ''
+" let bufferline.icon_close_tab_modified = '●'
+" " 4/15/2021
+" " post install (yarn install | npm install) then load plugin only for editing supported files
+" " Since google3 vim already has codefmt for some of the filetypes, we will
+" " exclude them here.
+" Plug 'prettier/vim-prettier', {
+"   \ 'do': 'yarn install',
+"   \ 'for': ['css', 'less', 'scss', 'json', 'graphql', 'vue', 'yaml', 'html'] }
+" " 4/19/2021
+" " 4/23/2021
+" Plug 'numtostr/FTerm.nvim', { 'on': 'toggle' }
+" Plug 'nvim-lua/popup.nvim'
+" Plug 'gruvbox-community/gruvbox'
+" " 4/26/2021
+" " Plug 'famiu/nvim-reload'
+" " 4/30/2021 " the iPad Pro day
+" Plug 'norcalli/nvim-colorizer.lua'
+" " 5/3/2021
+" Plug 'npxbr/glow.nvim', {'do': ':GlowInstall'}
+" Plug 'folke/lsp-colors.nvim'
+" " 6/18/2021
+" Plug 'stsewd/fzf-checkout.vim'
+" " 6/28/2021 (hotest day ever)
+" 13/7/2021
+" Plug 'tweekmonster/startuptime.vim'
+" "Plug 'onsails/vimway-lsp-diag.nvim' " replace trouble? can't exit it?
+" " 13/8/2021
+" " Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' , 'on': 'Clap'}
+" " 14/8/2021
+" " 19/8/2021
+" " modern tagbar
+" " 21/8/2021 easymotion + sneak
+" ====== PROBABLY OK HAVE ===== "
+" " ====== OLD OLD OLD ===== "
+" " ===== from old spf13
+" Plug 'fatih/vim-go'
+" Plug 'edkolev/tmuxline.vim'
+" Plug 'fnune/base16-vim'   " superset of above.
+" Plug 'vim-scripts/mru.vim'
+" Plug 'ayu-theme/ayu-vim' " or other package manager
+" "set termguicolors     " enable true colors support
+" let ayucolor="mirage" " for mirage version of theme
+" "let ayucolor="dark"   " for dark version of theme
+" Plug 'drewtempelmeyer/palenight.vim'
+" Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeTabsOpen', 'NERDTreeTabsFind', 'NERDTreeFind' ] }
+" Plug 'jistr/vim-nerdtree-tabs', { 'on': ['NERDTreeToggle', 'NERDTreeTabsOpen', 'NERDTreeTabsFind', 'NERDTreeFind' ] }
+" Plug 'Xuyuanp/nerdtree-git-plugin'
+" "Plug 'bling/vim-bufferline'
+" Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-surround'
+" " ===== from old spf13
+" Plug 'edkolev/promptline.vim'
+" Plug 'nikvdp/neomux'
+" " imcompatible with zah's nim.vim plugin.
+" Plug 'vifm/vifm.vim'
+" " use homebrew version
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" Plug 'junegunn/fzf.vim'
+" Plug 'dikiaap/minimalist'
+" Plug 'unblevable/quick-scope'
+" " Trigger a highlight in the appropriate direction when pressing these keys:
+" let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+" highlight QuickScopePrimary guifg='#00FF87' gui=underline ctermfg=155 cterm=underline
+" highlight QuickScopeSecondary guifg='#FFAF00' gui=underline ctermfg=81 cterm=underline
+" let g:qs_max_chars=150
+" Plug 'alvan/vim-closetag'
+" let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
+" let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.js'
+" let g:closetag_filetypes = 'html,xhtml,phtml,javascript'
+" " use <c-w><c-w> to switch.
+" Plug 'voldikss/vim-floaterm', { 'on': ['FloatermNew', 'FloatermToggle', 'FloatermHide'] }
+" set shell=/bin/zsh
+" let g:floaterm_wintype="floating"
+" let g:floaterm_gitcommit='floaterm'
+" let g:floaterm_autoinsert=1
+" let g:floaterm_width=0.5
+" let g:floaterm_height=0.5
+" let g:floaterm_wintitle=0
+" let g:floaterm_position="bottomright"
+" let g:floaterm_autoclose=1
+" function s:floatermSettings()
+"     setlocal number
+"     " more settings
+" endfunction
+" autocmd FileType floaterm call s:floatermSettings()
+" autocmd User Startified setlocal buflisted
+" Plug 'mhinz/vim-startify'
+" let g:python3_host_prog = '/Users/jimxu/homebrew/bin/python3'
+" Plug 'nightsense/vimspectr'
+" Plug 'tpope/vim-rhubarb'
+" Plug 'junegunn/gv.vim'
+" Plug 'kevinhwang91/rnvimr', {'do': 'make sync', 'on': 'RnvimrToggle'}
+" " Keeping up to date with master
+" Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'skywind3000/asynctasks.vim'
+" Plug 'skywind3000/asyncrun.vim'
+" Plug 'zhaocai/GoldenView.Vim'
+" Plug 'machakann/vim-highlightedyank'
+" let g:highlightedyank_highlight_duration = -1
+" Plug 'pangloss/vim-javascript'
+" let g:javascript_plugin_flow = 1
+" Plug 'brooth/far.vim', {'on': ['F', 'Far', 'Farr', 'Fardo']}
+" Plug 'RRethy/vim-illuminate'
+" let g:Illuminate_ftblacklist = ['nerdtree']
+" augroup illuminate_augroup
+"   autocmd!
+"   autocmd VimEnter * hi illuminatedCurWord cterm=italic gui=italic
+" augroup END
+" Plug 'lfv89/vim-interestingwords'
+" Plug 'AndrewRadev/linediff.vim', {'on': 'Linediff'}
+" Plug 'kshenoy/vim-signature'
+" Plug 'wellle/targets.vim'
+" Plug 'markonm/traces.vim'
+" Plug 'christoomey/vim-tmux-navigator'
+" Plug 'liuchengxu/vim-which-key'
+" Plug 'mhinz/vim-signify'
+" " 3/7/2021
+" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+" Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+" Plug 'RRethy/nvim-treesitter-textsubjects'
+" Plug 'nvim-treesitter/nvim-treesitter-refactor'
+" Plug 'ulwlu/elly.vim'
+" " 3/12/2021
+" Plug 'b4skyx/serenade'
+" " 3/22/2021
+" " 4/3/2021
+" Plug 'i3d/vim-jimbothemes'
+" " 4/6/2021
+" " https://sharksforarms.dev/posts/neovim-rust/
+" Plug 'neovim/nvim-lspconfig'
+" Plug 'kabouzeid/nvim-lspinstall'
+" Plug 'simrat39/rust-tools.nvim'
+" Plug 'nvim-lua/lsp_extensions.nvim'
+" Plug 'nvim-lua/completion-nvim'
+" " Optional dependencies
+" Plug 'nvim-lua/popup.nvim'
+" Plug 'nvim-lua/plenary.nvim'
+" Plug 'nvim-telescope/telescope.nvim'
+" Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+" Plug 'nacro90/numb.nvim'
+" " 4/15/2021
+" " post install (yarn install | npm install) then load plugin only for editing supported files
+" Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+" " 4/19/2021
+" Plug 'kyazdani42/nvim-web-devicons'
+" Plug 'ryanoasis/vim-devicons'
+" " 4/23/2021 (AirTag day)
+" Plug 'numtostr/FTerm.nvim'
+" Plug 'gruvbox-community/gruvbox'
+" " 4/26/2021
+" Plug 'famiu/nvim-reload'
+" " 4/30/2021 " the iPad Pro day
+" Plug 'tversteeg/registers.nvim'
+" Plug 'npxbr/glow.nvim', {'do': ':GlowInstall'}
+" " 5/3/2021
+" Plug 'folke/lsp-colors.nvim'
+" Plug 'folke/lsp-trouble.nvim'
+" " 6/4 2021
+" Plug 'ahmedkhalf/lsp-rooter.nvim'
+" " 6/22/2021  ==> looongest daytime.
+" Plug 'ray-x/lsp_signature.nvim'
+" " 6/27/2021 ===> Hoooooot!!! (45c)
+" Plug 'Pocco81/TrueZen.nvim'
+" " 7/6/2021
+" " 13/7/2021
+" Plug 'folke/zen-mode.nvim'   " another zen-mode
+" Plug 'folke/twilight.nvim'   " dim unfocused code
+" Plug 'tweekmonster/startuptime.vim'
+" Plug 'onsails/vimway-lsp-diag.nvim'
+" " 31/7/2021
+" Plug 'gelguy/wilder.nvim'
+" " 14/8/2021
+" Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+" Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+" " 19/8/2021
+" Plug 'lukas-reineke/indent-blankline.nvim'
+" let g:indent_blankline_char_list = ['|', '¦', '┆', '┊']    
+" let g:indent_blankline_char_highlight_list = ['Error', 'Function']    
+" let g:indent_blankline_space_char_highlight_list = ['Error', 'Function']    
+" let g:indent_blankline_use_treesitter = v:true    
+" let g:indent_blankline_show_current_context = v:true    
+" let g:indent_blankline_context_highlight_list = ['Error', 'Warning']  
+" Plug 'lewis6991/gitsigns.nvim'
+" " modern tagbar
+" Plug 'liuchengxu/vista.vim'
+" function! NearestMethodOrFunction() abort
+"   return get(b:, 'vista_nearest_method_or_function', '')
+" endfunction
+" autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+" " 21/8/2021 easymotion.
+" Plug 'phaazon/hop.nvim'
+" nno S :HopPattern<cr>
+" Plug 'nvim-treesitter/playground'
+" Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
+" Plug 'haringsrob/nvim_context_vt'
+" Plug 'onsails/lspkind-nvim'
+" Plug 'windwp/nvim-autopairs'
+" let g:session_directory = '~/.vim/sessions'
+" "let g:session_autoload = 'yes'
+" let g:session_autosave = 'yes'
+" let g:session_autosave_periodic = 1
+" let g:session_autosave_silent = 1
+" let g:session_default_to_last = 1
+" let g:session_command_aliases = 1
+" Plug 'xolox/vim-misc'
+" Plug 'xolox/vim-session'
+" " ====== OLD OLD OLD ===== "
 " ================== PLUG END ====================== "
 call plug#end()
 " Automatically install missing plugins on startup
