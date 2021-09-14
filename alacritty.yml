@@ -402,7 +402,7 @@ key_bindings:
 #  cyan:    '#56b6c2'
 #  white:   '#ffffff'
 
-## #Colors (matrix)
+##Colors (matrix)
 #colors:
 #  # #Default Colors
 #  primary:
@@ -437,38 +437,69 @@ key_bindings:
 #    text: "#00FF00"
 
 # #Colors (dark matrix)
+#colors:
+#  primary:
+#    background: "#091013"
+#    foreground: "#3e5715"
+#  normal:
+#    black: "#333333"
+#    red: "#006536"
+#    green: "#6fa64c"
+#    yellow: "#7e8000"
+#    blue: "#2c9a84"
+#    magenta: "#452d53"
+#    cyan: "#114d53"
+#    white: "#006536"
+#  bright:
+#    black: "#333333"
+#    red: "#00733d"
+#    green: "#90D762"
+#    yellow: "#e2e500"
+#    blue: "#46d8b8"
+#    magenta: "#4a3059"
+#    cyan: "#12545a"
+#    white: "#006536"
+#  selection:
+#    text: "#00FF87"
+#    background: "#0F191C"
+#    white: "#FFFFFF"
+#  cursor:
+#    cursor: "#9FA86E"
+#    text: "#00FF87"
+
+# Colors (darker matrix)
 colors:
-  # #Default Colors
   primary:
     background: "#091013"
-    foreground: "#81B32C"
-  # #Normal colors
+    foreground: "#28380d"
   normal:
-    black: "#091013"
-    red: "#00cd6d"
-    green: "#90D762"
-    yellow: "#00cd6d"
-    blue: "#9CE667"
-    magenta: "#00cd6d"
-    cyan: "#0ECC1E"
-    white: "#00cd6d"
-  # #Bright colors
+    black: "#333333"
+    red: "#002e18"
+    green: "#6fa64c"
+    yellow: "#2d2d00"
+    blue: "#0d2f28"
+    magenta: "#26192e"
+    cyan: "#092b2e"
+    white: "#002e19"
   bright:
-    black: "#00CD6D"
-    red: "#00cd6d"
+    black: "#333333"
+    red: "#00381d"
     green: "#90D762"
-    yellow: "#00cd6d"
-    blue: "#9CE667"
-    magenta: "#00cd6d"
-    cyan: "#0ECC1E"
-    white: "#00cd6d"
+    yellow: "#e2e500"
+    blue: "#46d8b8"
+    magenta: "#2f1f39"
+    cyan: "#0b3437"
+    white: "#00381e"
   selection:
     text: "#00FF87"
     background: "#0F191C"
     white: "#FFFFFF"
   cursor:
-    cursor: "#81B32C"
+    cursor: "#373A26"
     text: "#00FF87"
+
+    #import:
+  #  - ~/.config/alacritty/tempus.yml
 
 ## #Colors (Pencil Dark)
 #colors:
