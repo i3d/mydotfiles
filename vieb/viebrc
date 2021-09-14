@@ -22,6 +22,7 @@ set suggesttopsites=50
 set suspendonrestore=all
 set suspendtimeout=1800000
 set windowtitle=url
+set mouse+=copyselect
 
 " Mappings
 imap <CapsLock> <toNormalMode>
