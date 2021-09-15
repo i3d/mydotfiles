@@ -1,10 +1,44 @@
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=10000000
+SAVEHIST=10000000
+
+[[ ! -d $HOME/my_completions ]]  && mkdir -p $HOME/my_completions
+[[ ! -d $HOME/.local/bin ]]  && mkdir -p $HOME/.local/bin
+[[ ! -d $HOME/.config ]]  && mkdir -p $HOME/.config
+[[ ! -d $HOME/.local/src ]]  && mkdir -p $HOME/.local/src
+
+if [[ ! -d $HOME/.local/src ]]; then
+  mkdir -p $HOME/.local/src
+  cd $HOME
+fi
+
+if [[ ! -d $HOME/.local/src/mydotfiles ]]; then
+  cd $HOME/.local/src >/dev/null # startup dependencies
+  git clone https://github.com/i3d/mydotfiles.git
+  echo "mydotfiles is installed to $HOME/.local/src. Needs to be manually copied ..."
+  sleep 3
+fi
+
+if [[ ! -d $HOME/.local/src/base16-shell ]]; then
+  cd $HOME/.local/src >/dev/null # startup dependencies
+  # git clone https://github.com/gabrielelana/awesome-terminal-fonts.git
+  git clone https://github.com/chriskempson/base16-shell.git
+fi
+
+#git clone https://github.com/Parth/dotfiles.git
+# if [[ ! -d $HOME/.local/src/zsh-interactive-cd ]]; then
+#   git clone https://github.com/changyuheng/zsh-interactive-cd.git
+# fi
+#source $HOME/.local/src/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
+#  git clone https://github.com/i3d/afetch.git
+
 ###### !!!! VIM mode forever !!!! ########
 ###### !!!! VIM mode forever !!!! ########
 ###### !!!! VIM mode forever !!!! ########
 autoload -z edit-command-line
 zle -N edit-command-line
 [[ ! -d $HOME/.local/src/zsh-vimode-visual ]] && \
-  mkdir -p $HOME/.local/src && \
   cd $HOME/.local/src >/dev/null && \
   git clone https://github.com/b4b4r07/zsh-vimode-visual.git && cd $HOME >/dev/null
 source $HOME/.local/src/zsh-vimode-visual/zsh-vimode-visual.zsh
@@ -24,7 +58,7 @@ zle -N zle-keymap-select
 ###### !!!! VIM mode forever !!!! ########
 ###### !!!! VIM mode forever !!!! ########
 ###### !!!! VIM mode forever !!!! ########
-export ZSH=/Users/jimxu/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 ###### !!!! VIM mode forever !!!! ########
 ###### !!!! VIM mode forever !!!! ########
 ###### !!!! VIM mode forever !!!! ########
@@ -44,6 +78,7 @@ if [[ ! -d $HOME/.cargo ]]; then
 fi
 # if everything goes well, we should have rustc in PATH.
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
+cd $HOME >/dev/null
 #
 # ================ Before sourcing OMZ ====================
 # Set name of the theme to load.
@@ -127,8 +162,8 @@ COMPLETION_WAITING_DOTS="true"
 # so that eval can do the right thing every time.
 unset HOMEBREW_SHELLENV_PREFIX
 export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/symlinks:/usr/local/scripts:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/bin/g4bin:/usr/X11R6/bin:/usr/local/google/bin
-export PATH=/Users/jimxu/homebrew/opt/llvm/bin:$PATH:$HOME/.rvm/bin:/$HOME/.rbenv/shims # Add RVM to PATH for scripting
-export CSCOPE_DB=/Users/jimxu/src/linux/cscope.out
+export PATH=$HOME/homebrew/opt/llvm/bin:$PATH:$HOME/.rvm/bin:/$HOME/.rbenv/shims # Add RVM to PATH for scripting
+export CSCOPE_DB=$HOME/src/linux/cscope.out
 [[ -f $HOME/.cargo/env  ]] && source $HOME/.cargo/env
 
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ #
@@ -144,7 +179,7 @@ source ~/.zshrc.pre-oh-my-zsh                                                   
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # Initialize HOMEBREW PATHs and ENVs before we add our own.
-export HOMEBREW_PREFIX=/Users/jimxu/homebrew
+export HOMEBREW_PREFIX=$HOME/homebrew
 # we use alternative install because on corp machine /usr/local isn't free of change.
 NEED_INSTALL_BREW=0
 if [[ ! -d $HOMEBREW_PREFIX ]]; then
@@ -176,7 +211,7 @@ if ((  $NEED_INSTALL_BREW )); then
   # if the above all went well, then install secondary tools
   brew install \
     colormake colortail coreutils cowsay cppcheck cppman \
-    cscope universal-ctags ctail diffutils direnv fortune geoip gnu-sed \
+    cscope ctail diffutils direnv fortune geoip gnu-sed \
     go gotop htop lolcat lsof m-cli mas ncdu multitail mu neofetch \
     nnn pcre pcre2 peco pidof pstree ranger shellcheck shfmt \
     ssh-copy-id tree-sitter  util-macros watch wifi-password
@@ -196,7 +231,7 @@ if ((  $NEED_INSTALL_BREW )); then
     mark-text qutebrowser 
 
   echo "Install node tools ..."
-  if [[ ! $(npm updatge -g --force && npm install -g neovim flake8) ]] ; then
+  if [[ ! $(npm update -g --force && npm install -g neovim flake8) ]] ; then
     yarn update && yarn install -g neovim flake8
   fi
 fi
@@ -234,7 +269,7 @@ cd $HOME >/dev/null
 
 [[ ! -d $HOME/src/ytfzf ]] && \
   cd $HOME/src >/dev/null && \
-  brew install jq \
+  brew install jq && \
   git clone https://github.com/pystardust/ytfzf.git && \
   cp $HOME/src/ytfzf/ytfzf $HOME/.local/bin/ytfzf && cd $HOME >/dev/null
 # ytfzf config
@@ -474,10 +509,10 @@ BASE16_SHELL="$HOME/.local/src/base16-shell/"
 [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
 eval "$("$BASE16_SHELL/profile_helper.sh")"
 
-[[ -f  /Users/jimxu/homebrew/opt/asdf/asdf.sh ]] && \
-  . /Users/jimxu/homebrew/opt/asdf/asdf.sh
-[[ -f  /Users/jimxu/homebrew/opt/asdf/etc/bash_completion.d/asdf.bash ]] && \
-  . /Users/jimxu/homebrew/opt/asdf/etc/bash_completion.d/asdf.bash
+[[ -f  $HOME/homebrew/opt/asdf/asdf.sh ]] && \
+  . $HOME/homebrew/opt/asdf/asdf.sh
+[[ -f  $HOME/homebrew/opt/asdf/etc/bash_completion.d/asdf.bash ]] && \
+  . $HOME/homebrew/opt/asdf/etc/bash_completion.d/asdf.bash
 alias asif='asdf info'
 alias aspa='asdf plugin add'
 alias aspl='asdf plugin list'
@@ -594,8 +629,8 @@ fortune | cowsay -f $(cowsay -l| sed '1d' | shuf | tr ' ' '\n' | head -1) | lolc
 #cbonsai -s $(shuf -i 1-10000 -n 1) -p
 # terminal logo
 #screenfetch
-#neofetch
-afetch  # fast
+neofetch
+#afetch  # fast
 # don't fatch the IP.
 #archey -o
 
@@ -816,7 +851,6 @@ zman() {
     man -k . | fzf -q "$1" --prompt='man> '  \
       | awk -F\( '{print $1}' | xargs -r man
 }
-#source $HOME/.local/src/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
 #
 # FZF functions #########################
 #
@@ -864,7 +898,7 @@ alias n3=nnn
 # wal -R -n -t -w -e &
 # pid=$!; disown %1; sleep 1; ( [[ $(ps -p $pid) ]] && kill -9 $pid 1>/dev/null 2>/dev/null) &>/dev/null
 
-export LIBRARY_PATH=$LIBRARY_PATH:/Users/jimxu/homebrew/lib
+export LIBRARY_PATH=$LIBRARY_PATH:$HOME/homebrew/lib
 #set -o vi
 # These two stay the last since we need our own path to be at the top.
 #bindkey -v
@@ -966,4 +1000,4 @@ alias ptdp='pt dependents'
 alias ptvr='pt variants'
 #### MacPorts setup
 
-export PATH=/Users/jimxu/bin:/Users/jimxu/go_code/bin:$PATH:/Users/jimxu/go/bin:/Users/jimxu/homebrew/opt/util-linux/bin:/Users/jimxu/homebrew/opt/util-linux/sbin
+export PATH=$HOME/bin:$HOME/go_code/bin:$PATH:$HOME/go/bin:$HOME/homebrew/opt/util-linux/bin:$HOME/homebrew/opt/util-linux/sbin
