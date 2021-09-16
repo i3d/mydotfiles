@@ -269,16 +269,16 @@ alias srr='screen -UaADRR'
 alias sk='screen_kill'
 alias s='echo $STY'
 
-alias sdg='screen -c /home/jimxu/.screenrc-go -d -m -UaA -S go'
-alias sg='screen -c /home/jimxu/.screenrc-go -UaA -S go'
-alias sde='screen -c /home/jimxu/.screenrc-everything -d -m -UaA -S everything'
-alias se='screen -c /home/jimxu/.screenrc-everything -UaA -S everything'
-alias sdc='screen -c /home/jimxu/.screenrc-compile -d -m -UaA -S compile'
-alias sc='screen -c /home/jimxu/.screenrc-compile -UaA -S compile'
-alias sdj='screen -c /home/jimxu/.screenrc-jotspot -d -m -UaA -S jotspot'
-alias sj='screen -c /home/jimxu/.screenrc-jotspot -UaA -S jotspot'
-alias sdb='screen -c /home/jimxu/.screenrc-borg -d -m -UaA -S borg'
-alias sb='screen -c /home/jimxu/.screenrc-borg -UaA -S borg'
+alias sdg='screen -c $HOME/.screenrc-go -d -m -UaA -S go'
+alias sg='screen -c $HOME/.screenrc-go -UaA -S go'
+alias sde='screen -c $HOME/.screenrc-everything -d -m -UaA -S everything'
+alias se='screen -c $HOME/.screenrc-everything -UaA -S everything'
+alias sdc='screen -c $HOME/.screenrc-compile -d -m -UaA -S compile'
+alias sc='screen -c $HOME/.screenrc-compile -UaA -S compile'
+alias sdj='screen -c $HOME/.screenrc-jotspot -d -m -UaA -S jotspot'
+alias sj='screen -c $HOME/.screenrc-jotspot -UaA -S jotspot'
+alias sdb='screen -c $HOME/.screenrc-borg -d -m -UaA -S borg'
+alias sb='screen -c $HOME/.screenrc-borg -UaA -S borg'
 
 alias cdgocode='cd ~/go_code/src/'
 alias gtags='/home/build/nonconf/google3/tools/tags/gtags.sh'
@@ -306,15 +306,15 @@ alias dump_group='ssh caladmin /usr/local/bin/list_domain_calendars.par --calend
 alias dump_user='ssh caladmin /usr/local/bin/list_domain_calendars.par --calendar_type user'
 alias dump_res='ssh caladmin /usr/local/bin/list_domain_calendars.par --calendar_type resource'
 alias cdcorpcron='cd /home/build/ops/corp/slack/roles/caladmin/files.cron/etc/cron.d/scripts'
-alias cdsp='cd /home/jimxu/src/sp/google3/experimental/users/jimxu/sp'
-alias cdexp='cd /home/jimxu/src/google3_experimental/google3/experimental/users/jimxu/'
+alias cdsp='cd $HOME/src/sp/google3/experimental/users/jimxu/sp'
+alias cdexp='cd $HOME/src/google3_experimental/google3/experimental/users/jimxu/'
 alias cddjango='cd /home/build/google3/third_party/py/django/v0_96'
-alias cdconfman='cd /home/jimxu/src/google3-confman/google3/'
-alias cdconfmant='cd /home/jimxu/src/confman_turbogears/depot/google3/experimental/users/jimxu/confman_turbogears/confman'
+alias cdconfman='cd $HOME/src/google3-confman/google3/'
+alias cdconfmant='cd $HOME/src/confman_turbogears/depot/google3/experimental/users/jimxu/confman_turbogears/confman'
 alias cddasherman2='cd ~/src/dasherman2/google3'
 alias cddasherman='cd ~/src/dasherman/depot/ops/corp/slack/roles/dasherman/files/usr/local/lib/dasherman'
 alias cddclient='cd ~/src/dasherman-client/depot/ops/corp/dogfood/dasherman-client/'
-alias cdshuttle='/home/jimxu/src/andriod/shuttle/google3/experimental/android/Shuttle/src/com/google/android/shuttle'
+alias cdshuttle='$HOME/src/andriod/shuttle/google3/experimental/android/Shuttle/src/com/google/android/shuttle'
 alias smartsync='/home/build/nonconf/google3/tools/continuous_build/smartsync.sh'
 alias smartsyncdoozer='smartsync -l DOOZER'
 alias cdcdb='cd ~/src/corpdb/google3/google3/ops/sysops/corpdb/'
@@ -332,7 +332,7 @@ alias cdjavabase='cd ~/src/google3_java/google3/java/com/google/common'
 alias cdjavanet='cd ~/src/google3_java/google3/java/com/google/net'
 alias cdgslb='cd ~/src/gslb/google3/googledata/production/gslbpush/sources'
 alias cdpushqr='cd ~/src/push_qr/google3/production/tools/push_quickrelease'
-alias cdgfe='cd /home/jimxu/src/gfe/google/config'
+alias cdgfe='cd $HOME/src/gfe/google/config'
 #alias -g ...='../..'
 #alias -g ....='../../..'
 #alias -g .....='../../../..'
@@ -395,7 +395,7 @@ export P4MERGE=/home/build/public/eng/perforce/mergep4.tcl
 export P4EDITOR=$EDITOR
 #export P4PORT=perforce6:6666
 export BASE=$HOME/src
-export JDK_HOME=/home/jimxu/pkgs/jdk1.6.0_12_32
+export JDK_HOME=$HOME/pkgs/jdk1.6.0_12_32
 export GOOGLE_USE_CORP_SSL_AGENT=true
 if [ -x  /usr/local/scripts/ssx-agents ]; then
   eval $(/usr/local/scripts/ssx-agents $SHELL)
@@ -440,9 +440,9 @@ if [[ $(hostname) =~ 'jimux.kir' ]]; then
 fi
 
 
-export GUILE_LOAD_PATH="/Users/jimxu/homebrew/share/guile/site/3.0"
-export GUILE_LOAD_COMPILED_PATH="/Users/jimxu/homebrew/lib/guile/3.0/site-ccache"
-export GUILE_SYSTEM_EXTENSIONS_PATH="/Users/jimxu/homebrew/lib/guile/3.0/extensions"
+export GUILE_LOAD_PATH="$HOME/homebrew/share/guile/site/3.0"
+export GUILE_LOAD_COMPILED_PATH="$HOME/homebrew/lib/guile/3.0/site-ccache"
+export GUILE_SYSTEM_EXTENSIONS_PATH="$HOME/homebrew/lib/guile/3.0/extensions"
 
 
 ######## GO
