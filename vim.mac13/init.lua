@@ -1,4 +1,3 @@
-
 local execute = vim.api.nvim_command
 local fn = vim.fn
 local api = vim.api
@@ -24,7 +23,7 @@ require("packer").startup(function(use)
   use "wbthomason/packer.nvim"
   -- other packages.
   -- other packages.
-  use {"terrortylor/nvim-comment", opt = true}
+  -- use {"terrortylor/nvim-comment", opt = true}
   use {
     "SmiteshP/nvim-gps",
     requires = "nvim-treesitter/nvim-treesitter"
@@ -32,7 +31,7 @@ require("packer").startup(function(use)
   -- speed up startup time.
   use 'lewis6991/impatient.nvim'
 end)
-require('nvim_comment').setup()
+-- require('nvim_comment').setup()
 ---- packer packages.
 --
 --

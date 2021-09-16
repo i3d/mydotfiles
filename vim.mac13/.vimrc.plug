@@ -108,6 +108,7 @@ let g:vista_update_on_text_changed = 1
 let g:vista_stay_on_open = 0  " don't focus on it by default.
 let g:vista_keep_fzf_colors = 1
 let g:vista_sidebar_width = 20
+let g:vista_sidebar_position = 'vertical topleft'
 Plug 'liuchengxu/vista.vim'
 function! NearestMethodOrFunction() abort
   return get(b:, 'vista_nearest_method_or_function', '')
@@ -127,6 +128,7 @@ Plug 'windwp/nvim-autopairs'
 Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 " ====== MUST HAVE ===== "
 " ====== NICE HAVE ===== "
+Plug 'markonm/traces.vim'
 Plug 'lukas-reineke/indent-blankline.nvim'
 let g:indent_blankline_char_list = ['|', '¦', '┆', '┊']
 let g:indent_blankline_char_highlight_list = ['Error', 'Function']
@@ -223,7 +225,6 @@ let g:lsp_format_sync_timeout = 1000
 " Plug 'AndrewRadev/linediff.vim', { 'on': 'Linediff' }
 " Plug 'kshenoy/vim-signature'
 " Plug 'wellle/targets.vim'
-" Plug 'markonm/traces.vim'
 " Plug 'christoomey/vim-tmux-navigator'
 " Plug 'benmills/vimux'
 " " Plug 'tpope/vim-rhubarb', { 'on': 'GBrowse' }
@@ -329,7 +330,7 @@ let g:lsp_format_sync_timeout = 1000
 " autocmd FileType floaterm call s:floatermSettings()
 " autocmd User Startified setlocal buflisted
 " Plug 'mhinz/vim-startify'
-" let g:python3_host_prog = '/Users/jimxu/homebrew/bin/python3'
+" let g:python3_host_prog = '$HOME/homebrew/bin/python3'
 " Plug 'nightsense/vimspectr'
 " Plug 'tpope/vim-rhubarb'
 " Plug 'junegunn/gv.vim'

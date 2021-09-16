@@ -20,7 +20,7 @@ endif
 call plug#begin('~/.vi/plugged')
 " ====== MUST HAVE ===== "
 if fnamemodify(resolve(expand('%:p')), ':h') !~ 'google3'
-  " Plug 'fatih/vim-go'
+  Plug 'fatih/vim-go'
 endif
 Plug 'i3d/vim-jimbothemes'
 Plug 'liuchengxu/vim-which-key'
@@ -53,6 +53,7 @@ let g:vista_update_on_text_changed = 1
 let g:vista_stay_on_open = 0  " don't focus on it by default.
 let g:vista_keep_fzf_colors = 1
 let g:vista_sidebar_width = 25
+let g:vista_sidebar_position = 'vertical topleft'
 Plug 'liuchengxu/vista.vim'
 function! NearestMethodOrFunction() abort
   return get(b:, 'vista_nearest_method_or_function', '')
@@ -84,6 +85,7 @@ let g:session_default_to_last = 1
 let g:session_command_aliases = 1
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
+Plug 'markonm/traces.vim'
 " ====== NICE HAVE ===== "
 " ====== OK HAVE ===== "
 Plug 'dikiaap/minimalist'
@@ -116,7 +118,6 @@ let g:qs_max_chars=150
 " Plug 'AndrewRadev/linediff.vim', {'on': 'Linediff'}
 " Plug 'kshenoy/vim-signature'
 " Plug 'wellle/targets.vim'
-" Plug 'markonm/traces.vim'
 " Plug 'christoomey/vim-tmux-navigator'
 " " Plug 'ulwlu/elly.vim'
 " " Plug 'b4skyx/serenade'
@@ -223,6 +224,12 @@ let g:asyncrun_rootmarks = ['.git', '.svn', '.root', '.project', '.hg', '.projec
 augroup nongo_indent
 au!
 au VimEnter *.virc,*.lua,*.rs,*.sh,*.vim*,*.bash*,*.zsh*,*.h,*.cc,*.html,*.toml,*.py set ts=2 sw=2 sts tw=0 expandtab
+augroup END
+augroup vista_sidebar
+au!
+au VimEnter *.go,*.rs nested :Vista!!
+" this will keep vista not able to jump window."
+au BufLeave,BufWinLeave,BufDelete,BufHidden,BufUnload,WinLeave,VimLeave <buffer> ++once :Vista!
 augroup END
 " ====================== GOOGLE3 ============================"
 if fnamemodify(resolve(expand('%:p')), ':h') =~ 'google3'
