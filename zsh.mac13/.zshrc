@@ -10,18 +10,18 @@ SAVEHIST=10000000
 
 if [[ ! -d $HOME/.local/src ]]; then
   mkdir -p $HOME/.local/src
-  cd $HOME
+  cd $HOME 1>/dev/null 2>/dev/null
 fi
 
 if [[ ! -d $HOME/.local/src/mydotfiles ]]; then
-  cd $HOME/.local/src >/dev/null # startup dependencies
-  git clone https://github.com/i3d/mydotfiles.git
+  cd $HOME/.local/src 1>/dev/null 2>/dev/null && \ # startup dependencies
+  git clone https://github.com/i3d/mydotfiles.git && \
   echo "mydotfiles is installed to $HOME/.local/src. Needs to be manually copied ..."
   sleep 3
 fi
 
 if [[ ! -d $HOME/.local/src/base16-shell ]]; then
-  cd $HOME/.local/src >/dev/null # startup dependencies
+  cd $HOME/.local/src 1>/dev/null 2>/dev/null && \ # startup dependencies
   # git clone https://github.com/gabrielelana/awesome-terminal-fonts.git
   git clone https://github.com/chriskempson/base16-shell.git
 fi
@@ -32,15 +32,16 @@ fi
 # fi
 #source $HOME/.local/src/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
 #  git clone https://github.com/i3d/afetch.git
-
+#
 ###### !!!! VIM mode forever !!!! ########
 ###### !!!! VIM mode forever !!!! ########
 ###### !!!! VIM mode forever !!!! ########
 autoload -z edit-command-line
 zle -N edit-command-line
 [[ ! -d $HOME/.local/src/zsh-vimode-visual ]] && \
-  cd $HOME/.local/src >/dev/null && \
-  git clone https://github.com/b4b4r07/zsh-vimode-visual.git && cd $HOME >/dev/null
+  mkdir -p $HOME/.local/src 2>/dev/null && \
+  cd $HOME/.local/src 1>dev/null 2>/dev/null && \
+  git clone https://github.com/b4b4r07/zsh-vimode-visual.git && cd $HOME 1>/dev/null 2>/dev/null
 source $HOME/.local/src/zsh-vimode-visual/zsh-vimode-visual.zsh
 # neovim as man pager.
 #export MANPAGER="/bin/sh -c \"col -b | v -c 'set ft=man ts=8 nomod nolist noma nu' -\""
@@ -68,7 +69,7 @@ if [[ ! -d $HOME/.cargo ]]; then
   # setup rustup.
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
   [[ -f $HOME/.cargo/env  ]] && source $HOME/.cargo/env
-  cd $HOME >/dev/null
+  cd $HOME 1>/dev/null 2>/dev/null
   rustup update && rustup default nightly && \
   # install core rust tools.
   # this is close to what rustbinup offers.
@@ -78,7 +79,6 @@ if [[ ! -d $HOME/.cargo ]]; then
 fi
 # if everything goes well, we should have rustc in PATH.
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
-cd $HOME >/dev/null
 #
 # ================ Before sourcing OMZ ====================
 # Set name of the theme to load.
@@ -183,7 +183,7 @@ export HOMEBREW_PREFIX=$HOME/homebrew
 # we use alternative install because on corp machine /usr/local isn't free of change.
 NEED_INSTALL_BREW=0
 if [[ ! -d $HOMEBREW_PREFIX ]]; then
-  mkdir -p $HOMEBREW_PREFIX && \
+  mkdir -p $HOMEBREW_PREFIX 2>/dev/null && \
   	  curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C $HOMEBREW_PREFIX
   # now, we install some base packages.
   # some of the rust based packages will be installed from rust/cargo.
@@ -253,46 +253,44 @@ else
 fi
 
 if [[ ! -d $HOME/src/vifm ]]; then
-  mkdir -p $HOME/src
+  mkdir -p $HOME/src 2>/dev/null && \
   # non startup dependencies.
-  cd $HOME/src >/dev/null && \
+  cd $HOME/src 1>/dev/null 2>/dev/null && \
   git clone https://github.com/vifm/vifm.git && \
-    cd $HOME/src/vifm && automake && \
+    cd $HOME/src/vifm 1>/dev/null 2>/dev/null && automake && \
     configure --prefix=$HOME/.local --without-X11 && \
     make && make install
 fi
 
-# [[ ! -d $HOME/src/Nim ]] && cd $HOME/src && git clone https://github.com/nim-lang/Nim.git
-[[ ! -d $HOME/src/rust ]] && cd $HOME/src && git clone https://github.com/rust-lang/rust.git
-[[ ! -d $HOME/go ]] && cd $HOME && git clone https://github.com/golang/go.git 
-cd $HOME >/dev/null
+# [[ ! -d $HOME/src/Nim ]] && cd $HOME/src 1>/dev/null 2>/dev/null && git clone https://github.com/nim-lang/Nim.git
+[[ ! -d $HOME/src/rust ]] && [[ ! -L $HOME/src ]] && cd $HOME/src 1>/dev/null 2>/dev/null && git clone https://github.com/rust-lang/rust.git
+[[ ! -d $HOME/go ]] && [[ ! -L $HOME/go ]] && cd $HOME 1>/dev/null 2>/dev/null && git clone https://github.com/golang/go.git 
+cd $HOME 1>/dev/null 2>/dev/null
 
-[[ ! -d $HOME/src/ytfzf ]] && \
-  cd $HOME/src >/dev/null && \
+[[ ! -d $HOME/src/ytfzf ]] && [[ ! -L $HOME/src ]] && \
+  cd $HOME/src 2>/dev/null && \
   brew install jq && \
   git clone https://github.com/pystardust/ytfzf.git && \
   cp $HOME/src/ytfzf/ytfzf $HOME/.local/bin/ytfzf && cd $HOME >/dev/null
 # ytfzf config
 export YTFZF_PLAYER="mpv --vd-queue-enable=yes --vd-lavc-threads=4"
 
-if [[ ! -d $HOME/src/neovim ]]; then
-  echo "Install neovim.git ..."
-  cd $HOME/src >/dev/null && \
-  git clone https://github.com/neovim/neovim.git
-  cd neovim
+[[ ! -d $HOME/src/neovim ]] && [[ ! -L $HOME/src ]] && \
+  cd $HOME/src 2>/dev/null && \
+  git clone https://github.com/neovim/neovim.git && \
+  cd neovim 2>/dev/null && \
+  echo "Install neovim.git ..." && \
   mkdir -p $HOME/.local/bin && \
-  make distclean && make CMAKE_EXTRA_FLAGS=-DCMAKE_INSTALL_PREFIX=$HOME/.local CMAKE_BUILD_TYPE=Release
-  make install
-  cd $HOME >/dev/null
-fi
+  make distclean && make CMAKE_EXTRA_FLAGS=-DCMAKE_INSTALL_PREFIX=$HOME/.local CMAKE_BUILD_TYPE=Release && \
+  make install && \
+  cd $HOME 1>/dev/null 2>/dev/null
 
-if [[ ! -d $HOME/src/neovide ]]; then
-  cd $HOME/src >/dev/null && \
+[[ ! -d $HOME/src/neovide ]] && [[ ! -L $HOME/src ]] && \
+  cd $HOME/src 2>/dev/null && \
   git clone https://github.com/neovide/neovide.git  && \
   cd neovide && cargo build --release && \
-  mkdir -p $HOME/bin && cp target/release/neovide $HOME/bin
-  cd $HOME >/dev/null
-fi
+  mkdir -p $HOME/bin 2>/dev/null && cp target/release/neovide $HOME/bin 2>/dev/null && \
+  cd $HOME 1>/dev/null 2>/dev/null
 
 #github qfc
 [[ -s "$HOME/.qfc/bin/qfc.sh"  ]] && source "$HOME/.qfc/bin/qfc.sh"
@@ -500,10 +498,10 @@ fpath+=~/.zfunc
 eval "$(hub alias -s)"
 
 [[ ! -d $HOME/.local/src/base16-shell ]] && \
-  mkdir -p $HOME/.local/src && \
-  cd $HOME/.local/src >/dev/null && \
+  mkdir -p $HOME/.local/src 2>/dev/null && \
+  cd $HOME/.local/src 2>/dev/null && \
   git clone https://github.com/chriskempson/base16-shell.git && \
-  cd $HOME >/dev/null
+  cd $HOME 2>/dev/null
 BASE16_SHELL="$HOME/.local/src/base16-shell/"
 [ -n "$PS1" ] && \
 [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
@@ -629,8 +627,8 @@ fortune | cowsay -f $(cowsay -l| sed '1d' | shuf | tr ' ' '\n' | head -1) | lolc
 #cbonsai -s $(shuf -i 1-10000 -n 1) -p
 # terminal logo
 #screenfetch
-neofetch
-#afetch  # fast
+#neofetch
+afetch  # fast
 # don't fatch the IP.
 #archey -o
 
@@ -677,8 +675,8 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 # ctrl-space to call out the history commnad menu.
 #bindkey '^Q' history-beginning-search-menu
 [[ ! -d $HOME/.local/src/zsh-autocomplete ]] && \
-    cd $HOME/.local/src >/dev/null && \
-    git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git && cd $HOME >/dev/null
+    cd $HOME/.local/src 2>/dev/null && \
+    git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git && cd $HOME 2>/dev/null
 [[ -f  $HOME/.local/src/zsh-autocomplete/zsh-autocomplete.plugin.zsh ]] && \
      source $HOME/.local/src/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 ### ============ start zplug init ============= ###
@@ -851,6 +849,7 @@ zman() {
     man -k . | fzf -q "$1" --prompt='man> '  \
       | awk -F\( '{print $1}' | xargs -r man
 }
+#source $HOME/.local/src/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
 #
 # FZF functions #########################
 #
