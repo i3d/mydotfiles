@@ -20,7 +20,7 @@ endif
 call plug#begin('~/.vi/plugged')
 " ====== MUST HAVE ===== "
 if fnamemodify(resolve(expand('%:p')), ':h') !~ 'google3'
-  Plug 'fatih/vim-go'
+  " Plug 'fatih/vim-go'
 endif
 Plug 'i3d/vim-jimbothemes'
 Plug 'liuchengxu/vim-which-key'
@@ -53,7 +53,7 @@ let g:vista_update_on_text_changed = 1
 let g:vista_stay_on_open = 0  " don't focus on it by default.
 let g:vista_keep_fzf_colors = 1
 let g:vista_sidebar_width = 25
-let g:vista_sidebar_position = 'vertical topleft'
+let g:vista_sidebar_position = 'vertical topleft' 
 Plug 'liuchengxu/vista.vim'
 function! NearestMethodOrFunction() abort
   return get(b:, 'vista_nearest_method_or_function', '')
@@ -74,6 +74,7 @@ augroup END
 Plug 'lfv89/vim-interestingwords'
 " ====== MUST HAVE ===== "
 " ====== NICE HAVE ===== "
+Plug 'markonm/traces.vim'
 Plug 'vifm/vifm.vim'
 Plug 'tpope/vim-surround'
 let g:session_directory = '~/.vi/sessions'
@@ -85,7 +86,6 @@ let g:session_default_to_last = 1
 let g:session_command_aliases = 1
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
-Plug 'markonm/traces.vim'
 " ====== NICE HAVE ===== "
 " ====== OK HAVE ===== "
 Plug 'dikiaap/minimalist'
@@ -225,12 +225,6 @@ augroup nongo_indent
 au!
 au VimEnter *.virc,*.lua,*.rs,*.sh,*.vim*,*.bash*,*.zsh*,*.h,*.cc,*.html,*.toml,*.py set ts=2 sw=2 sts tw=0 expandtab
 augroup END
-augroup vista_sidebar
-au!
-au VimEnter *.go,*.rs nested :Vista!!
-" this will keep vista not able to jump window."
-au BufLeave,BufWinLeave,BufDelete,BufHidden,BufUnload,WinLeave,VimLeave <buffer> ++once :Vista!
-augroup END
 " ====================== GOOGLE3 ============================"
 if fnamemodify(resolve(expand('%:p')), ':h') =~ 'google3'
   highlight SignifySignAdd    cterm=bold ctermbg=0  ctermfg=2
@@ -252,6 +246,12 @@ if fnamemodify(resolve(expand('%:p')), ':h') =~ 'google3'
 " ====================== LSP ============================"
 " ====================== LSP ============================"
 " ====================== LSP ============================"
+augroup vista_sidebar 
+  au!
+  au VimEnter *.go,*.rs nested :Vista!!
+  " this will make vista can't jump window.
+  " au BufLeave,BufWinLeave,BufDelete,BufHidden,BufUnload,WinLeave,VimLeave <buffer> ++once :Vista!
+augroup END
 " does not work on MAC "
 " augroup ciderlsp_config
 " au!

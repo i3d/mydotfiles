@@ -19,12 +19,6 @@ augroup END
 "  au! BufReadPre * setlocal foldmethod=indent
 "  au! BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
 "augroup END
-augroup vista_sidebar
-au!
-au VimEnter *.go,*.rs nested :Vista!!
-" this will keep vista not able to jump window."
-au BufLeave,BufWinLeave,BufDelete,BufHidden,BufUnload,WinLeave,VimLeave <buffer> ++once :Vista!
-augroup END
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 let g:mapleader = "\<Space>"
@@ -77,6 +71,9 @@ if fnamemodify(resolve(expand('%:p')), ':h') =~ 'google3'
         \})
   augroup corp_programming
     au!
+    au VimEnter *.go nested :Vista!!
+    " this will make vista can't jump window.
+    "au BufLeave,BufWinLeave,BufDelete,BufHidden,BufUnload,WinLeave,VimLeave <buffer> ++once :Vista!
     au FileType bzl,cpp,go,java,proto,python nno <silent> gd :vert LspDefinition<CR>
     au FileType bzl,cpp,go,java,proto,python nno <silent> gm :LspRename<CR>
     au FileType bzl,cpp,go,java,proto,python nno <silent> gr :LspReferences<CR>
@@ -380,8 +377,8 @@ nno <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
 nno - <C-W>-
 nno = <C-W>+
 "vsplit"
-nno < <C-W><
-nno > <C-W>>
+nno < 100<C-W><
+nno > 100<C-W>>
 vno J :m '>+1<cr>gv=gv
 vno K :m '<-2<cr>gv=gv
 vno C :CommentToggle<cr>
