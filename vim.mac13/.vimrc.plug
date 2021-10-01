@@ -99,10 +99,6 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'kabouzeid/nvim-lspinstall'
 Plug 'nvim-lua/lsp_extensions.nvim'
 Plug 'ray-x/lsp_signature.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-fzy-native.nvim'
-Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'gelguy/wilder.nvim'
 let g:vista_update_on_text_changed = 1
 let g:vista_stay_on_open = 0  " don't focus on it by default.
@@ -128,7 +124,6 @@ Plug 'windwp/nvim-autopairs'
 Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 " ====== MUST HAVE ===== "
 " ====== NICE HAVE ===== "
-Plug 'markonm/traces.vim'
 Plug 'lukas-reineke/indent-blankline.nvim'
 let g:indent_blankline_char_list = ['|', '¦', '┆', '┊']
 let g:indent_blankline_char_highlight_list = ['Error', 'Function']
@@ -154,6 +149,7 @@ Plug 'ms-jpq/coq_nvim'
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts', 'on': 'COQnow'}
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'vifm/vifm.vim'
+Plug 'markonm/traces.vim'
 " ====== NICE HAVE ===== "
 " ====== OK HAVE ===== "
 Plug 'roosta/fzfolds.vim'
@@ -379,9 +375,6 @@ let g:lsp_format_sync_timeout = 1000
 " Plug 'nvim-lua/completion-nvim'
 " " Optional dependencies
 " Plug 'nvim-lua/popup.nvim'
-" Plug 'nvim-lua/plenary.nvim'
-" Plug 'nvim-telescope/telescope.nvim'
-" Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 " Plug 'nacro90/numb.nvim'
 " " 4/15/2021
 " " post install (yarn install | npm install) then load plugin only for editing supported files

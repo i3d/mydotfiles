@@ -1,7 +1,9 @@
+
 local execute = vim.api.nvim_command
 local fn = vim.fn
 local api = vim.api
 local gl = vim.g
+local cmd = vim.cmd
 -- global inspect
 function _G.p(...)
   local objects = {}
@@ -12,6 +14,56 @@ function _G.p(...)
   print(table.concat(objects, '\n'))
   return ...
 end
+
+-- ----- =========== CONFIG ========== -------
+-- -- Use .vim's local packer dir. ----
+-- -- cmd [[set runtimepath=$VIMRUNTIME]]
+-- cmd [[set packpath=/Users/jimxu/.vim/nvim/site]]
+-- local package_root = '/Users/jimxu/.vim/nvim/site/pack'
+-- local install_path = package_root .. '/packer/start/packer.nvim'
+-- local function load_plugins()
+--   require('packer').startup {
+--     {
+--       'wbthomason/packer.nvim',
+--       {
+--         'nvim-telescope/telescope.nvim',
+--         requires = {
+--           'nvim-lua/plenary.nvim',
+--           { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+--         },
+--       },
+--       -- ADD PLUGINS  --
+--       {
+--         "SmiteshP/nvim-gps",
+--         requires = "nvim-treesitter/nvim-treesitter"
+--       },
+--       -- speed up startup time.
+--       'lewis6991/impatient.nvim',
+--       -- ADD PLUGINS  --
+--     },
+--     config = {
+--       package_root = package_root,
+--       compile_path = install_path .. '/plugin/packer_compiled.lua',
+--       -- display = { non_interactive = true },
+--     },
+--   }
+-- end
+-- if vim.fn.isdirectory(install_path) == 0 then
+--   print("Installing Telescope and dependencies.")
+--   vim.fn.system { 'git', 'clone', '--depth=1', 'https://github.com/wbthomason/packer.nvim', install_path }
+-- end
+-- load_plugins()
+-- -- require('packer').sync()
+-- 
+-- _G.load_config = function()
+--   require('telescope').setup()
+--   require('telescope').load_extension('fzf')
+--   -- ADD INIT.LUA SETTINGS THAT ARE _NECESSARY_ FOR REPRODUCING THE ISSUE
+-- end
+-- vim.cmd [[autocmd User PackerComplete ++once echo "Ready!" | lua load_config()]]
+----- =========== CONFIG ========== -------
+
+
 local install_path = fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
   execute('!git clone https://github.com/wbthomason/packer.nvim '..install_path)
@@ -30,6 +82,13 @@ require("packer").startup(function(use)
   }
   -- speed up startup time.
   use 'lewis6991/impatient.nvim'
+  use {
+        'nvim-telescope/telescope.nvim',
+        requires = {
+          'nvim-lua/plenary.nvim',
+          { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+        },
+  }
 end)
 -- require('nvim_comment').setup()
 ---- packer packages.
@@ -92,16 +151,16 @@ require('numb').setup{
 local actions = require('telescope.actions')
 require("telescope").setup{
   defaults = {
-	set_env = { ['COLORTERM'] = 'truecolor' },
+	  set_env = { ['COLORTERM'] = 'truecolor' },
   },
-  pickers = {
-    buffers = {
-      theme = "dropdown",
-    },
-    find_files = {
-      theme = "dropdown",
-    },
-  },
+--   pickers = {
+--     buffers = {
+--       theme = "dropdown",
+--     },
+--     find_files = {
+--       theme = "dropdown",
+--     },
+--   },
   extensions = {
     fzf = {
       fuzzy = true,
