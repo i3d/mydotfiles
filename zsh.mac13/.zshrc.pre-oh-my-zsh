@@ -186,14 +186,15 @@ screenup (){
 }
 
 rsc() {
-  CLIENTID=$1.`date +%S`
+  #CLIENTID=$1.`date +%S`
+  CLIENTID=$1
   tmux new-session -d -t $1 -s $CLIENTID
   tmux attach-session -t $CLIENTID
 }
 
 tt() {
   tmux new-session -d -s $1
-  rsc $1
+  #rsc $1
 }
 
 #######

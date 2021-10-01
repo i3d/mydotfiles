@@ -294,10 +294,9 @@ export YTFZF_PLAYER="mpv --vd-queue-enable=yes --vd-lavc-threads=4"
 
 #github qfc
 [[ -s "$HOME/.qfc/bin/qfc.sh"  ]] && source "$HOME/.qfc/bin/qfc.sh"
-# for my kir workstation.
-#. $HOME/.bagpipe/setup.sh $HOME/.bagpipe jimxu-linux.kir.corp.google.com "corp-ssh-helper --stderrthreshold=INFO %h %p"
 # for my c.googler.com instance.
 [[ -d $HOME/.bagpipe ]] && \
+# segfault in mac m1.
 . $HOME/.bagpipe/setup.sh $HOME/.bagpipe ujimux.c.googlers.com "corp-ssh-helper -relay=sup-ssh-relay.corp.google.com --stderrthreshold=INFO %h %p"
 #. $HOME/.bagpipe/setup.sh $HOME/.bagpipe ujimux.c.googlers.com
 #
@@ -627,8 +626,8 @@ fortune | cowsay -f $(cowsay -l| sed '1d' | shuf | tr ' ' '\n' | head -1) | lolc
 #cbonsai -s $(shuf -i 1-10000 -n 1) -p
 # terminal logo
 #screenfetch
-#neofetch
-afetch  # fast
+neofetch
+# afetch  # fast
 # don't fatch the IP.
 #archey -o
 
@@ -691,7 +690,7 @@ fi
 source ~/.zplug/init.zsh
 # for some reason not work fully with zplug.
 #zplug "marlonrichert/zsh-autocomplete"
-#zplug "zsh-users/zsh-history-substring-search"
+zplug "zsh-users/zsh-history-substring-search"
 # ###### ==== plugins ====== #####
 
 # Install plugins if there are plugins that have not been installed
@@ -702,8 +701,6 @@ if ! zplug check --verbose; then
     fi
 fi
 ### ============ start zplug config ============= ###
-#bindkey -M vicmd 'k' history-substring-search-up
-#bindkey -M vicmd 'j' history-substring-search-down
 ### ============ end zplug config ============= ###
 # Then, source plugins and add commands to $PATH
 zplug load --verbose
@@ -711,7 +708,20 @@ zplug load --verbose
 HISTORY_SUBSTRING_SEARCH_FUZZY=1
 ### ============ end zplug init ============= ###
 export PATH=$PATH:$HOME/.config/nvcode/utils/bin
-
+#### FZF customized key bindings ####
+#bindkey -M viins '^x' fzf-history-widget # r for reverse history search
+#bindkey -M vicmd 'k' fzf-history-widget
+#bindkey -M vicmd 'j' fzf-cd-widget # j for jump
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+#bindkey -M vicmd 'r' fzf-history-widget
+bindkey -M vicmd '?' fzf-history-widget
+bindkey -M viins '^f' fzf-file-widget # f for file
+bindkey -M vicmd 'f' fzf-file-widget # f for file
+bindkey -M viins '^j' fzf-cd-widget # j for jump
+bindkey -M viins '^t' transpose-chars # t for transpose
+bindkey -M viins '\ec' capitalize-word # c for capitalizae
+#### FZF customized key bindings ####
 # Setup python environment. It should be on >= v3
 #if command -v pyenv 1>/dev/null 2>&1; then
 #  eval "$(pyenv init -)"
@@ -732,18 +742,6 @@ export FZF_DEFAULT_OPTS="--color=bg+:#333333,bg:#091013,gutter:#6fa64c,spinner:#
 #export FZF_DEFAULT_OPTS="--color=bg+:#1B1D1E,bg:#1B1D1E,spinner:#fb4934,hl:#928374,fg:#ebdbb2,header:#928374,info:#8ec07c,pointer:#fb4934,marker:#fb4934,fg+:#ebdbb2,prompt:#fb4934,hl+:#fb4934"
 
 #### FZF thems ######
-#### FZF customized key bindings ####
-#bindkey -M viins '^x' fzf-history-widget # r for reverse history search
-bindkey -M vicmd 'k' fzf-history-widget
-bindkey -M vicmd 'r' fzf-history-widget
-bindkey -M vicmd '?' fzf-history-widget
-bindkey -M viins '^f' fzf-file-widget # f for file
-bindkey -M vicmd 'f' fzf-file-widget # f for file
-bindkey -M viins '^j' fzf-cd-widget # j for jump
-bindkey -M vicmd 'j' fzf-cd-widget # j for jump
-bindkey -M viins '^t' transpose-chars # t for transpose
-bindkey -M viins '\ec' capitalize-word # c for capitalizae
-#### FZF customized key bindings ####
 #
 # FZF functions #########################
 # https://github.com/junegunn/fzf/wiki/examples#changing-directory
