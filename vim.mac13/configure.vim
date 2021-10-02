@@ -1,0 +1,1 @@
+./configure --prefix=$HOME/.local --enable-python3interp --without-x --enable-luainterp --with-features=big --enable-terminal --disable-xsmp --disable-gui --with-tlib=ncurses --with-python3-command=/usr/local/bin/python3
