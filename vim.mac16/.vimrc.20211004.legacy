@@ -1,112 +1,41 @@
 set nocompatible cul
-set rtp+=~/homebrew/opt/vim
-set rtp+=~/homebrew/opt/fzf
-set rtp+=~/.vim
 source ~/.vimrc.plug
-let g:LustyJugglerSuppressRubyWarning = 1
+
 " for italic
 set t_ZH=[3m
 set t_ZR=[23m
-let g:asyncrun_open = 10
-let g:asyncrun_rootmarks = ['.git', '.svn', '.root', '.project', '.hg', '.projectile']
+
 augroup nongo_indent
 au!
-au VimEnter *.virc,*.lua,*.rs,*.sh,*.vim*,*.bash*,*.zsh*,*.h,*.cc,*.html,*.toml,*.py set ts=2 sw=2 sts tw=0 expandtab
+au VimEnter *.rs,*.sh,*.vim*,*.bash*,*.zsh*,*.h,*.cc,*.html,*.toml,*.py set ts=2 sw=2 sts tw=0 expandtab
 augroup END
-" intend + manual folding
-"augroup folding
-"  au!
-"  au! BufReadPre * setlocal foldmethod=indent
-"  au! BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
-"augroup END
+
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
+let g:asyncrun_open = 10
+let g:asyncrun_rootmarks = ['.git', '.svn', '.root', '.project', '.hg', '.projecti  le']
+set rtp+=~/homebrew/opt/vim
+set rtp+=/Users/i3dmaster/homebrew/opt/fzf
 let g:mapleader = "\<Space>"
 let g:maplocalleader = ','
 nno <silent> <leader> :silent <c-u> :silent WhichKey '<Space>'<CR>
 vno <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
 nno <silent> <localleader> :silent <c-u> :silent WhichKey ','<CR>
-" ============================ GOOGLE3 =========================="
-if fnamemodify(resolve(expand('%:p')), ':h') =~ 'google3'
-  highlight SignifySignAdd    cterm=bold ctermbg=0  ctermfg=2
-  highlight SignifySignDelete cterm=bold ctermbg=0  ctermfg=4
-  highlight SignifySignChange cterm=bold ctermbg=0  ctermfg=3
-  " update signify whenever we get focus, not just on save
-  let g:signify_update_on_focusgained = 1
-  let g:signify_realtime = 1
-  let g:signify_cursorhold_insert = 0
-  let g:signify_cursorhold_normal = 0
-  let g:signify_vcs_list = [ 'perforce', 'hg' ]
-  let g:signify_vcs_cmds = {
-        \ 'perforce': 'DIFF=%d" -U0" citcdiff.bin %f || [[ $? == 1 ]]',
-        \ 'hg': 'hg diff -r p4head --color never --config defaults.diff= --nodates -U0 -- %f',
-        \ }
-  let g:signify_vcs_cmds_diffmode = { 'perforce': 'citcdiff.bin -b %f || true' }
-  let g:signify_skip_filename_pattern = ['\.pipertmp.*']
-  let g:signify_line_highlight = 0
-  let g:blazevim_quickfix_autoopen = 1
-  let g:blazevim_execution='background'
-  let s:ignore_warnings = 0
-  " Cider
-  " Send async completion requests.
-  let g:lsp_async_completion = 1
-  let g:lsp_signs_enabled = 1           " enable diagnostics signs in the gutter
-  let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
-  let g:lsp_highlight_references_enabled = 1
-  let g:lsp_signature_help_enabled = 1
-  let g:asyncomplete_auto_popup = 1
-  "let g:asyncomplete_smart_completion = 1
-  if has('nvim')
-    let g:lsp_preview_float = 1
-  endif
-  au User lsp_setup call lsp#register_server({
-        \ 'name': 'CiderLSP',
-        \ 'cmd': {server_info->[
-        \   '~/bin/ciderlsp',
-        \   '--tooltag=vim-lsp',
-        \   '--noforward_sync_responses',
-        \   '--hub_addr=blade:languageservices',
-        \ ]},
-        \ 'whitelist': ['c', 'cpp', 'java', 'proto', 'python', 'textproto', 'go', 'swift', 'BUILD'],
-        \})
-  augroup corp_programming
-    au!
-    au VimEnter *.go nested :Vista!!
-    " this will make vista can't jump window.
-    "au BufLeave,BufWinLeave,BufDelete,BufHidden,BufUnload,WinLeave,VimLeave <buffer> ++once :Vista!
-    au FileType bzl,cpp,go,java,proto,python nno <silent> gd :vert LspDefinition<CR>
-    au FileType bzl,cpp,go,java,proto,python nno <silent> gm :LspRename<CR>
-    au FileType bzl,cpp,go,java,proto,python nno <silent> gr :LspReferences<CR>
-    au FileType bzl,cpp,go,java,proto,python nno <silent> gp :LspPeekDefinition<CR>
-    au FileType bzl,cpp,go,java,proto,python nno <silent> g. :LspDocumentSymbol<CR>
-    au FileType bzl,cpp,go,java,proto,python nno <silent> g= :LspDocumentFormat<CR>
-    au FileType bzl,cpp,go,java,proto,python nno <silent> ] :LspNextDiagnostic<CR>
-    au FileType bzl,cpp,go,java,proto,python nno <silent> [ :LspPreviousDiagnostic<CR>
-    au FileType bzl,cpp,go,java,proto,python nno <silent> g/ :LspDocumentSymbolSearch<CR>
-    au FileType bzl,cpp,go,java,proto,python nno <silent> g\ :LspCodeAction<CR>
-    au FileType bzl,cpp,go,java,proto,python nno <silent> H :LspHover<CR>
-    " :setfiletype <c-d>
-    au FileType
-          \ bzl,cpp,go,java,proto,python,
-          \textproto,yaml,typescript,javascript,
-          \gslb,html,json,ncl,p4-spec,pbtxt,piccolo,
-          \gcl,sdl,sh,sql,text,textpb,tf,tpl,tpp,xml,zsh
-          \ nno <silent> K <cmd>lua require"plugins.blame".desc()<CR>
-  augroup END
-endif
-" ============================ GOOGLE3 =========================="
+" ================ functions and commands ======================
+""" <space>k to bring up help
+com! -nargs=* Google execute 'silent !google <args>'
+com! -nargs=+ Greph execute 'silent grep! <args> *.h' | cwindow
+com! -nargs=+ Grepcc execute 'silent grep! <args> *.cc' | cwindow
+com! -nargs=+ Grepgo execute 'silent grep! <args> *.go' | cwindow
+com! -nargs=* AsyncRustBuild :call <SID>AsyncRustBuild()
+com! -nargs=* AsyncRustRun :call <SID>AsyncRustRun()
+com! -nargs=* AsyncCargoBuild :call <SID>AsyncCargoBuild()
+com! -nargs=* AsyncCargoRun :call <SID>AsyncCargoRun()
+com! -nargs=* AsyncCargoTest :call <SID>AsyncCargoTest()
+com! -nargs=* AsyncCargoCheck :call <SID>AsyncCargoCheck()
+com! -nargs=* AsyncGoRunThis :call <SID>AsyncGoRunThis()
 " ================ functions and commands ======================
 " window management
-function! ResCur() abort
-  if line("'\"") <= line("$")
-    silent! normal! g`"
-    return 1
-  endif
-endfunction
-augroup resCur
-  au!
-  au BufWinEnter * call ResCur()
-augroup END
 function! MaximizeToggle() abort
   if exists("s:maximize_session")
     exec "source " . s:maximize_session
@@ -170,8 +99,14 @@ function! s:AsyncCargoRun() abort
   call asyncrun#run("", {"rows": 30}, 'cargo run')
   let g:asyncrun_open = l:aro
 endfunction
-function! s:AsyncGoRunThis() abort
-  call s:AsyncGoRunFile(expand('%'))
+function! s:AsyncCargoCheck() abort
+	"open cwindow manually.
+  let l:aro = g:asyncrun_open
+  let g:asyncrun_open = 0
+  call setqflist([]) | copen 30
+  " don't use !, so we scrolling the output.
+  call asyncrun#run("", {"rows": 30}, 'cargo check')
+  let g:asyncrun_open = l:aro
 endfunction
 function! s:AsyncGoRunFile(file) abort
 	"open cwindow manually.
@@ -182,6 +117,7 @@ function! s:AsyncGoRunFile(file) abort
   call asyncrun#run("", {"rows": 30}, 'go run '.a:file)
   let g:asyncrun_open = l:aro
 endfunction
+
 " NERDTrees File highlighting
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
  exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
@@ -201,26 +137,127 @@ function! PrevHunk(size) abort
     execute "normal \<plug>(signify-prev-hunk)"
   endif
 endfunction
-""" <space>k to bring up help
-com! -nargs=+ Moma execute 'silent !moma <args>'
-com! -nargs=+ Who execute 'silent !who <args>'
-com! -nargs=* Changelist execute 'silent !cl <args>'
-com! -nargs=* Buganizer execute 'silent !bug <args>'
-com! -nargs=* Cider execute 'silent !cider <args>'
-com! -nargs=* Stuff execute 'silent !stuff <args>'
-com! -nargs=* CiderKeys execute 'silent !myciderkeys'
-com! -nargs=* Google execute 'silent !google <args>'
-com! -nargs=+ Greph execute 'silent grep! <args> *.h' | cwindow
-com! -nargs=+ Grepcc execute 'silent grep! <args> *.cc' | cwindow
-com! -nargs=+ Grepgo execute 'silent grep! <args> *.go' | cwindow
-com! -nargs=* AsyncRustBuild :call <SID>AsyncRustBuild()
-com! -nargs=* AsyncRustRun :call <SID>AsyncRustRun()
-com! -nargs=* AsyncCargoBuild :call <SID>AsyncCargoBuild()
-com! -nargs=* AsyncCargoRun :call <SID>AsyncCargoRun()
-com! -nargs=* AsyncCargoTest :call <SID>AsyncCargoTest()
-com! -nargs=* AsyncGoRunThis :call <SID>AsyncGoRunThis()
-" ================ functions and commands ======================
+
+
 " ================ themes ======================
+"colorscheme mustang
+"colorscheme molokai
+"color jellybeans
+"color hybrid
+"color gotham
+"color lucius
+"color molokai_dark
+"color bubblegum-256-dark
+"color holokai
+"color hemisu
+"color cabin
+"color hybrid_material
+"color darkburn
+"color alduin
+"color kolor
+"color badwolf
+"color onedark
+"color colorsbox-material
+"color gruvbox
+"color palenight
+"let g:airline_theme='palenight'
+""color onedark
+""let g:airline_theme='onedark'
+"color atlas
+"let g:airline_theme='atlas'
+"color nord
+"let g:airline_theme='nord'
+"color hybrid_material
+"let g:airline_theme='hybrid'
+""color hydrangea
+"let g:airline_theme='hybrid'
+"color monokai-chris
+"let g:airline_theme='hybrid'
+"color mustang
+"let g:airline_theme='hybrid'
+"color material
+"color hybrid
+"let g:airline_theme='hybrid'
+""color ayu
+""let g:airline_theme='ayu'
+"color spacegray
+"let g:airline_theme='spacegray'
+"set termguicolors
+"color afterglow
+"let g:airline_theme='minimalist'
+"let g:afterglow_blackout=1
+"let g:afterglow_italic_comments=1
+"let g:afterglow_inherit_background=1
+"set termguicolors
+"color ayu
+"let g:airline_theme='ayu_mirage'
+"color apprentice
+"let g:airline_theme='minimalist'
+"set background=dark
+"set termguicolors
+"colorscheme deep-space
+"let g:deepspace_italics=1
+"let g:airline_theme='deep_space'
+"color alduin
+"let g:alduin_Shout_Fire_Breath = 1
+"let g:alduin_Shout_Become_Ethereal = 1
+"let g:alduin_Shout_Dragon_Aspect = 1
+
+"color minimalist
+"let g:airline_theme='minimalist'
+
+"color lucius
+"let g:airline_theme='minimalist'
+"color paramount
+"let g:airline_theme='minimalist'
+"set background=dark
+"set termguicolors
+"color pink-moon
+"let g:airline_theme='minimalist'
+"let g:two_firewatch_italics=1
+"set termguicolors
+"colo absent
+"let g:airline_theme='twofirewatch'
+"set termguicolors
+"colo allure
+"let g:airline_theme='twofirewatch'
+
+"set background=dark
+"set termguicolors
+"color two-firewatch 
+"let g:airline_theme='twofirewatch'
+"let g:two_firewatch_italics=1
+
+"set background=dark
+"set notermguicolors
+"color oncedark
+"let g:airline_theme='onedark'
+
+"set background=dark
+"set termguicolors
+"color one
+"let g:airline_theme='one'
+
+"set background=dark
+"set termguicolors
+"colorscheme pinkmare
+"let g:airline_theme = 'minimalist'
+
+"set background=dark
+"set termguicolors
+"colorscheme elly
+"let g:airline_theme = 'elly'
+"
+"set background=dark
+"set termguicolors
+"colorscheme cody 
+"let g:airline_theme = 'minimalist'
+
+"set background=dark
+"set termguicolors
+"colorscheme breakingbad
+"let g:airline_theme = 'minimalist'
+"
 set background=dark
 if $NOTRUECOLOR
 	set notermguicolors
@@ -228,20 +265,26 @@ else
 	set termguicolors
 endif
 colorscheme darkmatrix
-""" perfect fit for matrix!!
-" ##########################################
-let g:javascript_plugin_flow = 1
-" ================ themes ======================
-set encoding=utf-8
-set fillchars+=stl:\ ,stlnc:\
-if !has("nvim")
-    set term=xterm-256color
-endif
-"https://github.com/ryanoasis/powerline-extra-symbols
-let g:NERDTreeHijackNetrw = 0 "// add this line if you use NERDTree
-if executable('rg')
-  set grepprg=rg\ -C1\ -S\ --column\ -H\ --vimgrep\ --color=never
-endif
+let g:airline_theme = 'biogoo'
+
+"set background=dark
+"set termguicolors
+"colorscheme serenade
+"let g:serenade_enable_italic = 1
+"let g:serenade_disable_comment_italic = 0
+"let g:serenade_transparent_background = 0
+"let g:serenade_diagnostic_text_highlight = 1
+"let g:serenade_diagnostic_line_highlight = 1
+"let g:airline_theme = 'serenade'
+"
+"set background=dark
+"set termguicolors
+"colorscheme lighthaus
+"let g:airline_theme = 'lighthaus'
+
+set t_8b=^[[48;2;%lu;%lu;%lum
+set t_8f=^[[38;2;%lu;%lu;%lum
+
 " Prettier configuration
 " https://github.com/prettier/vim-prettier
 let g:prettier#autoformat = 1
@@ -257,6 +300,172 @@ nno <silent> <leader>cp :Prettier<cr>
 " when running at every change you may want to disable quickfix
 " let g:prettier#quickfix_enabled = 0
 " autocmd TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+
+" ##########################################
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+" ============== themes ====================
+set encoding=utf-8
+set fillchars+=stl:\ ,stlnc:\
+if !has("nvim")
+    set term=xterm-256color
+endif
+let g:airline_powerline_fonts = 1
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_symbols.space = "\ua0"
+let g:airline_mode_map = {
+    \ '__' : '-',
+    \ 'n'  : 'N',
+    \ 'i'  : 'I',
+    \ 'R'  : 'R',
+    \ 'c'  : 'C',
+    \ 'v'  : 'V',
+    \ 'V'  : 'V',
+    \ '' : 'V',
+    \ 's'  : 'S',
+    \ 'S'  : 'S',
+    \ '' : 'S',
+    \ }
+if !exists('g:airline_powerline_fonts')
+  let g:airline#extensions#tabline#left_sep = ' '
+  let g:airline#extensions#tabline#left_alt_sep = '|'
+  let g:airline_left_sep = '⮀'
+  let g:airline_left_alt_sep = '⮁'
+  let g:airline_right_sep = '⮂'
+  let g:airline_right_alt_sep = '⮃'
+else
+  let g:airline#extensions#tabline#left_sep = ''
+  let g:airline#extensions#tabline#left_alt_sep = ''
+  " powerline symbols
+  let g:airline_left_sep = ''
+  let g:airline_left_alt_sep = ''
+  let g:airline_right_sep = ''
+  let g:airline_right_alt_sep = ''
+  let g:airline_symbols.branch = ''
+  "let g:airline_symbols.branch = 'ᚠ'
+  let g:airline_symbols.readonly = ''
+  let g:airline_symbols.linenr = ''
+endif
+"https://github.com/ryanoasis/powerline-extra-symbols
+" blocks
+"let g:airline_left_sep = "\ue0c4"
+"let g:airline_left_alt_sep = "\ue0c6"
+"let g:airline_right_sep = "\uE0c5"
+"let g:airline_right_alt_sep = "\uE0c7"
+" triangle
+let g:airline_left_sep = "\ue0b8"
+let g:airline_left_alt_sep = '\ue0b9'
+let g:airline_right_sep = "\ue0ba"
+let g:airline_righ_alt_sep = "\ue0bb"
+" round
+"let g:airline_left_sep = "\ue0b4"
+"let g:airline_left_alt_sep = '\ue0b5'
+"let g:airline_right_sep = "\ue0b6"
+"let g:airline_righ_alt_sep = "\ue0b7"
+" sticks
+"let g:airline_left_sep = "\ue0c8"
+"let g:airline_right_sep = "\ue0ca"
+" flame
+"let g:airline_left_sep = "\ue0c0"
+"let g:airline_right_sep = "\ue0c2"
+" blocks
+"let g:airline_left_sep = "\ue0d2"
+"let g:airline_right_sep = "\ue0d4"
+let g:airline_symbols.crypt = '🔒'
+let g:airline_symbols.spell = 'Ꞩ'
+let g:airline_symbols.maxlinenr = '㏑'
+let g:airline_symbols.notexists = '∄'
+let g:airline#extensions#branch#prefix     = '⤴' "➔, ➥, ⎇
+let g:airline#extensions#readonly#symbol   = '☯'
+let g:airline#extensions#linecolumn#prefix = '¶'
+let g:airline#extensions#paste#symbol      = 'ρ'
+let g:airline_symbols.paste     = 'ρ'
+let g:airline_symbols.whitespace = 'Ξ'
+let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
+let g:airline#extensions#quickfix#location_text = 'Location'
+let g:airline#extensions#bufferline#enabled = 1
+let g:airline#extensions#bufferline#overwrite_variables = 1
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#syntastic#enabled = 1
+let airline#extensions#syntastic#error_symbol = 'E:'
+let airline#extensions#syntastic#stl_format_err = '%E{[%e(#%fe)]}'
+let airline#extensions#syntastic#warning_symbol = 'W:'
+let airline#extensions#syntastic#stl_format_err = '%W{[%w(#%fw)]}'
+let g:airline#extensions#hunks#enabled = 1
+let g:airline#extensions#hunks#non_zero_only = 0
+let g:airline#extensions#hunks#hunk_symbols = ['+', '~', '-']
+let g:airline#extensions#ctrlp#color_template = 'insert'
+let g:airline#extensions#ctrlp#color_template = 'normal'
+let g:airline#extensions#ctrlp#color_template = 'visual'
+let g:airline#extensions#ctrlp#color_template = 'replace'
+let g:airline#extensions#ctrlp#show_adjacent_modes = 1
+let g:airline#extensions#ctrlspace#enabled = 1
+let g:CtrlSpaceStatuslineFunction = "airline#extensions#ctrlspace#statusline()"
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#switch_buffers_and_tabs = 1
+let g:airline#extensions#tabline#show_buffers = 1
+let g:airline#extensions#tabline#show_tabs = 1
+let g:airline#extensions#tabline#buffers_label = 'b'
+let g:airline#extensions#tabline#tabs_label = 't'
+let g:airline#extensions#tmuxline#enabled = 0
+let airline#extensions#tmuxline#color_template = 'normal'
+let airline#extensions#tmuxline#color_template = 'insert'
+let airline#extensions#tmuxline#color_template = 'visual'
+let airline#extensions#tmuxline#color_template = 'replace'
+let g:airline#extensions#ycm#enabled = 1
+let g:airline#extensions#ycm#error_symbol = 'E:'
+let g:airline#extensions#ycm#warning_symbol = 'W:'
+let g:airline#extensions#vimtex#enabled = 1
+let g:airline#extensions#vimtex#left = "{"
+let g:airline#extensions#vimtex#right = "}"
+"let g:airline_theme='gotham'
+"let g:airline_theme='term'
+"let g:airline_theme='hybridline'
+"let g:airline_theme='kalisi'
+"let g:airline_theme='powerlineish'
+" https://github.com/vim-airline/vim-airline/wiki/Screenshots
+"let g:airline_theme='jellybeans'
+"let g:airline_theme='lucius'
+"let g:airline_theme='wombat'
+"let g:airline_theme='night_owl'
+"let g:airline_theme='understated'
+"let g:airline_theme='ubaryd'
+"let g:airline_theme='papercolor'
+"let g:airline_theme='murmur'
+"let g:airline_theme='luna'
+"let g:airline_theme='kolor'
+"let g:airline_theme='badwolf'
+"let g:airline_theme='angr'
+"let g:airline_theme='distinguished'
+"let g:airline_theme='base16'
+"let g:airline_theme='tomorrow'
+"let g:airline_theme='archery'
+"let g:airline_theme='solarized'
+"let g:airline_theme='solarized'
+"let g:airline_solarized_bg='dark'
+"let g:tmuxline_preset = 'nightly_fox'
+let g:rnvimr_ex_enable = 1
+let g:rnvimr_draw_border = 1
+let g:rnvimr_pick_enable = 1
+let g:rnvimr_bw_enable = 1
+let g:rnvimr_ranger_cmd = 'ranger --cmd="set column_ratios 1,1"'
+            " \ --cmd="set draw_borders separators"'
+" let g:rnvimr_layout = { 'relative': 'editor',
+"             \ 'width': float2nr(round(0.6 * &columns)),
+"             \ 'height': float2nr(round(0.6 * &lines)),
+"             \ 'col': float2nr(round(0.2 * &columns)),
+"             \ 'row': float2nr(round(0.2 * &lines)),
+"             \ 'style': 'minimal' }
+let g:rnvimr_presets = [
+            \ {'width': 0.800, 'height': 0.800}]
+let g:ranger_replace_netrw = 1 "// open ranger when vim open a directory
+let g:NERDTreeHijackNetrw = 0 "// add this line if you use NERDTree
+let g:ranger_map_keys = 0
+if executable('rg')
+  set grepprg=rg\ -C1\ -S\ --column\ -H\ --vimgrep\ --color=never
+endif
 " ================ themes ======================
 "
 " ================ key maps ======================
@@ -264,10 +473,6 @@ nno <silent> <leader>cp :Prettier<cr>
 nno Z :set nonu nornu mouse=<cr>
 nno X :set nu rnu mouse=nvicar<cr>
 nno C :set mouse=<cr>
-"nno vd :v/\S/d<cr>
-"nno vb :v/\S/,/\S/-j<cr>
-nno vd :g/^\s*$/d<cr>
-nno vb :%s/\n\{3,}/\r\r/e<cr>
 nno Y y$
 nno n nzzzv
 nno N Nzzzv
@@ -294,6 +499,7 @@ nno ep k$v^yjA<space><esc>p
 nno xp j$v^ykA<space><esc>p
 nno sp j$v^yk^Pa<space><esc>
 nno dp k$v^yj^Pa<space><esc>
+
 vno v; :'<,'>normal! A;<cr>
 vno v0 :'<,'>normal! A)<cr>
 vno v9 :'<,'>normal! A}<cr>
@@ -301,31 +507,26 @@ vno v] :'<,'>normal! A]<cr>
 vno v, :'<,'>normal! A,<cr>
 vno v. :'<,'>normal! A.<cr>
 " most langs.
-"vno v/ :'<,'>normal! I// <cr>
-vno v/ :s/^/\/\/ /g<cr>
-vno r/ :s/^\/\/ //g<cr>
+vno v/ :'<,'>normal! I// <cr>
 " for scripts.
-"vno v\ :'<,'>normal! I# <cr>
-vno v\ :s/^/# /g<cr>
-vno r\ :s/^# //g<cr>
+vno v\ :'<,'>normal! I# <cr>
 " for vim.
-"vno v' :'<,'>normal! I" <cr>
-vno v' :s/^/" /g<cr>
-vno r' :s/^" //g<cr>
+vno v' :'<,'>normal! I" <cr>
 " for lua.
-"vno v- :'<,'>normal! I-- <cr>
-vno v- :s/^/-- /g<cr>
-vno r- :s/^-- //g<cr>
+vno v- :'<,'>normal! I-- <cr>
 " remove trailing spaces.
 vno v= :s/\v\s+$//g<cr>
+
 vno < <gv
 vno > >gv
+
 nno e, yiw
 nno e. yiW
 nno w, yaw
 nno w. yaW
 nno o o<esc>
 nno O O<esc>
+
 " jump break, this is super.
 ino , ,<c-g>u
 ino ; ;<c-g>u
@@ -352,17 +553,19 @@ ino % %<c-g>u
 ino ^ ^<c-g>u
 ino & &<c-g>u
 ino * *<c-g>u
+
 " jumplist
 nno <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
 nno <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
+
 " select last paste in visual mode
 " Map leader to which_key
 "split"
 nno - <C-W>-
 nno = <C-W>+
 "vsplit"
-nno < 100<C-W><
-nno > 100<C-W>>
+nno < <C-W><
+nno > <C-W>>
 vno J :m '>+1<cr>gv=gv
 vno K :m '<-2<cr>gv=gv
 vno C :CommentToggle<cr>
@@ -372,13 +575,8 @@ ino <c-k> <esc>:m .-2<cr>==
 " sync with cider -- myciderkeys on mac
 nor <silent> go <c-o>
 nor <silent> gi <c-i>
-nno <silent> gs :G4DifGFilesf<cr>
-nno <silent> ge :G4Edit<cr>
-nno <silent> gz :G4Revert<cr>
-nno <silent> ga :G4Add<cr>
-nno <silent> gl :Blame<cr>
-nno <silent> gf :GFiles<cr>
 nno <silent> cp :copen<cr>
+
 " !!! important !!! don't map to gj/gk, unfortunately they aren't reliable.
 nno <silent> gj :call NextHunk(1)<cr>
 nno <silent> gk :call PrevHunk(1)<cr>
@@ -386,34 +584,21 @@ nno <silent> gl :call NextHunk(9999)<cr>
 nno <silent> gh :call PrevHunk(9999)<cr>
 " !!! important !!! don't map to gj/gk, unfortunately they aren't reliable.
 "
-"nno <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]'
-"nno ; :   == ; is used in line search.
+"nno ; :
 ino jk <esc>
 ino <capslock> <esc>
 "ino vv <esc>
 nno <silent> <tab> <c-w>w
 cno w!! w !sudo tee % >/dev/null
 nno <F12> "%phr_I#ifndef __<Esc>gUwyypldwidefine <Esc>yypldwiendif //<Esc>O<Esc>
+nno <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]'
 ",ig"
-nno <localleader>da <cmd>lua require('vimway-lsp-diag').open_all_diagnostics()<cr>
-nno <localleader>d0 <cmd>lua require('vimway-lsp-diag').open_buffer_diagnostics()<cr>
 nno <silent> <localleader>sf :SignifyToggleHighlight<cr>
 ino <silent> <localleader>w <esc>:w!<cr>
-ino <silent> <localleader>ww <esc>:wa!<cr>
-nno <silent> <localleader>qq :q!<cr>
-nno <silent> <localleader>qa :qa!<cr>
-nno <silent> <localleader>qs :wqa!<cr>
 nno <silent> <localleader>iv :e ~/.vimrc<CR>
 nno <silent> <localleader>iR :so ~/.vimrc<CR>"
-nno <silent> <localleader>gw :GoogleOutlineWindow<CR>
-nno <silent> <localleader>oh :O h<cr>
-nno <silent> <localleader>ot :O t<cr>
-nno <silent> <localleader>ob :O b<cr>
-nno <silent> <localleader>oc :O cc<cr>
-nno <silent> <localleader>og :O go<cr>
-nno <silent> <localleader>ol :OpenCL<cr>
-nno <silent> <localleader>oo :SessionOpen<cr>
-nno <silent> <localleader>ss :SessionSave
+nno <silent> <localleader>gj <plug>(signify-next-hunk)
+nno <silent> <localleader>gk <plug>(signify-prev-hunk)
 nno <silent> <localleader>oi :e ~/.config/nvim/init.vim<cr>
 nno <silent> <localleader>ok :e ~/.config/nvim/keys/which-key.vim<cr>
 nno <silent> <localleader>op :e ~/.config/nvim/vim-plug/plugins.vim<cr>
@@ -423,7 +608,6 @@ nno <silent> <localleader>s/ :CocList grep<cr>
 nno <silent> <localleader>sa :Ag<cr>
 nno <silent> <localleader>s. :CocList files<cr>
 nno <silent> <localleader>s, :CocList words<cr>
-nno <silent> <localleader>se :call InterestingWords('n')<cr>
 nno <silent> <localleader>s? :CocList commands<cr>
 nno <silent> <localleader>sb :Buffers<cr>
 nno <silent> <localleader>sB :BLines<cr>
@@ -435,29 +619,14 @@ nno <silent> <localleader>st :Rg<cr>
 nno <silent> <localleader>sT :BTags<cr>
 nno <silent> <localleader>sw :Windows<cr>
 nno <silent> <localleader>sz :FZF<cr>
-nno <silent> <localleader>ps :!p4 diff<cr>
-nno <silent> <localleader>pe :exe ':!p4 edit '.bufname('%')<cr>
-nno <silent> <localleader>pz :!p4 revert<cr>
-nno <silent> <localleader>pa :!p4 add<cr>
-nno <silent> <localleader>pA :!p4 addto -c<space>
-nno <silent> <localleader>pl :!p4 blame<cr>
-nno <silent> <localleader>pp :Ppending<cr>
-nno <silent> <localleader>pu :!p4 sync<cr>
+nno <silent> <localleader>sr :RnvimrToggle<cr>
 nno <silent> <localleader>ph :Startify<cr>
 nno <silent> <localleader>pq :qa!<cr>
 nno <silent> <localleader>pw :wqa!<cr>
 nno <silent> <localleader>pR :so $MYVIMRC<cr>
 nno <silent> <localleader>pS :SSave<cr>
 nno <silent> <localleader>pE :e ~/.vimrc<cr>
-nno <silent> <localleader>pB :e ~/.vimrc.plug<cr>
-nno <silent> <localleader>pf :Prettier<cr>
-nno <silent> <localleader>Gb :!blaze build<cr>
-nno <silent> <localleader>GB :BlazeBuild<cr>
-nno <silent> <localleader>Gt :!blaze test<cr>
-nno <silent> <localleader>GT :BlazeTest<cr>
-nno <silent> <localleader>Gh :Greph<space>
-nno <silent> <localleader>Gc :Grepcc<space>
-nno <silent> <localleader>Gg :Grepgo<space>
+nno <silent> <localleader>pB :e ~/.vimrc.bundles<cr>
 nno <silent> <localleader>B :!xxd -g1 %<cr>
 nno <silent> <localleader>bb :CocList buffers<cr>
 nno <silent> <localleader>bn :bn<cr>
@@ -487,6 +656,7 @@ nno <silent> <localleader>tt :FloatermNew --width=50 --height=60<cr>
 nno <silent> <localleader>t. :lua require('FTerm').toggle()<cr>
 nno <silent> <localleader>T :CocList colors<cr>
 nno <silent> <localleader>ct :CommentToggle<cr>
+nno <silent> <localleader>cv :'<,'>CommentToggle<cr>
 "NERDTree"
 nno <localleader>to :NERDTreeTabsOpen<cr>
 nno <localleader>tf :NERDTreeTabsFind<cr>
@@ -508,22 +678,22 @@ nno <localleader>l( :norm yss(<cr>
 nno <localleader>l) :norm yss)<cr>
 nno <localleader>wq :norm ysiw'<cr>
 nno <localleader>wQ :norm ysiw"<cr>
-nno <localleader>Wq :norm ysaW'<cr>
-nno <localleader>WQ :norm ysaW"<cr>
+nno <localleader>Wq :norm ysaw'<cr>
+nno <localleader>WQ :norm ysaw"<cr>
 nno <localleader>w) :norm ysiw)<cr>
 nno <localleader>w( :norm ysiw(<cr>
-nno <localleader>W) :norm ysaW)<cr>
-nno <localleader>W( :norm ysaW(<cr>
+nno <localleader>W) :norm ysaw)<cr>
+nno <localleader>W( :norm ysaw(<cr>
 nno <localleader>w* :norm ysiw*<cr>
-nno <localleader>W* :norm ysaW*<cr>
+nno <localleader>W* :norm ysaw*<cr>
 nno <localleader>w] :norm ysiw]<cr>
 nno <localleader>w[ :norm ysiw[<cr>
-nno <localleader>W] :norm ysaW]<cr>
-nno <localleader>W[ :norm ysaW[<cr>
+nno <localleader>W] :norm ysaw]<cr>
+nno <localleader>W[ :norm ysaw[<cr>
 nno <localleader>w} :norm ysiw{<cr>
 nno <localleader>w{ :norm ysiw}<cr>
-nno <localleader>W} :norm ysaW{<cr>
-nno <localleader>W{ :norm ysaW}<cr>
+nno <localleader>W} :norm ysaw{<cr>
+nno <localleader>W{ :norm ysaw}<cr>
 nno <localleader>p} :norm ysip}<cr>
 nno <localleader>p{ :norm ysip{<cr>
 " ds and cs works.
@@ -532,16 +702,12 @@ nno <localleader>p{ :norm ysip{<cr>
 let g:rustfmt_autosave = 1
 " ==================== space macs simulation layer ========
 " ==================== space macs simulation layer ========
-" source $HOME/.config/nvim_back/plug-config/coc.vim
-" source $HOME/.vim/plugged/coc.nvim/plugin/coc.vim
-" https://github.com/neoclide/coc.nvim/blob/master/doc/coc.txt
-let g:coc_user_config = {}
-let g:coc_user_config['coc.preferences.jumpCommand'] = 'vsplit'
+"source $HOME/.config/nvim.03192021/plug-config/coc/coc.vim
 " ==================== space macs simulation layer ========
 " Create map to add keys to
 let g:which_key_map =  {}
 " Define a separator
-" let g:which_key_sep = '➥'
+"let g:which_key_sep = '➥'
 let g:which_key_sep = '✑'
 set timeoutlen=100
 " Not a fan of floating windows for this
@@ -567,37 +733,44 @@ let g:which_key_map[';'] = [ ':CocList outline'           , 'search words' ]
 let g:which_key_map['V'] = [ ':Commands'                  , 'commands' ]
 let g:which_key_map['='] = [ '<C-W>='                     , 'balance windows' ]
 " not yet
-"let g:which_key_map['c'] = [ ':Codi!!'                   , 'virtual repl']
+"let g:which_key_map['c'] = [ ':Codi!!'                    , 'virtual repl']
 let g:which_key_map['d'] = [ ':bd'                        , 'delete buffer']
 let g:which_key_map['e'] = [ ':CocCommand explorer'       , 'explorer' ]
-" use <leader>sf
-let g:which_key_map['F'] = [ ':Files'                     , 'FZF Files' ]
-let g:which_key_map['f'] = [':Telescope find_files find_command=rg,-.,-i,--files'  	  , 'Tele Files']
-"let g:which_key_map['f'] = [':Telescope file_browser'  , 'files']
-let g:which_key_map['S'] = [ ':SessionSave '              , 'save session' ]
-let g:which_key_map['L'] = [ ':SessionOpen'               , 'open session' ]
-let g:which_key_map['v'] = [ ':<C-W>v'                    , 'split right']
-"let g:which_key_map['z'] = [ ':ZenMode'                  , 'zen' ]
-let g:which_key_map['z'] = [ ':Twilight'                  , 'zen' ]
+let g:which_key_map['F'] = [ ':Files'                     , 'FZF files' ]
+let g:which_key_map['f'] = [':Telescope file_browser theme=get_dropdown'  , 'TS files']
+let g:which_key_map['r'] = [ ':RnvimrToggle'              , 'ranger' ]
+let g:which_key_map['S'] = [ ':SSave'                     , 'save session' ]
+let g:which_key_map['T'] = [ ':Rg'                        , 'search text' ]
+let g:which_key_map['v'] = [ '<C-W>v'                     , 'split right']
+let g:which_key_map['z'] = [ ':Twilight'                   , 'zen' ]
 let g:which_key_map['m'] = [ ':TZFocus'                   , 'Max/UnMax' ]
 let g:which_key_map['?'] = [ ':CocList maps'              , 'maps' ]
-let g:which_key_map['B'] = [ ':Vista'                     , 'Tags' ]
+let g:which_key_map['B'] = [ ':!xxd -g1 %'                , 'show hex' ]
+let g:which_key_map['x'] = [ 'copen'                      , 'show quickfix' ]
 let g:which_key_map["'"] = [ ':FloatermNew --width=50 --height=60' , 'shell' ]
-let g:which_key_map['h'] = [ ':FloatermKill'              , 'kill shell' ]
+let g:which_key_map['h'] = [ ':FloatermKill'               , 'kill shell' ]
 let g:which_key_map['q'] = [ ':q!'                        , 'quit']
 let g:which_key_map['n'] = [ ':bnext'                     , 'cycle buffers' ]
-let g:which_key_map['`'] = [ ':TSHighlightCapturesUnderCursor' , 'TSInfo' ]
-let g:which_key_map['u'] = [ ':e #'                       , 'ropen' ]
-let g:which_key_map['\'] = [ ':TSPlaygroundToggle'        , 'TS' ]
 " Group mappings
 " a is for actions
+" Rust 
+let g:which_key_map.R = {
+      \ 'name' : '+Rust',
+      \ 'r' : [ ':AsyncRustRun'                  , 'Run file'],
+      \ 'b' : [ ':AsyncRustBuild'                , 'Compile file'],
+      \ 'c' : [ ':AsyncCargoBuild'               , 'Compile cargo'],
+      \ 'x' : [ ':AsyncCargoRun'                 , 'Run cargo bin'],
+      \ 't' : [ ':AsyncCargoTest'                , 'Test cargo'],
+      \ '?' : [ ':AsyncCargoCheck'               , 'cargo check'],
+      \ }
 let g:which_key_map.a = {
       \ 'name' : '+actions' ,
       \ 'c' : [':ColorizerToggle'        , 'colorizer'],
       \ 'e' : [':CocCommand explorer'    , 'explorer'],
-      \ 'r' : [':luafile %'              , 'lua run %'],
+      \ 'n' : [':set nonumber!'          , 'line-numbers'],
+      \ 'r' : [':set norelativenumber!'  , 'relative line nums'],
       \ 's' : [':let @/ = ""'            , 'remove search highlight'],
-      \ 'v' : [':Vista!!'                , 'tag viewer'],
+      \ 't' : [':FloatermNew --width=50 --height=60' , 'terminal'],
       \ }
 " b is for buffer
 let g:which_key_map.b = {
@@ -611,17 +784,11 @@ let g:which_key_map.b = {
       \ 'n' : [':bnext'                                      , 'next-buffer']     ,
       \ 'p' : [':bprevious'                                  , 'previous-buffer'] ,
       \ '?' : [':Buffers'                                    , 'fzf-buffer']      ,
-      \ 'b' : [':CocList buffers'                           , 'all buffers'],
-      \ 'm' : [':CocList marks'                             , 'all marks'],
+      \ 'b' : [':CocList marks'                             , 'all marks'],
       \ }
 " code
 let g:which_key_map.c = {
       \ 'name' : '+code' ,
-      \ 'h' : [':Greph'                                         , 'search .h'],
-      \ 'c' : [':Grephcc'                                       , 'search .cc'],
-      \ 'g' : [':Grephgo'                                       , 'search .go'],
-      \ 't' : [':Twilight'                                      , 'Twilight coding'],
-      \ 'z' : [':ZenMode'                                       , 'ZenMode coding'],
       \ }
 " g is for git
 let g:which_key_map.g = {
@@ -648,33 +815,6 @@ let g:which_key_map.g = {
       \ 'u' : ['<Plug>(GitGutterUndoHunk)'         , 'undo hunk'],
       \ 'v' : [':GV'                               , 'view commits'],
       \ 'V' : [':GV!'                              , 'view buffer commits'],
-      \ }
-" google
-let g:which_key_map.G = {
-      \ 'name' : '+Google',
-      \ 'r' : [ ':RelatedFilesWindow'                     , 'Related files'],
-      \ 'l' : [ ':GoogleOutlineWindow'                    , 'GoogleOutlineWindow'],
-      \ 'H' : [ ':SignifyToggleHighlight'                 , 'toggle highlight'],
-      \ 'v' : [ ':BlazeViewCommandLog'                    , 'Blaze View Log'],
-      \ 'e' : [ ':BlazeLoadErrors'                        , 'Blaze Errors'],
-      \ 'S' : [ ':BlazeGoToSponge'                        , 'Blaze Sponge'],
-      \ 'U' : [ ':BlazeDepsUpdate'                        , 'Blaze DepUpdate'],
-      \ 'c' : [ ':CritiqueComments'                       , 'CL comments'],
-      \ 'p' : [ ':CritiquePreviousComments'               , 'CL previous comments'],
-      \ 'n' : [ ':CritiqueNextComments'                   , 'CL next comments'],
-      \ 'u' : [ ':CritiqueUnresolvedComments'             , 'CL unresolved comments'],
-      \ 'B' : [ ':BlazeBuild'                              , 'Async Build'],
-      \ 'T' : [ ':BlazeTest'                               , 'Async Test'],
-      \ }
-" Rust & Go
-let g:which_key_map.R = {
-      \ 'name' : '+Rust',
-      \ 'r' : [ ':AsyncRustRun'                  , 'Run file'],
-      \ 'b' : [ ':AsyncRustBuild'                , 'Compile file'],
-      \ 'c' : [ ':AsyncCargoBuild'               , 'Compile cargo'],
-      \ 'x' : [ ':AsyncCargoRun'                 , 'Run cargo bin'],
-      \ 't' : [ ':AsyncCargoTest'                , 'Test cargo'],
-      \ 'g' : [ ':AsyncGoRunThis'                , 'go run this'],
       \ }
 " l is for language server protocol
 let g:which_key_map.l = {
@@ -717,60 +857,36 @@ let g:which_key_map.l = {
 " open
 let g:which_key_map.o = {
       \ 'name' : '+open',
-      \ 'o' : [':SessionOpen'             			  , 'open session'],
       \ '1' : [':vsp ~/.vimrc'                                    , 'vimrc'],
       \ '2' : [':vsp ~/.vimrc.plug'                               , 'vimrc plug'],
       \ '3' : [':vsp ~/.vim/init.lua'                             , 'vimrc init.lua'],
       \ '4' : [':vsp ~/.zshrc'                                    , 'zshrc'],
       \ '5' : [':vsp ~/.zshrc.pre-oh-my-zsh'                      , 'zshrc pre-omz'],
-      \ '6' : [':vsp ~/.zshenv'                                   , 'zshenv'],
+      \ '6' : [':vsp ~/.zshenv'                      						 , 'zshenv'],
       \ '7' : [':vsp ~/bin/cheat'                                 , 'cheatsheet'],
-      \ 'i' : [':vsp ~/.config/nvim/init.vim'                     , 'open init'],
-      \ 'k' : [':vsp ~/.config/nvim/keys/which-key.vim'           , 'which keys'],
-      \ 'p' : [':vsp ~/.config/nvim/vim-plug/plugins.vim'         , 'vim-plug'],
-      \ 'h' : [':O h'                                             , 'open .h'],
-      \ 'c' : [':O cc'                                            , 'open .cc'],
-      \ 'b' : [':O b'                                             , 'open BUILD'],
-      \ 't' : [':O t'                                             , 'open test'],
-      \ 'g' : [':O go'                                            , 'open .go'],
-      \ 'l' : [':OpenCL'                                          , 'open CL'],
-      \ 'w' : [':!vieb "<cWORD>"'                                 , 'open link'],
-      \ 's' : [':!vieb "google.com/search?q=<cword>"'             , 'search web'],
-      \ 'v' : [':vsp /tmp/foo.go'                  		  , 'vsp file'],
-      \ }
-" Piper
-let g:which_key_map.P = {
-      \ 'name' : '+Piper',
-      \ 's' : [ ':G4Diff'                               , 'g4 diff'],
-      \ 'e' : [ ':G4Edit'                               , 'g4 edit'],
-      \ 'z' : [ ':G4Revert'                             , 'g4 revert'],
-      \ 'a' : [ ':G4Add'                                , 'g4 add'],
-      \ 'A' : [ ':G4AddTo'                              , 'g4 addto'],
-      \ 'l' : [ ':Blame'                                , 'g4 blame'],
-      \ 'p' : [ ':Ppending'                             , 'g4 pending'],
-      \ 'u' : [ ':!p4 sync'                             , 'p4 sync'],
+      \ 'i' : [':vsp ~/.config/nvim/init.vim'                            , 'open init'],
+      \ 'k' : [':vsp ~/.config/nvim/keys/which-key.vim'                  , 'which keys'],
+      \ 'p' : [':vsp ~/.config/nvim/vim-plug/plugins.vim'                , 'vim-plug'],
       \ }
 " project
 let g:which_key_map.p = {
       \ 'name' : '+projects' ,
       \ 'a' : [':qa!'                                       , 'quit all'],
       \ 's' : [':wqa!'                                      , 'save&quit all'],
-      \ 'w' : [':w!'                                        , 'save!'],
-      \ 'S' : [':SessionSave '                              , 'save session'],
-      \ 'e' : [':e ~/.vimrc'                          	    , 'open init' ],
-      \ 'b' : [':e ~/.vimrc.plug'                           , 'open plug' ],
+      \ 'S' : [':SSave'                                     , 'save session'],
+      \ 'e' : [':e ~/.vimrc'                          , 'open init' ],
+      \ 'b' : [':e ~/.vimrc.bundles'                  , 'open bundles' ],
       \ 'h' : ['Startify'                                   , 'home' ],
       \ 'f' : [':Prettier'                                  , 'Pretties' ],
       \ }
 " s is for search
 let g:which_key_map.s = {
       \ 'name' : '+search' ,
-      \ '.' : [':Vista finder'          , 'Tags'],
       \ '/' : [':History/'              , 'history'],
       \ ';' : [':Commands'              , 'commands'],
       \ 'a' : [':Ag'                    , 'text Ag'],
-      \ 'B' : [':BLines'                , 'current buffer'],
-      \ 'b' : [':Buffers'               , 'open buffers'],
+      \ 'b' : [':BLines'                , 'current buffer'],
+      \ 'B' : [':Buffers'               , 'open buffers'],
       \ 'c' : [':Commits'               , 'commits'],
       \ 'C' : [':BCommits'              , 'buffer commits'],
       \ 'f' : [':Files'                 , 'files'],
@@ -822,40 +938,6 @@ let g:which_key_map.t = {
       \ 'y' : [':FloatermNew --width=110 --height=8 ytfzf -fm'   , 'ytfzf music'],
       \ '/' : [':FloatermNew --width=110 --height=8 ytfzf -f'      , 'ytfzf video'],
       \ }
-" Diagnose
-let g:which_key_map.x = {
-      \ 'name' : '+Diagnose' ,
-      \ 'q' : [ 'copen'                                         , 'show quickfix' ],
-      \ 'x' : [ ':LspTroubleToggle'                             , 'toggle lsp trouble' ],
-      \ 'w' : [ ':LspTroubleToggle lsp_workspace_diagnostics'   , 'lsp workspace' ],
-      \ 'd' : [ ':LspTroubleToggle lsp_document_diagnostics'    , 'lsp document' ],
-      \ 'c' : [ ':LspTroubleToggle quickfix'                    , 'lsp quickfix' ],
-      \ 'l' : [ ':LspTroubleToggle loclist'                     , 'lsp loclist' ],
-      \ 'r' : [ ':LspTroubleToggle lsp_references'              , 'lsp refs' ],
-      \}
-" Telescope                                                                            
-let g:which_key_map.T = {                                                         
-        \ 'name' : '+Telescope' ,                                                   
-        \ 'A' : [':Telescope autocommands'                         , 'Telescope autocommands'],
-        \ 'B' : [':Telescope builtin'                              , 'Telescope builtin'],
-        \ 'C' : [':Telescope commands'                             , 'Telescope vim commands'],
-        \ 'K' : [':Telescope keymaps'                              , 'Telescope keymaps'],
-        \ 'O' : [':Telescope vim_options'                          , 'Telescope vim options'],
-        \ 'R' : [':Telescope registers'                            , 'Telescope registers'],
-        \ 'H' : [':Telescope search_history'                       , 'Telescope search history'],
-        \ 'M' : [':Telescope man_pages'                            , 'Telescope man page'],
-        \ 'L' : [':Telescope loclist'                              , 'Telescope loclist'],
-        \ 'Q' : [':Telescope quickfix'                             , 'Telescope quickfix'],
-        \ '/' : [':Telescope current_buffer_fuzzy_find'            , 'Telescope curbuf search'],
-        \ '.' : [':Telescope file_browser'      , 'Telescope browser'],
-        \ 'b' : [':Telescope buffers'                              , 'Telescope buffers'],
-        \ 'f' : [':Telescope find_files find_command=rg,--hidden,-i,--files,-l'       , 'Telescope find files'],
-        \ 'g' : [':Telescope live_grep'                            , 'Telescope grep'],
-        \ 'h' : [':Telescope help_tags'                            , 'Telescope vim help'],
-        \ 'm' : [':Telescope marks'                                , 'Telescope marks'],
-        \ 'c' : [':Telescope command_history'                      , 'Telescope q:'],
-        \ 's' : [':Telescope oldfiles'                             , 'Telescope switch files'],
-        \ }
 " windows
 let g:which_key_map.w = {
       \ 'name' : '+windows' ,
@@ -876,16 +958,49 @@ let g:which_key_map.w = {
       \ 'V' : [':VsplitVifm'                                    , 'VTab vifm'],
       \ '?' : ['Windows'                                        , 'fzf windows'],
       \ }
+" Telescope                                                                            
+let g:which_key_map.T = {                                                         
+        \ 'name' : '+Telescope' ,                                                   
+        \ 'A' : [':Telescope autocommands'                         , 'Telescope autocommands'],
+        \ 'B' : [':Telescope builtin'                              , 'Telescope builtin'],
+        \ 'C' : [':Telescope commands'                             , 'Telescope vim commands'],
+        \ 'K' : [':Telescope keymaps'                              , 'Telescope keymaps'],
+        \ 'O' : [':Telescope vim_options'                          , 'Telescope vim options'],
+        \ 'R' : [':Telescope registers'                            , 'Telescope registers'],
+        \ 'H' : [':Telescope search_history'                       , 'Telescope search history'],
+        \ 'M' : [':Telescope man_pages'                            , 'Telescope man page'],
+        \ 'L' : [':Telescope loclist'                              , 'Telescope loclist'],
+        \ 'Q' : [':Telescope quickfix'                             , 'Telescope quickfix'],
+        \ '/' : [':Telescope current_buffer_fuzzy_find'            , 'Telescope curbuf search'],
+        \ '.' : [':Telescope file_browser theme=get_dropdown'      , 'Telescope browser'],
+        \ 'b' : [':Telescope buffers'                              , 'Telescope buffers'],
+        \ 'f' : [':Telescope find_files theme=get_dropdown find_command=rg,--hidden,-i,--files,-l'       , 'Telescope find files'],
+        \ 'g' : [':Telescope live_grep'                            , 'Telescope grep'],
+        \ 'h' : [':Telescope help_tags'                            , 'Telescope vim help'],
+        \ 'm' : [':Telescope marks'                                , 'Telescope marks'],
+        \ 'c' : [':Telescope command_history'                      , 'Telescope q:'],
+        \ 's' : [':Telescope oldfiles'                             , 'Telescope switch files'],
+        \ }
 " Register which key map
 call which_key#register('<Space>', "g:which_key_map")
 " ================ key maps ======================
 "
 " ================ settings ======================
 set path+=**
-" c-x/c-a +- num/alpha.
-set nrformats+=alpha
 set wildmenu
 set wildmode=longest:full,full
+set nrformats+=alpha
+
+set copyindent   "make the autoindent copying the existing indentation"
+set shiftround   "round the shift to multiple shiftwidth"
+set smarttab     "use shiftwidth when insert tab"
+set wildignore=*.swp,*.bak,*.pyc,*.class,*.o
+set title
+set visualbell
+set noerrorbells
+set nobackup
+set noswapfile
+
 " https://sharksforarms.dev/posts/neovim-rust/
 " tab completion
 ino <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -896,16 +1011,8 @@ imap <S-Tab> <Plug>(completion_smart_s_tab)
 " https://sharksforarms.dev/posts/neovim-rust/
 " COQ config
 let g:coq_settings = {}
-" autocmd VimEnter * execute 'COQnow'
-set copyindent   "make the autoindent copying the existing indentation"
-set shiftround   "round the shift to multiple shiftwidth"
-set smarttab     "use shiftwidth when insert tab"
-set wildignore=*.swp,*.bak,*.pyc,*.class,*.o
-set title
-set visualbell
-set noerrorbells
-set nobackup
-set noswapfile
+autocmd VimEnter * execute 'COQnow'
+"
 vmap Q gq
 nmap Q gqap"
 cmap w!! w !sudo tee % >/dev/null
@@ -921,12 +1028,15 @@ let g:go_highlight_structs = 1
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
 let g:go_auto_type_info = 1
-" autocomplete for Go using omnifunc. <TAB> doesn't work for some reason.
-" maybe related to the rust setup, need investigate.
-" https://tpaschalis.github.io/vim-go-setup/
-" another one with coc: https://octetz.com/docs/2019/2019-04-24-vim-as-a-go-ide/
 au filetype go inoremap <buffer> . .<C-x><C-o>
 "disable ruby warning.
+let g:LustyJugglerSuppressRubyWarning = 1
+"supertab
+"let g:SuperTabDefaultCompletionType = "context"
+"autocmd FileType *
+"    \ if &omnifunc != '' |
+"    \   call SuperTabChain(&omnifunc, "<c-p>") |
+"    \ endif
 "NERDTree auto open. ctrl-e does the same toggle. disable for now.
 "autocmd VimEnter * execute 'NERDTree' | wincmd p
 "autocmd BufWinEnter * NERDTreeMirror
@@ -970,6 +1080,7 @@ autocmd VimEnter * call NERDTreeHighlightFile('bashprofile', 'Gray', 'none', '#6
 autocmd filetype nerdtree highlight haskell_icon ctermbg=none ctermfg=Red guifg=#ffa500
 autocmd filetype nerdtree highlight html_icon ctermbg=none ctermfg=Red guifg=#ffa500
 autocmd filetype nerdtree highlight go_icon ctermbg=none ctermfg=Red guifg=#ffa500
+
 autocmd filetype nerdtree syn match haskell_icon ## containedin=NERDTreeFlags
 " if you are using another syn highlight for a given line (e.g.
 " NERDTreeHighlightFile) need to give that name in the 'containedin' for this
@@ -980,13 +1091,8 @@ autocmd filetype nerdtree syn match go_icon ## containedin=NERDTreeFlags
 au BufNewFile,BufRead fish_funced set ft=fish
 "from makc => My New Terminal: Alaritty 19:05
 " allow alaritty to have a transparent background."
-" !!!! These two lines have side effect of the new neovim syntax
-" highlight loading change. 
-" https://github.com/neovim/neovim/pull/14771
-" The theme after enable these doesn't look too bad but it's still unexpected.
 hi! Normal ctermbg=NONE guibg=NONE
 hi! NonText ctermbg=NONE guibg=NONE guifg=NONE ctermfg=NONE
-" !!!! These two lines have side effect of the new neovim syntax
 syntax on
 set shiftround
 set ignorecase
@@ -994,13 +1100,7 @@ set smartcase
 set incsearch
 set ws  " wrap search"
 set wb  "writebackup"
-" always has to be the end.
-filetype plugin indent on
-set nu rnu
-set guifont=FiraCode\ Nerd\ Font\ Mono:h22
-"" neovide configs"
 set mouse=nvicar
-"set mouse=a
 let g:neovide_transparency=0.97
 let g:neovide_cursor_antialiasing=v:true
 " also sonicboom, wireframe 
@@ -1014,17 +1114,16 @@ set shortmess+=c
 " ============================== nvim native lsp usage
 " https://sharksforarms.dev/posts/neovim-rust/
 " " Code navigation shortcuts
-"nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
-nno <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+"nno <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
+nno <silent> gd :vert <cmd>lua vim.lsp.buf.definition()<CR>
 nno <silent> gD    <cmd>lua vim.lsp.buf.references()<CR>
 nno <silent> H     <cmd>lua vim.lsp.buf.hover()<CR>
 nno <silent> g.    <cmd>lua vim.lsp.buf.code_action()<CR>
 " Set updatetime for CursorHold
 " 300ms of no cursor movement to trigger CursorHold
-set updatetime=3000
-" Show diagnostic popup on cursor hold, this is pretty annoying, 
-" we changed to use vimway diagnose.
-" autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
+set updatetime=300
+" Show diagnostic popup on cursor hold
+autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
 " Goto previous/next diagnostic warning/error
 nno <silent> g[ <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
 nno <silent> g] <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
@@ -1032,13 +1131,18 @@ set signcolumn=yes " fix jitter
 " Enable type inlay hints
 autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
 \ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} }
-"nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
-"nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
-"nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-"nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
-"nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
-"nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-"nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
+"nno <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+"nno <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+"nno <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+"nno <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+"nno <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+"nno <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+"nno <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
+" ============================== nvim native lsp usage
+" always has to be the end.
+filetype plugin indent on
+set nu rnu
+set spell
 " spell
 imap <c-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 nmap <c-l> [s1z=`]a<c-g>u
@@ -1051,6 +1155,7 @@ set wildcharm=<Tab>
 cmap <expr> <Tab> wilder#in_context() ? wilder#next() : "\Tab><"
 cmap <expr> <S-Tab> wilder#in_context() ? wilder#previous() : "\<S-Tab>"
 call wilder#set_option('modes', ['/', '?', ':'])
+
 call wilder#set_option('pipeline', [
 	      \   wilder#branch(
       \     wilder#cmdline_pipeline({
@@ -1062,10 +1167,13 @@ call wilder#set_option('pipeline', [
       \     }),
       \   ),
       \ ])
+
 let s:highlighters = [
 	        \ wilder#pcre2_highlighter(),
         \ wilder#basic_highlighter(),
         \ ]
+
+
 call wilder#set_option('renderer', wilder#renderer_mux({
       \ ':': wilder#popupmenu_renderer({
       \   'highlighter': s:highlighters,
@@ -1082,6 +1190,7 @@ call wilder#set_option('renderer', wilder#renderer_mux({
       \ }),
       \ }))
 """"""""""""""""""""""""""""""""""""""""""""""
+
 "function! CustomFold()
 "  return printf('   %6d%s', v:foldend - v:foldstart + 1, getline(v:foldstart))
 "endfunction
