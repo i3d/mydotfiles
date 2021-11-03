@@ -1,0 +1,491 @@
+# chars as part of filename
+WORDCHARS='*?_-[]~=&;!#$%^(){}<>'
+# GNU Colors
+[ -f /etc/DIR_COLORS ] && eval $(dircolors -b /etc/DIR_COLORS)
+export ZLSCOLORS="${LS_COLORS}"
+
+### autoload -Uz compinit
+### compinit
+
+# Disable core dump
+limit coredumpsize 0
+
+zstyle ':completion:*' completer _oldlist _expand _complete _ignored _match _correct _approximate _prefix
+#
+zstyle ':completion:*' expand 'yes'
+zstyle ':completion::complete:*' '\\'
+zstyle ':completion:*' expand prefix suffix
+#
+## Will do autofirst match and menu complete
+##zstyle ':completion:*:*:*:default' menu yes select
+##
+## will do list by the last modification time.
+zstyle ':completion:*' file-sort modification
+#
+## this provent the auto cd subdir working.
+## zstyle ':completion:*:*:default' force-list always
+#
+zmodload zsh/complist
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31' 
+#
+zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
+zstyle ':completion:*' list-suffixes true
+#
+zstyle ':completion:*' matcher-list '' '' '' 'r:|[._-]=** r:|=** l:|=*'
+zstyle ':completion:*' max-errors 3 numeric
+#
+zstyle ':completion:*' menu select=0
+zstyle ':completion:*' original true
+zstyle ':completion:*' preserve-prefix '//[^/]##/'
+zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+zstyle ':completion:*' special-dirs true
+## do squeeze-slashes
+zstyle ':completion:*' squeeze-slashes true
+zstyle ':completion:*' use-compctl true
+#
+## New stuff
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache
+zstyle ':completion:*:(all-|)files' ignored-patterns '(|*/)CVS'
+#zstyle ':completion:*:cd:*' ignored-patterns '(*/)#CVS'
+#zstyle ':completion:*:cd:*' ignored-patterns parent pwd
+zstyle ':completion:*:match:*' original only
+zstyle ':completion:*:approximate:*' max-errors 1 numeric
+zstyle ':completion:*:functions' ignored-patterns '_*'
+zstyle ':completion:*:*:kill:*' menu yes select
+zstyle ':completion:*:kill:*'   force-list always
+#
+zstyle ':completion::prefix-1:*' completer _complete
+zstyle ':completion:predict:*' completer _complete
+zstyle ':completion:incremental:*' completer _complete _correct
+#
+zstyle ':completion:*:processes' command 'ps -au$USER'
+#
+## Group matches and Describe
+zstyle ':completion:*:matches' group 'yes'
+zstyle ':completion:*:options' description 'yes'
+zstyle ':completion:*:options' auto-description '%d'
+zstyle ':completion:*:descriptions' format $'\e[01;33m -- %d --\e[0m'
+zstyle ':completion:*:messages' format $'\e[01;35m -- %d --\e[0m'
+zstyle ':completion:*:warnings' format $'\e[01;31m -- No Matches Found --\e[0m'
+## cd dir color red
+zstyle ':completion:*:default' list-colors ''
+########### experiment ###############
+#zstyle ':completion:*:*:*:*:*' menu select
+expand-or-complete-with-dots() {      # This bunch of code displays red dots when autocompleting
+  echo -n "\e[31m......\e[0m"         # a command with the tab key, "Oh-my-zsh"-style.
+  zle expand-or-complete
+  zle redisplay
+}
+zle -N expand-or-complete-with-dots
+bindkey "^I" expand-or-complete-with-dots
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+zstyle :compinstall filename '/home/yongjian/.zshrc'
+########## experiment ###############
+#
+########################## zsh-autocomplete settings ################################
+zstyle ':autocomplete:*' default-context ''
+#zstyle ':autocomplete:*' default-context history-incremental-search-backward
+## '': Start each new command line with normal autocompletion.
+## history-incremental-search-backward: Start in live history search mode.
+#
+zstyle ':autocomplete:*' min-delay 3 # number of seconds (float)
+## 0.0: Start autocompletion immediately when you stop typing.
+## 0.4: Wait 0.4 seconds for more keyboard input before showing completions.
+#
+# Try 0 to see if it interacts with other completions or not.
+# if so, change back to 1.
+# If 1, then extendedglob to show the current pwd content would not work
+# anymore (because it needs 1 input), so a bit of feature lost.
+#### zstyle ':autocomplete:*' min-input 0 #number of characters (integer)
+## 0: Show completions immediately on each new command line.
+## 1: Wait for at least 1 character of input.
+#
+zstyle ':autocomplete:*' ignored-input '' # extended glob pattern
+## '':     Always show completions.
+## '..##': Don't show completions when the input consists of two or more dots.
+#
+## When completions don't fit on screen, show up to this many lines:
+#### zstyle ':autocomplete:*' list-lines 8  # (integer)
+## 💡 NOTE: The actual amount shown can be less.
+#
+## If any of the following are shown at the same time, list them in this order:
+zstyle ':completion:*:' group-order \
+    expansions history-words options \
+    aliases functions builtins reserved-words \
+    executables local-directories directories suffix-aliases
+## 💡 NOTE: This is NOT the order in which they are generated.
+#
+zstyle ':autocomplete:*' insert-unambiguous no
+## no:  Tab inserts the top completion.
+## yes: Tab first inserts substring common to all listed completions, if any.
+#
+zstyle ':autocomplete:*' widget-style menu-select
+## complete-word: (Shift-)Tab inserts the top (bottom) completion.
+## menu-complete: Press again to cycle to next (previous) completion.
+## menu-select:   Same as `menu-complete`, but updates selection in menu.
+## ⚠️ NOTE: This can NOT be changed at runtime.
+#
+## CD with fzf worked.
+zstyle ':autocomplete:*' fzf-completion yes
+## no:  Tab uses Zsh's completion system only.
+## yes: Tab first tries Fzf's completion, then falls back to Zsh's.
+## ⚠️ NOTE: This can NOT be changed at runtime and requires that you have
+## installed Fzf's shell extensions.
+#
+## Add a space after these completions:
+zstyle ':autocomplete:*' add-space \
+    executables aliases functions builtins reserved-words commands \
+    expansions history-words options \
+    local-directories directories suffix-aliases
+########################## zsh-autocomplete settings ################################
+
+rationalise-dot() {
+  if [[ $LBUFFER = *.. ]]; then
+    LBUFFER+=/..
+  else
+    LBUFFER+=.
+  fi
+}
+zle -N rationalise-dot
+bindkey . rationalise-dot
+
+#extendedglob already provided by zsh-autocomplete
+compctl -o setopt unsetopt
+setopt aliases appendhistory autocd notify completeinword listambiguous autolist complete_aliases no_list_beep list_packed bang_hist extended_history hist_reduce_blanks hist_verify inc_append_history no_clobber correct INTERACTIVE_COMMENTS path_dirs no_check_jobs no_hup share_history auto_name_dirs markdirs globsubst listpacked 
+## will make zsh-autocomplete not work in command like mv, cp, etc..
+#shwordsplit
+#
+unsetopt beep nomatch
+# screen key binding
+# ctrl-a :sessionname to find out the current session
+screen_kill() {
+  screen -X -S $1 kill
+}
+
+trr() {
+  tmux -2 attach-session -t $1 || tmux ls
+}
+
+tmux_has_main() {
+  tmux -2 has-session -t main
+}
+
+tmux_init_main() {
+  tmux -2 new-session -d -s main -n $1
+}
+
+screenup (){
+  # echo "Checking LOAS status..."
+  # prodcertstatus --check_remaining_hours=9 || prodaccess --ssh_cert -g
+  echo "Starting tmux..."
+  tmux_has_main || tmux_init_main $1
+  tmux -2 attach-session -t main
+}
+
+rsc() {
+  #CLIENTID=$1.`date +%S`
+  CLIENTID=$1
+  tmux new-session -d -t $1 -s $CLIENTID
+  tmux attach-session -t $CLIENTID
+}
+
+tt() {
+  tmux new-session -d -s $1
+  #rsc $1
+}
+
+#######
+# https://github.com/mooz/percol
+function peco-src () {
+    local selected_dir=$(ghq list --full-path | peco --query "$LBUFFER")
+    if [ -n "$selected_dir" ]; then
+        BUFFER="cd ${selected_dir}"
+        zle accept-line
+    fi
+    zle clear-screen
+}
+zle -N peco-src
+
+function peco-godoc() {
+    local selected_dir=$(ghq list --full-path | peco --query "$LBUFFER")
+    if [ -n "$selected_dir" ]; then
+        BUFFER="godoc ${selected_dir} | less"
+        zle accept-line
+    fi
+    zle clear-screen
+}
+zle -N peco-godoc
+
+function ppgrep() {
+    if [[ $1 == "" ]]; then
+        PERCOL=peco
+    else
+        PERCOL="peco --query $1"
+    fi
+    ps aux | eval $PERCOL | awk '{ print $2 }'
+}
+
+function ppkill() {
+    if [[ $1 =~ "^-" ]]; then
+        QUERY=""            # options only
+    else
+        QUERY=$1            # with a query
+        [[ $# > 0 ]] && shift
+    fi
+    ppgrep $QUERY | xargs kill $*
+}
+
+function exists { which $1 &> /dev/null }
+
+if exists peco; then
+    function peco_select_history() {
+        local tac
+        exists gtac && tac="gtac" || { exists tac && tac="tac" || { tac="tail -r" } }
+        BUFFER=$(fc -l -n 1 | eval $tac | peco --query "$LBUFFER")
+        CURSOR=$#BUFFER         # move cursor
+        zle -R -c               # refresh
+    }
+    zle -N peco_select_history
+    bindkey '^R' peco_select_history
+fi
+
+
+# until we fix gnubby, we use the default ssh binary.
+#alias sx='ssh -t -A -x jimux'
+# -X forwarding X is having problem with vi.
+alias sux='ssh -t -A -X ujimux.c.googlers.com'
+alias dstat='dstat -cdlmnpsy'
+#alias sl='screen -ls'
+alias tl='tmux ls'
+alias tlc='tmux lsc'
+alias tc='tmux list-commands'
+alias tw='tmux list-windows -t'
+alias sr='screen -UraAd'
+alias tk='tmux kill-session -t'
+alias srx='screen -UraAdx'
+alias srr='screen -UaADRR'
+alias sk='screen_kill'
+alias s='echo $STY'
+
+alias sdg='screen -c $HOME/.screenrc-go -d -m -UaA -S go'
+alias sg='screen -c $HOME/.screenrc-go -UaA -S go'
+alias sde='screen -c $HOME/.screenrc-everything -d -m -UaA -S everything'
+alias se='screen -c $HOME/.screenrc-everything -UaA -S everything'
+alias sdc='screen -c $HOME/.screenrc-compile -d -m -UaA -S compile'
+alias sc='screen -c $HOME/.screenrc-compile -UaA -S compile'
+alias sdj='screen -c $HOME/.screenrc-jotspot -d -m -UaA -S jotspot'
+alias sj='screen -c $HOME/.screenrc-jotspot -UaA -S jotspot'
+alias sdb='screen -c $HOME/.screenrc-borg -d -m -UaA -S borg'
+alias sb='screen -c $HOME/.screenrc-borg -UaA -S borg'
+
+alias cdgocode='cd ~/go_code/src/'
+alias gtags='/home/build/nonconf/google3/tools/tags/gtags.sh'
+alias gtagsc='/home/build/nonconf/google3/tools/tags/gtags.sh --lang=c++'
+alias gtagsj='/home/build/nonconf/google3/tools/tags/gtags.sh --lang=java'
+alias gtagsjs='/home/build/nonconf/google3/tools/tags/gtags.sh --lang=javascript'
+alias gtagspb='/home/build/nonconf/google3/tools/tags/gtags.sh --lang=proto'
+alias gtagspy='/home/build/nonconf/google3/tools/tags/gtags.sh --lang=python'
+alias vless='vi -u /usr/share/vim/vim80/macros/less.vim'
+alias dfa='df -ha .'
+alias bls='/bin/ls -trABipFG'
+alias ls='exa --sort=type --icons --time=modified --git --color=always'
+alias la='ls -laFh'
+#alias l='ls -Hlghi --sort=modified --group-directories-first'
+alias l='ls -la@BFbgHhi --sort=modified --group-directories-first'
+alias ll='bls -la'
+alias lr='l -T'
+alias lss='l --sort=size'
+alias lsd='l -D'
+#alias s='cd ..'
+alias md='mkdir -p'
+#alias grep='grep --color=always'
+alias info_cal='ssh caladmin exec /etc/cron.d/scripts/add_events2 --info-calendars'
+alias dump_group='ssh caladmin /usr/local/bin/list_domain_calendars.par --calendar_type group'
+alias dump_user='ssh caladmin /usr/local/bin/list_domain_calendars.par --calendar_type user'
+alias dump_res='ssh caladmin /usr/local/bin/list_domain_calendars.par --calendar_type resource'
+alias cdcorpcron='cd /home/build/ops/corp/slack/roles/caladmin/files.cron/etc/cron.d/scripts'
+alias cdsp='cd $HOME/src/sp/google3/experimental/users/jimxu/sp'
+alias cdexp='cd $HOME/src/google3_experimental/google3/experimental/users/jimxu/'
+alias cddjango='cd /home/build/google3/third_party/py/django/v0_96'
+alias cdconfman='cd $HOME/src/google3-confman/google3/'
+alias cdconfmant='cd $HOME/src/confman_turbogears/depot/google3/experimental/users/jimxu/confman_turbogears/confman'
+alias cddasherman2='cd ~/src/dasherman2/google3'
+alias cddasherman='cd ~/src/dasherman/depot/ops/corp/slack/roles/dasherman/files/usr/local/lib/dasherman'
+alias cddclient='cd ~/src/dasherman-client/depot/ops/corp/dogfood/dasherman-client/'
+alias cdshuttle='$HOME/src/andriod/shuttle/google3/experimental/android/Shuttle/src/com/google/android/shuttle'
+alias smartsync='/home/build/nonconf/google3/tools/continuous_build/smartsync.sh'
+alias smartsyncdoozer='smartsync -l DOOZER'
+alias cdcdb='cd ~/src/corpdb/google3/google3/ops/sysops/corpdb/'
+alias cdacr='cd ~/src/acr/ops/corp/acr'
+alias cdesc='cd ~/src/ops_esc/'
+alias cdmgxp='cd ~/src/mg_agent_xp/'
+alias cdgoogle3mgxp='cd ~/src/google3_mgxp/google3/'
+alias cddocs='cd ~/src/designdocs/'
+alias cdapps='cd ~/src/google3_docs_borg/google3/production/'
+alias cdjotsre='cd ~/src/jotspot-sre/google3'
+alias cdjot='cd ~/src/jotspot/google3/java/com/google/jotspot/'
+alias cdbase='cd ~/src/google3_base/google3/base'
+alias cdnet='cd ~/src/google3_net/google3/net/'
+alias cdjavabase='cd ~/src/google3_java/google3/java/com/google/common'
+alias cdjavanet='cd ~/src/google3_java/google3/java/com/google/net'
+alias cdgslb='cd ~/src/gslb/google3/googledata/production/gslbpush/sources'
+alias cdpushqr='cd ~/src/push_qr/google3/production/tools/push_quickrelease'
+alias cdgfe='cd $HOME/src/gfe/google/config'
+#alias -g ...='../..'
+#alias -g ....='../../..'
+#alias -g .....='../../../..'
+#alias -g b='acoc blaze'
+#alias -g bbbb='blaze'
+alias cdlab='cd ~/src/codelabs/'
+alias build='bbbb build'
+alias cdg4='cd ~/src/google3_g4/branches/google3_tools_dev_branch/google3'
+alias btest='bbbb test'
+alias cdblaze='cd ~/src/google3_blaze/google3'
+alias cdblazelib='cd ~/src/google3_blaze/google3/java/com/google/devtools/build/lib'
+alias ss='cd ../../'
+alias srcup='g4 sync'
+alias g4p='g4 p'
+alias g4s='g4 submit'
+alias g4c='g4 change'
+alias openglibc='w3m http://www.gnu.org/software/libc/manual/html_mono/libc.html#toc_Top'
+alias openman='w3m http://linux.die.net/man/'
+alias openman1='w3m http://linux.die.net/man/1/'
+alias openman2='w3m http://www.kernel.org/doc/man-pages/index.html'
+alias openman3='w3m http://linux.die.net/man/3/'
+alias openman4='w3m http://linux.die.net/man/4/'
+alias openman5='w3m http://linux.die.net/man/5/'
+alias openman6='w3m http://linux.die.net/man/6/'
+alias openman7='w3m http://linux.die.net/man/7/'
+alias openman8='w3m http://linux.die.net/man/8/'
+alias openmanl='w3m http://linux.die.net/man/l/'
+alias openmann='w3m http://linux.die.net/man/n/'
+alias openglxr='w3m http://fiasco.mtv.corp.google.com/lxr/http/source/'
+alias opengkernel='w3m http://fiasco.mtv.corp.google.com/lxr/http/source/'
+alias openlxr='w3m http://lxr.linux.no/'
+alias openjava='w3m https://wiki.corp.google.com/twiki/bin/view/Main/Java'
+alias opensj='w3m https://www.corp.google.com/~engdocs/nonconf/java/common/overview-summ#'
+alias opengdb='w3m http://sourceware.org/gdb/current/onlinedocs/gdb/'
+alias opensyscall='w3m http://www.win.tue.nl/~aeb/linux/lk/lk-4.html'
+alias opensyscalls='w3m http://www.kernel.org/doc/man-pages/online/pages/man2/syscalls.2.html'
+alias openautoconf='w3m http://www.gnu.org/software/autoconf/manual/autoconf.html'
+alias openautomake='w3m http://sources.redhat.com/automake/automake.html'
+alias opengcc='w3m http://www.network-theory.co.uk/docs/gccintro/index.html'
+alias opengccman='w3m http://gcc.gnu.org/onlinedocs/'
+alias opencstd='w3m http://c0x.coding-guidelines.com/index.html'
+alias opencfaq='w3m http://c-faq.com/questions.html'
+alias opencplusfaq='w3m http://www.parashift.com/c++-faq-lite/'
+alias openccfaq='w3m http://www2.research.att.com/~bs/bs_faq2.html#void-main'
+alias opencheaders='w3m http://en.wikipedia.org/wiki/Category:C_standard_library_headers'
+alias opencposix='w3m http://en.wikipedia.org/wiki/C_POSIX_library'
+alias opensus4='w3m http://pubs.opengroup.org/onlinepubs/9699919799/mindex.html'
+alias openw3m='w3m http://w3m.sourceforge.net/MANUAL'
+alias jade='/google/data/ro/teams/jade/jade'
+
+#
+# End of lines added by compinstall
+export GFS_CLIENT_SECURITY_LEVEL=integrity
+#`keval `ssh-agent -s` 2>/dev/null 1>/dev/null && ssh-add 2>&1 >/dev/null
+[[ "$(type -p java)" =~ /usr/local/buildtools/java ]] || export PATH="/usr/local/buildtools/java/jdk/bin:$PATH"
+export P4CONFIG=.p4config
+#export P4DIFF="/home/build/public/google/tools/p4diff"
+#export P4DIFF=diff
+export P4MERGE=/home/build/public/eng/perforce/mergep4.tcl
+export P4EDITOR=$EDITOR
+#export P4PORT=perforce6:6666
+export BASE=$HOME/src
+export JDK_HOME=$HOME/pkgs/jdk1.6.0_12_32
+export GOOGLE_USE_CORP_SSL_AGENT=true
+if [ -x  /usr/local/scripts/ssx-agents ]; then
+  eval $(/usr/local/scripts/ssx-agents $SHELL)
+fi
+#[[ -d /google/src/status ]] && srcfs login >/dev/null
+export PRODACCESS="prodaccess --ssh_cert"
+export P4DIFF=diff
+export SVN_EDITOR=vim
+
+## docker
+export DOCKER_HOST=tcp://localhost:4243
+
+function cd() {
+  ([[ "$@" =~ "google3" ]] || [[ "$PWD" =~ "google3" ]]) && unset P4PORT #|| export P4PORT=perforce:6666
+  builtin cd "$@" && /bin/ls
+}
+
+# for mac only
+function pman() {
+    man -t "${1}" | open -f -a /Applications/Preview.app
+}
+
+unset http_proxy
+
+
+# user CANARY G4
+export USE_CANARY_G4=1
+# export USE_CANARY_BLAZE=nightly
+export RUBYLIB=$RUBYLIB:/usr/local/google/usr/local/lib/site_ruby/1.8
+#export PATH=/usr/local/lib/cw:$PATH
+#
+
+export GOPATH=$HOME/go_code
+
+export PATH=$HOME/bin:$GOPATH/bin:/usr/local/symlinks:/usr/local/scripts:$PATH:$HOME/pkgs/android-sdk-linux_x86-1.5_r3/tools
+export PATH=$PATH:/usr/local/google/bin:$HOME/src/depot_tools
+
+export G4INHIBITAUTOREVERT=1
+
+if [[ $(hostname) =~ 'jimux.kir' ]]; then
+  export LANG=C
+fi
+
+
+export GUILE_LOAD_PATH="$HOME/homebrew/share/guile/site/3.0"
+export GUILE_LOAD_COMPILED_PATH="$HOME/homebrew/lib/guile/3.0/site-ccache"
+export GUILE_SYSTEM_EXTENSIONS_PATH="$HOME/homebrew/lib/guile/3.0/extensions"
+
+
+######## GO
+# gc
+prefixes=(5 6 8)
+for p in $prefixes; do
+  compctl -g "*.${p}" ${p}l
+  compctl -g "*.go" ${p}g
+done
+#
+# standard go tools
+compctl -g "*.go" gofmt
+
+# gccgo
+compctl -g "*.go" gccgo
+#
+#
+gdoc () {
+    # tmpl_dir="$ZSH/plugins/gdoc/templates2" 
+    # godoc --templates="$tmpl_dir" "$@" | highlight --syntax=go --out-format=ansi
+    go doc --all "$@" | highlight --syntax=go --out-format=ansi
+}
+
+# from https://github.com/tobylane/Bin
+alias lk='CGSession -suspend'
+anybar() { printf $1 | nc -4u -w0 localhost ${2:-1738}; }
+cdf() { cd "$(osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)')"; }
+#alias xcr="xcodebuild -configuration Release"
+#alias xtr="xctool -configuration Release -scheme"
+alias common='sort ~/.histfile | uniq -c | sort -n -r | head -n10'
+alias shck='shellcheck -s sh'
+i() { osascript -e 'tell application "iTunes"' -e "$1" -e "end tell"; }
+serve() { nc -v -l 8080 <<< "HTTP/1.1 200 OK\n\n $(date) $(cat $@)"; }
+#vod() { stream=$(livestreamer --stream-url $1 best); ffmpeg -ss $2 -i $stream -bsf:a aac_adtstoasc -c copy out.mp4; }
+#alias ctd="/Applications/CorsixTH.app/Contents/MacOS/CorsixTH --config-file=$HOME/.config/CorsixTH/configdemo.txt --interpreter=$HOME/Downloads/CorsixTH/CorsixTH/CorsixTH.lua"
+#alias cth="/Applications/CorsixTH.app/Contents/MacOS/CorsixTH --interpreter=$HOME/Downloads/CorsixTH/CorsixTH/CorsixTH.lua"
+rt() { for i in $@; do youtube_dl -f "best[height=720]" $i; done }
+pman() { man -t $@ | open -fa Preview.app; }
+#alias ql="qlmanage -p 2>/dev/null"
+#alias jv="$HOME/Library/Application\ Support/minecraft/runtime/jre-x64/jre.bundle/Contents/Home/bin/java -jar"
+alias yl="yamllint -d \"rules: {line-length: disable}\""
+pdfshrink () { gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=${3:-/ebook} -dNOPAUSE -dQUIET -dBATCH -sOutputFile="$2" "$1"; }
+bo() { for i in $@; do open $(brew info $i | sed -n '3p'); done }
+alias ls2="find . -type d -mindepth 1 -maxdepth 1 ! -path '*app' -exec basename {} \;"
+alias wgetimg="wget -nd -H -r -l 2 -A jpg"

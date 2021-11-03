@@ -913,7 +913,7 @@ unalias a 2>/dev/null # was fasd -a
 unalias hgd 2>/dev/null
 export PAGER='bat -p'
 export LESS='FRX' # if PAGER == 'less'
-source /etc/bash_completion.d/hgd
+#source /etc/bash_completion.d/hgd
 alias hgco='hg update'  # checkout a specfic rev.
 alias hghd='hg update p4head'  # checkout the head.
 alias hgam='hg amend'   # hg modify/update the existing rev.
