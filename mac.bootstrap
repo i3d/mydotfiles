@@ -1,0 +1,14 @@
+* install xcode, codesign agree if need to.
+* get the latest command line tools:
+https://developer.apple.com/download/all/
+* make sure:
+ls /Library/Developer/CommandLineTools/SDKs has the current OS SDK.
+* install oh-my-zsh first:
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+* then git clone https://github.com/i3d/mydotfiles.git and copy over the zsh and vim configs.
+* .local can all be rsynced.
+* .config can all be rsynced.
+* need Fonts and/or maybe FontCollections from Library to get term nerd fonts work.
+* brew install if fail may need temp remove the enable check to manual install.
+* vifm may need manual install.
+* brew install gettext to get the libintl deps, if needed.
