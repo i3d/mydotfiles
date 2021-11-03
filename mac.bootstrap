@@ -12,3 +12,6 @@ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.
 * brew install if fail may need temp remove the enable check to manual install.
 * vifm may need manual install.
 * brew install gettext to get the libintl deps, if needed.
+* global .gitconfig is a symlnk from .config/git/gitconfig. rsync .config shall get it.
+* get all .dir and .rc over.
+* get Vieb config over.
