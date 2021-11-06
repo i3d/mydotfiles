@@ -44,6 +44,7 @@ nmap gp :pin<CR>
 nmap <Space>2 :vs<CR>
 nmap <Space>1 :split<CR>
 nmap <Space>b :b<Space>
+nmap <Space>t <openNewTab><toExploreMode>
 nmap <Space>q :quitall<CR>
 nmap <M-=> <zoomIn>
 nmap <M--> <zoomOut>
