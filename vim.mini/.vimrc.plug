@@ -161,7 +161,7 @@ Plug 'Pocco81/TrueZen.nvim', {'on': 'TZFocus'}  " used only for max/restore wind
 Plug 'folke/zen-mode.nvim' " another zen-mode
 Plug 'folke/twilight.nvim' " dim unfocused code
 Plug 'nacro90/numb.nvim'
-Plug 'simrat39/rust-tools.nvim', { 'for': 'rust' }
+Plug 'simrat39/rust-tools.nvim'
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'ThePrimeagen/git-worktree.nvim'
 Plug 'nvim-lua/completion-nvim'

@@ -230,10 +230,13 @@ if $NOTRUECOLOR
 else
 	set termguicolors
 endif
-colorscheme darkmatrix 
 """ perfect fit for matrix!!
+" in order to programmatically set glaxyline, colorscheme set is moved to
+" plugs.lua since that loads before this happens.
+" colorscheme darkmatrix 
+" colorscheme quitedark 
 " ##########################################
-let g:javascript_plugin_flow = 1
+" let g:javascript_plugin_flow = 1
 " ================ themes ======================
 set encoding=utf-8
 set fillchars+=stl:\ ,stlnc:\
@@ -592,12 +595,12 @@ let g:which_key_map['d'] = [ ':bd'                        , 'delete buffer']
 let g:which_key_map['e'] = [ ':CocCommand explorer'       , 'explorer' ]
 " use <leader>sf
 let g:which_key_map['F'] = [ ':Files'                     , 'FZF Files' ]
-let g:which_key_map['f'] = [':Telescope find_files find_command=rg,-.,-i,--files'  	  , 'Tele Files']
+let g:which_key_map['v'] = [':Telescope find_files find_command=rg,-.,-i,--files'  	  , 'Tele Files']
+let g:which_key_map['f'] = [ ':VsplitVifm'                , 'vifm']
 "let g:which_key_map['f'] = [':Telescope file_browser'  , 'files']
 let g:which_key_map['r'] = [ ':RnvimrToggle'              ,'ranger' ]
 let g:which_key_map['S'] = [ ':SessionSave '              , 'save session' ]
 let g:which_key_map['L'] = [ ':SessionOpen'               , 'open session' ]
-let g:which_key_map['v'] = [ ':<C-W>v'                    , 'split right']
 "let g:which_key_map['z'] = [ ':ZenMode'                  , 'zen' ]
 let g:which_key_map['z'] = [ ':Twilight'                  , 'zen' ]
 let g:which_key_map['m'] = [ ':TZFocus'                   , 'Max/UnMax' ]
@@ -1005,8 +1008,8 @@ au BufNewFile,BufRead fish_funced set ft=fish
 " highlight loading change. 
 " https://github.com/neovim/neovim/pull/14771
 " The theme after enable these doesn't look too bad but it's still unexpected.
-hi! Normal ctermbg=NONE guibg=NONE
-hi! NonText ctermbg=NONE guibg=NONE guifg=NONE ctermfg=NONE
+" hi! Normal ctermbg=NONE guibg=NONE
+" hi! NonText ctermbg=NONE guibg=NONE guifg=NONE ctermfg=NONE
 " !!!! These two lines have side effect of the new neovim syntax
 syntax on
 set shiftround
