@@ -3,8 +3,8 @@ local condition = require('galaxyline.condition')
 
 -- quitedark
 local colors = {
-  bg = '#030303',
-  bg_dim = '#040404',
+  bg = '#0E0E0E',
+  bg_dim = '#070707',
   bg_light = '#131313',
   black = '#333333',
   white = '#FAFAFA',
