@@ -462,7 +462,8 @@ if $NOTRUECOLOR
 else
 	set termguicolors
 endif
-colorscheme darkmatrix
+" colorscheme darkmatrix
+colorscheme quitedark
 """ perfect fit for matrix!!
 " ##########################################
 let g:javascript_plugin_flow = 1
