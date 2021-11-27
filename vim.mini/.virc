@@ -462,7 +462,8 @@ if $NOTRUECOLOR
 else
 	set termguicolors
 endif
-colorscheme darkmatrix
+"colorscheme darkmatrix
+colorscheme quitedark
 """ perfect fit for matrix!!
 " ##########################################
 let g:javascript_plugin_flow = 1
@@ -1228,11 +1229,19 @@ set statusline=%1*%<%f%m\ \[%{&ff}:%{&fenc}:%Y]\ %{getcwd()}\ \ \[%{strftime('%Y
 " set statusline +=%2*/%L%*               "total lines
 " set statusline +=%1*%4v\ %*             "virtual column number
 " set statusline +=%2*0x%04B\ %*          "character under cursor
-hi User1 guifg=#90D762 guibg=#091013
-hi User2 guifg=#00FF87 guibg=#091013
-hi User3 guifg=#ff66ff guibg=#091013
-hi User4 guifg=#a0ee40 guibg=#091013
-hi User5 guifg=#eeee40 guibg=#091013
+" matrix
+"hi User1 guifg=#90D762 guibg=#091013
+"hi User2 guifg=#00FF87 guibg=#091013
+"hi User3 guifg=#ff66ff guibg=#091013
+"hi User4 guifg=#a0ee40 guibg=#091013
+"hi User5 guifg=#eeee40 guibg=#091013
+
+" quitedark
+hi User1 guifg=#CACACA guibg=#0E0E0E
+hi User2 guifg=#FAFAFA guibg=#0E0E0E
+hi User3 guifg=#412A4D guibg=#0E0E0E
+hi User4 guifg=#929492 guibg=#0E0E0E
+hi User5 guifg=#FAFF00 guibg=#0E0E0E
 " ==================== stautsline ================== "
 " ====================== SETTING =================== "
 " ====================== SETTING =================== "
