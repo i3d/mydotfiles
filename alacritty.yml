@@ -704,13 +704,13 @@ key_bindings:
 #    cyan:    '#7a5ccc'
 #    white:   '#f0f1ce'
 #
-# Colors (darker matrix)
+# Colors (carbondark) minor change to match kitty
 colors:
   primary:
-    background: "#0E0E0E"
+    background: "#101010"
     foreground: "#4B4C4B"
   normal:
-    black: "#111111"
+    black: "#141414"
     red: "#575757"
     green: "#737373"
     yellow: "#e2e500"
@@ -729,7 +729,7 @@ colors:
     white: "#E6E6E6"
   selection:
     text: "#E6E6E6"
-    background: "#111111"
+    background: "#1A1A1A"
     white: "#FAFAFA"
   cursor:
     cursor: "#575a3b"
