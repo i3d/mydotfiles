@@ -9,14 +9,17 @@ module.exports = {
 		updateChannel: "canary",
 
 		// default font size in pixels for all tabs
-		fontSize: 28,
+		fontSize: 30,
 
 		// font family with optional fallbacks
 		// fontFamily: '"VictorMono Nerd Font Mono"',
 		// fontFamily: '"JetBrainsMono Nerd Font Mono"',
 		// fontFamily: '"ProFontWindows Nerd Font Mono"',
 		// fontFamily: '"ShureTechMono Nerd Font Mono"',
-		fontFamily: '"SFMono Nerd Font"',
+		// fontFamily: '"SFMono Nerd Font"',
+		// fontFamily: '"OperatorMono Nerd Font"',
+		fontFamily: '"SpaceMono Nerd Font Mono"',
+		// fontFamily: '"CamingoCode Nerd Font"',
 		// 'Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
 
 		// default font weight: 'normal' or 'bold'
@@ -33,7 +36,8 @@ module.exports = {
 
 		// terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
 		// cursorColor: "rgba(248,28,229,0.8)",
-		cursorColor: "#384545",
+		// cursorColor: "#384545",
+		cursorColor: "#404040",
 
 		// terminal text color under BLOCK cursor
 		// cursorAccentColor: "#00FF00",
@@ -52,7 +56,8 @@ module.exports = {
 		// terminal background color
 		// opacity is only supported on macOS
 		// backgroundColor: "#091013",
-		backgroundColor: "#0E0E0E",
+		// backgroundColor: "#0E0E0E",
+		backgroundColor: "#101010",
 
 		// terminal selection color
 		// selectionColor: "rgba(248,28,229,0.3)",
@@ -87,7 +92,8 @@ module.exports = {
 // 		colors: {
 // 			black: "#091013",
 // 			red: "#23755a",
-// 			green: "#82D967",
+// 			// green: "#82D967",
+// 			green: "#81B32C",
 // 			yellow: "#FFD700",
 // 			blue: "#3f5242",
 // 			magenta: "#409931",
@@ -95,27 +101,36 @@ module.exports = {
 // 			white: "#507350",
 // 			lightBlack: "#333333",
 // 			lightRed: "#afc079",
-// 			lightGreen: "#90D762",
+// 			// lightGreen: "#90D762",
+// 			lightGreen: "#81B32C",
 // 			lightYellow: "#FAFF00",
 // 			lightBlue: "#4f7e7e",
 // 			lightMagenta: "#11FF25",
-// 			lightCyan: "#C1FF8A",
+// 			// lightCyan: "#C1FF8A",
+// 			// lightCyan: "#90D762",
+// 			lightCyan: "#81B32C",
 // 			lightWhite: "#678c61",
 // 		},
 
 		colors: {
 			black: "#0E0E0E",
 			red: "#575757",
-			green: "#737373",
-			yellow: "#e2e500",
+			// green: "#737373",
+			green: "#81B32C",
+			// yellow: "#90D762",
+			// yellow: "#81B32C",
+			yellow: "#B39700",
 			blue: "#848484",
 			magenta: "#412A4D",
 			cyan: "#7F847F",
 			white: "#7D7D7D",
 			lightBlack: "#333333",
 			lightRed: "#666666",
-			lightGreen: "#CACACA",
-			lightYellow: "#FAFF00",
+			// lightGreen: "#CACACA",
+			lightGreen: "#81B32C",
+			// lightYellow: "#ADFFA7",
+			// lightYellow: "#90D762",
+			lightYellow: "#B39700",
 			lightBlue: "#929492",
 			lightMagenta: "#644A7F",
 			lightCyan: "#9F9F9F",
