@@ -1,9 +1,11 @@
-
 local execute = vim.api.nvim_command
 local fn = vim.fn
 local api = vim.api
 local gl = vim.g
-local cmd = vim.cmd
+-- !!!!!!!!!!!!!! LOCAL PLUGINS !!!!!!!!!!!!!!! --
+-- local plugins
+require('plugs')
+
 -- global inspect
 function _G.p(...)
   local objects = {}
@@ -14,62 +16,13 @@ function _G.p(...)
   print(table.concat(objects, '\n'))
   return ...
 end
-
--- ----- =========== CONFIG ========== -------
--- -- Use .vim's local packer dir. ----
--- -- cmd [[set runtimepath=$VIMRUNTIME]]
--- cmd [[set packpath=/Users/jimxu/.vim/nvim/site]]
--- local package_root = '/Users/jimxu/.vim/nvim/site/pack'
--- local install_path = package_root .. '/packer/start/packer.nvim'
--- local function load_plugins()
---   require('packer').startup {
---     {
---       'wbthomason/packer.nvim',
---       {
---         'nvim-telescope/telescope.nvim',
---         requires = {
---           'nvim-lua/plenary.nvim',
---           { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
---         },
---       },
---       -- ADD PLUGINS  --
---       {
---         "SmiteshP/nvim-gps",
---         requires = "nvim-treesitter/nvim-treesitter"
---       },
---       -- speed up startup time.
---       'lewis6991/impatient.nvim',
---       -- ADD PLUGINS  --
---     },
---     config = {
---       package_root = package_root,
---       compile_path = install_path .. '/plugin/packer_compiled.lua',
---       -- display = { non_interactive = true },
---     },
---   }
--- end
--- if vim.fn.isdirectory(install_path) == 0 then
---   print("Installing Telescope and dependencies.")
---   vim.fn.system { 'git', 'clone', '--depth=1', 'https://github.com/wbthomason/packer.nvim', install_path }
--- end
--- load_plugins()
--- -- require('packer').sync()
--- 
--- _G.load_config = function()
---   require('telescope').setup()
---   require('telescope').load_extension('fzf')
---   -- ADD INIT.LUA SETTINGS THAT ARE _NECESSARY_ FOR REPRODUCING THE ISSUE
--- end
--- vim.cmd [[autocmd User PackerComplete ++once echo "Ready!" | lua load_config()]]
------ =========== CONFIG ========== -------
-
-
 local install_path = fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
   execute('!git clone https://github.com/wbthomason/packer.nvim '..install_path)
   execute 'packadd packer.nvim'
 end
 ---- packer packages.
+local NOREF_NOERR_TRUNC = { noremap = true, silent = true, nowait = true }
 require("packer").startup(function(use)
   -- Packer can manage itself as an optional plugin
   use "wbthomason/packer.nvim"
@@ -80,22 +33,39 @@ require("packer").startup(function(use)
     "SmiteshP/nvim-gps",
     requires = "nvim-treesitter/nvim-treesitter"
   }
+  use {
+    'nvim-telescope/telescope.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim',
+      { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+    },
+  }
+  use 'kosayoda/nvim-lightbulb'
+  use {
+    'weilbith/nvim-code-action-menu',
+    cmd = 'CodeActionMenu',
+  }
   -- speed up startup time.
   use 'lewis6991/impatient.nvim'
-  use {
-        'nvim-telescope/telescope.nvim',
-        requires = {
-          'nvim-lua/plenary.nvim',
-          { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
-        },
-  }
+  use 'nyngwang/NeoRoot.lua'
 end)
 -- require('nvim_comment').setup()
 ---- packer packages.
 --
 --
 --
-require('symbols-outline').setup()
+--
+--NeoRoot
+vim.cmd'au BufEnter * NeoRoot'
+vim.keymap.set('n', '<Leader>pp', function() vim.cmd('NeoRootSwitchMode') end, NOREF_NOERR_TRUNC)
+vim.keymap.set('n', '<Leader>pn', function() vim.cmd('NeoRootChange') end, NOREF_NOERR_TRUNC)
+--
+-- lightbulb
+vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
+vim.fn.sign_define('LightBulbSign', { text = "", texthl = "", linehl="", numhl="CursorLineNr" })
+--
+require"tabby".setup()
+--require('symbols-outline').setup()
 if not os.getenv('NOTRUECOLOR') then
   require'colorizer'.setup()
 end
@@ -105,7 +75,7 @@ require('lspkind').init({
     -- enables text annotations
     --
     -- default: true
-    with_text = true,
+    -- with_text = true,
     -- default symbol map
     -- can be either 'default' (requires nerd-fonts font) or
     -- 'codicons' for codicon preset (requires vscode-codicons font)
@@ -151,6 +121,9 @@ require('numb').setup{
 local actions = require('telescope.actions')
 require("telescope").setup{
   defaults = {
+    layout_config = {
+      vertical = { width = 0.6 }
+    },
 	  set_env = { ['COLORTERM'] = 'truecolor' },
   },
 --   pickers = {
@@ -171,6 +144,7 @@ require("telescope").setup{
   },
 }
 require('telescope').load_extension('fzf')
+require('telescope').load_extension('ghn')
 -- ----------------------------------------------
 --
 -- require('FTerm').setup({
@@ -214,7 +188,14 @@ local function setup_servers()
   require'lspinstall'.setup()
   local servers = require'lspinstall'.installed_servers()
   for _, server in pairs(servers) do
-    require'lspconfig'[server].setup{ on_attach=on_attach }
+  -- local servers = { 'gopls', 'pyright', 'rust_analyzer','tsserver' }
+  -- for _, server in ipairs(servers) do
+    require'lspconfig'[server].setup { 
+      on_attach=on_attach ,
+      flags = {
+        debounce_text_changes = 150,
+      }
+    }
   end
 end
 setup_servers() -- important
@@ -441,6 +422,3 @@ MUtils.completion_confirm = function()
   end
 end
 remap('i' , '<CR>','v:lua.MUtils.completion_confirm()', {expr = true , noremap = true})
--- !!!!!!!!!!!!!! LOCAL PLUGINS !!!!!!!!!!!!!!! --
--- local plugins
-require('plugs')

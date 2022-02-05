@@ -19,6 +19,12 @@ augroup END
 "  au! BufReadPre * setlocal foldmethod=indent
 "  au! BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
 "augroup END
+augroup vista_sidebar
+au!
+" au VimEnter *.go,*.rs nested :Vista!!
+" this will keep vista not able to jump window."
+" au BufLeave,BufWinLeave,BufDelete,BufHidden,BufUnload,WinLeave,VimLeave <buffer> ++once :Vista!
+augroup END
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 let g:mapleader = "\<Space>"
@@ -71,9 +77,6 @@ if fnamemodify(resolve(expand('%:p')), ':h') =~ 'google3'
         \})
   augroup corp_programming
     au!
-    au VimEnter *.go nested :Vista!!
-    " this will make vista can't jump window.
-    "au BufLeave,BufWinLeave,BufDelete,BufHidden,BufUnload,WinLeave,VimLeave <buffer> ++once :Vista!
     au FileType bzl,cpp,go,java,proto,python nno <silent> gd :vert LspDefinition<CR>
     au FileType bzl,cpp,go,java,proto,python nno <silent> gm :LspRename<CR>
     au FileType bzl,cpp,go,java,proto,python nno <silent> gr :LspReferences<CR>
@@ -227,10 +230,13 @@ if $NOTRUECOLOR
 else
 	set termguicolors
 endif
-colorscheme darkmatrix
 """ perfect fit for matrix!!
+" in order to programmatically set glaxyline, colorscheme set is moved to
+" plugs.lua since that loads before this happens.
+" colorscheme darkmatrix 
+" colorscheme carbondark
 " ##########################################
-let g:javascript_plugin_flow = 1
+" let g:javascript_plugin_flow = 1
 " ================ themes ======================
 set encoding=utf-8
 set fillchars+=stl:\ ,stlnc:\
@@ -589,17 +595,17 @@ let g:which_key_map['d'] = [ ':bd'                        , 'delete buffer']
 let g:which_key_map['e'] = [ ':CocCommand explorer'       , 'explorer' ]
 " use <leader>sf
 let g:which_key_map['F'] = [ ':Files'                     , 'FZF Files' ]
-let g:which_key_map['f'] = [':Telescope find_files find_command=rg,-.,-i,--files'  	  , 'Tele Files']
-"let g:which_key_map['f'] = [':Telescope file_browser theme=get_dropdown'  , 'files']
+let g:which_key_map['v'] = [':Telescope find_files find_command=rg,-.,-i,--files'  	  , 'Tele Files']
+let g:which_key_map['f'] = [ ':VsplitVifm'                , 'vifm']
+"let g:which_key_map['f'] = [':Telescope file_browser'  , 'files']
 let g:which_key_map['r'] = [ ':RnvimrToggle'              ,'ranger' ]
 let g:which_key_map['S'] = [ ':SessionSave '              , 'save session' ]
 let g:which_key_map['L'] = [ ':SessionOpen'               , 'open session' ]
-let g:which_key_map['v'] = [ ':<C-W>v'                    , 'split right']
 "let g:which_key_map['z'] = [ ':ZenMode'                  , 'zen' ]
 let g:which_key_map['z'] = [ ':Twilight'                  , 'zen' ]
 let g:which_key_map['m'] = [ ':TZFocus'                   , 'Max/UnMax' ]
 let g:which_key_map['?'] = [ ':CocList maps'              , 'maps' ]
-let g:which_key_map['B'] = [ ':Vista'                     , 'Tags' ]
+let g:which_key_map['B'] = [ ':Vista!!'                     , 'Tags' ]
 let g:which_key_map["'"] = [ ':FloatermNew --width=50 --height=60' , 'shell' ]
 let g:which_key_map['h'] = [ ':FloatermKill'              , 'kill shell' ]
 let g:which_key_map['q'] = [ ':q!'                        , 'quit']
@@ -865,9 +871,9 @@ let g:which_key_map.T = {
         \ 'L' : [':Telescope loclist'                              , 'Telescope loclist'],
         \ 'Q' : [':Telescope quickfix'                             , 'Telescope quickfix'],
         \ '/' : [':Telescope current_buffer_fuzzy_find'            , 'Telescope curbuf search'],
-        \ '.' : [':Telescope file_browser theme=get_dropdown'      , 'Telescope browser'],
+        \ '.' : [':Telescope file_browser'      , 'Telescope browser'],
         \ 'b' : [':Telescope buffers'                              , 'Telescope buffers'],
-        \ 'f' : [':Telescope find_files theme=get_dropdown find_command=rg,--hidden,-i,--files,-l'       , 'Telescope find files'],
+        \ 'f' : [':Telescope find_files find_command=rg,--hidden,-i,--files,-l'       , 'Telescope find files'],
         \ 'g' : [':Telescope live_grep'                            , 'Telescope grep'],
         \ 'h' : [':Telescope help_tags'                            , 'Telescope vim help'],
         \ 'm' : [':Telescope marks'                                , 'Telescope marks'],
@@ -914,7 +920,7 @@ imap <S-Tab> <Plug>(completion_smart_s_tab)
 " https://sharksforarms.dev/posts/neovim-rust/
 " COQ config
 let g:coq_settings = {}
-" autocmd VimEnter * execute 'COQnow'
+autocmd VimEnter *.rs execute 'COQnow'
 set copyindent   "make the autoindent copying the existing indentation"
 set shiftround   "round the shift to multiple shiftwidth"
 set smarttab     "use shiftwidth when insert tab"
@@ -1002,8 +1008,8 @@ au BufNewFile,BufRead fish_funced set ft=fish
 " highlight loading change. 
 " https://github.com/neovim/neovim/pull/14771
 " The theme after enable these doesn't look too bad but it's still unexpected.
-hi! Normal ctermbg=NONE guibg=NONE
-hi! NonText ctermbg=NONE guibg=NONE guifg=NONE ctermfg=NONE
+" hi! Normal ctermbg=NONE guibg=NONE
+" hi! NonText ctermbg=NONE guibg=NONE guifg=NONE ctermfg=NONE
 " !!!! These two lines have side effect of the new neovim syntax
 syntax on
 set shiftround
@@ -1033,7 +1039,7 @@ set shortmess+=c
 " https://sharksforarms.dev/posts/neovim-rust/
 " " Code navigation shortcuts
 "nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
-nno <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+nno <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
 nno <silent> gD    <cmd>lua vim.lsp.buf.references()<CR>
 nno <silent> H     <cmd>lua vim.lsp.buf.hover()<CR>
 nno <silent> g.    <cmd>lua vim.lsp.buf.code_action()<CR>
