@@ -227,9 +227,9 @@ au VimEnter *.virc,*.lua,*.rs,*.sh,*.vim*,*.bash*,*.zsh*,*.h,*.cc,*.html,*.toml,
 augroup END
 augroup vista_sidebar
 au!
-au VimEnter *.go,*.rs nested :Vista!!
+" au VimEnter *.go,*.rs nested :Vista!!
 " this will keep vista not able to jump window."
-au BufLeave,BufWinLeave,BufDelete,BufHidden,BufUnload,WinLeave,VimLeave <buffer> ++once :Vista!
+" au BufLeave,BufWinLeave,BufDelete,BufHidden,BufUnload,WinLeave,VimLeave <buffer> ++once :Vista!
 augroup END
 " ====================== GOOGLE3 ============================"
 if fnamemodify(resolve(expand('%:p')), ':h') =~ 'google3'
@@ -463,7 +463,7 @@ else
 	set termguicolors
 endif
 "colorscheme darkmatrix
-colorscheme carbondark 
+colorscheme carbondark
 """ perfect fit for matrix!!
 " ##########################################
 let g:javascript_plugin_flow = 1
