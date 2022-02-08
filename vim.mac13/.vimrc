@@ -824,6 +824,7 @@ let g:which_key_map.t = {
       \ 't' : [':FloatermNew --wintype=popup --width=50 --height=60'   , 'terminal'],
       \ '?' : [':FloatermNew --wintype=popup --width=90 --height=50 w3m https://quickref.me/vim'   , 'vim quickref'],
       \ '.' : [':FloatermNew --wintype=popup --width=60 --height=25'   , 'small terminal'],
+      \ 'l' : [':FloatermNew --wintype=popup --width=200 --height=25'   , 'long terminal'],
       \ '1' : [':FloatermFirst'                                        , 'first terminal'],
       \ '0' : [':FloatermLast'                                         , 'last terminal'],
       \ 'j' : [':FloatermNext'                                         , 'next terminal'],

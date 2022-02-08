@@ -1,8 +1,8 @@
 # Window Customization
 window:
   dimensions:
-    columns: 90
-    lines: 50
+    columns: 200
+    lines: 45
   padding:
     x: 2
     y: 2
@@ -10,7 +10,7 @@ window:
 scrolling:
   history: 100000
   multiplier: 3
-background_opacity: 0.99
+window.opacity : 0.99
 window.dynamic_title: true
 
 url:
@@ -28,7 +28,8 @@ font:
     #family: Iosevka Term SS03
     #family: Iosevka Nerd Font Mono
     #family: BlexMono Nerd Font Mono ## no regular
-    family: SFMono Nerd Font ## no regular
+    # family: SFMono Nerd Font ## no regular
+    family: SpaceMono Nerd Font Mono ## no regular
     #style: Regular
   bold:
     #family: JetBrainsMono Nerd Font Mono
@@ -36,7 +37,8 @@ font:
     #family: Iosevka Term SS03
     #family: Iosevka Nerd Font Mono
     #family: BlexMono Nerd Font Mono
-    family: SFMono Nerd Font
+    # family: SFMono Nerd Font
+    family: SpaceMono Nerd Font Mono
     style: Bold
   italic:
     #family: JetBrainsMono Nerd Font Mono
@@ -45,9 +47,10 @@ font:
     #family: Iosevka Nerd Font Mono
     #family: BlexMono Nerd Font Mono
     #family: Mononoki Nerd Font Mono
-    family: SFMono Nerd Font
+    # family: SFMono Nerd Font
+    family: SpaceMono Nerd Font Mono
     style: Italic
-  size: 24
+  size: 40
   offset:
     x: 0
     y: 0
@@ -712,8 +715,10 @@ colors:
   normal:
     black: "#141414"
     red: "#575757"
-    green: "#737373"
-    yellow: "#e2e500"
+    #green: "#737373"
+    green: "#81B32C"
+    #yellow: "#e2e500"
+    yellow: "#B39700"
     blue: "#848484"
     magenta: "#412a4D"
     cyan: "#7f847f"
@@ -721,8 +726,10 @@ colors:
   bright:
     black: "#333333"
     red: "#666666"
-    green: "#CACACA"
-    yellow: "#FAFF00"
+    #green: "#CACACA"
+    green: "#81B32C"
+    #yellow: "#FAFF00"
+    yellow: "#B39700"
     blue: "#FAFAFA"
     magenta: "#412A4D"
     cyan: "#9F9F9F"
@@ -732,8 +739,37 @@ colors:
     background: "#1A1A1A"
     white: "#FAFAFA"
   cursor:
-    cursor: "#575a3b"
-    text: "#E6E6E6"
+    cursor: "#404040"
+    text: "#404040"
+
+# ayu-dark
+# colors:
+#   # Default colors
+#   primary:
+#     background: '#0A0E14'
+#     foreground: '#B3B1AD'
+# 
+#   # Normal colors
+#   normal:
+#     black: '#01060E'
+#     red: '#EA6C73'
+#     green: '#91B362'
+#     yellow: '#F9AF4F'
+#     blue: '#53BDFA'
+#     magenta: '#FAE994'
+#     cyan: '#90E1C6'
+#     white: '#C7C7C7'
+# 
+#   # Bright colors
+#   bright:
+#     black: '#686868'
+#     red: '#F07178'
+#     green: '#C2D94C'
+#     yellow: '#FFB454'
+#     blue: '#59C2FF'
+#     magenta: '#FFEE99'
+#     cyan: '#95E6CB'
+#     white: '#FFFFFF'
 
 
 cursor:
@@ -743,3 +779,5 @@ cursor:
 # || \// || Mackenzie Criswell
 # || //\ || https://makc.co
 # ||   \\|| https://github.com/makccr
+# import:
+#  - /Users/jimxu/.config/alacritty/gelacritty/dark/Tokyonight_Night.yml
