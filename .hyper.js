@@ -9,16 +9,19 @@ module.exports = {
 		updateChannel: "canary",
 
 		// default font size in pixels for all tabs
-		fontSize: 30,
+		fontSize: 28,
 
 		// font family with optional fallbacks
 		// fontFamily: '"VictorMono Nerd Font Mono"',
+		// fontFamily: '"BlexMono Nerd Font Mono"',
+		// fontFamily: '"NotoMono Nerd Font Mono"',
+		// fontFamily: '"Iosevka Nerd Font Mono"',
 		// fontFamily: '"JetBrainsMono Nerd Font Mono"',
 		// fontFamily: '"ProFontWindows Nerd Font Mono"',
 		// fontFamily: '"ShureTechMono Nerd Font Mono"',
 		// fontFamily: '"SFMono Nerd Font"',
-		// fontFamily: '"OperatorMono Nerd Font"',
-		fontFamily: '"SpaceMono Nerd Font Mono"',
+		fontFamily: '"OperatorMono Nerd Font"',
+		// fontFamily: '"SpaceMono Nerd Font Mono"',
 		// fontFamily: '"CamingoCode Nerd Font"',
 		// 'Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
 

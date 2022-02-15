@@ -2,7 +2,7 @@
 window:
   dimensions:
     columns: 200
-    lines: 45
+    lines: 35
   padding:
     x: 2
     y: 2
@@ -25,32 +25,32 @@ font:
   normal:
     #family: JetBrainsMono Nerd Font Mono
     #family: FiraCode Nerd Font Mono
-    #family: Iosevka Term SS03
     #family: Iosevka Nerd Font Mono
     #family: BlexMono Nerd Font Mono ## no regular
-    # family: SFMono Nerd Font ## no regular
+    #family: SFMono Nerd Font ## no regular
+    #family: Lekton Nerd Font ## no regular
     family: SpaceMono Nerd Font Mono ## no regular
-    #style: Regular
+    style: Regular
   bold:
     #family: JetBrainsMono Nerd Font Mono
     #family: FiraCode Nerd Font Mono
-    #family: Iosevka Term SS03
     #family: Iosevka Nerd Font Mono
     #family: BlexMono Nerd Font Mono
-    # family: SFMono Nerd Font
+    #family: SFMono Nerd Font
+    #family: Lekton Nerd Font
     family: SpaceMono Nerd Font Mono
     style: Bold
   italic:
     #family: JetBrainsMono Nerd Font Mono
     #family: FiraCode Nerd Font Mono
-    #family: Iosevka Term SS03
     #family: Iosevka Nerd Font Mono
     #family: BlexMono Nerd Font Mono
     #family: Mononoki Nerd Font Mono
-    # family: SFMono Nerd Font
+    #family: SFMono Nerd Font
+    #family: Lekton Nerd Font
     family: SpaceMono Nerd Font Mono
     style: Italic
-  size: 40
+  size: 28
   offset:
     x: 0
     y: 0
