@@ -9,7 +9,7 @@ module.exports = {
 		updateChannel: "canary",
 
 		// default font size in pixels for all tabs
-		fontSize: 28,
+		fontSize: 30,
 
 		// font family with optional fallbacks
 		// fontFamily: '"VictorMono Nerd Font Mono"',
@@ -20,10 +20,11 @@ module.exports = {
 		// fontFamily: '"ProFontWindows Nerd Font Mono"',
 		// fontFamily: '"ShureTechMono Nerd Font Mono"',
 		// fontFamily: '"SFMono Nerd Font"',
-		fontFamily: '"OperatorMono Nerd Font"',
 		// fontFamily: '"SpaceMono Nerd Font Mono"',
 		// fontFamily: '"CamingoCode Nerd Font"',
 		// 'Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
+		// fontFamily: '"OperatorMono Nerd Font"', pretty good incursive
+		fontFamily: '"CartographCFNerdFontComplete-Thin"',
 
 		// default font weight: 'normal' or 'bold'
 		fontWeight: "normal",
@@ -54,18 +55,21 @@ module.exports = {
 
 		// color of the text
 		// foregroundColor: "#436644",
-		foregroundColor: "#404040",
+		// foregroundColor: "#404040",
+		foregroundColor: "#9DB19C",
 
 		// terminal background color
 		// opacity is only supported on macOS
 		// backgroundColor: "#091013",
 		// backgroundColor: "#0E0E0E",
-		backgroundColor: "#101010",
+		// backgroundColor: "#101010",
+		backgroundColor: "#151B22",
 
 		// terminal selection color
 		// selectionColor: "rgba(248,28,229,0.3)",
 		// selectionColor: "#00FF87",
-		selectionColor: "#E6E6E6",
+		// selectionColor: "#E6E6E6",
+		selectionColor: "#7A9917",
 
 		// border color (window, tabs)
 		// borderColor: "#091013",
@@ -115,28 +119,47 @@ module.exports = {
 // 			lightWhite: "#678c61",
 // 		},
 
+// 		colors: {
+// 			black: "#0E0E0E",
+// 			red: "#575757",
+// 			// green: "#737373",
+// 			green: "#81B32C",
+// 			// yellow: "#90D762",
+// 			// yellow: "#81B32C",
+// 			yellow: "#B39700",
+// 			blue: "#848484",
+// 			magenta: "#412A4D",
+// 			cyan: "#7F847F",
+// 			white: "#7D7D7D",
+// 			lightBlack: "#333333",
+// 			lightRed: "#666666",
+// 			// lightGreen: "#CACACA",
+// 			lightGreen: "#81B32C",
+// 			// lightYellow: "#ADFFA7",
+// 			// lightYellow: "#90D762",
+// 			lightYellow: "#B39700",
+// 			lightBlue: "#929492",
+// 			lightMagenta: "#644A7F",
+// 			lightCyan: "#9F9F9F",
+// 			lightWhite: "#E6E6E6",
+// 		},
+
 		colors: {
 			black: "#0E0E0E",
-			red: "#575757",
-			// green: "#737373",
-			green: "#81B32C",
-			// yellow: "#90D762",
-			// yellow: "#81B32C",
-			yellow: "#B39700",
-			blue: "#848484",
+			red: "#B0B400",
+			green: "#A4B259",
+			yellow: "#C5DC58",
+			blue: "#BEF14D",
 			magenta: "#412A4D",
-			cyan: "#7F847F",
+			cyan: "#97B392",
 			white: "#7D7D7D",
 			lightBlack: "#333333",
-			lightRed: "#666666",
-			// lightGreen: "#CACACA",
-			lightGreen: "#81B32C",
-			// lightYellow: "#ADFFA7",
-			// lightYellow: "#90D762",
-			lightYellow: "#B39700",
-			lightBlue: "#929492",
+			lightRed: "#ACBF4C",
+			lightGreen: "#BCD053",
+			lightYellow: "#DEF475",
+			lightBlue: "#C4EDA0",
 			lightMagenta: "#644A7F",
-			lightCyan: "#9F9F9F",
+			lightCyan: "#90D762",
 			lightWhite: "#E6E6E6",
 		},
 
