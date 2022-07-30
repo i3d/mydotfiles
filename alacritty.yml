@@ -10,7 +10,7 @@ window:
 scrolling:
   history: 100000
   multiplier: 3
-window.opacity : 0.99
+window.opacity : 0.97
 window.dynamic_title: true
 
 url:
@@ -26,31 +26,37 @@ font:
     #family: JetBrainsMono Nerd Font Mono
     #family: FiraCode Nerd Font Mono
     #family: Iosevka Nerd Font Mono
+    #family: SauceCodePro Nerd Font Mono
     #family: BlexMono Nerd Font Mono ## no regular
     #family: SFMono Nerd Font ## no regular
     #family: Lekton Nerd Font ## no regular
-    family: SpaceMono Nerd Font Mono ## no regular
-    style: Regular
+    #family: SpaceMono Nerd Font Mono ## no regular
+    family:  CartographCF Nerd Font
+    style: Thin
   bold:
     #family: JetBrainsMono Nerd Font Mono
     #family: FiraCode Nerd Font Mono
     #family: Iosevka Nerd Font Mono
+    #family: SauceCodePro Nerd Font Mono
     #family: BlexMono Nerd Font Mono
     #family: SFMono Nerd Font
     #family: Lekton Nerd Font
-    family: SpaceMono Nerd Font Mono
+    #family: SpaceMono Nerd Font Mono
+    family:  CartographCF Nerd Font
     style: Bold
   italic:
     #family: JetBrainsMono Nerd Font Mono
     #family: FiraCode Nerd Font Mono
     #family: Iosevka Nerd Font Mono
+    # family: SauceCodePro Nerd Font Mono
     #family: BlexMono Nerd Font Mono
     #family: Mononoki Nerd Font Mono
     #family: SFMono Nerd Font
     #family: Lekton Nerd Font
-    family: SpaceMono Nerd Font Mono
+    #family: SpaceMono Nerd Font Mono
+    family:  CartographCF Nerd Font
     style: Italic
-  size: 28
+  size: 24
   offset:
     x: 0
     y: 0
