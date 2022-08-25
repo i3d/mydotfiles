@@ -14,7 +14,7 @@
 
       run ```xmodmap ~/.xmodmap``` to load it.
 
-4.  copy .profile (or the last few lines for remapping) to the home dir. it does:
+4.  copy .zprofile (or the last few lines for remapping) to the home dir. it does:
       a.  autoload xmodmap.
       b.  xcape the hyper_l (capslock) to esc.
 
