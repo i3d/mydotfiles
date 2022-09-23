@@ -1,0 +1,11 @@
+[/]
+background-color='rgb(22,27,32)'
+bold-is-bright=true
+default-size-columns=100
+font='CartographCF Nerd Font 20'
+foreground-color='rgb(158,177,156)'
+palette=['rgb(29,32,29)', 'rgb(176,180,0)', 'rgb(164,178,89)', 'rgb(197,220,88)', 'rgb(190,225,77)', 'rgb(65,42,77)', 'rgb(176,196,74)', 'rgb(176,196,74)', 'rgb(33,35,33)', 'rgb(188,196,74)', 'rgb(188,208,83)', 'rgb(222,244,117)', 'rgb(196,237,160)', 'rgb(192,97,203)', 'rgb(144,215,98)', 'rgb(188,196,74)']
+scrollback-lines=1000000
+scrollbar-policy='never'
+use-system-font=false
+use-theme-colors=false
