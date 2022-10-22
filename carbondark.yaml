@@ -1,0 +1,35 @@
+# Colors (carbondark) minor change to match kitty
+colors:
+  primary:
+    background: "#101010"
+    foreground: "#4B4C4B"
+  normal:
+    black: "#141414"
+    red: "#575757"
+    #green: "#737373"
+    green: "#81B32C"
+    #yellow: "#e2e500"
+    yellow: "#B39700"
+    blue: "#848484"
+    magenta: "#412a4D"
+    cyan: "#7f847f"
+    white: "#7D7D7D"
+  bright:
+    black: "#333333"
+    red: "#666666"
+    #green: "#CACACA"
+    green: "#81B32C"
+    #yellow: "#FAFF00"
+    yellow: "#B39700"
+    blue: "#FAFAFA"
+    magenta: "#412A4D"
+    cyan: "#9F9F9F"
+    white: "#E6E6E6"
+  selection:
+    text: "#E6E6E6"
+    background: "#1A1A1A"
+    white: "#FAFAFA"
+  cursor:
+    cursor: "#404040"
+    text: "#404040"
+
