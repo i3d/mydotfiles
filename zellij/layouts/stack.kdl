@@ -1,0 +1,18 @@
+layout {
+    pane size=1 borderless=true {
+        plugin location="zellij:tab-bar"
+    }
+    pane stacked=true {
+        pane borderless=true focus=true
+        pane borderless=true
+        pane borderless=true
+        pane borderless=true
+    }
+    pane split_direction="vertical" size=6 {
+        pane size="85%" command="htop"
+        pane size="15%" command="clock"
+    }
+    pane size=1 borderless=true {
+        plugin location="zellij:status-bar"
+    }
+}
