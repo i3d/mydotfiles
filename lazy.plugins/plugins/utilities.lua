@@ -1,0 +1,17 @@
+return {
+  'sindrets/winshift.nvim',
+  'zhaocai/GoldenView.Vim',
+  'haringsrob/nvim_context_vt',
+  'windwp/nvim-autopairs',
+  'markonm/traces.vim',
+  'lukas-reineke/indent-blankline.nvim',
+  'RRethy/vim-illuminate',
+  'lfv89/vim-interestingwords',
+  'machakann/vim-highlightedyank',
+  'ryanoasis/vim-devicons',
+  'kyazdani42/nvim-web-devicons',
+  'tversteeg/registers.nvim',
+  'ms-jpq/coq_nvim',
+  'lewis6991/gitsigns.nvim',
+  'vifm/vifm.vim',
+}
