@@ -21,17 +21,19 @@ augroup END
 "augroup END
 augroup vista_sidebar
 au!
-au VimEnter *.go,*.rs nested :Vista!!
+" au VimEnter *.go,*.rs nested :Vista!!
 " this will keep vista not able to jump window."
-au BufLeave,BufWinLeave,BufDelete,BufHidden,BufUnload,WinLeave,VimLeave <buffer> ++once :Vista!
+" au BufLeave,BufWinLeave,BufDelete,BufHidden,BufUnload,WinLeave,VimLeave <buffer> ++once :Vista!
 augroup END
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
-let g:mapleader = "\<Space>"
-let g:maplocalleader = ','
-nno <silent> <leader> :silent <c-u> :silent WhichKey '<Space>'<CR>
-vno <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
-nno <silent> <localleader> :silent <c-u> :silent WhichKey ','<CR>
+
+" let g:mapleader = "\<Space>"
+" let g:maplocalleader = ','
+" nno <silent> <leader> :silent <c-u> :silent WhichKey '<Space>'<CR>
+" vno <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
+" nno <silent> <localleader> :silent <c-u> :silent WhichKey ','<CR>
+"
 " ============================ GOOGLE3 =========================="
 if fnamemodify(resolve(expand('%:p')), ':h') =~ 'google3'
   highlight SignifySignAdd    cterm=bold ctermbg=0  ctermfg=2
@@ -224,7 +226,8 @@ com! -nargs=* AsyncCargoTest :call <SID>AsyncCargoTest()
 com! -nargs=* AsyncGoRunThis :call <SID>AsyncGoRunThis()
 " ================ functions and commands ======================
 " ================ themes ======================
-set background=dark
+" in color.lua
+"set background=dark
 if $NOTRUECOLOR
 	set notermguicolors
 else
@@ -234,7 +237,7 @@ endif
 " in order to programmatically set glaxyline, colorscheme set is moved to
 " plugs.lua since that loads before this happens.
 " colorscheme darkmatrix 
-" colorscheme quitedark 
+" colorscheme carbondark
 " ##########################################
 " let g:javascript_plugin_flow = 1
 " ================ themes ======================
@@ -346,8 +349,8 @@ nno e, yiw
 nno e. yiW
 nno w, yaw
 nno w. yaW
-nno o o<esc>
-nno O O<esc>
+"nno o o<esc>
+"nno O O<esc>
 " jump break, this is super.
 ino , ,<c-g>u
 ino ; ;<c-g>u
@@ -410,7 +413,7 @@ nno <silent> gh :call PrevHunk(9999)<cr>
 "
 "nno <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]'
 "nno ; :   == ; is used in line search.
-ino jk <esc>
+" ino jk <esc> " corp machine mapped it.
 ino <capslock> <esc>
 "ino vv <esc>
 nno <silent> <tab> <c-w>w
@@ -562,346 +565,349 @@ let g:coc_user_config = {}
 let g:coc_user_config['coc.preferences.jumpCommand'] = 'vsplit'
 " ==================== space macs simulation layer ========
 " Create map to add keys to
-let g:which_key_map =  {}
-" Define a separator
-" let g:which_key_sep = '➥'
-let g:which_key_sep = '✑'
-set timeoutlen=100
-" Not a fan of floating windows for this
-let g:which_key_use_floating_win = 0
-" Change the colors if you want
-highlight default link WhichKey          Operator
-highlight default link WhichKeySeperator DiffAdded
-highlight default link WhichKeyGroup     Identifier
-highlight default link WhichKeyDesc      Function
-" Hide status line
-autocmd! FileType which_key
-autocmd  FileType which_key set laststatus=0 noshowmode noruler
-  \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
-" Single mappings
-let g:which_key_map['0'] = [ ':Restart'                   , 'Restart Nvim' ]
-let g:which_key_map['1'] = [ '<C-W>s'                     , '2 stacks' ]
-let g:which_key_map['2'] = [ '<C-W>v'                     , '2 columns' ]
-let g:which_key_map['/'] = [ ':CocList grep'              , 'coc grep' ]
-let g:which_key_map['C'] = [ ':CocList colors'            , 'all themes' ]
-let g:which_key_map['.'] = [ ':CocList files'             , 'open files' ]
-let g:which_key_map[','] = [ ':CocList words'             , 'search words' ]
-let g:which_key_map[';'] = [ ':CocList outline'           , 'search words' ]
-let g:which_key_map['V'] = [ ':Commands'                  , 'commands' ]
-let g:which_key_map['='] = [ '<C-W>='                     , 'balance windows' ]
-" not yet
-"let g:which_key_map['c'] = [ ':Codi!!'                   , 'virtual repl']
-let g:which_key_map['d'] = [ ':bd'                        , 'delete buffer']
-let g:which_key_map['e'] = [ ':CocCommand explorer'       , 'explorer' ]
-" use <leader>sf
-let g:which_key_map['F'] = [ ':Files'                     , 'FZF Files' ]
-let g:which_key_map['v'] = [':Telescope find_files find_command=rg,-.,-i,--files'  	  , 'Tele Files']
-let g:which_key_map['f'] = [ ':VsplitVifm'                , 'vifm']
-"let g:which_key_map['f'] = [':Telescope file_browser'  , 'files']
-let g:which_key_map['r'] = [ ':RnvimrToggle'              ,'ranger' ]
-let g:which_key_map['S'] = [ ':SessionSave '              , 'save session' ]
-let g:which_key_map['L'] = [ ':SessionOpen'               , 'open session' ]
-"let g:which_key_map['z'] = [ ':ZenMode'                  , 'zen' ]
-let g:which_key_map['z'] = [ ':Twilight'                  , 'zen' ]
-let g:which_key_map['m'] = [ ':TZFocus'                   , 'Max/UnMax' ]
-let g:which_key_map['?'] = [ ':CocList maps'              , 'maps' ]
-let g:which_key_map['B'] = [ ':Vista'                     , 'Tags' ]
-let g:which_key_map["'"] = [ ':FloatermNew --width=50 --height=60' , 'shell' ]
-let g:which_key_map['h'] = [ ':FloatermKill'              , 'kill shell' ]
-let g:which_key_map['q'] = [ ':q!'                        , 'quit']
-let g:which_key_map['n'] = [ ':bnext'                     , 'cycle buffers' ]
-let g:which_key_map['`'] = [ ':TSHighlightCapturesUnderCursor' , 'TSInfo' ]
-let g:which_key_map['u'] = [ ':e #'                       , 'ropen' ]
-let g:which_key_map['\'] = [ ':TSPlaygroundToggle'        , 'TS' ]
-" Group mappings
-" a is for actions
-let g:which_key_map.a = {
-      \ 'name' : '+actions' ,
-      \ 'c' : [':ColorizerToggle'        , 'colorizer'],
-      \ 'e' : [':CocCommand explorer'    , 'explorer'],
-      \ 'r' : [':luafile %'              , 'lua run %'],
-      \ 's' : [':let @/ = ""'            , 'remove search highlight'],
-      \ 'v' : [':Vista!!'                , 'tag viewer'],
-      \ }
-" b is for buffer
-let g:which_key_map.b = {
-      \ 'name' : '+buffer',
-      \ '1' : [':b1'                                         , 'buffer 1']        ,
-      \ '2' : [':b2'                                         , 'buffer 2']        ,
-      \ 'd' : [':bd'                                         , 'delete-buffer']   ,
-      \ 'f' : [':bfirst'                                     , 'first-buffer']    ,
-      \ 'h' : [':Startify'                                   , 'home-buffer']     ,
-      \ 'l' : [':blast'                                      , 'last-buffer']     ,
-      \ 'n' : [':bnext'                                      , 'next-buffer']     ,
-      \ 'p' : [':bprevious'                                  , 'previous-buffer'] ,
-      \ '?' : [':Buffers'                                    , 'fzf-buffer']      ,
-      \ 'b' : [':CocList buffers'                           , 'all buffers'],
-      \ 'm' : [':CocList marks'                             , 'all marks'],
-      \ }
-" code
-let g:which_key_map.c = {
-      \ 'name' : '+code' ,
-      \ 'h' : [':Greph'                                         , 'search .h'],
-      \ 'c' : [':Grephcc'                                       , 'search .cc'],
-      \ 'g' : [':Grephgo'                                       , 'search .go'],
-      \ 't' : [':Twilight'                                      , 'Twilight coding'],
-      \ 'z' : [':ZenMode'                                       , 'ZenMode coding'],
-      \ }
-" g is for git
-let g:which_key_map.g = {
-      \ 'name' : '+git' ,
-      \ 'a' : [':Git add .'                        , 'add all'],
-      \ 'A' : [':Git add %'                        , 'add current'],
-      \ 'b' : [':Git blame'                        , 'blame'],
-      \ 'B' : [':GBrowse'                          , 'browse'],
-      \ 'c' : [':Git commit'                       , 'commit'],
-      \ 'd' : [':Git diff'                         , 'diff'],
-      \ 'D' : [':Gdiffsplit'                       , 'diff split'],
-      \ 'g' : [':GGrep'                            , 'git grep'],
-      \ 'G' : [':Gstatus'                          , 'status'],
-      \ 'h' : [':GitGutterLineHighlightsToggle'    , 'highlight hunks'],
-      \ 'H' : ['<Plug>(GitGutterPreviewHunk)'      , 'preview hunk'],
-      \ 'j' : ['<Plug>(GitGutterNextHunk)'         , 'next hunk'],
-      \ 'k' : ['<Plug>(GitGutterPrevHunk)'         , 'prev hunk'],
-      \ 'l' : [':Git log'                          , 'log'],
-      \ 'p' : [':Git push'                         , 'push'],
-      \ 'P' : [':Git pull'                         , 'pull'],
-      \ 'r' : [':GRemove'                          , 'remove'],
-      \ 's' : ['<Plug>(GitGutterStageHunk)'        , 'stage hunk'],
-      \ 't' : [':GitGutterSignsToggle'             , 'toggle signs'],
-      \ 'u' : ['<Plug>(GitGutterUndoHunk)'         , 'undo hunk'],
-      \ 'v' : [':GV'                               , 'view commits'],
-      \ 'V' : [':GV!'                              , 'view buffer commits'],
-      \ }
-" google
-let g:which_key_map.G = {
-      \ 'name' : '+Google',
-      \ 'r' : [ ':RelatedFilesWindow'                     , 'Related files'],
-      \ 'l' : [ ':GoogleOutlineWindow'                    , 'GoogleOutlineWindow'],
-      \ 'H' : [ ':SignifyToggleHighlight'                 , 'toggle highlight'],
-      \ 'v' : [ ':BlazeViewCommandLog'                    , 'Blaze View Log'],
-      \ 'e' : [ ':BlazeLoadErrors'                        , 'Blaze Errors'],
-      \ 'S' : [ ':BlazeGoToSponge'                        , 'Blaze Sponge'],
-      \ 'U' : [ ':BlazeDepsUpdate'                        , 'Blaze DepUpdate'],
-      \ 'c' : [ ':CritiqueComments'                       , 'CL comments'],
-      \ 'p' : [ ':CritiquePreviousComments'               , 'CL previous comments'],
-      \ 'n' : [ ':CritiqueNextComments'                   , 'CL next comments'],
-      \ 'u' : [ ':CritiqueUnresolvedComments'             , 'CL unresolved comments'],
-      \ 'B' : [ ':BlazeBuild'                              , 'Async Build'],
-      \ 'T' : [ ':BlazeTest'                               , 'Async Test'],
-      \ }
-" Rust & Go
-let g:which_key_map.R = {
-      \ 'name' : '+Rust',
-      \ 'r' : [ ':AsyncRustRun'                  , 'Run file'],
-      \ 'b' : [ ':AsyncRustBuild'                , 'Compile file'],
-      \ 'c' : [ ':AsyncCargoBuild'               , 'Compile cargo'],
-      \ 'x' : [ ':AsyncCargoRun'                 , 'Run cargo bin'],
-      \ 't' : [ ':AsyncCargoTest'                , 'Test cargo'],
-      \ 'g' : [ ':AsyncGoRunThis'                , 'go run this'],
-      \ }
-" l is for language server protocol
-let g:which_key_map.l = {
-      \ 'name' : '+lsp' ,
-      \ '.' : [':CocConfig'                          , 'config'],
-      \ ';' : ['<Plug>(coc-refactor)'                , 'refactor'],
-      \ 'a' : ['<Plug>(coc-codeaction)'              , 'line action'],
-      \ 'A' : ['<Plug>(coc-codeaction-selected)'     , 'selected action'],
-      \ 'b' : [':CocNext'                            , 'next action'],
-      \ 'B' : [':CocPrev'                            , 'prev action'],
-      \ 'c' : [':CocList commands'                   , 'commands'],
-      \ 'd' : ['<Plug>(coc-definition)'              , 'definition'],
-      \ 'D' : ['<Plug>(coc-declaration)'             , 'declaration'],
-      \ 'e' : [':CocList extensions'                 , 'extensions'],
-      \ 'f' : ['<Plug>(coc-format-selected)'         , 'format selected'],
-      \ 'F' : ['<Plug>(coc-format)'                  , 'format'],
-      \ 'h' : ['<Plug>(coc-float-hide)'              , 'hide'],
-      \ 'i' : ['<Plug>(coc-implementation)'          , 'implementation'],
-      \ 'I' : [':CocList diagnostics'                , 'diagnostics'],
-      \ 'j' : ['<Plug>(coc-float-jump)'              , 'float jump'],
-      \ 'l' : ['<Plug>(coc-codelens-action)'         , 'code lens'],
-      \ 'n' : ['<Plug>(coc-diagnostic-next)'         , 'next diagnostic'],
-      \ 'N' : ['<Plug>(coc-diagnostic-next-error)'   , 'next error'],
-      \ 'o' : ['<Plug>(coc-openlink)'                , 'open link'],
-      \ 'O' : [':CocList outline'                    , 'outline'],
-      \ 'p' : ['<Plug>(coc-diagnostic-prev)'         , 'prev diagnostic'],
-      \ 'P' : ['<Plug>(coc-diagnostic-prev-error)'   , 'prev error'],
-      \ 'q' : ['<Plug>(coc-fix-current)'             , 'quickfix'],
-      \ 'r' : ['<Plug>(coc-rename)'                  , 'rename'],
-      \ 'R' : ['<Plug>(coc-references)'              , 'references'],
-      \ 's' : [':CocList -I symbols'                 , 'references'],
-      \ 'S' : [':CocList snippets'                   , 'snippets'],
-      \ 't' : ['<Plug>(coc-type-definition)'         , 'type definition'],
-      \ 'u' : [':CocListResume'                      , 'resume list'],
-      \ 'U' : [':CocUpdate'                          , 'update CoC'],
-      \ 'v' : [':Vista!!'                            , 'tag viewer'],
-      \ 'z' : [':CocDisable'                         , 'disable CoC'],
-      \ 'Z' : [':CocEnable'                          , 'enable CoC'],
-      \ }
-" open
-let g:which_key_map.o = {
-      \ 'name' : '+open',
-      \ 'o' : [':SessionOpen'             			  , 'open session'],
-      \ '1' : [':vsp ~/.vimrc'                                    , 'vimrc'],
-      \ '2' : [':vsp ~/.vimrc.plug'                               , 'vimrc plug'],
-      \ '3' : [':vsp ~/.vim/init.lua'                             , 'vimrc init.lua'],
-      \ '4' : [':vsp ~/.zshrc'                                    , 'zshrc'],
-      \ '5' : [':vsp ~/.zshrc.pre-oh-my-zsh'                      , 'zshrc pre-omz'],
-      \ '6' : [':vsp ~/.zshenv'                                   , 'zshenv'],
-      \ '7' : [':vsp ~/bin/cheat'                                 , 'cheatsheet'],
-      \ 'i' : [':vsp ~/.config/nvim/init.vim'                     , 'open init'],
-      \ 'k' : [':vsp ~/.config/nvim/keys/which-key.vim'           , 'which keys'],
-      \ 'p' : [':vsp ~/.config/nvim/vim-plug/plugins.vim'         , 'vim-plug'],
-      \ 'h' : [':O h'                                             , 'open .h'],
-      \ 'c' : [':O cc'                                            , 'open .cc'],
-      \ 'b' : [':O b'                                             , 'open BUILD'],
-      \ 't' : [':O t'                                             , 'open test'],
-      \ 'g' : [':O go'                                            , 'open .go'],
-      \ 'l' : [':OpenCL'                                          , 'open CL'],
-      \ 'w' : [':!vieb "<cWORD>"'                                 , 'open link'],
-      \ 's' : [':!vieb "google.com/search?q=<cword>"'             , 'search web'],
-      \ 'v' : [':vsp /tmp/foo.go'                  		  , 'vsp file'],
-      \ }
-" Piper
-let g:which_key_map.P = {
-      \ 'name' : '+Piper',
-      \ 's' : [ ':G4Diff'                               , 'g4 diff'],
-      \ 'e' : [ ':G4Edit'                               , 'g4 edit'],
-      \ 'z' : [ ':G4Revert'                             , 'g4 revert'],
-      \ 'a' : [ ':G4Add'                                , 'g4 add'],
-      \ 'A' : [ ':G4AddTo'                              , 'g4 addto'],
-      \ 'l' : [ ':Blame'                                , 'g4 blame'],
-      \ 'p' : [ ':Ppending'                             , 'g4 pending'],
-      \ 'u' : [ ':!p4 sync'                             , 'p4 sync'],
-      \ }
-" project
-let g:which_key_map.p = {
-      \ 'name' : '+projects' ,
-      \ 'a' : [':qa!'                                       , 'quit all'],
-      \ 's' : [':wqa!'                                      , 'save&quit all'],
-      \ 'w' : [':w!'                                        , 'save!'],
-      \ 'S' : [':SessionSave '                              , 'save session'],
-      \ 'e' : [':e ~/.vimrc'                          	    , 'open init' ],
-      \ 'b' : [':e ~/.vimrc.plug'                           , 'open plug' ],
-      \ 'h' : ['Startify'                                   , 'home' ],
-      \ 'f' : [':Prettier'                                  , 'Pretties' ],
-      \ }
-" s is for search
-let g:which_key_map.s = {
-      \ 'name' : '+search' ,
-      \ '.' : [':Vista finder'          , 'Tags'],
-      \ '/' : [':History/'              , 'history'],
-      \ ';' : [':Commands'              , 'commands'],
-      \ 'a' : [':Ag'                    , 'text Ag'],
-      \ 'B' : [':BLines'                , 'current buffer'],
-      \ 'b' : [':Buffers'               , 'open buffers'],
-      \ 'c' : [':Commits'               , 'commits'],
-      \ 'C' : [':BCommits'              , 'buffer commits'],
-      \ 'f' : [':Files'                 , 'files'],
-      \ 'g' : [':GFiles'                , 'git files'],
-      \ 'G' : [':GFiles?'               , 'modified git files'],
-      \ 'h' : [':History'               , 'file history'],
-      \ 'H' : [':History:'              , 'command history'],
-      \ 'l' : [':Lines'                 , 'lines'] ,
-      \ 'm' : [':Marks'                 , 'marks'] ,
-      \ 'M' : [':Maps'                  , 'normal maps'] ,
-      \ 'p' : [':Helptags'              , 'help tags'] ,
-      \ 'P' : [':Tags'                  , 'project tags'],
-      \ 's' : [':CocList grep'          , 'search'],
-      \ 'S' : [':Colors'                , 'color schemes'],
-      \ 't' : [':Rg'                    , 'text Rg'],
-      \ 'T' : [':BTags'                 , 'buffer tags'],
-      \ 'w' : [':Windows'               , 'search windows'],
-      \ 'y' : [':Filetypes'             , 'file types'],
-      \ 'z' : [':FZF'                   , 'FZF'],
-      \ '?' : [':FZF'                   , 'FZF'],
-      \ 'e' : [":call InterestingWords('n')"          , 'search words'],
-      \ }
-      " \ 's' : [':Snippets'     , 'snippets'],
-" t is for terminal
-let g:which_key_map.t = {
-      \ 'name' : '+terminal' ,
-      \ 't' : [':FloatermNew --wintype=popup --width=50 --height=60'   , 'terminal'],
-      \ '?' : [':FloatermNew --wintype=popup --width=90 --height=50 w3m https://quickref.me/vim'   , 'vim quickref'],
-      \ '.' : [':FloatermNew --wintype=popup --width=60 --height=25'   , 'small terminal'],
-      \ '1' : [':FloatermFirst'                                        , 'first terminal'],
-      \ '0' : [':FloatermLast'                                         , 'last terminal'],
-      \ 'j' : [':FloatermNext'                                         , 'next terminal'],
-      \ 'k' : [':FloatermPrev'                                         , 'prev terminal'],
-      \ 'q' : [':FloatermKill'                                         , 'kill terminal'],
-      \ 'h' : [':FloatermHide'                                         , 'hide terminal'],
-      \ 'f' : [':FloatermNew fzf'                               , 'fzf'],
-      \ 'g' : [':FloatermNew lazygit'                           , 'git'],
-      \ 'i' : [':FloatermNew ipython'                           , 'ipython'],
-      \ 'r' : [':FloatermNew ranger'                            , 'ranger'],
-      \ ';' : [':FloatermToggle'                                , 'toggle'],
-      \ 's' : [':FloatermNew gotop -sbpa'                       , 'gotop'],
-      \ 'm' : [':FloatermNew --width=50 --height=8 playm'       , 'play music'],
-      \ 'v' : [':FloatermNew --width=50 --height=8 playv'       , 'play video'],
-      \ 'c' : [':FloatermNew --width=50 --height=8 termv'       , 'play tv'],
-      \ 'T' : [':FloatermNew --width=70 --height=15 ttyper'     , 'Rust typer'],
-      \ 'Z' : [':FloatermNew --width=70 --height=15 typer'      , 'Go typer'],
-      \ 'n' : [':FloatermNew --width=90 --height=30 nb'         , 'newsboat'],
-      \ 'o' : [':FloatermNew --width=90 --height=30 tor'        , 'the old reader'],
-      \ 'y' : [':FloatermNew --width=110 --height=8 ytfzf -fm'   , 'ytfzf music'],
-      \ '/' : [':FloatermNew --width=110 --height=8 ytfzf -f'      , 'ytfzf video'],
-      \ }
-" Diagnose
-let g:which_key_map.x = {
-      \ 'name' : '+Diagnose' ,
-      \ 'q' : [ 'copen'                                         , 'show quickfix' ],
-      \ 'x' : [ ':LspTroubleToggle'                             , 'toggle lsp trouble' ],
-      \ 'w' : [ ':LspTroubleToggle lsp_workspace_diagnostics'   , 'lsp workspace' ],
-      \ 'd' : [ ':LspTroubleToggle lsp_document_diagnostics'    , 'lsp document' ],
-      \ 'c' : [ ':LspTroubleToggle quickfix'                    , 'lsp quickfix' ],
-      \ 'l' : [ ':LspTroubleToggle loclist'                     , 'lsp loclist' ],
-      \ 'r' : [ ':LspTroubleToggle lsp_references'              , 'lsp refs' ],
-      \}
-" Telescope                                                                            
-let g:which_key_map.T = {                                                         
-        \ 'name' : '+Telescope' ,                                                   
-        \ 'A' : [':Telescope autocommands'                         , 'Telescope autocommands'],
-        \ 'B' : [':Telescope builtin'                              , 'Telescope builtin'],
-        \ 'C' : [':Telescope commands'                             , 'Telescope vim commands'],
-        \ 'K' : [':Telescope keymaps'                              , 'Telescope keymaps'],
-        \ 'O' : [':Telescope vim_options'                          , 'Telescope vim options'],
-        \ 'R' : [':Telescope registers'                            , 'Telescope registers'],
-        \ 'H' : [':Telescope search_history'                       , 'Telescope search history'],
-        \ 'M' : [':Telescope man_pages'                            , 'Telescope man page'],
-        \ 'L' : [':Telescope loclist'                              , 'Telescope loclist'],
-        \ 'Q' : [':Telescope quickfix'                             , 'Telescope quickfix'],
-        \ '/' : [':Telescope current_buffer_fuzzy_find'            , 'Telescope curbuf search'],
-        \ '.' : [':Telescope file_browser'      , 'Telescope browser'],
-        \ 'b' : [':Telescope buffers'                              , 'Telescope buffers'],
-        \ 'f' : [':Telescope find_files find_command=rg,--hidden,-i,--files,-l'       , 'Telescope find files'],
-        \ 'g' : [':Telescope live_grep'                            , 'Telescope grep'],
-        \ 'h' : [':Telescope help_tags'                            , 'Telescope vim help'],
-        \ 'm' : [':Telescope marks'                                , 'Telescope marks'],
-        \ 'c' : [':Telescope command_history'                      , 'Telescope q:'],
-        \ 's' : [':Telescope oldfiles'                             , 'Telescope switch files'],
-        \ }
-" windows
-let g:which_key_map.w = {
-      \ 'name' : '+windows' ,
-      \ 'a' : [':CocList windows'                               , 'list windows'],
-      \ 'w' : ['<C-W>w'                                         , 'other window'],
-      \ 's' : ['<C-W>s'                                         , 'split window'],
-      \ '_' : ['<C-W>s'                                         , 'split below'],
-      \ 'v' : ['<C-W>v'                                         , 'split right'],
-      \ '2' : ['<C-W>v'                                         , '2 columns'],
-      \ 'j' : ['<C-W>j'                                         , 'window down'],
-      \ 'k' : ['<C-W>k'                                         , 'window up'],
-      \ 'h' : ['<C-W>h'                                         , 'window left'],
-      \ 'l' : ['<C-W>h'                                         , 'window right'],
-      \ 'd' : ['<C-W>q'                                         , 'window kill'],
-      \ 'D' : ['<C-W>c'                                         , 'window clean'],
-      \ 'm' : [':call MaximizeToggle()'                         , 'window max'],
-      \ 'T' : [':TabVifm'                                       , 'Tab vifm'],
-      \ 'V' : [':VsplitVifm'                                    , 'VTab vifm'],
-      \ '?' : ['Windows'                                        , 'fzf windows'],
-      \ }
+" let g:which_key_map =  {}
+" " Define a separator
+" " let g:which_key_sep = '➥'
+" let g:which_key_sep = '✑'
+" set timeoutlen=100
+" " Not a fan of floating windows for this
+" let g:which_key_use_floating_win = 0
+" " Change the colors if you want
+" highlight default link WhichKey          Operator
+" highlight default link WhichKeySeperator DiffAdded
+" highlight default link WhichKeyGroup     Identifier
+" highlight default link WhichKeyDesc      Function
+" " Hide status line
+" autocmd! FileType which_key
+" autocmd  FileType which_key set laststatus=0 noshowmode noruler
+"   \| autocmd BufLeave <buffer> set laststatus=3 noshowmode ruler
+" " Single mappings
+" let g:which_key_map['0'] = [ ':Restart'                   , 'Restart Nvim' ]
+" let g:which_key_map['1'] = [ '<C-W>s'                     , '2 stacks' ]
+" let g:which_key_map['2'] = [ '<C-W>v'                     , '2 columns' ]
+" let g:which_key_map['/'] = [ ':CocList grep'              , 'coc grep' ]
+" "let g:which_key_map['C'] = [ ':CocList colors'            , 'all themes' ]
+" let g:which_key_map['C'] = [ ':Telescope colorscheme'     , 'all themes' ]
+" let g:which_key_map['.'] = [ ':CocList files'             , 'open files' ]
+" let g:which_key_map[','] = [ ':CocList words'             , 'search words' ]
+" let g:which_key_map[';'] = [ ':CocList outline'           , 'search words' ]
+" let g:which_key_map['V'] = [ ':Commands'                  , 'commands' ]
+" let g:which_key_map['='] = [ '<C-W>='                     , 'balance windows' ]
+" " not yet
+" "let g:which_key_map['c'] = [ ':Codi!!'                   , 'virtual repl']
+" let g:which_key_map['d'] = [ ':bd'                        , 'delete buffer']
+" let g:which_key_map['e'] = [ ':CocCommand explorer'       , 'explorer' ]
+" " use <leader>sf
+" let g:which_key_map['F'] = [ ':Files'                     , 'FZF Files' ]
+" "let g:which_key_map['v'] = [':Telescope find_files find_command=rg,-.,-i,--files'  	  , 'Tele Files']
+" let g:which_key_map['v'] = [':Telescope file_browser'  	  , 'File Browser']
+" let g:which_key_map['f'] = [ ':VsplitVifm'                , 'vifm']
+" let g:which_key_map['r'] = [ ':RnvimrToggle'              ,'ranger' ]
+" let g:which_key_map['S'] = [ ':SessionSave '              , 'save session' ]
+" let g:which_key_map['L'] = [ ':SessionOpen'               , 'open session' ]
+" "let g:which_key_map['z'] = [ ':ZenMode'                  , 'zen' ]
+" let g:which_key_map['z'] = [ ':Twilight'                  , 'zen' ]
+" let g:which_key_map['m'] = [ ':TZFocus'                   , 'Max/UnMax' ]
+" let g:which_key_map['?'] = [ ':CocList maps'              , 'maps' ]
+" let g:which_key_map['B'] = [ ':Vista!!'                     , 'Tags' ]
+" let g:which_key_map["'"] = [ ':FloatermNew --width=50 --height=60' , 'shell' ]
+" let g:which_key_map['h'] = [ ':FloatermKill'              , 'kill shell' ]
+" let g:which_key_map['q'] = [ ':q!'                        , 'quit']
+" let g:which_key_map['n'] = [ ':bnext'                     , 'cycle buffers' ]
+" let g:which_key_map['`'] = [ ':TSHighlightCapturesUnderCursor' , 'TSInfo' ]
+" let g:which_key_map['u'] = [ ':e #'                       , 'ropen' ]
+" let g:which_key_map['\'] = [ ':TSPlaygroundToggle'        , 'TS' ]
+" " Group mappings
+" " a is for actions
+" let g:which_key_map.a = {
+"       \ 'name' : '+actions' ,
+"       \ 'c' : [':ColorizerToggle'        , 'colorizer'],
+"       \ 'e' : [':CocCommand explorer'    , 'explorer'],
+"       \ 'r' : [':luafile %'              , 'lua run %'],
+"       \ 's' : [':let @/ = ""'            , 'remove search highlight'],
+"       \ 'v' : [':Vista!!'                , 'tag viewer'],
+"       \ }
+" " b is for buffer
+" let g:which_key_map.b = {
+"       \ 'name' : '+buffer',
+"       \ '1' : [':b1'                                         , 'buffer 1']        ,
+"       \ '2' : [':b2'                                         , 'buffer 2']        ,
+"       \ 'd' : [':bd'                                         , 'delete-buffer']   ,
+"       \ 'f' : [':bfirst'                                     , 'first-buffer']    ,
+"       \ 'h' : [':Startify'                                   , 'home-buffer']     ,
+"       \ 'l' : [':blast'                                      , 'last-buffer']     ,
+"       \ 'n' : [':bnext'                                      , 'next-buffer']     ,
+"       \ 'p' : [':bprevious'                                  , 'previous-buffer'] ,
+"       \ '?' : [':Buffers'                                    , 'fzf-buffer']      ,
+"       \ 'b' : [':CocList buffers'                           , 'all buffers'],
+"       \ 'm' : [':CocList marks'                             , 'all marks'],
+"       \ }
+" " code
+" let g:which_key_map.c = {
+"       \ 'name' : '+code' ,
+"       \ 'h' : [':Greph'                                         , 'search .h'],
+"       \ 'c' : [':Grephcc'                                       , 'search .cc'],
+"       \ 'g' : [':Grephgo'                                       , 'search .go'],
+"       \ 't' : [':Twilight'                                      , 'Twilight coding'],
+"       \ 'z' : [':ZenMode'                                       , 'ZenMode coding'],
+"       \ }
+" " g is for git
+" let g:which_key_map.g = {
+"       \ 'name' : '+git' ,
+"       \ 'a' : [':Git add .'                        , 'add all'],
+"       \ 'A' : [':Git add %'                        , 'add current'],
+"       \ 'b' : [':Git blame'                        , 'blame'],
+"       \ 'B' : [':GBrowse'                          , 'browse'],
+"       \ 'c' : [':Git commit'                       , 'commit'],
+"       \ 'd' : [':Git diff'                         , 'diff'],
+"       \ 'D' : [':Gdiffsplit'                       , 'diff split'],
+"       \ 'g' : [':GGrep'                            , 'git grep'],
+"       \ 'G' : [':Gstatus'                          , 'status'],
+"       \ 'h' : [':GitGutterLineHighlightsToggle'    , 'highlight hunks'],
+"       \ 'H' : ['<Plug>(GitGutterPreviewHunk)'      , 'preview hunk'],
+"       \ 'j' : ['<Plug>(GitGutterNextHunk)'         , 'next hunk'],
+"       \ 'k' : ['<Plug>(GitGutterPrevHunk)'         , 'prev hunk'],
+"       \ 'l' : [':Git log'                          , 'log'],
+"       \ 'p' : [':Git push'                         , 'push'],
+"       \ 'P' : [':Git pull'                         , 'pull'],
+"       \ 'r' : [':GRemove'                          , 'remove'],
+"       \ 's' : ['<Plug>(GitGutterStageHunk)'        , 'stage hunk'],
+"       \ 't' : [':GitGutterSignsToggle'             , 'toggle signs'],
+"       \ 'u' : ['<Plug>(GitGutterUndoHunk)'         , 'undo hunk'],
+"       \ 'v' : [':GV'                               , 'view commits'],
+"       \ 'V' : [':GV!'                              , 'view buffer commits'],
+"       \ }
+" " google
+" let g:which_key_map.G = {
+"       \ 'name' : '+Google',
+"       \ 'r' : [ ':RelatedFilesWindow'                     , 'Related files'],
+"       \ 'l' : [ ':GoogleOutlineWindow'                    , 'GoogleOutlineWindow'],
+"       \ 'H' : [ ':SignifyToggleHighlight'                 , 'toggle highlight'],
+"       \ 'v' : [ ':BlazeViewCommandLog'                    , 'Blaze View Log'],
+"       \ 'e' : [ ':BlazeLoadErrors'                        , 'Blaze Errors'],
+"       \ 'S' : [ ':BlazeGoToSponge'                        , 'Blaze Sponge'],
+"       \ 'U' : [ ':BlazeDepsUpdate'                        , 'Blaze DepUpdate'],
+"       \ 'c' : [ ':CritiqueComments'                       , 'CL comments'],
+"       \ 'p' : [ ':CritiquePreviousComments'               , 'CL previous comments'],
+"       \ 'n' : [ ':CritiqueNextComments'                   , 'CL next comments'],
+"       \ 'u' : [ ':CritiqueUnresolvedComments'             , 'CL unresolved comments'],
+"       \ 'B' : [ ':BlazeBuild'                              , 'Async Build'],
+"       \ 'T' : [ ':BlazeTest'                               , 'Async Test'],
+"       \ }
+" " Rust & Go
+" let g:which_key_map.R = {
+"       \ 'name' : '+Rust',
+"       \ 'r' : [ ':AsyncRustRun'                  , 'Run file'],
+"       \ 'b' : [ ':AsyncRustBuild'                , 'Compile file'],
+"       \ 'c' : [ ':AsyncCargoBuild'               , 'Compile cargo'],
+"       \ 'x' : [ ':AsyncCargoRun'                 , 'Run cargo bin'],
+"       \ 't' : [ ':AsyncCargoTest'                , 'Test cargo'],
+"       \ 'g' : [ ':AsyncGoRunThis'                , 'go run this'],
+"       \ }
+" " l is for language server protocol
+" let g:which_key_map.l = {
+"       \ 'name' : '+lsp' ,
+"       \ '.' : [':CocConfig'                          , 'config'],
+"       \ ';' : ['<Plug>(coc-refactor)'                , 'refactor'],
+"       \ 'a' : ['<Plug>(coc-codeaction)'              , 'line action'],
+"       \ 'A' : ['<Plug>(coc-codeaction-selected)'     , 'selected action'],
+"       \ 'b' : [':CocNext'                            , 'next action'],
+"       \ 'B' : [':CocPrev'                            , 'prev action'],
+"       \ 'c' : [':CocList commands'                   , 'commands'],
+"       \ 'd' : ['<Plug>(coc-definition)'              , 'definition'],
+"       \ 'D' : ['<Plug>(coc-declaration)'             , 'declaration'],
+"       \ 'e' : [':CocList extensions'                 , 'extensions'],
+"       \ 'f' : ['<Plug>(coc-format-selected)'         , 'format selected'],
+"       \ 'F' : ['<Plug>(coc-format)'                  , 'format'],
+"       \ 'h' : ['<Plug>(coc-float-hide)'              , 'hide'],
+"       \ 'i' : ['<Plug>(coc-implementation)'          , 'implementation'],
+"       \ 'I' : [':CocList diagnostics'                , 'diagnostics'],
+"       \ 'j' : ['<Plug>(coc-float-jump)'              , 'float jump'],
+"       \ 'l' : ['<Plug>(coc-codelens-action)'         , 'code lens'],
+"       \ 'n' : ['<Plug>(coc-diagnostic-next)'         , 'next diagnostic'],
+"       \ 'N' : ['<Plug>(coc-diagnostic-next-error)'   , 'next error'],
+"       \ 'o' : ['<Plug>(coc-openlink)'                , 'open link'],
+"       \ 'O' : [':CocList outline'                    , 'outline'],
+"       \ 'p' : ['<Plug>(coc-diagnostic-prev)'         , 'prev diagnostic'],
+"       \ 'P' : ['<Plug>(coc-diagnostic-prev-error)'   , 'prev error'],
+"       \ 'q' : ['<Plug>(coc-fix-current)'             , 'quickfix'],
+"       \ 'r' : ['<Plug>(coc-rename)'                  , 'rename'],
+"       \ 'R' : ['<Plug>(coc-references)'              , 'references'],
+"       \ 's' : [':CocList -I symbols'                 , 'references'],
+"       \ 'S' : [':CocList snippets'                   , 'snippets'],
+"       \ 't' : ['<Plug>(coc-type-definition)'         , 'type definition'],
+"       \ 'u' : [':CocListResume'                      , 'resume list'],
+"       \ 'U' : [':CocUpdate'                          , 'update CoC'],
+"       \ 'v' : [':Vista!!'                            , 'tag viewer'],
+"       \ 'z' : [':CocDisable'                         , 'disable CoC'],
+"       \ 'Z' : [':CocEnable'                          , 'enable CoC'],
+"       \ }
+" " open
+" let g:which_key_map.o = {
+"       \ 'name' : '+open',
+"       \ 'o' : [':SessionOpen'             			  , 'open session'],
+"       \ '0' : [':vsp ~/.vim/lua/plugs.lua'                        , 'plugs'],
+"       \ '1' : [':vsp ~/.vimrc'                                    , 'vimrc'],
+"       \ '2' : [':vsp ~/.vimrc.plug'                               , 'vimrc plug'],
+"       \ '3' : [':vsp ~/.vim/init.lua'                             , 'vimrc init.lua'],
+"       \ '4' : [':vsp ~/.zshrc'                                    , 'zshrc'],
+"       \ '5' : [':vsp ~/.zshrc.pre-oh-my-zsh'                      , 'zshrc pre-omz'],
+"       \ '6' : [':vsp ~/.zshenv'                                   , 'zshenv'],
+"       \ '7' : [':vsp ~/bin/cheat'                                 , 'cheatsheet'],
+"       \ 'i' : [':vsp ~/.config/nvim/init.vim'                     , 'open init'],
+"       \ 'k' : [':vsp ~/.config/nvim/keys/which-key.vim'           , 'which keys'],
+"       \ 'p' : [':vsp ~/.config/nvim/vim-plug/plugins.vim'         , 'vim-plug'],
+"       \ 'h' : [':O h'                                             , 'open .h'],
+"       \ 'c' : [':O cc'                                            , 'open .cc'],
+"       \ 'b' : [':O b'                                             , 'open BUILD'],
+"       \ 't' : [':O t'                                             , 'open test'],
+"       \ 'g' : [':O go'                                            , 'open .go'],
+"       \ 'l' : [':OpenCL'                                          , 'open CL'],
+"       \ 'w' : [':!vieb "<cWORD>"'                                 , 'open link'],
+"       \ 's' : [':!vieb "google.com/search?q=<cword>"'             , 'search web'],
+"       \ 'v' : [':vsp /tmp/foo.go'                  		  , 'vsp file'],
+"       \ }
+" " Piper
+" let g:which_key_map.P = {
+"       \ 'name' : '+Piper',
+"       \ 's' : [ ':G4Diff'                               , 'g4 diff'],
+"       \ 'e' : [ ':G4Edit'                               , 'g4 edit'],
+"       \ 'z' : [ ':G4Revert'                             , 'g4 revert'],
+"       \ 'a' : [ ':G4Add'                                , 'g4 add'],
+"       \ 'A' : [ ':G4AddTo'                              , 'g4 addto'],
+"       \ 'l' : [ ':Blame'                                , 'g4 blame'],
+"       \ 'p' : [ ':Ppending'                             , 'g4 pending'],
+"       \ 'u' : [ ':!p4 sync'                             , 'p4 sync'],
+"       \ }
+" " project
+" let g:which_key_map.p = {
+"       \ 'name' : '+projects' ,
+"       \ 'a' : [':qa!'                                       , 'quit all'],
+"       \ 's' : [':wqa!'                                      , 'save&quit all'],
+"       \ 'w' : [':w!'                                        , 'save!'],
+"       \ 'S' : [':SessionSave '                              , 'save session'],
+"       \ 'e' : [':e ~/.vimrc'                          	    , 'open init' ],
+"       \ 'b' : [':e ~/.vimrc.plug'                           , 'open plug' ],
+"       \ 'h' : ['Startify'                                   , 'home' ],
+"       \ 'f' : [':Prettier'                                  , 'Pretties' ],
+"       \ }
+" " s is for search
+" let g:which_key_map.s = {
+"       \ 'name' : '+search' ,
+"       \ '.' : [':Vista finder'          , 'Tags'],
+"       \ '/' : [':History/'              , 'history'],
+"       \ ';' : [':Commands'              , 'commands'],
+"       \ 'a' : [':Ag'                    , 'text Ag'],
+"       \ 'B' : [':BLines'                , 'current buffer'],
+"       \ 'b' : [':Buffers'               , 'open buffers'],
+"       \ 'c' : [':Commits'               , 'commits'],
+"       \ 'C' : [':BCommits'              , 'buffer commits'],
+"       \ 'f' : [':Files'                 , 'files'],
+"       \ 'g' : [':GFiles'                , 'git files'],
+"       \ 'G' : [':GFiles?'               , 'modified git files'],
+"       \ 'h' : [':History'               , 'file history'],
+"       \ 'H' : [':History:'              , 'command history'],
+"       \ 'l' : [':Lines'                 , 'lines'] ,
+"       \ 'm' : [':Marks'                 , 'marks'] ,
+"       \ 'M' : [':Maps'                  , 'normal maps'] ,
+"       \ 'p' : [':Helptags'              , 'help tags'] ,
+"       \ 'P' : [':Tags'                  , 'project tags'],
+"       \ 's' : [':CocList grep'          , 'search'],
+"       \ 'S' : [':Colors'                , 'color schemes'],
+"       \ 't' : [':Rg'                    , 'text Rg'],
+"       \ 'T' : [':BTags'                 , 'buffer tags'],
+"       \ 'w' : [':Windows'               , 'search windows'],
+"       \ 'y' : [':Filetypes'             , 'file types'],
+"       \ 'z' : [':FZF'                   , 'FZF'],
+"       \ '?' : [':FZF'                   , 'FZF'],
+"       \ 'e' : [":call InterestingWords('n')"          , 'search words'],
+"       \ }
+"       " \ 's' : [':Snippets'     , 'snippets'],
+" " t is for terminal
+" let g:which_key_map.t = {
+"       \ 'name' : '+terminal' ,
+"       \ 't' : [':FloatermNew --wintype=popup --width=50 --height=60'   , 'terminal'],
+"       \ '?' : [':FloatermNew --wintype=popup --width=90 --height=50 w3m https://quickref.me/vim'   , 'vim quickref'],
+"       \ '.' : [':FloatermNew --wintype=popup --width=60 --height=25'   , 'small terminal'],
+"       \ '1' : [':FloatermFirst'                                        , 'first terminal'],
+"       \ '0' : [':FloatermLast'                                         , 'last terminal'],
+"       \ 'j' : [':FloatermNext'                                         , 'next terminal'],
+"       \ 'k' : [':FloatermPrev'                                         , 'prev terminal'],
+"       \ 'q' : [':FloatermKill'                                         , 'kill terminal'],
+"       \ 'h' : [':FloatermHide'                                         , 'hide terminal'],
+"       \ 'f' : [':FloatermNew fzf'                               , 'fzf'],
+"       \ 'g' : [':FloatermNew lazygit'                           , 'git'],
+"       \ 'i' : [':FloatermNew ipython'                           , 'ipython'],
+"       \ 'r' : [':FloatermNew ranger'                            , 'ranger'],
+"       \ ';' : [':FloatermToggle'                                , 'toggle'],
+"       \ 's' : [':FloatermNew gotop -sbpa'                       , 'gotop'],
+"       \ 'm' : [':FloatermNew --width=50 --height=8 playm'       , 'play music'],
+"       \ 'v' : [':FloatermNew --width=50 --height=8 playv'       , 'play video'],
+"       \ 'c' : [':FloatermNew --width=50 --height=8 termv'       , 'play tv'],
+"       \ 'T' : [':FloatermNew --width=70 --height=15 ttyper'     , 'Rust typer'],
+"       \ 'Z' : [':FloatermNew --width=70 --height=15 typer'      , 'Go typer'],
+"       \ 'n' : [':FloatermNew --width=90 --height=30 nb'         , 'newsboat'],
+"       \ 'o' : [':FloatermNew --width=90 --height=30 tor'        , 'the old reader'],
+"       \ 'y' : [':FloatermNew --width=110 --height=8 ytfzf -fm'   , 'ytfzf music'],
+"       \ '/' : [':FloatermNew --width=110 --height=8 ytfzf -f'      , 'ytfzf video'],
+"       \ }
+" " Diagnose
+" let g:which_key_map.x = {
+"       \ 'name' : '+Diagnose' ,
+"       \ 'q' : [ 'copen'                                         , 'show quickfix' ],
+"       \ 'x' : [ ':LspTroubleToggle'                             , 'toggle lsp trouble' ],
+"       \ 'w' : [ ':LspTroubleToggle lsp_workspace_diagnostics'   , 'lsp workspace' ],
+"       \ 'd' : [ ':LspTroubleToggle lsp_document_diagnostics'    , 'lsp document' ],
+"       \ 'c' : [ ':LspTroubleToggle quickfix'                    , 'lsp quickfix' ],
+"       \ 'l' : [ ':LspTroubleToggle loclist'                     , 'lsp loclist' ],
+"       \ 'r' : [ ':LspTroubleToggle lsp_references'              , 'lsp refs' ],
+"       \}
+" " Telescope                                                                            
+" let g:which_key_map.T = {                                                         
+"         \ 'name' : '+Telescope' ,                                                   
+"         \ 'A' : [':Telescope autocommands'                         , 'Telescope autocommands'],
+"         \ 'B' : [':Telescope builtin'                              , 'Telescope builtin'],
+"         \ 'C' : [':Telescope commands'                             , 'Telescope vim commands'],
+"         \ 'K' : [':Telescope keymaps'                              , 'Telescope keymaps'],
+"         \ 'O' : [':Telescope vim_options'                          , 'Telescope vim options'],
+"         \ 'R' : [':Telescope registers'                            , 'Telescope registers'],
+"         \ 'H' : [':Telescope search_history'                       , 'Telescope search history'],
+"         \ 'M' : [':Telescope man_pages'                            , 'Telescope man page'],
+"         \ 'L' : [':Telescope loclist'                              , 'Telescope loclist'],
+"         \ 'Q' : [':Telescope quickfix'                             , 'Telescope quickfix'],
+"         \ '/' : [':Telescope current_buffer_fuzzy_find'            , 'Telescope curbuf search'],
+"         \ '.' : [':Telescope file_browser'      , 'Telescope browser'],
+"         \ 'b' : [':Telescope buffers'                              , 'Telescope buffers'],
+"         \ 'f' : [':Telescope find_files find_command=rg,--hidden,-i,--files,-l'       , 'Telescope find files'],
+"         \ 'g' : [':Telescope live_grep'                            , 'Telescope grep'],
+"         \ 'h' : [':Telescope help_tags'                            , 'Telescope vim help'],
+"         \ 'm' : [':Telescope marks'                                , 'Telescope marks'],
+"         \ 'c' : [':Telescope command_history'                      , 'Telescope q:'],
+"         \ 's' : [':Telescope oldfiles'                             , 'Telescope switch files'],
+"         \ }
+" " windows
+" let g:which_key_map.w = {
+"       \ 'name' : '+windows' ,
+"       \ 'a' : [':CocList windows'                               , 'list windows'],
+"       \ 'o' : ['<C-W>w'                                         , 'other window'],
+"       \ 's' : ['<C-W>s'                                         , 'split window'],
+"       \ '_' : ['<C-W>s'                                         , 'split below'],
+"       \ 'v' : ['<C-W>v'                                         , 'split right'],
+"       \ '2' : ['<C-W>v'                                         , '2 columns'],
+"       \ 'j' : ['<C-W>j'                                         , 'window down'],
+"       \ 'k' : ['<C-W>k'                                         , 'window up'],
+"       \ 'h' : ['<C-W>h'                                         , 'window left'],
+"       \ 'l' : ['<C-W>h'                                         , 'window right'],
+"       \ 'd' : ['<C-W>q'                                         , 'window kill'],
+"       \ 'D' : ['<C-W>c'                                         , 'window clean'],
+"       \ 'm' : [':call MaximizeToggle()'                         , 'window max'],
+"       \ 'T' : [':TabVifm'                                       , 'Tab vifm'],
+"       \ 'V' : [':VsplitVifm'                                    , 'VTab vifm'],
+"       \ '?' : ['Windows'                                        , 'fzf windows'],
+"       \ 'w' : [':WinShift'                                      , 'WinShift'],
+"       \ }
 " Register which key map
-call which_key#register('<Space>', "g:which_key_map")
+" call which_key#register('<Space>', "g:which_key_map")
 " ================ key maps ======================
 "
 " ================ settings ======================
@@ -1021,7 +1027,8 @@ set wb  "writebackup"
 " always has to be the end.
 filetype plugin indent on
 set nu rnu
-set guifont=FiraCode\ Nerd\ Font\ Mono:h22
+"set guifont=FiraCode\ Nerd\ Font\ Mono:h22
+set guifont=CartographCF\ Nerd\ Font:h22
 "" neovide configs"
 set mouse=nvicar
 "set mouse=a

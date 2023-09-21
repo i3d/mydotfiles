@@ -291,47 +291,6 @@ export YTFZF_PLAYER="mpv --vd-queue-enable=yes --vd-lavc-threads=4"
 
 #github qfc
 [[ -s "$HOME/.qfc/bin/qfc.sh"  ]] && source "$HOME/.qfc/bin/qfc.sh"
-# for my c.googler.com instance.
-[[ -d $HOME/.bagpipe ]] && \
-# segfault in mac m1.
-. $HOME/.bagpipe/setup.sh $HOME/.bagpipe xjimux.c.googlers.com "corp-ssh-helper -relay=sup-ssh-relay.corp.google.com --stderrthreshold=INFO %h %p"
-#. $HOME/.bagpipe/setup.sh $HOME/.bagpipe ujimux.c.googlers.com
-#
-
-# script is ~/bin/renew.pa
-function renew_gcert_ifneeded() {
-	~/bin/renew.pa
-}
-
-function renew_gcert_ifneeded1() {
-	~/bin/renew1.pa
-}
-
-function renew_bagpipe_ifneeded() {
-	~/bin/bagpipe.pa
-}
-
-function pa() {
-  # migrated to use rw => ~/bin/xx
-  #echo "ssh to ujimux.c.googler.com ..."
-  #renew_gcert_ifneeded
-  # open up our first connection to our remote host so that any
-  # disconnection will be reconnected. 'then sux wouldn't bother
-  # manual reconnect anymore'
-  #echo
-  # renew_bagpipe_ifneeded
-  # idempotent if already connected.
-  # help any remote editing or opened remote sessions, e.g. sux, remote tmux, vscode, oni, etc.
-  #autossh -f -M20000 -t -A -X ujimux.c.googlers.com
-  # ~/bin/sux gcert -s
-}
-
-function ca() {
-  # migrated to use rw => ~/bin/xx
-  echo "ssh to xjimux.c.googler.com ..."
-  renew_gcert_ifneeded1
-}
-
 ##### !!!! Start plugin managers !!!! ######
 ##### !!!! Start plugin managers !!!! ######
 [[ ! -d $HOME/.zprezto ]] && \
@@ -441,12 +400,7 @@ export NVM_DIR="$HOME/.nvm"
 alias lx='xplr'
 alias r='ranger'
 alias hbc='~/bin/hbc.sh'
-alias g4='p4'
 alias bbbb='blaze'
-# g4d citc stuff.
-[[ -f /Library/GoogleCorpSupport/srcfs/shell_completion/enable_completion.sh ]] && \
-  source /Library/GoogleCorpSupport/srcfs/shell_completion/enable_completion.sh
-
 # for oni finding neovim
 export ONI_NEOVIM_PATH=$HOME/bin/v
 

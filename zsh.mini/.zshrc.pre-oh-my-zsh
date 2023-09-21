@@ -282,12 +282,6 @@ alias sdb='screen -c $HOME/.screenrc-borg -d -m -UaA -S borg'
 alias sb='screen -c $HOME/.screenrc-borg -UaA -S borg'
 
 alias cdgocode='cd ~/go_code/src/'
-alias gtags='/home/build/nonconf/google3/tools/tags/gtags.sh'
-alias gtagsc='/home/build/nonconf/google3/tools/tags/gtags.sh --lang=c++'
-alias gtagsj='/home/build/nonconf/google3/tools/tags/gtags.sh --lang=java'
-alias gtagsjs='/home/build/nonconf/google3/tools/tags/gtags.sh --lang=javascript'
-alias gtagspb='/home/build/nonconf/google3/tools/tags/gtags.sh --lang=proto'
-alias gtagspy='/home/build/nonconf/google3/tools/tags/gtags.sh --lang=python'
 alias vless='vi -u /usr/share/vim/vim80/macros/less.vim'
 alias dfa='df -ha .'
 alias bls='/bin/ls -trABipFG'
@@ -302,54 +296,10 @@ alias lsd='l -D'
 #alias s='cd ..'
 alias md='mkdir -p'
 #alias grep='grep --color=always'
-alias info_cal='ssh caladmin exec /etc/cron.d/scripts/add_events2 --info-calendars'
-alias dump_group='ssh caladmin /usr/local/bin/list_domain_calendars.par --calendar_type group'
-alias dump_user='ssh caladmin /usr/local/bin/list_domain_calendars.par --calendar_type user'
-alias dump_res='ssh caladmin /usr/local/bin/list_domain_calendars.par --calendar_type resource'
-alias cdcorpcron='cd /home/build/ops/corp/slack/roles/caladmin/files.cron/etc/cron.d/scripts'
-alias cdsp='cd $HOME/src/sp/google3/experimental/users/jimxu/sp'
-alias cdexp='cd $HOME/src/google3_experimental/google3/experimental/users/jimxu/'
-alias cddjango='cd /home/build/google3/third_party/py/django/v0_96'
-alias cdconfman='cd $HOME/src/google3-confman/google3/'
-alias cdconfmant='cd $HOME/src/confman_turbogears/depot/google3/experimental/users/jimxu/confman_turbogears/confman'
-alias cddasherman2='cd ~/src/dasherman2/google3'
-alias cddasherman='cd ~/src/dasherman/depot/ops/corp/slack/roles/dasherman/files/usr/local/lib/dasherman'
-alias cddclient='cd ~/src/dasherman-client/depot/ops/corp/dogfood/dasherman-client/'
-alias cdshuttle='$HOME/src/andriod/shuttle/google3/experimental/android/Shuttle/src/com/google/android/shuttle'
-alias smartsync='/home/build/nonconf/google3/tools/continuous_build/smartsync.sh'
-alias smartsyncdoozer='smartsync -l DOOZER'
-alias cdcdb='cd ~/src/corpdb/google3/google3/ops/sysops/corpdb/'
-alias cdacr='cd ~/src/acr/ops/corp/acr'
-alias cdesc='cd ~/src/ops_esc/'
-alias cdmgxp='cd ~/src/mg_agent_xp/'
-alias cdgoogle3mgxp='cd ~/src/google3_mgxp/google3/'
-alias cddocs='cd ~/src/designdocs/'
-alias cdapps='cd ~/src/google3_docs_borg/google3/production/'
-alias cdjotsre='cd ~/src/jotspot-sre/google3'
-alias cdjot='cd ~/src/jotspot/google3/java/com/google/jotspot/'
-alias cdbase='cd ~/src/google3_base/google3/base'
-alias cdnet='cd ~/src/google3_net/google3/net/'
-alias cdjavabase='cd ~/src/google3_java/google3/java/com/google/common'
-alias cdjavanet='cd ~/src/google3_java/google3/java/com/google/net'
-alias cdgslb='cd ~/src/gslb/google3/googledata/production/gslbpush/sources'
-alias cdpushqr='cd ~/src/push_qr/google3/production/tools/push_quickrelease'
-alias cdgfe='cd $HOME/src/gfe/google/config'
 #alias -g ...='../..'
 #alias -g ....='../../..'
 #alias -g .....='../../../..'
-#alias -g b='acoc blaze'
-#alias -g bbbb='blaze'
-alias cdlab='cd ~/src/codelabs/'
-alias build='bbbb build'
-alias cdg4='cd ~/src/google3_g4/branches/google3_tools_dev_branch/google3'
-alias btest='bbbb test'
-alias cdblaze='cd ~/src/google3_blaze/google3'
-alias cdblazelib='cd ~/src/google3_blaze/google3/java/com/google/devtools/build/lib'
 alias ss='cd ../../'
-alias srcup='g4 sync'
-alias g4p='g4 p'
-alias g4s='g4 submit'
-alias g4c='g4 change'
 alias openglibc='w3m http://www.gnu.org/software/libc/manual/html_mono/libc.html#toc_Top'
 alias openman='w3m http://linux.die.net/man/'
 alias openman1='w3m http://linux.die.net/man/1/'
@@ -386,32 +336,14 @@ alias jade='/google/data/ro/teams/jade/jade'
 
 #
 # End of lines added by compinstall
-export GFS_CLIENT_SECURITY_LEVEL=integrity
-#`keval `ssh-agent -s` 2>/dev/null 1>/dev/null && ssh-add 2>&1 >/dev/null
-[[ "$(type -p java)" =~ /usr/local/buildtools/java ]] || export PATH="/usr/local/buildtools/java/jdk/bin:$PATH"
-export P4CONFIG=.p4config
-#export P4DIFF="/home/build/public/google/tools/p4diff"
-#export P4DIFF=diff
-export P4MERGE=/home/build/public/eng/perforce/mergep4.tcl
-export P4EDITOR=$EDITOR
-#export P4PORT=perforce6:6666
 export BASE=$HOME/src
-export GOOGLE_USE_CORP_SSL_AGENT=true
 if [ -x  /usr/local/scripts/ssx-agents ]; then
   eval $(/usr/local/scripts/ssx-agents $SHELL)
 fi
-#[[ -d /google/src/status ]] && srcfs login >/dev/null
-export PRODACCESS="prodaccess --ssh_cert"
-export P4DIFF=diff
 export SVN_EDITOR=vim
 
 ## docker
 export DOCKER_HOST=tcp://localhost:4243
-
-function cd() {
-  ([[ "$@" =~ "google3" ]] || [[ "$PWD" =~ "google3" ]]) && unset P4PORT #|| export P4PORT=perforce:6666
-  builtin cd "$@" && /bin/ls
-}
 
 # for mac only
 function pman() {
@@ -419,14 +351,6 @@ function pman() {
 }
 
 unset http_proxy
-
-
-# user CANARY G4
-export USE_CANARY_G4=1
-# export USE_CANARY_BLAZE=nightly
-export RUBYLIB=$RUBYLIB:/usr/local/google/usr/local/lib/site_ruby/1.8
-#export PATH=/usr/local/lib/cw:$PATH
-#
 
 export GOPATH=$HOME/go_code
 

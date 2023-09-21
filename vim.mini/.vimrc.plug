@@ -1,37 +1,38 @@
 let $MYVIMRC = "$HOME/.vimrc"
+let g:python3_host_prog = '~/homebrew/bin/python3'
 if $NOTRUECOLOR
 	set notermguicolors
 else 
 	set termguicolors
 endif
 " Disable not used builtin plugins
-lua <<EOF
-local disabled_built_ins = {
-  "netrw",
-  "netrwPlugin",
-  "netrwSettings",
-  "netrwFileHandlers",
-  "gzip",
-  "zip",
-  "zipPlugin",
-  "tar",
-  "tarPlugin",
-  "getscript",
-  "getscriptPlugin",
-  "vimball",
-  "vimballPlugin",
-  "2html_plugin",
-  "logipat",
-  "rrhelper",
-  "spellfile_plugin",
-  "matchit"
-}
-for _, plugin in pairs(disabled_built_ins) do
-  vim.g["loaded_" .. plugin] = 1
-end
-EOF
-" ####### Before any plugsin #######
-lua require('impatient')
+" lua <<eof
+" local disabled_built_ins = {
+"   "netrw",
+"   "netrwplugin",
+"   "netrwsettings",
+"   "netrwfilehandlers",
+"   "gzip",
+"   "zip",
+"   "zipplugin",
+"   "tar",
+"   "tarplugin",
+"   "getscript",
+"   "getscriptplugin",
+"   "vimball",
+"   "vimballplugin",
+"   "2html_plugin",
+"   "logipat",
+"   "rrhelper",
+"   "spellfile_plugin",
+"   "matchit"
+" }
+" for _, plugin in pairs(disabled_built_ins) do
+"   vim.g["loaded_" .. plugin] = 1
+" end
+" eof
+" " ####### before any plugsin #######
+" lua require('impatient')
 " ####### Before any plugsin #######
 """""""""""""""""""""""""""""""""""""""""""""""
 "https://github.com/ChristianChiarulli/nvim
@@ -60,18 +61,20 @@ call plug#begin('~/.vim/plugged')
 if fnamemodify(resolve(expand('%:p')), ':h') !~ 'google3'
   " Plug 'fatih/vim-go' " with  CiderLSP, it surrpassed  vim-go's functionality.
 endif
-Plug 'i3d/vim-jimbothemes'
-Plug 'mhinz/vim-signify' " this is copied over.
-Plug 'liuchengxu/vim-which-key'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+"Plug 'i3d/vim-jimbothemes'
+" LAST Plug 'sonph/onehalf', {'rtp': 'vim/'}
+" LAST Plug 'mhartington/oceanic-next'
+"Plug 'mhinz/vim-signify' " this is copied over.
+"Plug 'liuchengxu/vim-which-key'
+" LAST Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+"Plug 'junegunn/fzf.vim'
+" LAST Plug 'prabirshrestha/async.vim'
+" LAST Plug 'prabirshrestha/vim-lsp'
+" LAST Plug 'prabirshrestha/asyncomplete.vim'
+" LAST Plug 'prabirshrestha/asyncomplete-lsp.vim'
+"Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 au! FileType * let g:coc_suggest_disable = 1
-Plug 'voldikss/vim-floaterm'  " can't load lazily.
+"Plug 'voldikss/vim-floaterm'  " can't load lazily.
 set shell=/bin/zsh
 let g:floaterm_wintype="floating"
 let g:floaterm_gitcommit='floaterm'
@@ -87,30 +90,30 @@ function s:floatermSettings()
 endfunction
 autocmd FileType floaterm call s:floatermSettings()
 autocmd User Startified setlocal buflisted
-Plug 'skywind3000/asynctasks.vim'
-Plug 'skywind3000/asyncrun.vim'
-Plug 'zhaocai/GoldenView.Vim'
+" LAST Plug 'skywind3000/asynctasks.vim'
+" LAST Plug 'skywind3000/asyncrun.vim'
+"Plug 'zhaocai/GoldenView.Vim'
 let g:goldenview__enable_at_startup = 1
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-Plug 'RRethy/nvim-treesitter-textsubjects'
-Plug 'nvim-treesitter/nvim-treesitter-refactor'
-Plug 'neovim/nvim-lspconfig'
-Plug 'kabouzeid/nvim-lspinstall'
-Plug 'nvim-lua/lsp_extensions.nvim'
-Plug 'ray-x/lsp_signature.nvim'
-Plug 'gelguy/wilder.nvim'
+"Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+"Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+"Plug 'RRethy/nvim-treesitter-textsubjects'
+"Plug 'nvim-treesitter/nvim-treesitter-refactor'
+"Plug 'neovim/nvim-lspconfig'
+"Plug 'kabouzeid/nvim-lspinstall'
+"Plug 'nvim-lua/lsp_extensions.nvim'
+"Plug 'ray-x/lsp_signature.nvim'
+"Plug 'gelguy/wilder.nvim'
 let g:vista_update_on_text_changed = 1
 let g:vista_stay_on_open = 0  " don't focus on it by default.
 let g:vista_keep_fzf_colors = 1
 let g:vista_sidebar_width = 20
 let g:vista_sidebar_position = 'vertical topleft'
-Plug 'liuchengxu/vista.vim'
+"Plug 'liuchengxu/vista.vim'
 function! NearestMethodOrFunction() abort
   return get(b:, 'vista_nearest_method_or_function', '')
 endfunction
 au VimEnter * call vista#RunForNearestMethodOrFunction()
-Plug 'haringsrob/nvim_context_vt'
+"Plug 'haringsrob/nvim_context_vt'
 let g:session_directory = '~/.vim/sessions'
 "let g:session_autoload = 'yes'
 let g:session_autosave = 'yes'
@@ -118,58 +121,67 @@ let g:session_autosave_periodic = 1
 let g:session_autosave_silent = 1
 let g:session_default_to_last = 1
 let g:session_command_aliases = 1
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-session'
-Plug 'windwp/nvim-autopairs'
-"Plug 'NTBBloodbath/galaxyline.nvim' , {'branch': 'main'}
-Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
+"Plug 'xolox/vim-misc'
+"Plug 'xolox/vim-session'
+"Plug 'windwp/nvim-autopairs'
+" Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 " ====== MUST HAVE ===== "
 " ====== NICE HAVE ===== "
-Plug 'markonm/traces.vim'
-Plug 'lukas-reineke/indent-blankline.nvim'
+"Plug 'markonm/traces.vim'
+"Plug 'lukas-reineke/indent-blankline.nvim'
 let g:indent_blankline_char_list = ['|', '¦', '┆', '┊']
 let g:indent_blankline_char_highlight_list = ['Error', 'Function']
 let g:indent_blankline_space_char_highlight_list = ['Error', 'Function']
 let g:indent_blankline_use_treesitter = v:true
 let g:indent_blankline_show_current_context = v:true
 let g:indent_blankline_context_highlight_list = ['Error', 'Warning']
-Plug 'phaazon/hop.nvim'
-nno S :HopPattern<cr>
-Plug 'RRethy/vim-illuminate'
+"Plug 'phaazon/hop.nvim'
+nno \ :HopPattern<cr>
+"Plug 'RRethy/vim-illuminate'
 let g:Illuminate_ftblacklist = ['nerdtree']
 augroup illuminate_augroup
   autocmd!
   autocmd VimEnter * hi illuminatedCurWord cterm=italic gui=italic
 augroup END
-Plug 'lfv89/vim-interestingwords'
-Plug 'machakann/vim-highlightedyank'
+"Plug 'lfv89/vim-interestingwords'
+"Plug 'machakann/vim-highlightedyank'
 let g:highlightedyank_highlight_duration = -1
-Plug 'ryanoasis/vim-devicons'
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'nanozuki/tabby.nvim'
-Plug 'tversteeg/registers.nvim'
-Plug 'ms-jpq/coq_nvim'
-Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts', 'on': 'COQnow'}
-Plug 'lewis6991/gitsigns.nvim'
-Plug 'vifm/vifm.vim'
+"Plug 'ryanoasis/vim-devicons'
+"Plug 'kyazdani42/nvim-web-devicons'
+"Plug 'nanozuki/tabby.nvim'
+"Plug 'tversteeg/registers.nvim'
+"Plug 'ms-jpq/coq_nvim'
+"Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts', 'on': 'COQnow'}
+"Plug 'lewis6991/gitsigns.nvim'
+"Plug 'vifm/vifm.vim'
 " ====== NICE HAVE ===== "
 " ====== OK HAVE ===== "
-Plug 'roosta/fzfolds.vim'
-Plug 'onsails/lspkind-nvim'
-Plug 'nvim-treesitter/playground', { 'on': 'TSPlaygroundToggle' }
-Plug 'Pocco81/TrueZen.nvim', {'on': 'TZFocus'}  " used only for max/restore window effect.
-Plug 'folke/zen-mode.nvim' " another zen-mode
-Plug 'folke/twilight.nvim' " dim unfocused code
-Plug 'nacro90/numb.nvim'
-Plug 'simrat39/rust-tools.nvim'
-Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-Plug 'ThePrimeagen/git-worktree.nvim'
-Plug 'nvim-lua/completion-nvim'
+" LAST Plug 'roosta/fzfolds.vim'
+"Plug 'nvim-treesitter/playground', { 'on': 'TSPlaygroundToggle' }
+" LAST Plug 'Pocco81/TrueZen.nvim', {'on': 'TZFocus'}  " used only for max/restore window effect.
+" LAST Plug 'folke/zen-mode.nvim' " another zen-mode
+" LAST Plug 'folke/twilight.nvim' " dim unfocused code
+"Plug 'nacro90/numb.nvim'
+" LAST Plug 'simrat39/rust-tools.nvim'
+" LAST Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+" LAST Plug 'ThePrimeagen/git-worktree.nvim'
+" LAST Plug 'nvim-lua/completion-nvim'
+" Plug 'aca/completion-tabnine', { 'do': './install.sh' } " tabnine completion engine.
+let g:completion_chain_complete_list = {
+    \ 'default': [
+    \    {'complete_items': ['lsp', 'snippet', 'tabnine' ]},
+    \    {'mode': '<c-p>'},
+    \    {'mode': '<c-n>'}
+    \]
+\}
 imap <Tab> <Plug>(completion_smart_tab)
 imap <S-Tab> <Plug>(completion_smart_s_tab)
-Plug 'simrat39/symbols-outline.nvim'
-Plug 'tpope/vim-surround'
-Plug 'norcalli/nvim-colorizer.lua'
+" Plug 'simrat39/symbols-outline.nvim'
+" LAST Plug 'tpope/vim-repeat'
+" LAST Plug 'tpope/vim-surround'
+"Plug 'norcalli/nvim-colorizer.lua'
+" LAST Plug 'sainnhe/everforest'
+let g:everforest_background = 'hard'
 " ====== OK HAVE ===== "
 " ====== PROBABLY OK HAVE ===== "
 " Plug 'sso://user/mcdermottm/vim-csearch'
@@ -328,7 +340,6 @@ let g:lsp_format_sync_timeout = 1000
 " autocmd FileType floaterm call s:floatermSettings()
 " autocmd User Startified setlocal buflisted
 " Plug 'mhinz/vim-startify'
-" let g:python3_host_prog = '$HOME/homebrew/bin/python3'
 " Plug 'nightsense/vimspectr'
 " Plug 'tpope/vim-rhubarb'
 " Plug 'junegunn/gv.vim'
@@ -477,7 +488,9 @@ let g:fzf_tags_command = 'ctags -R'
 let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp' } }
 "let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info --color=bg+:#3B4346,bg:#2A2F33,gutter:#2A2F33,spinner:#c1bf89,hl:#C76767,fg:#bfddb2,header:#CC9361,info:#87c095,pointer:#82abbc,marker:#c1bf89,fg+:#D49864,prompt:#e5a46b,hl+:#87c095 --header-lines=0 --ansi --keep-right'
 " matrix theme
-let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info --color=bg+:#18282e,bg:#091013,gutter:#6fa64c,spinner:#e2e500,hl:#e2e500,fg:#90d762,header:#46d8b8,info:#90d762,pointer:#90d762,marker:#00ff87,fg+:#00ff87,prompt:#00cd6d,hl+:#90d762 --header-lines=0 --keep-right'
+" let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info --color=bg+:#18282e,bg:#091013,gutter:#6fa64c,spinner:#e2e500,hl:#e2e500,fg:#90d762,header:#46d8b8,info:#90d762,pointer:#90d762,marker:#00ff87,fg+:#00ff87,prompt:#00cd6d,hl+:#90d762 --header-lines=0 --keep-right'
+" carbondark theme
+let $FZF_DEFAULT_OPTS = '--color=bg+:#333333,bg:#0E0E0E,gutter:#666666,spinner:#FAFF00,hl:#FAFF00,fg:#929492,header:#7D7D7D,info:#929492,pointer:#929492,marker:#FAFAFA,fg+:#CACACA,prompt:#E6E6E6,hl+:#929492 --header-lines=0 --layout=reverse --keep-right --info=inline --header-lines=0'
 let $FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/**'"
 "-g '!{node_modules,.git}'
 " Customize fzf colors to match your color scheme
