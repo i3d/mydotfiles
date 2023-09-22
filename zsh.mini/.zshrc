@@ -34,7 +34,7 @@ autoload -z edit-command-line
 zle -N edit-command-line
 [[ ! -d $HOME/.local/src/zsh-vimode-visual ]] && \
   mkdir -p $HOME/.local/src 2>/dev/null && \
-  cd $HOME/.local/src 1>dev/null 2>/dev/null && \
+  cd $HOME/.local/src 1>/dev/null 2>/dev/null && \
   git clone https://github.com/b4b4r07/zsh-vimode-visual.git && cd $HOME 1>/dev/null 2>/dev/null
 source $HOME/.local/src/zsh-vimode-visual/zsh-vimode-visual.zsh
 # neovim as man pager.
@@ -48,6 +48,8 @@ function zle-line-init zle-keymap-select {
   RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}$(git_prompt_status) $EPS1"
   zle reset-prompt
 }
+
+set -o vi
 zle -N zle-line-init
 zle -N zle-keymap-select
 ###### !!!! VIM mode forever !!!! ########
@@ -68,8 +70,7 @@ if [[ ! -d $HOME/.cargo ]]; then
   # install core rust tools.
   # this is close to what rustbinup offers.
   cargo install bat ripgrep git-delta exa procs dutree \
-	      lsd fselect hx bingrep find-files xplr ttyper \
-	      racer cargo-rls-install hub
+	      lsd fselect hx bingrep find-files ttyper racer 
 fi
 # if everything goes well, we should have rustc in PATH.
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
@@ -155,7 +156,7 @@ COMPLETION_WAITING_DOTS="true"
 # explicit PATH starts. make sure HOMEBREW_SHELLENV_PREFIX also reset
 # so that eval can do the right thing every time.
 unset HOMEBREW_SHELLENV_PREFIX
-export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/symlinks:/usr/local/scripts:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/bin/g4bin:/usr/X11R6/bin:/usr/local/google/bin
+export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/symlinks:/usr/local/scripts:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/bin/g4bin:/usr/X11R6/bin:/usr/local/google/bin:/usr/games
 export PATH=$HOME/homebrew/opt/llvm/bin:$PATH:$HOME/.rvm/bin:/$HOME/.rbenv/shims # Add RVM to PATH for scripting
 export CSCOPE_DB=$HOME/src/linux/cscope.out
 [[ -f $HOME/.cargo/env  ]] && source $HOME/.cargo/env
@@ -173,9 +174,9 @@ source ~/.zshrc.pre-oh-my-zsh                                                   
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # Initialize HOMEBREW PATHs and ENVs before we add our own.
-export HOMEBREW_PREFIX=$HOME/homebrew
+export HOMEBREW_PREFIX=/home/linuxbrew/.linuxbrew
 if ! `echo $PKG_CONFIG_PATH | grep 'homebrew' | grep -v grep >/dev/null`; then
-  export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$(find $HOME/homebrew -type d -name "pkgconfig" | tr '\n' ':' | sed 's/.$//')
+  export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$(find $HOMEBREW_PREFIX -type d -name "pkgconfig" | tr '\n' ':' | sed 's/.$//')
 fi
 # we use alternative install because on corp machine /usr/local isn't free of change.
 NEED_INSTALL_BREW=0
@@ -188,7 +189,7 @@ if [[ ! -d $HOMEBREW_PREFIX ]]; then
 fi
 export HOMEBREW_INSTALL_CLEANUP=1
 eval $(${HOMEBREW_PREFIX}/bin/brew shellenv)
-alias python=$HOME/homebrew/bin/python3
+alias python=/home/linuxbrew/.linuxbrew/bin/python3
 
 # this will take a while
 if ((  $NEED_INSTALL_BREW )); then
@@ -200,37 +201,39 @@ if ((  $NEED_INSTALL_BREW )); then
   # install core tools
   echo "Install core tools ..."
   brew install \
-    git hub asdf autojump fasd fd tldr the_silver_searcher \
-    tree tmux zsh zsh-syntax-highlighting zsync alacritty amethyst \
-    kitty glow vscodium irssi fontconfig font-firacode-nerd-font \
-    font-noto-nerd-font source-highlight lazygit
+    git git-credential-oauth hub asdf autojump fd tldr the_silver_searcher \
+    tree tmux zsh zsh-syntax-highlighting zsync \
+    glow irssi fontconfig  \
+    source-highlight lazygit
   echo "Install secondary tools ..."
   # if the above all went well, then install secondary tools
   brew install \
     colormake colortail coreutils cowsay cppcheck cppman \
     cscope ctail diffutils direnv fortune geoip gnu-sed \
-    go gotop htop lolcat lsof m-cli mas ncdu multitail mu neofetch \
-    nnn pcre pcre2 peco pidof pstree ranger shellcheck shfmt \
-    ssh-copy-id tree-sitter  util-macros watch wifi-password
+    go gotop htop lolcat lsof ncdu multitail mu neofetch \
+    nnn pcre pcre2 peco pstree ranger shellcheck shfmt \
+    ssh-copy-id tree-sitter util-macros watch 
   # everything went well, continue installing 
   echo "Install network tools ..."
   brew install \
-    fping geoip hping ifstat iftop iperf mtr nmap speedtest-cli tping \
+    geoip hping ifstat iftop iperf mtr nmap speedtest-cli \
     tcptraceroute w3m
   # continue installing media apps
   echo "Install media apps ..."
   brew install \
-    ffmpeg ffmpeg-iina flac imagemagick media-info mpv mplayershell \
+    ffmpeg flac imagemagick media-info mpv \
     transmission-cli youtube-dl
   echo "Install other apps ..."
-  brew install \
-    freetype gdb util-linux typescript universal-ctags \
-    mark-text qutebrowser 
+  brew install freetype gdb util-linux typescript universal-ctags 
+  sudo apt install libnotify-bin # for zsh-auto-notify
 
   echo "Install node tools ..."
-  if [[ ! $(npm update -g --force && npm install -g neovim flake8) ]] ; then
+  if [[ ! $(npm update -g --force && npm install -g notify-send neovim flake8) ]] ; then
     yarn update && yarn install -g neovim flake8
   fi
+
+  echo "Install neovim pynvim ..."
+  pip3 install pynvim
 fi
 
 # fzf requires go, which comes from homebrew.
@@ -397,8 +400,10 @@ export NVM_DIR="$HOME/.nvm"
 [[ ! $(which xplr) ]] && brew install --head xplr && mkdir -p $HOME/.config/xplr
 #homebrew cleanup previous installs.
 #or run this to cleanup.
-alias lx='xplr'
+#alias lx='xplr'
 alias r='ranger'
+alias n='nnn'
+alias m='vifm'
 alias hbc='~/bin/hbc.sh'
 alias bbbb='blaze'
 # for oni finding neovim
@@ -980,7 +985,6 @@ else
     fi
 fi
 unset __conda_setup
-unalias sux
 # <<< conda initialize <<<
 
 
@@ -1006,5 +1010,3 @@ if [ -f '/Users/jimxu/Downloads/gcloud/google-cloud-sdk/completion.zsh.inc' ]; t
 alias zm='lazyman'
 unalias ls
 alias ls='exa -a --sort=modified --icons --git --color=always'
-
-source ~/.kube.zsh

@@ -1,6 +1,6 @@
 set nocompatible cul
-set rtp+=~/homebrew/opt/vim
-set rtp+=~/homebrew/opt/fzf
+set rtp+=/home/linuxbrew/.linuxbrew/opt/vim
+set rtp+=/home/linuxbrew/.linuxbrew/opt/fzf
 set rtp+=~/.vim
 source ~/.vimrc.plug
 let g:LustyJugglerSuppressRubyWarning = 1

@@ -470,7 +470,7 @@ endif
 "colorscheme darkmatrix
 "colorscheme forestgreen
 "colorscheme carbondark
-colorscheme nord
+"colorscheme nord
 set background=light
 colorscheme inkstained
 """ perfect fit for matrix!!
@@ -1256,3 +1256,5 @@ hi User5 guifg=#FAFF00 guibg=#0E0E0E
 " ====================== SETTING =================== "
 " ====================== SETTING =================== "
 " ====================== SETTING =================== "
+set background=light
+colorscheme inkstained

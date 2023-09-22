@@ -14,15 +14,7 @@ function _G.p(...)
   print(table.concat(objects, '\n'))
   return ...
 end
-local NOREF_NOERR_TRUNC = { noremap = true, silent = true, nowait = true }
-
-
----
---
---    START LAZY Plugin Manager
---
----
-
+local NOREF_NOERR_TRUNC = { noremap = true, silent = true, nowait = true } --- START LAZY Plugin Manager
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -47,6 +39,6 @@ vim.opt.statuscolumn = '%l|%r'
 require("lazy").setup('plugins')
 require("mason").setup{}
 require("mason-lspconfig").setup {
-  ensure_installed = { "lua_ls", "rust_analyzer", "gopls", }, 
+  ensure_installed = { "lua_ls", "rust_analyzer", "gopls", },
   automatic_installation = true,
 }
