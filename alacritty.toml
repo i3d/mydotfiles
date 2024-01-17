@@ -1,0 +1,98 @@
+live_config_reload = true
+
+[colors.bright]
+black = "#333333"
+blue = "#FAFAFA"
+cyan = "#9F9F9F"
+green = "#81B32C"
+magenta = "#412A4D"
+red = "#666666"
+white = "#E6E6E6"
+yellow = "#B39700"
+
+[colors.cursor]
+cursor = "#404040"
+text = "#404040"
+
+[colors.normal]
+black = "#141414"
+blue = "#848484"
+cyan = "#7f847f"
+green = "#81B32C"
+magenta = "#412a4D"
+red = "#575757"
+white = "#7D7D7D"
+yellow = "#B39700"
+
+[colors.primary]
+background = "#101010"
+foreground = "#4B4C4B"
+
+[colors.selection]
+background = "#1A1A1A"
+text = "#E6E6E6"
+
+[cursor]
+style = "Block"
+unfocused_hollow = true
+
+[font]
+size = 28
+
+# MonaspiceRn Nerd Font Mono
+# MonaspiceRn Nerd Font Mono Bold
+# MonaspiceRn Nerd Font Mono Bold Italic
+# MonaspiceRn Nerd Font Mono ExtraBold
+# MonaspiceRn Nerd Font Mono ExtraBold Italic
+# MonaspiceRn Nerd Font Mono ExtraLight
+# MonaspiceRn Nerd Font Mono ExtraLight Italic
+# MonaspiceRn Nerd Font Mono Italic
+# MonaspiceRn Nerd Font Mono Light
+# MonaspiceRn Nerd Font Mono Light Italic
+# MonaspiceRn Nerd Font Mono Medium                                                                                                              
+# MonaspiceRn Nerd Font Mono Medium Italic                                                                                                       
+# MonaspiceRn Nerd Font Mono Regular                                                                                                             
+# MonaspiceRn Nerd Font Mono SemiBold                                                                                                            
+# MonaspiceRn Nerd Font Mono SemiBold Italic
+
+[font.bold]
+# family = "CartographCF Nerd Font"
+family = "MonaspiceRn Nerd Font Mono"
+style = "Bold"
+
+[font.glyph_offset]
+x = 0
+y = 1
+
+[font.italic]
+# family = "CartographCF Nerd Font"
+family = "MonaspiceRn Nerd Font Mono"
+style = "Italic"
+
+[font.normal]
+# family = "FiraCode Nerd Font Mono"
+family = "MonaspiceRn Nerd Font Mono"
+style = "Light"
+
+[font.offset]
+x = 0
+y = 0
+
+[scrolling]
+history = 100000
+multiplier = 3
+
+[selection]
+save_to_clipboard = true
+semantic_escape_chars = ",│`|:\"' ()[]{}<>"
+
+[window]
+decorations = "none"
+
+[window.dimensions]
+columns = 200
+lines = 35
+
+[window.padding]
+x = 2
+y = 2
