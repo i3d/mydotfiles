@@ -1,0 +1,97 @@
+live_config_reload = true
+
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[[colors.indexed_colors]]
+color = "0xffa066"
+index = 16
+
+[[colors.indexed_colors]]
+color = "0xff5d62"
+index = 17
+
+[colors.bright]
+black = "0x727169"
+blue = "0x7fb4ca"
+cyan = "0x7aa89f"
+green = "0x98bb6c"
+magenta = "0x938aa9"
+red = "0xB798F3"
+white = "0xdcd7ba"
+yellow = "0xe6c384"
+
+[colors.normal]
+black = "0x090618"
+blue = "0x7e9cd8"
+cyan = "0x6a9589"
+green = "0x76946a"
+magenta = "0x957fb8"
+red = "0xBB9BF7"
+white = "0xc8c093"
+yellow = "0xc0a36e"
+
+[colors.primary]
+background = "0x1f1f28"
+foreground = "0xdcd7ba"
+
+[colors.selection]
+background = "0x2d4f67"
+foreground = "0xc8c093"
+
+[cursor]
+style = "Block"
+unfocused_hollow = true
+
+[font]
+size = 36
+
+[font.bold]
+#family = "CartographCF Nerd Font"
+#family = "MonaspiceRnVar Nerd Font Mono"
+family = "MonaspiceRn Nerd Font Mono"
+style = "Bold"
+
+[font.glyph_offset]
+x = 0
+y = 1
+
+[font.italic]
+#family = "CartographCF Nerd Font"
+#family = "MonaspiceRnVar Nerd Font Mono"
+family = "MonaspiceRn Nerd Font Mono"
+style = "Italic"
+
+[font.normal]
+#family = "FiraCode Nerd Font Mono"
+#family = "MonaspiceRnVar Nerd Font Mono"
+family = "MonaspiceRn Nerd Font Mono"
+style = "Light"
+
+[font.offset]
+x = 0
+y = 0
+
+[[keyboard.bindings]]
+action = "SpawnNewInstance"
+key = "N"
+mods = "Command"
+
+[scrolling]
+history = 100000
+multiplier = 3
+
+[selection]
+save_to_clipboard = true
+semantic_escape_chars = ",│`|:\"' ()[]{}<>"
+
+[window]
+decorations = "none"
+
+[window.dimensions]
+columns = 200
+lines = 35
+
+[window.padding]
+x = 2
+y = 2
