@@ -1,0 +1,95 @@
+{
+  "$schema": "./schema.json",
+  "config": {
+    "updateChannel": "canary",
+    "fontSize": 30,
+    "fontFamily": "MonaspiceRn Nerd Font Mono",
+    "fontWeight": "normal",
+    "fontWeightBold": "bold",
+    "lineHeight": 1,
+    "letterSpacing": 0,
+    "scrollback": 1000,
+    "cursorColor": "#404040",
+    "cursorAccentColor": "#FAFAFA",
+    "cursorShape": "BLOCK",
+    "cursorBlink": false,
+    "foregroundColor": "#4B4C4B",
+    "backgroundColor": "#101010",
+    "selectionColor": "#7A9917",
+    "borderColor": "#0E0E0E",
+    "css": "",
+    "termCSS": "",
+    "workingDirectory": "",
+    "showHamburgerMenu": "",
+    "showWindowControls": "",
+    "padding": "0px 0px",
+    "colors": {
+      "black": "#141414",
+      "red": "#575757",
+      "green": "#81B32C",
+      "yellow": "#B39700",
+      "blue": "#848484",
+      "magenta": "#412a4D",
+      "cyan": "#7f847f",
+      "white": "#7D7D7D",
+      "lightBlack": "#333333",
+      "lightRed": "#666666",
+      "lightGreen": "#CACACA",
+      "lightYellow": "#ADFFA7",
+      "lightBlue": "#FAFAFA",
+      "lightMagenta": "#32213C",
+      "lightCyan": "#9F9F9F",
+      "lightWhite": "#E6E6E6",
+      "limeGreen": "#32CD32",
+      "lightCoral": "#F08080"
+    },
+    "shell": "/bin/zsh",
+    "shellArgs": [
+      "--login"
+    ],
+    "env": {},
+    "bell": false,
+    "bellSound": null,
+    "bellSoundURL": null,
+    "copyOnSelect": true,
+    "defaultSSHApp": true,
+    "quickEdit": true,
+    "macOptionSelectionMode": "vertical",
+    "webGLRenderer": true,
+    "webLinksActivationKey": "",
+    "disableLigatures": true,
+    "disableAutoUpdates": false,
+    "autoUpdatePlugins": true,
+    "preserveCWD": true,
+    "screenReaderMode": false,
+    "hyperStatusLine": {
+      "dirtyColor": "salmon",
+      "aheadColor": "ivory"
+    }
+  },
+  "plugins": [],
+  "localPlugins": [],
+  "keymaps": {
+    "editor:clearBuffer": "command+z",
+    "pane:next": "command+j",
+    "pane:prev": "command+k",
+    "tab:next": [
+      "command+esc",
+      "command+]"
+    ],
+    "tab:prev": [
+      "command+shift+tab",
+      "command+["
+    ],
+    "window:close": [
+      "command+q"
+    ],
+    "pane:close": [
+      "command+w"
+    ],
+    "pane:splitRight": [
+      "command+d",
+      "command+enter"
+    ]
+  }
+}
