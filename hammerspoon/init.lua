@@ -78,6 +78,8 @@ hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "n", switchToEmptySpace)
 --   end
 -- end)
 
+
+-- quake mode for everything
 function BindHotkey(appName, key, sizepct)
   -- hs.hotkey.bind({ "Alt" }, key, function()
   hs.hotkey.bind({ "shift", "ctrl" }, key, function()
@@ -107,5 +109,6 @@ function BindHotkey(appName, key, sizepct)
 end
 
 BindHotkey("Wezterm", "x", 0.75)
-BindHotkey("Chrome", "c", 1)
 BindHotkey("Alacritty", "a", 0.75)
+BindHotkey("Chrome", "c", 1)
+BindHotkey("Arc", "s", 1)
