@@ -1,0 +1,13 @@
+layout {
+    pane size=1 borderless=true {
+        plugin location="zellij:tab-bar"
+    }
+    pane size="80%" stacked=true {
+        pane
+        pane
+    }
+    pane split_direction="vertical" {
+            pane size="70%"
+            pane size="30%"
+    }
+}
