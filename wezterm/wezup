@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# brew tap homebrew/cask-versions
+# brew install --cask wezterm@nightly
+#
+brew upgrade --cask wezterm@nightly --no-quarantine --greedy-latest
