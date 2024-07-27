@@ -1,0 +1,75 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run the `zed: Open Default Settings` command
+// from the command paletteo
+//
+// https://zed.dev/docs/languages/rust
+// lsp for golang is native.
+{
+  "vim_mode": true,
+  "ui_font_size": 24,
+  "buffer_font_size": 24,
+  "buffer_font_family": "NovaMono Nerd Font",
+  "buffer_font_weight": 100,
+  "autosave": "on_window_change",
+  "active_pane_magnification": 1.3,
+  "current_line_highlight": "all",
+  "theme": {
+    // "mode": "system",
+    "mode": "dark",
+    "light": "One Light",
+    "dark": "poimandres"
+  },
+  "scrollbar": {
+    "show": "never"
+  },
+  "inline_completions": {
+    "disabled_globs": [".env"]
+  },
+  "tabs": {
+    "close_position": "right",
+    "file_icons": true,
+    "git_status": true
+  },
+  "indent_guides": {
+    "enabled": true,
+    "coloring": "indent_aware"
+    // "coloring": "fixed"
+    // "background_coloring": "indent_aware"
+  },
+  "languages": {
+    "C": {
+      "format_on_save": "off",
+      "preferred_line_length": 64,
+      "soft_wrap": "preferred_line_length"
+    },
+    "JSON": {
+      "tab_size": 4
+    },
+    "Go": {
+      "hard_tabs": true,
+      "show_inline_completions": true,
+      // "format_on_save": true,
+      "enable_language_server": true
+    }
+  },
+  "terminal": {
+    "alternate_scroll": "off",
+    "blinking": "terminal_controlled",
+    "copy_on_select": true,
+    "env": {},
+    "font_family": null,
+    "font_features": null,
+    "font_size": null,
+    "option_as_meta": false,
+    "button": false,
+    "toolbar": {
+      "title": true
+    },
+    "working_directory": "current_project_directory"
+  }
+}
