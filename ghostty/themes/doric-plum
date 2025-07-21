@@ -1,0 +1,31 @@
+# Doric-Plum Colors
+background = #221832
+foreground = #e2d7e7
+selection-background = #5e4170
+selection-foreground = #e2d7e7
+cursor-color = #c070d0
+
+# black
+palette = 0=#302f3c
+palette = 8=#302f3c
+# red
+palette = 1=#dba2a2
+palette = 9=#dba2a2
+# green
+palette = 2=#85c397
+palette = 10=#85c397
+# yellow
+palette = 3=#c4a992
+palette = 11=#c4a992
+# blue
+palette = 4=#95afd2
+palette = 12=#95afd2
+# magenta
+palette = 5=#c5a3b2
+palette = 13=#c5a3b2
+# cyan
+palette = 6=#a5bfce
+palette = 14=#a5bfce
+# white
+palette = 7=#e2d7e7
+palette = 15=#e2d7e7
