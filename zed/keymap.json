@@ -17,5 +17,10 @@
     "bindings": {
       // "j k": ["workspace::SendKeystrokes", "escape"]
     }
+  },
+  {
+    "bindings": {
+      "ctrl-backspace": "workspace::ToggleZoom"
+    }
   }
 ]
